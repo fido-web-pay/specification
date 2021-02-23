@@ -1,76 +1,74 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
 <svg width='400' height='600' xmlns='http://www.w3.org/2000/svg'>
-	<title>FWP Sample UI</title>
-	<defs>
-		<linearGradient id='bgnd' x1='0' x2='1' y1='0' y2='1'>
-			<stop offset='0' stop-color='#010130'/>
-			<stop offset='0.5' stop-color='#192886'/>
-			<stop offset='1' stop-color='#010130'/>
-		</linearGradient>
-		<radialGradient cx='0.5' cy='0.5' id='info' r='0.5' spreadMethod='pad'>
-			<stop offset='0' stop-color='#b5f279'/>
-			<stop offset='1' stop-color='#00bf00'/>
-		</radialGradient>
-	</defs>
-	<rect x='0' y='0' width='400' height='34' fill='#303030'/>
-	<rect x='0' y='34' width='400' height='566' fill='url(#bgnd)'/>
+    <title>FWP Sample UI</title>
+    <!-- Anders Rundgren 2021 -->
+    <defs>
+        <linearGradient id='bgnd' x1='0' x2='1' y1='0' y2='1'>
+            <stop offset='0' stop-color='#000050'/>
+            <stop offset='0.4' stop-color='#0101a6'/>
+            <stop offset='0.5' stop-color='#3030ff'/>
+            <stop offset='0.6' stop-color='#1928a6'/>
+            <stop offset='1' stop-color='#000050'/>
+        </linearGradient>
+        <radialGradient id='info' cx='0.5' cy='0.5' r='0.5' spreadMethod='pad'>
+            <stop offset='0' stop-color='#b5f279'/>
+            <stop offset='1' stop-color='#00bf00'/>
+        </radialGradient>
+    </defs>
 
-	<svg x='65' y='60' width='270' height='180'>
-		<defs>
-			<clipPath id='cardClip'>
-				<rect rx='12' width='250' height='160' x='0' y='0'/>
-			</clipPath>
-		<linearGradient y1='0' x1='0' y2='1' x2='1' id='innerCardBorder'>
-			<stop offset='0' stop-opacity='0.6' stop-color='#e8e8e8'/>
-			<stop offset='0.48' stop-opacity='0.6' stop-color='#e8e8e8'/>
-			<stop offset='0.52' stop-opacity='0.6' stop-color='#b0b0b0'/>
-			<stop offset='1' stop-opacity='0.6' stop-color='#b0b0b0'/>
-		</linearGradient>
-		<filter id='dropShaddow'>
-			<feGaussianBlur stdDeviation='3.5'/>
-		</filter>
-		</defs>
-		<rect filter='url(#dropShaddow)' rx='13' width='256' height='164' x='7' y='8' fill='white'/>
-		<svg x='10' y='10' clip-path='url(#cardClip)'>
-			<image id='cardImage' width='250' height='160' href='card.svg'/>
-		</svg>
-		<rect fill='none' x='10.5' y='11' width='248.5' height='158' rx='11' stroke='url(#innerCardBorder)' stroke-width='2'/>
-		<rect fill='none' x='8.5' y='8.5' width='253' height='163' rx='13' stroke='#e0e0e0'/>
-		<rect fill='none' x='9.5' y='9.5' width='251' height='161' rx='13' stroke='#404040'/>
-	</svg>
+    <rect x='0' y='0' width='400' height='34' fill='black'/>
+    <rect x='0' y='34' width='400' height='566' fill='url(#bgnd)'/>
 
-	<circle cx='325' cy='70' fill='url(#info)' r='12' stroke='#007f7f'/>
-	<ellipse cx='325' cy='63.8' fill='black' rx='2.8' ry='2.1'/>
-	<path d='M323.3,67.6 l3.6,0 l1,10 l-5.25,0 Z' fill='black'/>
+    <svg x='65' y='60' width='270' height='180'>
+        <defs>
+            <clipPath id='cardClip'>
+                <rect rx='12' width='250' height='160' x='0' y='0'/>
+            </clipPath>
+            <linearGradient y1='0' x1='0' y2='1' x2='1' id='innerCardBorder'>
+                <stop offset='0' stop-opacity='0.6' stop-color='#e8e8e8'/>
+                <stop offset='0.48' stop-opacity='0.6' stop-color='#e8e8e8'/>
+                <stop offset='0.52' stop-opacity='0.6' stop-color='#b0b0b0'/>
+                <stop offset='1' stop-opacity='0.6' stop-color='#b0b0b0'/>
+            </linearGradient>
+            <filter id='dropShaddow'>
+                <feGaussianBlur stdDeviation='3.5'/>
+            </filter>
+        </defs>
+        <rect filter='url(#dropShaddow)' rx='13' width='256' height='164' x='7' y='8' fill='white'/>
+        <svg x='10' y='10' clip-path='url(#cardClip)'>
+            <image id='cardImage' width='250' height='160' href='card.svg'/>
+        </svg>
+        <rect fill='none' x='10.5' y='11' width='248.5' height='158' rx='11' stroke='url(#innerCardBorder)' stroke-width='2'/>
+        <rect fill='none' x='8.5' y='8.5' width='253' height='163' rx='13' stroke='#e0e0e0'/>
+        <rect fill='none' x='9.5' y='9.5' width='251' height='161' rx='13' stroke='#404040'/>
+    </svg>
 
-	<g  stroke='white' stroke-width='1.33293' fill='none'>
-	<path d='M340 135 l10 12 l-10 12 Z'/>
-	<path d='M60 135 l0 24 l-10 -12 Z'/>
-	</g>
+    <g stroke='white' stroke-width='1.33293' fill='none'>
+        <path d='M340 135 l10 12 l-10 12 Z'/>
+        <path d='M60 135 l0 24 l-10 -12 Z'/>
+    </g>
 
+    <g stroke='#d9d9d9' stroke-width='1'>
+        <rect x='105' y='272' width='190' height='42'/>
+        <rect x='105' y='345' width='190' height='42'/>
+    </g>
 
-	<g stroke='#d9d9d9' stroke-width='1'>
-		<rect x='105' y='272' width='190' height='42'/>
-		<rect x='105' y='345' width='190' height='42'/>
-	</g>
-	
-	<g fill='white' font-family='sans-serif' letter-spacing='1.5' font-size='22'>
-		<text x='18' y='22' font-size='18'>rocketshop.com</text>
-		<text x='92' y='301' text-anchor='end'>Payee</text>
-		<text x='120' y='301'>Rocket Shop</text>
-		<text x='92' y='374' text-anchor='end'>Total</text>
-		<text x='120' y='374'>
-			&#x20ac;&#x200a;435.<tspan font-size='18'>00</tspan>
-		</text>
-		<text x='200' y='448' text-anchor='middle'>Authorize</text>
-	</g>
-	<svg y='470' x='173' width='54' height='60' viewBox='0 0 18 20'>
-			<g stroke='white' stroke-linecap='round' stroke-width='0.7' fill='none'>
-				<path d='m 3.2250671,1.9837657 c 3.1417184,-1.8867533 7.9238359,-2.0434273 11.5815359,0'/>
-				<path d='M 0.5,7.246675 C 4.3588413,1.4874579 13.658833,1.5817769 17.495814,7.2108188'/>
-				<path d='M 1.970102,16.481672 C -1.7916136,7.2417778 9.8090522,1.4363037 15.176462,8.2520265 c 1.465529,1.8609795 2.695267,6.1462945 -0.770891,6.8124565 -1.6153,0.310445 -2.622651,-1.097225 -2.802546,-2.332088 -0.185372,-1.27246 -0.996557,-2.8067915 -3.0332813,-2.512194 -3.9497585,0.571306 -2.2510633,8.04581 3.3325123,9.237531'/>
-				<path d='M 6.7389694,19.298419 C 0.3713563,12.527176 5.4657885,6.2690732 10.815088,8.0873415 c 1.459183,0.495987 3.338154,2.0774515 3.346104,4.6135465'/>
-				<path d='M 15.04059,17.316012 C 11.229809,18.072804 8.9429657,15.238722 8.9261197,12.653027'/>
-			</g>
-		</svg>
+    <g fill='white' font-family='sans-serif' letter-spacing='1.5' font-size='22'>
+        <text x='18' y='22' font-size='18'>rocketshop.com</text>
+        <text x='92' y='301' text-anchor='end'>Payee</text>
+        <text x='120' y='301'>Rocket Shop</text>
+        <text x='92' y='374' text-anchor='end'>Total</text>
+        <text x='120' y='374'>&#x20ac;&#x200a;435.<tspan font-size='18'>00</tspan></text>
+        <text x='200' y='448' text-anchor='middle'>Authorize</text>
+    </g>
+
+    <svg y='470' x='173' width='54' height='60' viewBox='0 0 18 20'>
+        <g stroke='white' stroke-linecap='round' stroke-width='0.7' fill='none'>
+            <path d='m 3.2250671,1.9837657 c 3.1417184,-1.8867533 7.9238359,-2.0434273 11.5815359,0'/>
+            <path d='M 0.5,7.246675 C 4.3588413,1.4874579 13.658833,1.5817769 17.495814,7.2108188'/>
+            <path d='M 1.970102,16.481672 C -1.7916136,7.2417778 9.8090522,1.4363037 15.176462,8.2520265 c 1.465529,1.8609795 2.695267,6.1462945 -0.770891,6.8124565 -1.6153,0.310445 -2.622651,-1.097225 -2.802546,-2.332088 -0.185372,-1.27246 -0.996557,-2.8067915 -3.0332813,-2.512194 -3.9497585,0.571306 -2.2510633,8.04581 3.3325123,9.237531'/>
+            <path d='M 6.7389694,19.298419 C 0.3713563,12.527176 5.4657885,6.2690732 10.815088,8.0873415 c 1.459183,0.495987 3.338154,2.0774515 3.346104,4.6135465'/>
+            <path d='M 15.04059,17.316012 C 11.229809,18.072804 8.9429657,15.238722 8.9261197,12.653027'/>
+        </g>
+    </svg>
 </svg>
