@@ -10,10 +10,6 @@
             <stop offset='0.6' stop-color='#0101a6'/>
             <stop offset='1' stop-color='#000050'/>
         </linearGradient>
-        <radialGradient id='info' cx='0.5' cy='0.5' r='0.5' spreadMethod='pad'>
-            <stop offset='0' stop-color='#b5f279'/>
-            <stop offset='1' stop-color='#00bf00'/>
-        </radialGradient>
     </defs>
 
     <rect x='0' y='0' width='400' height='30' fill='black'/>
