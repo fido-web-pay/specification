@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="create statediagram" default="help" basedir=".">
+
+  <property name="src.dir" location="java"/>
+  <property name="temp.dir" location=".tmp"/>
+  <property name="originals.dir" location="."/>
+
+    <target name="help">
+    <echo message="Targets: testversion production"/>
+  </target>
+	
+  <target name="_compile">
+    <delete dir="${temp.dir}"/>
+    <mkdir dir="${temp.dir}"/>
+
+  	<!-- Compile -->
+    <javac debug="on"
+           srcdir="${src.dir}"
+           destdir="${temp.dir}" 
+           includeAntRuntime="false">
+       <compilerarg value="-Xlint:all,-path"/>
+    </javac>
+
+  </target>
+
+  <target name="testversion" depends="_compile">
+    <property name="file" value=""/>
+    <java fork="yes"
+          classname="StateDiagram"
+    	    dir="${temp.dir}"
+          failonerror="true">
+    	<classpath>
+            <pathelement path="${temp.dir}"/>
+     	</classpath>
+        <arg value="${originals.dir}"/>
+    </java>
+  </target>
+
+</project>
