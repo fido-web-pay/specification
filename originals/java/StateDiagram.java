@@ -14,6 +14,7 @@ public class StateDiagram {
     static double VBAR_START_Y = USER_TOP_Y + USER_HEIGHT - 5;
     static double VBAR_DISTANCE = 150;
     static double VBAR_START_X = 150;
+    static String VBAR_COLOR = "#cc2020";
 
     static double PROC_WIDTH = 86;
     static double PROC_SLANT = 8;
@@ -36,7 +37,7 @@ public class StateDiagram {
     static double HEADER_Y = FONT_SIZE;
 
     static String CLICKABLE_COLOR = "blue";
-
+ 
     String originalBase;
     StringBuilder svg = new StringBuilder ("""
 <?xml version='1.0' encoding='utf-8'?>
@@ -199,10 +200,10 @@ public class StateDiagram {
                .append(convert(VBAR_HEIGHT + VBAR_START_Y))
                .append("' stroke-width='")
                .append(convert(VBAR_WIDTH))
-               .append("' stroke='red'/>\n");
+               .append("' stroke='" + VBAR_COLOR + "'/>\n");
         }
         String embedded = readOriginal("user.svg")
-           .replace("height=\"128\"\n   width=\"128\"", "viewBox='0 0 128 128'");
+           .replace("height='128'\n   width='128'", "viewBox='0 0 128 128'");
         svg.append("<svg x='")
            .append(convert(center(0) - USER_HEIGHT / 2))
            .append("' y='")
@@ -213,6 +214,19 @@ public class StateDiagram {
            .append(USER_HEIGHT)
            .append("'")
            .append(embedded.substring(embedded.indexOf("<svg") + 4));
+
+        embedded = readOriginal("browser.svg")
+           .replace("<svg width='80' height='80'", "<svg viewBox='0 0 80 80'");
+        svg.append("<svg x='")
+           .append(convert(center(1) - USER_HEIGHT / 2))
+           .append("' y='")
+           .append(USER_TOP_Y)
+           .append("' width='")
+           .append(USER_HEIGHT)
+           .append("' height='")
+           .append(USER_HEIGHT)
+           .append("'")
+          .append(embedded.substring(embedded.indexOf("<svg") + 4));
         processing(1, 100, "#init");
         processing(2, 150, "#browserui");
         arrow(150, 3, 4, "KURT", "#kurt");
