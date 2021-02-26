@@ -46,7 +46,14 @@ public class StateDiagram {
   <!-- Anders Rundgren 2021 -->
   <defs>
     <filter id='dropShaddow'>
-      <feGaussianBlur stdDeviation='1'/>
+      <feGaussianBlur stdDeviation='1.3'/>
+    </filter>
+    <filter id='dropArbitrary'>
+      <feOffset result='offOut' in='SourceAlpha' dx='3' dy='3'/>
+      <feFlood flood-color='black' result='color' flood-opacity='0.4'/>
+      <feComposite in='color' in2='offOut' operator='in' result='sombra'/>
+      <feGaussianBlur result='blurOut' in='sombra' stdDeviation='1'/>
+      <feBlend in='SourceGraphic' in2='blurOut' mode='normal'/>
     </filter>
 """);
 
@@ -105,7 +112,7 @@ public class StateDiagram {
     void processing(int vbar, double y, String url) {
         double rectY = y - (PROC_HEIGHT + STROKE_WIDTH) / 2;
         double startX = center(vbar) - PROC_WIDTH / 2 + PROC_SLANT / 2;
-        svg.append("  <path fill='#a0a0a0' d='M")
+        svg.append("  <path fill='black' opacity='0.4' d='M")
            .append(convert(startX + DROP_OFFSET))
            .append(',')
            .append(convert(DROP_OFFSET + rectY))
@@ -225,9 +232,9 @@ public class StateDiagram {
            .append(USER_HEIGHT)
            .append("' height='")
            .append(USER_HEIGHT)
-           .append("'")
+           .append("' filter='url(#dropArbitrary)'")
           .append(embedded.substring(embedded.indexOf("<svg") + 4));
-        processing(1, 100, "#init");
+        processing(1, 200, "#init");
         processing(2, 150, "#browserui");
         arrow(150, 3, 4, "KURT", "#kurt");
         arrow(170, 3, 4, "Yes this!", "#something");
