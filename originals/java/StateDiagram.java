@@ -295,8 +295,8 @@ public class StateDiagram {
         actor("browser.svg",  "Browser",  1);
         actor("merchant.svg", "Merchant", 2);
         actor("acquirer.svg", "Acquirer", 3);
-        //        header(4, "Issuer");
-
+        actor("issuer.svg",   "Issuer",   4);
+  
         processing(1, 200, "#init");
         processing(2, 150, "#browserui");
         arrow(150, 3, 4, "KURT", "#kurt");
