@@ -8,9 +8,8 @@ import java.io.FileOutputStream;
 public class StateDiagram {
 
     static double ACTOR_TOP_Y = 26;
-    static double ACTOR_HEIGHT = 50;
+    static double ACTOR_HEIGHT = 40;
 
-    static double VBAR_HEIGHT = 600;
     static double VBAR_WIDTH = 2;
     static double VBAR_START_Y = ACTOR_TOP_Y + ACTOR_HEIGHT - 5;
     static double VBAR_X_DISTANCE = 120;
@@ -50,16 +49,7 @@ public class StateDiagram {
 
     double seqY = 110;
 
-    StringBuilder svg = new StringBuilder ("""
-<?xml version='1.0' encoding='utf-8'?>
-<svg width='1000' height='1000' xmlns='http://www.w3.org/2000/svg'>
-  <title>FIDO Web Pay - State Diagram</title>
-  <!-- Anders Rundgren 2021 -->
-  <defs>
-    <filter id='dropShaddow'>
-      <feGaussianBlur stdDeviation='1.3'/>
-    </filter>
-""");
+    StringBuilder svg = new StringBuilder ();
 
 /*
     <filter id='dropArbitrary'>
@@ -233,35 +223,6 @@ public class StateDiagram {
 
     StateDiagram(String originalBase) throws Exception {
         this.originalBase = originalBase;
-        svg.append("    <marker id='arrowHead' markerWidth='")
-           .append(convert(ARROW_HEAD_LENGTH))
-           .append("' markerHeight='")
-           .append(convert(ARROW_HEAD_WIDTH))
-           .append("' refX='0' refY='")
-           .append(convert(ARROW_HEAD_WIDTH / 2))
-           .append("' orient='auto'>\n        <polygon points='0 0, ")
-           .append(convert(ARROW_HEAD_LENGTH))
-           .append(" ")
-           .append(convert(ARROW_HEAD_WIDTH / 2))
-           .append(", 0 ")
-           .append(convert(ARROW_HEAD_WIDTH))
-           .append("' />\n" +
-            "    </marker>\n" +
-            "  </defs>\n");
-        for (int i = 0; i < 5; i++) {
-            String x = convert(i * VBAR_X_DISTANCE + VBAR_START_X);
-            svg.append("  <line x1='")
-               .append(x)
-               .append("' y1='")
-               .append(convert(VBAR_START_Y))
-               .append("' x2='")
-               .append(x)
-               .append("' y2='")
-               .append(convert(VBAR_HEIGHT + VBAR_START_Y))
-               .append("' stroke-width='")
-               .append(convert(VBAR_WIDTH))
-               .append("' stroke='" + VBAR_COLOR + "'/>\n");
-        }
 
         actor("user.svg",     "User",     0);
         actor("browser.svg",  "Browser",  1);
@@ -320,7 +281,52 @@ public class StateDiagram {
  //      arrow(170, 3, 4, "Yes this!", "#something");
   //      arrow(190, 4, 3, "blah", "#else");
   //      dashedArrow(210, 3, 4, "Auth", "#userauth");
-       new FileOutputStream(originalBase + "statediagram.svg").write(svg.append("</svg>").toString().getBytes("utf-8"));
+ 
+        StringBuilder preludium = new StringBuilder("<?xml version='1.0' encoding='utf-8'?>\n" +
+                                                    "<svg width='")
+            .append(convert(center(4) + PROC_WIDTH / 2 + 20))
+            .append("' height='")
+            .append(convert(seqY + 20))
+            .append("' xmlns='http://www.w3.org/2000/svg'>\n" +
+  "    <title>FIDO Web Pay - State Diagram</title>\n" +
+  "    <!-- Anders Rundgren 2021 -->\n" +
+  "    <defs>\n" +
+  "    <filter id='dropShaddow'>\n" +
+  "      <feGaussianBlur stdDeviation='1.3'/>\n" +
+  "    </filter>\n")
+            .append("    <marker id='arrowHead' markerWidth='")
+            .append(convert(ARROW_HEAD_LENGTH))
+            .append("' markerHeight='")
+            .append(convert(ARROW_HEAD_WIDTH))
+            .append("' refX='0' refY='")
+            .append(convert(ARROW_HEAD_WIDTH / 2))
+            .append("' orient='auto' markerUnits='userSpaceOnUse'>\n" +
+            "      <polygon points='0 0, ")
+            .append(convert(ARROW_HEAD_LENGTH))
+            .append(" ")
+            .append(convert(ARROW_HEAD_WIDTH / 2))
+            .append(", 0 ")
+            .append(convert(ARROW_HEAD_WIDTH))
+            .append("'/>\n" +
+               "    </marker>\n" +
+               "  </defs>\n");
+        for (int i = 0; i < 5; i++) {
+            String x = convert(i * VBAR_X_DISTANCE + VBAR_START_X);
+            preludium.append("  <line x1='")
+                 .append(x)
+                 .append("' y1='")
+                 .append(convert(VBAR_START_Y))
+                 .append("' x2='")
+                 .append(x)
+                 .append("' y2='")
+                 .append(convert(seqY))
+                 .append("' stroke-width='")
+                 .append(convert(VBAR_WIDTH))
+                 .append("' stroke='" + VBAR_COLOR + "'/>\n");
+        }
+        svg.insert(0, preludium);
+
+        new FileOutputStream(originalBase + "statediagram.svg").write(svg.append("</svg>").toString().getBytes("utf-8"));
      }
 
     static byte[] getByteArrayFromInputStream(InputStream is) throws Exception {
