@@ -1,0 +1,101 @@
+<!DOCTYPE html><html><head>
+<meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'>
+<link rel='icon' href='images/favicon.png' sizes='192x192'>
+<title>FIDO Web Pay</title><style type='text/css'>
+.header {font-size:1.5em;margin:1em 0 0.8em 0}
+.para {margin-top:0.8em}
+.tftable {border-collapse:collapse;box-shadow:0.3em 0.3em 0.3em #d0d0d0;margin-bottom:0.3em} 
+.tftable td {white-space:nowrap;background-color:#ffffe0;padding:0.4em 0.5em;border-width:1px;border-style:solid;border-color:#a9a9a9}
+.tftable th {white-space:nowrap;padding:0.4em 0.5em;background:linear-gradient(to bottom, #eaeaea 14%,#fcfcfc 52%,#e5e5e5 89%);text-align:center;border-width:1px;border-style:solid;border-color:#a9a9a9}
+.json {word-break:break-all;background-color:#f8f8f8;padding:1em;border-width:1px;border-style:solid;border-color:#a9a9a9;box-shadow:0.3em 0.3em 0.3em #d0d0d0}
+body {margin:1em;font-size:10pt;font-family:Verdana,'Bitstream Vera Sans','DejaVu Sans',Arial,'Liberation Sans';background-color:white} 
+code {font-size:10pt}
+ul {margin:0}
+li {margin-top:0.3em}
+a {color:blue;text-decoration:none}
+</style>
+</head>
+<body>
+  <img style='max-width:50%' src='images/fwp.svg' alt='logo' title='FWP logotype'>
+  <div class='header'>FIDO&reg; Web Pay (FWP) - Introduction</div>
+<div><a href='https://www.emvco.com/' title='EMVco Site'>EMV&reg;</a> represents
+the current &quot;Gold Standard&quot; for <i>secure and convenient payments</i> in the <u>physical world</u>.</div>
+  <div class='para'>
+    This document describes a <u>Web-adapted</u> version of EMV,
+    building on <a href='https://fidoalliance.org/fido2/' title='FIDO2 Technology'>FIDO2</a>
+    technology combined with W3C's
+    <a href='https://www.w3.org/TR/payment-request/' title='PaymentRequest'>PaymentRequest</a> API.
+  </div>
+  <div class='para'>
+    However, unlike EMV, FWP is intended to be applicable to <i>any account-based payment system</i>,
+    including the eurozone's 
+    <a href='https://www.europeanpaymentscouncil.eu/'>SEPA Inst</a>.
+  </div>
+  <div class='para'>
+    Also in contrast to EMV, FWP <i>encrypts</i> user-authorizations, which has the following side effects:
+<ul>
+  <li>
+    Eliminating dependencies on external tokenization services.</li>
+  <li>
+    Reducing the amount of personally identifiable information (PII), shared
+    with third-parties to the name of the payer's bank.
+  </li>
+  <li>
+    Eliminating <a href='https://www.pcisecuritystandards.org' title='PCI Site'>PCI</a>
+    requirents with respect to the payer.
+  </li>
+</ul>
+</div>
+  <div class='para'>
+    Although not a part of this specification, the underpinning authorization 
+scheme also opens the door to non-direct payments, including secure (tokenized) versions of Card-on-File.
+  </div>
+<div class='header'>
+Prerequisites
+</div>
+<div>hh</div>
+    <div id='paymentui' class='spacepara'>Core Receipt Data</div>
+    <div style='overflow-x:auto;padding-bottom:5pt'>
+      <img style='display:block;width:220pt;box-shadow:2pt 2pt 3pt #808080;border-width:1pt;border-style:solid;border-color:darkgrey' alt='Payment UI' src='images/ui.svg'>
+    </div>
+    <div>Non-normative UI in &quot;dark mode&quot;.</div>
+    <div>
+      <code>
+        Core Receipt Data ghr 88 jj nl<br>
+        ff<br>
+        kk kjkhjkjkk yhjj jgj g hgh ghghg
+      </code>
+    </div>
+    <div style='font-family:monospace'>
+      Core Receipt Data ghr 88 jj nl<br>
+      ff<br>
+      kk kjkhjkjkk yhjj jgj g hgh ghghg
+    </div><div class='spacepara'>Order Data</div>
+    <div style='overflow-x:auto;padding-bottom:5pt'>
+      @statediagram@
+    </div>
+    <div style='overflow-x:auto'>
+      <table class='tftable'>
+        <tr><th>Description</th><th>Quantity</th><th>Subtotal</th></tr>
+        <tr><td>Model Rocket<br>SpaceX Falcon Heavy<br>Scale 1:200</td><td style='text-align:right'>1</td><td style='text-align:right'>499.99 EUR</td></tr>
+      </table>
+    </div>
+    <div style='text-align:center' class='spacepara'>Shipping</div>
+    <div style='overflow-x:auto'>
+      <table class='tftable'>
+        <tr><th>Description</th><th>Cost</th></tr>
+        <tr><td>Free shipping</td><td style='text-align:right'>0.00 EUR</td></tr>
+      </table>
+    </div>
+    <table>
+      <tr><td>Return Policy:<br>Items can be returned within 30 days of receipt of delivery using the Online Returns Center. Once the item is received at our Customer Support Center, it takes 2 business days for the refund to be processed and 3-5 business days for the refund amount to show up in your account.</td></tr>
+    </table>
+    <div style='text-align:center' class='spacepara'>Payment Details</div>
+    <div style='overflow-x:auto'>
+      <table class='tftable'>
+        <tr><th>Provider Name</th><th>Account Type</th><th>Account Id</th><th>Transaction Id</th><th>Time Stamp</th><th>Request Id</th></tr>
+        <tr><td><a href='https://192.168.1.67:8442/webpay-payerbank'>My Bank</a></td><td>Bank Direct</td><td>FR*0131</td><td>#0100345123</td><td>2021-02-24 04:24:26 UTC</td><td>2021022400000002</td></tr>
+      </table>
+    </div>
+    <div style='margin-top:2em'><a href='2021022400000002/VS8_RUv8oV5boXYW36UVSw?json'>Switch to JSON view</a></div>
+</body></html>

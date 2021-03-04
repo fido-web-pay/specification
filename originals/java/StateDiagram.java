@@ -7,47 +7,49 @@ import java.io.FileOutputStream;
 
 public class StateDiagram {
 
-    static double ACTOR_TOP_Y = 26;
-    static double ACTOR_HEIGHT = 40;
+    static final String FILE_NAME = "statediagram.svg";
 
-    static double VBAR_WIDTH = 2;
-    static double VBAR_START_Y = ACTOR_TOP_Y + ACTOR_HEIGHT - 5;
-    static double VBAR_X_DISTANCE = 120;
-    static double VBAR_START_X = ACTOR_HEIGHT / 1.8;
-    static String VBAR_COLOR = "#cc2020";
+    static final double ACTOR_TOP_Y = 32;
+    static final double ACTOR_HEIGHT = 40;
 
-    static double PROC_WIDTH = 86;
-    static double PROC_SLANT = 8;
-    static double PROC_HEIGHT = 22;
+    static final double PROC_WIDTH = 86;
+    static final double PROC_SLANT = 8;
+    static final double PROC_HEIGHT = 22;
 
-    static double NUMB_WIDTH = 14;
+    static final double VBAR_WIDTH = 1.2;
+    static final double VBAR_START_Y = ACTOR_TOP_Y + ACTOR_HEIGHT - 5;
+    static final double VBAR_X_DISTANCE = 120;
+    static final double VBAR_START_X = PROC_WIDTH / 2 + 20;
+    static final String VBAR_COLOR = "#cc2020";
 
-    static double STROKE_WIDTH = 0.5;
+    static final double NUMB_WIDTH = 14;
 
-    static double ARROW_WIDTH = 1;
-    static double ARROW_HEAD_WIDTH = 5;
-    static double ARROW_HEAD_LENGTH = 7;
-    static double ARROW_HEAD_GUTTER = 0.5;
+    static final double STROKE_WIDTH = 0.5;
 
-    static double DROP_OFFSET = 2;
+    static final double ARROW_WIDTH = 1;
+    static final double ARROW_HEAD_WIDTH = 5;
+    static final double ARROW_HEAD_LENGTH = 7;
+    static final double ARROW_HEAD_GUTTER = 0.5;
 
-    static int FONT_SIZE = 12;
-    static double FONT_OFFSET = 4;
+    static final double DROP_OFFSET = 2;
 
-    static double HEADER_Y = FONT_SIZE;
+    static final int FONT_SIZE = 12;
+    static final double FONT_OFFSET = 4;
 
-    static double UI_WIDTH = 86;
-    static double UI_HEIGHT = 50;
-    static double UI_BORDER = 5;
+    static final double HEADER_Y = 20;
+
+    static final double UI_WIDTH = 86;
+    static final double UI_HEIGHT = 50;
+    static final double UI_BORDER = 5;
  
-    static String CLICKABLE_COLOR = "blue";
+    static final String CLICKABLE_COLOR = "blue";
 
-    static double SEQ_Y_DISTANCE = 32;
-    static double SEQ_Y_SLACK_AFTER_UI = 0;
+    static final double SEQ_Y_DISTANCE = 32;
+    static final double SEQ_Y_SLACK_AFTER_UI = 0;
 
     String originalBase;
 
-    double seqY = 110;
+    double seqY = 96;
 
     StringBuilder svg = new StringBuilder ();
 
@@ -273,20 +275,18 @@ public class StateDiagram {
         processing(1, "#init");
         arrow(1, 2, "PRES", "#pres");
         processing(2, "#merchant");
-        arrow(2, 3, "MA-REQ", "#ma-req");
+        arrow(2, 3, "AREQ", "#areq");
         processing(3, "#acquirer");
-        arrow(3, 4, "AI-REQ", "#ai-req");
+        arrow(3, 4, "IREQ", "#ireq");
         processing(4, "#issuer");
-        dashedArrow(4, 3, "TBD", "#tbd");
- //      arrow(170, 3, 4, "Yes this!", "#something");
-  //      arrow(190, 4, 3, "blah", "#else");
-  //      dashedArrow(210, 3, 4, "Auth", "#userauth");
+  //      dashedArrow(4, 3, "Out of Scope", "#outofscope");
  
+        seqY -= PROC_HEIGHT * 0.2;
         StringBuilder preludium = new StringBuilder("<?xml version='1.0' encoding='utf-8'?>\n" +
-                                                    "<svg width='")
+                                                    "<svg viewBox='0 0 ")
             .append(convert(center(4) + PROC_WIDTH / 2 + 20))
-            .append("' height='")
-            .append(convert(seqY + 20))
+            .append(" ")
+            .append(convert(seqY + 10))
             .append("' xmlns='http://www.w3.org/2000/svg'>\n" +
   "    <title>FIDO Web Pay - State Diagram</title>\n" +
   "    <!-- Anders Rundgren 2021 -->\n" +
@@ -326,7 +326,7 @@ public class StateDiagram {
         }
         svg.insert(0, preludium);
 
-        new FileOutputStream(originalBase + "statediagram.svg").write(svg.append("</svg>").toString().getBytes("utf-8"));
+        new FileOutputStream(originalBase + FILE_NAME).write(svg.append("</svg>").toString().getBytes("utf-8"));
      }
 
     static byte[] getByteArrayFromInputStream(InputStream is) throws Exception {
