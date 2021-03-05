@@ -1,36 +1,110 @@
 <!DOCTYPE html><html><head>
 <meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'>
 <link rel='icon' href='images/favicon.png' sizes='192x192'>
-<title>Receipt</title><style type='text/css'>
-.header {font-size:1.6em;padding-bottom:1em}
-.spacepara {padding:1.2em 0 0.6em 0}
-.para {padding-bottom:0.6em} 
+<title>FIDO Web Pay</title><style type='text/css'>
+.header {font-size:1.5em;margin:1em 0 0.8em 0}
+.para {margin-top:0.8em}
+.actor {color:darkgreen;font-weight:bolder}
 .tftable {border-collapse:collapse;box-shadow:0.3em 0.3em 0.3em #d0d0d0;margin-bottom:0.3em} 
 .tftable td {white-space:nowrap;background-color:#ffffe0;padding:0.4em 0.5em;border-width:1px;border-style:solid;border-color:#a9a9a9}
 .tftable th {white-space:nowrap;padding:0.4em 0.5em;background:linear-gradient(to bottom, #eaeaea 14%,#fcfcfc 52%,#e5e5e5 89%);text-align:center;border-width:1px;border-style:solid;border-color:#a9a9a9}
 .json {word-break:break-all;background-color:#f8f8f8;padding:1em;border-width:1px;border-style:solid;border-color:#a9a9a9;box-shadow:0.3em 0.3em 0.3em #d0d0d0}
 body {margin:1em;font-size:10pt;font-family:Verdana,'Bitstream Vera Sans','DejaVu Sans',Arial,'Liberation Sans';background-color:white} 
-code {font-size:10pt}
-a {color:blue;text-decoration:none}</style></head>
+code {font-size:10pt;font-weight:bold;color:maroon}
+ul {margin:0}
+li {margin-top:0.3em}
+a {color:blue;text-decoration:none}
+</style>
+</head>
 <body>
-<img style='max-width:50%' src='images/fwp.svg' alt='logo' title='FWP logotype'>
-<div style='overflow-x:auto'>
-<table>
-<tr><td>2000 Avenue des Champs-Élysées<br>75000 Paris<br>France</td></tr>
-<tr><td><i>Phone</i>: 01.50.10.42.08<br><i>e-mail</i>: support@spaceshop.com</td></tr></table>
+  <img style='max-width:50%' src='images/fwp.svg' alt='logo' title='FWP logotype'>
+  <div class='header'>FIDO Web Pay - Introduction</div>
+  <div>
+    <a href='https://www.emvco.com/' title='EMVCo Site'>EMV<img src='images/xtl.svg' alt='link'></a> represents
+    the current &quot;Gold Standard&quot; for <i>secure and convenient payments</i>
+    in the <u>physical world</u>.
+  </div>
+  <div class='para'>
+    This document describes FIDO&reg; Web Pay (FWP), which is a <u>Web-adapted</u> version of EMV&reg;,
+    building on <a href='https://fidoalliance.org/fido2/' title='FIDO2 Technology'>FIDO2<img src='images/xtl.svg' alt='link'></a>
+    technology combined with the W3C
+    <a href='https://www.w3.org/TR/payment-request/' title='PaymentRequest'>PaymentRequest<img src='images/xtl.svg' alt='link'></a> API.
+  </div>
+  <div class='para'>
+    However, unlike EMV, FWP is intended to be usable with <i>any account-based payment system</i>,
+    including the eurozone's
+    <a href='https://www.europeanpaymentscouncil.eu/' title='European Payments Council'>SEPA Instant<img src='images/xtl.svg' alt='link'></a>.
+  </div>
+  <div class='para'>
+    Also in contrast to EMV, FWP <i>encrypts user-authorizations</i>, which has the following side effects:
+    <ul>
+      <li>
+        Eliminating dependencies on external tokenization services.
+      </li>
+      <li>
+        Limiting the amount of personally identifiable information (PII), shared
+        with third-parties to the name of the payer's bank.
+        This is compliant with
+        <a href='https://www.pcisecuritystandards.org' title='PCI Site'>PCI<img src='images/xtl.svg' alt='link'></a>
+        requirements as well as with <a href='https://gdprinfo.eu/' title='GDPR Site'>GDPR<img src='images/xtl.svg' alt='link'></a>.
+      </li>
+      <li>
+        Separating the formats for account numbers and financial institution (bank branch) identifiers.
+        The latter would typically be expressed as URLs.
+      </li>
+    </ul>
+  </div>
+  <div class='para'>
+    Although not a part of this specification, the underpinning authorization
+    scheme also opens the door to <i>non-direct payments</i>,
+    including secure (<i>tokenized</i>) versions of Card-on-File.
+  </div>
+  <div class='header'>
+    Prerequisites
+  </div>
+  <div>
+    The steps outlined in <a href='#operation'>Detailed Operation</a>
+ depend on that the <span class='actor'>User</span> already has received
+    one or more <i>payment credentials</i> in an <a href='#enrollment'>Enrollment</a> process.
+    A payment credential is supposed to at least contain the following elements:
+    <ul>
+      <li>A <span class='actor'>User</span> specific (<i>unique</i>) FIDO key for <i>signing</i> payment authorization data.</li>
+      <li>An <span class='actor'>Issuer</span> specific (<i>shared</i>) public key for <i>encrypting</i> payment authorization data.</li>
+      <li>An <code>accountId</code> associated with the FIDO signature key.</li>
+      <li>A <code>paymentMethod</code> URL identifying the payment network.</li>
+      <li>An <code>issuerId</code> in the form of a BIN number or a URL associated with the <span class='actor'>Issuer</span>.</li>
+      <li>An icon identifying the payment credential for the <span class='actor'>User</span>.</li>
+    </ul>
+  </div>
+  <div class='para'>
+    Note that FWP effectively forms a browser-resident, universal &quot;wallet&quot;,
+    holding any number of payment credentials, each representing a specific <span class='actor'>Issuer</span>
+    and <code>paymentMethod</code>.
+  </div>
+  <div id='enrollment' class='header'>
+    Credential Enrollment
+  </div>
+  <div>
+    The exact enrollment process is yet to be defined; the assumption is that it
+    could be accomplished by extending the existing W3C
+    <a href='https://www.w3.org/TR/webauthn-2/' title='Web Authentication'>Web&nbsp;Authentication</a> enrollment system.
+    The extension would enable the browser to securely distinguish between &quot;ordinary&quot; FIDO keys,
+    and those targeted for payments.  This is needed for maintaining a local database holding FWP credentials.
+  </div>
+  <div class='para'>
+    It MAY be technically feasible using a FIDO key associated with a FWP credential
+for Web Authentication as well, but this would be a deployment decision
+by the <span class='actor'>Issuer</span>.
+  </div>
+  <div id='operation' class='header'>
+    Detailed Operation
+  </div>
+  <div>This section describes the different steps needed to perform a payment using FWP.
+The foundation for the description is the following sequence diagram where each step
+is linked to a boxed number:
 </div>
-<div id='paymentui' class='spacepara'>Core Receipt Data</div>
-<div style='overflow-x:auto;padding-bottom:5pt'>
-<img style='display:block;width:220pt;box-shadow:2pt 2pt 3pt #808080;border-width:1pt;border-style:solid;border-color:darkgrey' src='images/ui.svg'></div>
-<div>Non-normative UI in &quot;dark mode&quot;.</div>
-<div><code>Core Receipt Data ghr 88 jj nl<br>
-ff<br>
-kk kjkhjkjkk yhjj jgj g hgh ghghg</code></div>
-<div style='font-family:monospace'>Core Receipt Data ghr 88 jj nl<br>
-ff<br>
-kk kjkhjkjkk yhjj jgj g hgh ghghg</div><div style='text-align:center' class='spacepara'>Order Data</div>
-<div style='overflow-x:auto;padding-bottom:5pt'>
-<svg style='display:block;width:500pt' viewBox='0 0 566 510' xmlns='http://www.w3.org/2000/svg'>
+  <div style='overflow-x:auto;padding:8pt 0 5pt 0'>
+    <svg style='display:block;width:500pt;box-shadow:0.2em 0.2em 0.2em #d0d0d0;border-width:1px;border-style:solid;border-color:black' viewBox='0 0 606 449.6' xmlns='http://www.w3.org/2000/svg'>
     <title>FIDO Web Pay - State Diagram</title>
     <!-- Anders Rundgren 2021 -->
     <defs>
@@ -41,12 +115,12 @@ kk kjkhjkjkk yhjj jgj g hgh ghghg</div><div style='text-align:center' class='spa
       <polygon points='0 0, 7 2.5, 0 5'/>
     </marker>
   </defs>
-  <line x1='22.22222222222222' y1='61' x2='22.22222222222222' y2='490' stroke-width='2' stroke='#cc2020'/>
-  <line x1='142.22222222222223' y1='61' x2='142.22222222222223' y2='490' stroke-width='2' stroke='#cc2020'/>
-  <line x1='262.22222222222223' y1='61' x2='262.22222222222223' y2='490' stroke-width='2' stroke='#cc2020'/>
-  <line x1='382.22222222222223' y1='61' x2='382.22222222222223' y2='490' stroke-width='2' stroke='#cc2020'/>
-  <line x1='502.22222222222223' y1='61' x2='502.22222222222223' y2='490' stroke-width='2' stroke='#cc2020'/>
-<svg x='2.2222222222222214' y='26.0' width='40' height='40.0'
+  <line x1='63' y1='67' x2='63' y2='439.6' stroke-width='1.2' stroke='#cc2020'/>
+  <line x1='183' y1='67' x2='183' y2='439.6' stroke-width='1.2' stroke='#cc2020'/>
+  <line x1='303' y1='67' x2='303' y2='439.6' stroke-width='1.2' stroke='#cc2020'/>
+  <line x1='423' y1='67' x2='423' y2='439.6' stroke-width='1.2' stroke='#cc2020'/>
+  <line x1='543' y1='67' x2='543' y2='439.6' stroke-width='1.2' stroke='#cc2020'/>
+<svg x='43' y='32.0' width='40' height='40.0'
    xmlns:dc='http://purl.org/dc/elements/1.1/'
    xmlns:cc='http://creativecommons.org/ns#'
    xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
@@ -538,8 +612,8 @@ kk kjkhjkjkk yhjj jgj g hgh ghghg</div><div style='text-align:center' class='spa
      style='fill:url(#linearGradient3312);stroke:#1f1f1f;stroke-width:1.65679765px'
      inkscape:connector-curvature='0' />
 </svg>
-  <text x='22.22222222222222' y='16' fill='black' font-family='sans-serif' font-size='14.399999999999999' text-anchor='middle'>User</text>
-<svg x='122.22222222222223' y='26.0' width='40' height='40.0' viewBox='0 0 72 72' xmlns='http://www.w3.org/2000/svg'>
+  <text x='63' y='24' fill='black' font-family='sans-serif' font-size='14.399999999999999' text-anchor='middle'>User</text>
+<svg x='163' y='32.0' width='40' height='40.0' viewBox='0 0 72 72' xmlns='http://www.w3.org/2000/svg'>
   <title>Browser Symbol</title>
   <!-- Anders Rundgren 2021 -->
   <circle cx='36' cy='36' r='36' fill='#5070ff'/>
@@ -552,8 +626,8 @@ kk kjkhjkjkk yhjj jgj g hgh ghghg</div><div style='text-align:center' class='spa
   <line x1='9.5' y1='51' x2='62.5' y2='51'/>
   </g>
 </svg>
-  <text x='142.22222222222223' y='16' fill='black' font-family='sans-serif' font-size='14.399999999999999' text-anchor='middle'>Browser</text>
-<svg x='233.88888888888889' y='26.0' width='56.666666666666664' height='40.0'
+  <text x='183' y='24' fill='black' font-family='sans-serif' font-size='14.399999999999999' text-anchor='middle'>Browser</text>
+<svg x='274.6666666666667' y='32.0' width='56.666666666666664' height='40.0'
    xmlns:dc='http://purl.org/dc/elements/1.1/'
    xmlns:cc='http://creativecommons.org/ns#'
    xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
@@ -1173,8 +1247,8 @@ kk kjkhjkjkk yhjj jgj g hgh ghghg</div><div style='text-align:center' class='spa
      fill='#fdfac7'
      id='rect78' />
 </svg>
-  <text x='262.22222222222223' y='16' fill='black' font-family='sans-serif' font-size='14.399999999999999' text-anchor='middle'>Merchant</text>
-<svg x='359.69195525081903' y='26.0' width='45.060533942806344' height='40.0'
+  <text x='303' y='24' fill='black' font-family='sans-serif' font-size='14.399999999999999' text-anchor='middle'>Merchant</text>
+<svg x='400.4697330285968' y='32.0' width='45.060533942806344' height='40.0'
    xmlns:dc='http://purl.org/dc/elements/1.1/'
    xmlns:cc='http://creativecommons.org/ns#'
    xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
@@ -1951,8 +2025,8 @@ kk kjkhjkjkk yhjj jgj g hgh ghghg</div><div style='text-align:center' class='spa
      d='M 1088.7462,940.40933 H 0 v 26.065 h 1088.7462 z'
      style='fill:#afae44;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.25007'
      id='path2239' /></svg>
-  <text x='382.22222222222223' y='16' fill='black' font-family='sans-serif' font-size='14.399999999999999' text-anchor='middle'>Acquirer</text>
-<svg x='471.6666666666667' y='26.0' width='61.111111111111114' height='40.0' viewBox='0 0 110 72' xmlns='http://www.w3.org/2000/svg' xmlns:svg='http://www.w3.org/2000/svg'>
+  <text x='423' y='24' fill='black' font-family='sans-serif' font-size='14.399999999999999' text-anchor='middle'>Acquirer</text>
+<svg x='512.4444444444445' y='32.0' width='61.111111111111114' height='40.0' viewBox='0 0 110 72' xmlns='http://www.w3.org/2000/svg' xmlns:svg='http://www.w3.org/2000/svg'>
     <title>FIDO Web Pay - Issuer</title>
     <!-- Anders Rundgren 2021-->
     <defs>
@@ -1982,99 +2056,115 @@ kk kjkhjkjkk yhjj jgj g hgh ghghg</div><div style='text-align:center' class='spa
         <rect fill='#f2f2f2' height='6' id='svg_12' stroke='#404040' width='100' x='5' y='65'/>
         <rect fill='#f2f2f2' height='6' id='svg_13' stroke='#404040' width='90' x='10' y='59'/>
     </g>
-</svg>  <text x='502.22222222222223' y='16' fill='black' font-family='sans-serif' font-size='14.399999999999999' text-anchor='middle'>Issuer</text>
-  <line x1='261.22222222222223' y1='110' x2='150.72222222222223' y2='110' stroke-width='1' stroke='black' marker-end='url(#arrowHead)'/>
-  <text x='202.22222222222223' y='104.4' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>PREQ</text>
+</svg>  <text x='543' y='24' fill='black' font-family='sans-serif' font-size='14.399999999999999' text-anchor='middle'>Issuer</text>
+  <line x1='302.4' y1='96' x2='191.1' y2='96' stroke-width='1' stroke='black' marker-end='url(#arrowHead)'/>
+  <text x='243' y='90.4' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>PREQ</text>
   <a href='#preq'>
-  <rect x='254.97222222222223' y='102.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
-  <text x='261.22222222222223' y='114' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>1</text>
+  <rect x='295.75' y='88.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
+  <text x='302' y='100' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>1</text>
   </a>
-  <rect x='100.97222222222223' y='132.75' width='86' height='50' fill='black' opacity='0.4' filter='url(#dropShaddow)'/>
-  <rect x='98.97222222222223' y='130.75' width='86' height='50' fill='white' stroke-width='0.5' stroke='black'/>
-  <rect x='98.97222222222223' y='130.75' width='86' height='5' fill='#deeafc' stroke-width='0.5' stroke='black'/>
-  <text x='142.22222222222223' y='160' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>Payment UI</text>
+  <rect x='141.75' y='118.75' width='86' height='50' fill='black' opacity='0.4' filter='url(#dropShaddow)'/>
+  <rect x='139.75' y='116.75' width='86' height='50' fill='white' stroke-width='0.5' stroke='black'/>
+  <rect x='139.75' y='116.75' width='86' height='5' fill='#deeafc' stroke-width='0.5' stroke='black'/>
+  <text x='183' y='146' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>Payment UI</text>
   <a href='#paymentui'>
-  <rect x='91.72222222222223' y='126.25' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
-  <text x='98.97222222222223' y='137.5' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>2</text>
+  <rect x='132.5' y='112.25' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
+  <text x='139.75' y='123.5' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>2</text>
   </a>
-  <line x1='23.22222222222222' y1='202' x2='133.72222222222223' y2='202' stroke-width='1' stroke='black' marker-end='url(#arrowHead)' stroke-dasharray='4'/>
-  <text x='82.22222222222223' y='196.4' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>Authorization</text>
+  <line x1='63.6' y1='188' x2='174.9' y2='188' stroke-width='1' stroke='black' marker-end='url(#arrowHead)' stroke-dasharray='4'/>
+  <text x='123' y='182.4' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>Authorization</text>
   <a href='#userauth'>
-  <rect x='14.972222222222221' y='194.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
-  <text x='22.22222222222222' y='206' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>3</text>
+  <rect x='55.75' y='180.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
+  <text x='63' y='192' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>3</text>
   </a>
-  <path fill='black' opacity='0.4' d='M105.22222222222223,224.75 l86,0 l-8,22 l-86,0Z' filter='url(#dropShaddow)'/>
-  <path fill='#fff2cc' stroke='#404040' stroke-width='0.5' d='M103.22222222222223,222.75 l86,0 l-8,22 l-86,0Z'/>
-  <text x='145.02222222222224' y='238' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>Processing</text>
+  <path fill='black' opacity='0.4' d='M146,210.75 l86,0 l-8,22 l-86,0Z' filter='url(#dropShaddow)'/>
+  <path fill='#fff2cc' stroke='#404040' stroke-width='0.5' d='M144,208.75 l86,0 l-8,22 l-86,0Z'/>
+  <text x='185.8' y='224' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>Processing</text>
   <a href='#init'>
-  <rect x='91.72222222222223' y='226.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
-  <text x='98.97222222222223' y='238' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>4</text>
+  <rect x='132.5' y='212.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
+  <text x='139.75' y='224' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>4</text>
   </a>
-  <line x1='143.22222222222223' y1='266' x2='253.72222222222223' y2='266' stroke-width='1' stroke='black' marker-end='url(#arrowHead)'/>
-  <text x='202.22222222222223' y='260.4' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>PRES</text>
+  <line x1='183.6' y1='252' x2='294.9' y2='252' stroke-width='1' stroke='black' marker-end='url(#arrowHead)'/>
+  <text x='243' y='246.4' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>PRES</text>
   <a href='#pres'>
-  <rect x='134.97222222222223' y='258.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
-  <text x='142.22222222222223' y='270' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>5</text>
+  <rect x='175.75' y='244.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
+  <text x='183' y='256' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>5</text>
   </a>
-  <path fill='black' opacity='0.4' d='M225.22222222222223,288.75 l86,0 l-8,22 l-86,0Z' filter='url(#dropShaddow)'/>
-  <path fill='#fff2cc' stroke='#404040' stroke-width='0.5' d='M223.22222222222223,286.75 l86,0 l-8,22 l-86,0Z'/>
-  <text x='265.02222222222224' y='302' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>Processing</text>
+  <path fill='black' opacity='0.4' d='M266,274.75 l86,0 l-8,22 l-86,0Z' filter='url(#dropShaddow)'/>
+  <path fill='#fff2cc' stroke='#404040' stroke-width='0.5' d='M264,272.75 l86,0 l-8,22 l-86,0Z'/>
+  <text x='305.8' y='288' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>Processing</text>
   <a href='#merchant'>
-  <rect x='211.72222222222223' y='290.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
-  <text x='218.97222222222223' y='302' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>6</text>
+  <rect x='252.5' y='276.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
+  <text x='259.75' y='288' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>6</text>
   </a>
-  <line x1='263.22222222222223' y1='330' x2='373.72222222222223' y2='330' stroke-width='1' stroke='black' marker-end='url(#arrowHead)'/>
-  <text x='322.22222222222223' y='324.4' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>MA-REQ</text>
-  <a href='#ma-req'>
-  <rect x='254.97222222222223' y='322.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
-  <text x='262.22222222222223' y='334' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>7</text>
+  <line x1='303.6' y1='316' x2='414.9' y2='316' stroke-width='1' stroke='black' marker-end='url(#arrowHead)'/>
+  <text x='363' y='310.4' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>AREQ</text>
+  <a href='#areq'>
+  <rect x='295.75' y='308.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
+  <text x='303' y='320' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>7</text>
   </a>
-  <path fill='black' opacity='0.4' d='M345.22222222222223,352.75 l86,0 l-8,22 l-86,0Z' filter='url(#dropShaddow)'/>
-  <path fill='#fff2cc' stroke='#404040' stroke-width='0.5' d='M343.22222222222223,350.75 l86,0 l-8,22 l-86,0Z'/>
-  <text x='385.02222222222224' y='366' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>Processing</text>
+  <path fill='black' opacity='0.4' d='M386,338.75 l86,0 l-8,22 l-86,0Z' filter='url(#dropShaddow)'/>
+  <path fill='#fff2cc' stroke='#404040' stroke-width='0.5' d='M384,336.75 l86,0 l-8,22 l-86,0Z'/>
+  <text x='425.8' y='352' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>Processing</text>
   <a href='#acquirer'>
-  <rect x='331.72222222222223' y='354.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
-  <text x='338.97222222222223' y='366' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>8</text>
+  <rect x='372.5' y='340.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
+  <text x='379.75' y='352' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>8</text>
   </a>
-  <line x1='383.22222222222223' y1='394' x2='493.72222222222223' y2='394' stroke-width='1' stroke='black' marker-end='url(#arrowHead)'/>
-  <text x='442.22222222222223' y='388.4' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>AI-REQ</text>
-  <a href='#ai-req'>
-  <rect x='374.97222222222223' y='386.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
-  <text x='382.22222222222223' y='398' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>9</text>
+  <line x1='423.6' y1='380' x2='534.9' y2='380' stroke-width='1' stroke='black' marker-end='url(#arrowHead)'/>
+  <text x='483' y='374.4' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>IREQ</text>
+  <a href='#ireq'>
+  <rect x='415.75' y='372.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
+  <text x='423' y='384' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>9</text>
   </a>
-  <path fill='black' opacity='0.4' d='M465.22222222222223,416.75 l86,0 l-8,22 l-86,0Z' filter='url(#dropShaddow)'/>
-  <path fill='#fff2cc' stroke='#404040' stroke-width='0.5' d='M463.22222222222223,414.75 l86,0 l-8,22 l-86,0Z'/>
-  <text x='505.02222222222224' y='430' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>Processing</text>
+  <path fill='black' opacity='0.4' d='M506,402.75 l86,0 l-8,22 l-86,0Z' filter='url(#dropShaddow)'/>
+  <path fill='#fff2cc' stroke='#404040' stroke-width='0.5' d='M504,400.75 l86,0 l-8,22 l-86,0Z'/>
+  <text x='545.8' y='416' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>Processing</text>
   <a href='#issuer'>
-  <rect x='449.6222222222222' y='418.75' width='18.2' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
-  <text x='457.97222222222223' y='430' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>10</text>
-  </a>
-  <line x1='501.22222222222223' y1='458' x2='390.72222222222223' y2='458' stroke-width='1' stroke='black' marker-end='url(#arrowHead)' stroke-dasharray='4'/>
-  <text x='442.22222222222223' y='452.4' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>TBD</text>
-  <a href='#tbd'>
-  <rect x='492.8722222222222' y='450.75' width='18.2' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
-  <text x='502.22222222222223' y='462' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>11</text>
+  <rect x='490.4' y='404.75' width='18.2' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
+  <text x='498.75' y='416' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>10</text>
   </a>
 </svg>
-</div>
-<div style='overflow-x:auto'>
-<table class='tftable'>
-<tr><th>Description</th><th>Quantity</th><th>Subtotal</th></tr>
-<tr><td>Model Rocket<br>SpaceX Falcon Heavy<br>Scale 1:200</td><td style='text-align:right'>1</td><td style='text-align:right'>499.99 EUR</td></tr></table>
-</div>
-<div style='text-align:center' class='spacepara'>Shipping</div>
-<div style='overflow-x:auto'>
-<table class='tftable'>
-<tr><th>Description</th><th>Cost</th></tr>
-<tr><td>Free shipping</td><td style='text-align:right'>0.00 EUR</td></tr></table>
-</div>
-<table>
-<tr><td>Return Policy:<br>Items can be returned within 30 days of receipt of delivery using the Online Returns Center. Once the item is received at our Customer Support Center, it takes 2 business days for the refund to be processed and 3-5 business days for the refund amount to show up in your account.</td></tr></table>
-<div style='text-align:center' class='spacepara'>Payment Details</div>
-<div style='overflow-x:auto'>
-<table class='tftable'>
-<tr><th>Provider Name</th><th>Account Type</th><th>Account Id</th><th>Transaction Id</th><th>Time Stamp</th><th>Request Id</th></tr>
-<tr><td><a href='https://192.168.1.67:8442/webpay-payerbank'>My Bank</a></td><td>Bank Direct</td><td>FR*0131</td><td>#0100345123</td><td>2021-02-24 04:24:26 UTC</td><td>2021022400000002</td></tr></table>
-</div>
-<div style='margin-top:2em'><a href='2021022400000002/VS8_RUv8oV5boXYW36UVSw?json'>Switch to JSON view</a></div>
+  </div>
+  <div id='paymentui' class='spacepara'>Core Receipt Data</div>
+  <div style='overflow-x:auto;padding-bottom:5pt'>
+    <img style='display:block;width:220pt;box-shadow:2pt 2pt 3pt #808080;border-width:1pt;border-style:solid;border-color:darkgrey' alt='Payment UI' src='images/ui.svg'>
+  </div>
+  <div>Non-normative UI in &quot;dark mode&quot;.</div>
+  <div>
+    <code>
+      Core Receipt Data ghr 88 jj nl<br>
+      ff<br>
+      kk kjkhjkjkk yhjj jgj g hgh ghghg
+    </code>
+  </div>
+  <div style='font-family:monospace'>
+    Core Receipt Data ghr 88 jj nl<br>
+    ff<br>
+    kk kjkhjkjkk yhjj jgj g hgh ghghg
+  </div><div class='spacepara'>Order Data</div>
+
+  <div style='overflow-x:auto'>
+    <table class='tftable'>
+      <tr><th>Description</th><th>Quantity</th><th>Subtotal</th></tr>
+      <tr><td>Model Rocket<br>SpaceX Falcon Heavy<br>Scale 1:200</td><td style='text-align:right'>1</td><td style='text-align:right'>499.99 EUR</td></tr>
+    </table>
+  </div>
+  <div style='text-align:center' class='spacepara'>Shipping</div>
+  <div style='overflow-x:auto'>
+    <table class='tftable'>
+      <tr><th>Description</th><th>Cost</th></tr>
+      <tr><td>Free shipping</td><td style='text-align:right'>0.00 EUR</td></tr>
+    </table>
+  </div>
+  <table>
+    <tr><td>Return Policy:<br>Items can be returned within 30 days of receipt of delivery using the Online Returns Center. Once the item is received at our Customer Support Center, it takes 2 business days for the refund to be processed and 3-5 business days for the refund amount to show up in your account.</td></tr>
+  </table>
+  <div style='text-align:center' class='spacepara'>Payment Details</div>
+  <div style='overflow-x:auto'>
+    <table class='tftable'>
+      <tr><th>Provider Name</th><th>Account Type</th><th>Account Id</th><th>Transaction Id</th><th>Time Stamp</th><th>Request Id</th></tr>
+      <tr><td><a href='https://192.168.1.67:8442/webpay-payerbank'>My Bank</a></td><td>Bank Direct</td><td>FR*0131</td><td>#0100345123</td><td>2021-02-24 04:24:26 UTC</td><td>2021022400000002</td></tr>
+    </table>
+  </div>
+  <div style='margin-top:2em'><a href='2021022400000002/VS8_RUv8oV5boXYW36UVSw?json'>Switch to JSON view</a></div>
 </body></html>
