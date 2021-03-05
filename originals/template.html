@@ -3,14 +3,16 @@
 <link rel='icon' href='images/favicon.png' sizes='192x192'>
 <title>FIDO Web Pay</title><style type='text/css'>
 .header {font-size:1.5em;margin:1em 0 0.8em 0}
-.para {margin-top:0.8em}
+.para {margin-top: 0.8em}
 .actor {color:darkgreen;font-weight:bolder}
+.box {box-shadow: 0.2em 0.2em 0.2em #d0d0d0;border-width:1px;border-style:solid;border-color:black}
 .tftable {border-collapse:collapse;box-shadow:0.3em 0.3em 0.3em #d0d0d0;margin-bottom:0.3em} 
 .tftable td {white-space:nowrap;background-color:#ffffe0;padding:0.4em 0.5em;border-width:1px;border-style:solid;border-color:#a9a9a9}
 .tftable th {white-space:nowrap;padding:0.4em 0.5em;background:linear-gradient(to bottom, #eaeaea 14%,#fcfcfc 52%,#e5e5e5 89%);text-align:center;border-width:1px;border-style:solid;border-color:#a9a9a9}
 .json {word-break:break-all;background-color:#f8f8f8;padding:1em;border-width:1px;border-style:solid;border-color:#a9a9a9;box-shadow:0.3em 0.3em 0.3em #d0d0d0}
 body {margin:1em;font-size:10pt;font-family:Verdana,'Bitstream Vera Sans','DejaVu Sans',Arial,'Liberation Sans';background-color:white} 
-code {font-size:10pt;font-weight:bold;color:maroon}
+code {font-size:10pt}
+.reserved {color:maroon;font-weight:bold}
 ul {margin:0}
 li {margin-top:0.3em}
 a {color:blue;text-decoration:none}
@@ -18,47 +20,48 @@ a {color:blue;text-decoration:none}
 </head>
 <body>
   <img style='max-width:50%' src='images/fwp.svg' alt='logo' title='FWP logotype'>
-  <div class='header'>FIDO Web Pay - Introduction</div>
+  <div class='header'>FIDO&reg; Web Pay - Introduction</div>
   <div>
-    <a href='https://www.emvco.com/' title='EMVCo Site'>EMV<img src='images/xtl.svg' alt='link'></a> represents
+    <a href='https://www.emvco.com/' title='EMVCo Site'>EMV&reg;<img src='images/xtl.svg' alt='link'></a> represents
     the current &quot;Gold Standard&quot; for <i>secure and convenient payments</i>
     in the <u>physical world</u>.
   </div>
   <div class='para'>
-    This document describes FIDO&reg; Web Pay (FWP), which is a <u>Web-adapted</u> version of EMV&reg;,
-    building on <a href='https://fidoalliance.org/fido2/' title='FIDO2 Technology'>FIDO2<img src='images/xtl.svg' alt='link'></a>
+    This document describes FIDO Web Pay (FWP), which is a <u>Web-adapted</u> version of EMV,
+    building on <a href='https://fidoalliance.org/fido2/' 
+title='FIDO2 Technology'>FIDO2<img src='images/xtl.svg' alt='link'></a>
     technology combined with the W3C
-    <a href='https://www.w3.org/TR/payment-request/' title='PaymentRequest'>PaymentRequest<img src='images/xtl.svg' alt='link'></a> API.
+    <a href='https://www.w3.org/TR/payment-request/' 
+title='PaymentRequest'>PaymentRequest<img src='images/xtl.svg' alt='link'></a> API.
   </div>
   <div class='para'>
     However, unlike EMV, FWP is intended to be usable with <i>any account-based payment system</i>,
     including the eurozone's
-    <a href='https://www.europeanpaymentscouncil.eu/' title='European Payments Council'>SEPA Instant<img src='images/xtl.svg' alt='link'></a>.
+    <a href='https://www.europeanpaymentscouncil.eu/' 
+title='European Payments Council'>SEPA Instant<img src='images/xtl.svg' alt='link'></a>.
   </div>
   <div class='para'>
-    Also in contrast to EMV, FWP <i>encrypts user-authorizations</i>, which has the following side effects:
-    <ul>
-      <li>
-        Eliminating dependencies on external tokenization services.
-      </li>
-      <li>
-        Limiting the amount of personally identifiable information (PII), shared
-        with third-parties to the name of the payer's bank.
-        This is compliant with
-        <a href='https://www.pcisecuritystandards.org' title='PCI Site'>PCI<img src='images/xtl.svg' alt='link'></a>
-        requirements as well as with <a href='https://gdprinfo.eu/' title='GDPR Site'>GDPR<img src='images/xtl.svg' alt='link'></a>.
-      </li>
-      <li>
-        Separating the formats for account numbers and financial institution (bank branch) identifiers.
-        The latter would typically be expressed as URLs.
-      </li>
-    </ul>
-  </div>
-  <div class='para'>
-    Although not a part of this specification, the underpinning authorization
-    scheme also opens the door to <i>non-direct payments</i>,
-    including secure (<i>tokenized</i>) versions of Card-on-File.
-  </div>
+    Also in contrast to EMV, FWP <i>encrypts</i> user-authorizations to accomplish the following subgoals:
+  <ul>
+    <li>
+      Eliminate dependencies on external tokenization services.
+    </li>
+    <li>
+      Limit the amount of personally identifiable information (PII), shared
+      with <i>third parties</i>, to the name of the payer's bank.
+      This is compliant with
+      <a href='https://www.pcisecuritystandards.org'
+         title='PCI Site'>PCI<img src='images/xtl.svg' alt='link'></a>
+      requirements as well as with <a href='https://gdprinfo.eu/'
+title='GDPR Site'>GDPR<img src='images/xtl.svg' alt='link'></a>.
+    </li>
+    <li>
+      Separate the formats for account numbers and issuer (bank branch) identifiers.
+      The latter would typically be expressed as URLs, removing the need for externally managed
+      databases holding issuer payment processor end-points.
+    </li>
+  </ul>
+</div>
   <div class='header'>
     Prerequisites
   </div>
@@ -70,16 +73,16 @@ a {color:blue;text-decoration:none}
     <ul>
       <li>A <span class='actor'>User</span> specific (<i>unique</i>) FIDO key for <i>signing</i> payment authorization data.</li>
       <li>An <span class='actor'>Issuer</span> specific (<i>shared</i>) public key for <i>encrypting</i> payment authorization data.</li>
-      <li>An <code>accountId</code> associated with the FIDO signature key.</li>
-      <li>A <code>paymentMethod</code> URL identifying the payment network.</li>
-      <li>An <code>issuerId</code> in the form of a BIN number or a URL associated with the <span class='actor'>Issuer</span>.</li>
+      <li>An <code class='reserved'>accountId</code> associated with the FIDO signature key.</li>
+      <li>A <code class='reserved'>paymentMethod</code> URL identifying the payment network.</li>
+      <li>An <code class='reserved'>issuerId</code> in the form of a BIN number or a URL associated with the <span class='actor'>Issuer</span>.</li>
       <li>An icon identifying the payment credential for the <span class='actor'>User</span>.</li>
     </ul>
   </div>
-  <div class='para'>
-    Note that FWP effectively forms a browser-resident, universal &quot;wallet&quot;,
+  <div class='para box' style='padding:0.5em 1em;margin-top:1em;display:inline-block'>
+    Note that FWP effectively forms a browser-resident &quot;Wallet&quot;,
     holding any number of payment credentials, each representing a specific <span class='actor'>Issuer</span>
-    and <code>paymentMethod</code>.
+    and <code class='reserved'>paymentMethod</code>.
   </div>
   <div id='enrollment' class='header'>
     Credential Enrollment
@@ -87,7 +90,8 @@ a {color:blue;text-decoration:none}
   <div>
     The exact enrollment process is yet to be defined; the assumption is that it
     could be accomplished by extending the existing W3C
-    <a href='https://www.w3.org/TR/webauthn-2/' title='Web Authentication'>Web&nbsp;Authentication</a> enrollment system.
+    <a href='https://www.w3.org/TR/webauthn-2/' 
+title='Web Authentication'>Web&nbsp;Authentication<img src='images/xtl.svg' alt='link'></a> enrollment system.
     The extension would enable the browser to securely distinguish between &quot;ordinary&quot; FIDO keys,
     and those targeted for payments.  This is needed for maintaining a local database holding FWP credentials.
   </div>
@@ -121,31 +125,29 @@ is linked to a boxed number:
   <div style='font-family:monospace'>
     Core Receipt Data ghr 88 jj nl<br>
     ff<br>
-    kk kjkhjkjkk yhjj jgj g hgh ghghg
-  </div><div class='spacepara'>Order Data</div>
-
-  <div style='overflow-x:auto'>
-    <table class='tftable'>
-      <tr><th>Description</th><th>Quantity</th><th>Subtotal</th></tr>
-      <tr><td>Model Rocket<br>SpaceX Falcon Heavy<br>Scale 1:200</td><td style='text-align:right'>1</td><td style='text-align:right'>499.99 EUR</td></tr>
-    </table>
-  </div>
-  <div style='text-align:center' class='spacepara'>Shipping</div>
-  <div style='overflow-x:auto'>
-    <table class='tftable'>
-      <tr><th>Description</th><th>Cost</th></tr>
-      <tr><td>Free shipping</td><td style='text-align:right'>0.00 EUR</td></tr>
-    </table>
-  </div>
-  <table>
-    <tr><td>Return Policy:<br>Items can be returned within 30 days of receipt of delivery using the Online Returns Center. Once the item is received at our Customer Support Center, it takes 2 business days for the refund to be processed and 3-5 business days for the refund amount to show up in your account.</td></tr>
-  </table>
-  <div style='text-align:center' class='spacepara'>Payment Details</div>
-  <div style='overflow-x:auto'>
-    <table class='tftable'>
-      <tr><th>Provider Name</th><th>Account Type</th><th>Account Id</th><th>Transaction Id</th><th>Time Stamp</th><th>Request Id</th></tr>
-      <tr><td><a href='https://192.168.1.67:8442/webpay-payerbank'>My Bank</a></td><td>Bank Direct</td><td>FR*0131</td><td>#0100345123</td><td>2021-02-24 04:24:26 UTC</td><td>2021022400000002</td></tr>
-    </table>
-  </div>
-  <div style='margin-top:2em'><a href='2021022400000002/VS8_RUv8oV5boXYW36UVSw?json'>Switch to JSON view</a></div>
+    kk kjkhjkjkk yhjj jgj g hgh ghghg</div>
+<div class='header'>
+Possible Extensions
+</div>
+<div>
+The FWP core is loosely derived from a PoC system known as  
+<a href='https://cyberphone.github.io/doc/saturn/' title='Saturn'>Saturn<img src='images/xtl.svg' alt='link' /></a>.
+By building on this core, the following Saturn features are imaginable:
+<ul>
+  <li>
+    Support for <i>non-direct payments</i>,
+    including secure (<i>tokenized</i>) versions of Card-on-File.
+</li>
+<li>
+  Support for universal digital receipts.
+</li>
+</ul>
+</div>
+<div class='header'>
+  Author and Version
+</div>
+<div>
+The FWP specification is currently authored by Anders Rundgren (<code>anders.rundgren.net@gmail.com</code>).<br/>
+Current version: 0.1, 2020-03-09
+</div>
 </body></html>

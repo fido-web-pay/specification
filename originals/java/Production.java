@@ -13,7 +13,7 @@ public class Production {
         this.originalBase = originalBase;
         String template = readOriginal("template.html");
         String statediagram = readOriginal(StateDiagram.FILE_NAME);
-        statediagram = "<svg style='display:block;width:500pt;box-shadow:0.2em 0.2em 0.2em #d0d0d0;border-width:1px;border-style:solid;border-color:black' " + statediagram.substring(statediagram.indexOf("<svg ") + 5);
+        statediagram = "<svg style='display:block;width:500pt' class='box' " + statediagram.substring(statediagram.indexOf("<svg ") + 5);
         template = template.replace("@statediagram@", statediagram);
         new FileOutputStream(originalBase + ".." + File.separator + "draft.html").write(template.getBytes("utf-8"));
      }

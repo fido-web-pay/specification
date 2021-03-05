@@ -5,10 +5,10 @@
    height="12">
   <path
      fill="#ffffff"
-     stroke="#3366cc"
+     stroke="blue"
      d="M 4,4.518 H 9.982 V 10.5 H 4 Z"/>
   <path
-     fill="#3366cc"
+     fill="blue"
      d="M 8.265,1 H 13.5 V 6.39 L 11.927,7.937 10.617,6.627 7.893,9.35 5.203,6.662 8.013,3.854 6.7,2.544 Z"/>
   <path
      fill="#ffffff"
