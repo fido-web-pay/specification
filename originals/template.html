@@ -6,6 +6,7 @@
 .para {margin-top: 0.8em}
 .actor {color:darkgreen;font-weight:bolder}
 .box {box-shadow: 0.2em 0.2em 0.2em #d0d0d0;border-width:1px;border-style:solid;border-color:black}
+.numbox {border-width: 1pt;border-style:solid;border-color:black;border-radius:0.3em;display:inline-block;margin: 1.5em 0 0.6em 0;padding: 0 3pt 0.1em 3pt}
 .tftable {border-collapse:collapse;box-shadow:0.3em 0.3em 0.3em #d0d0d0;margin-bottom:0.3em} 
 .tftable td {white-space:nowrap;background-color:#ffffe0;padding:0.4em 0.5em;border-width:1px;border-style:solid;border-color:#a9a9a9}
 .tftable th {white-space:nowrap;padding:0.4em 0.5em;background:linear-gradient(to bottom, #eaeaea 14%,#fcfcfc 52%,#e5e5e5 89%);text-align:center;border-width:1px;border-style:solid;border-color:#a9a9a9}
@@ -24,7 +25,7 @@ a {color:blue;text-decoration:none}
   <div>
     <a href='https://www.emvco.com/' title='EMVCo Site'>EMV&reg;<img src='images/xtl.svg' alt='link'></a> represents
     the current &quot;Gold Standard&quot; for <i>secure and convenient payments</i>
-    in the <u>physical world</u>.
+    in the <u>Physical world</u>.
   </div>
   <div class='para'>
     This document describes FIDO Web Pay (FWP), which is a <u>Web-adapted</u> version of EMV,
@@ -41,7 +42,7 @@ title='PaymentRequest'>PaymentRequest<img src='images/xtl.svg' alt='link'></a> A
 title='European Payments Council'>SEPA Instant<img src='images/xtl.svg' alt='link'></a>.
   </div>
   <div class='para'>
-    Also in contrast to EMV, FWP <i>encrypts</i> user-authorizations to accomplish the following subgoals:
+    Also in contrast to EMV, the FWP client <i>encrypts</i> user-authorizations to accomplish the following subgoals:
   <ul>
     <li>
       Eliminate dependencies on external tokenization services.
@@ -49,7 +50,7 @@ title='European Payments Council'>SEPA Instant<img src='images/xtl.svg' alt='lin
     <li>
       Limit the amount of personally identifiable information (PII), shared
       with <i>third parties</i>, to the name of the payer's bank.
-      This is compliant with
+      This is presumably compliant with
       <a href='https://www.pcisecuritystandards.org'
          title='PCI Site'>PCI<img src='images/xtl.svg' alt='link'></a>
       requirements as well as with <a href='https://gdprinfo.eu/'
@@ -71,11 +72,12 @@ title='GDPR Site'>GDPR<img src='images/xtl.svg' alt='link'></a>.
     one or more <i>payment credentials</i> in an <a href='#enrollment'>Enrollment</a> process.
     A payment credential is supposed to at least contain the following elements:
     <ul>
-      <li>A <span class='actor'>User</span> specific (<i>unique</i>) FIDO key for <i>signing</i> payment authorization data.</li>
+      <li>An identifier to a <span class='actor'>User</span> specific (<i>unique</i>) FIDO key for <i>signing</i> payment authorization data.</li>
       <li>An <span class='actor'>Issuer</span> specific (<i>shared</i>) public key for <i>encrypting</i> payment authorization data.</li>
       <li>An <code class='reserved'>accountId</code> associated with the FIDO signature key.</li>
       <li>A <code class='reserved'>paymentMethod</code> URL identifying the payment network.</li>
-      <li>An <code class='reserved'>issuerId</code> in the form of a BIN number or a URL associated with the <span class='actor'>Issuer</span>.</li>
+      <li>An <code class='reserved'>issuerId</code> in the form of a
+Bank Identification Number (BIN) or URL associated with the <span class='actor'>Issuer</span>.</li>
       <li>An icon identifying the payment credential for the <span class='actor'>User</span>.</li>
     </ul>
   </div>
@@ -96,7 +98,7 @@ title='Web Authentication'>Web&nbsp;Authentication<img src='images/xtl.svg' alt=
     and those targeted for payments.  This is needed for maintaining a local database holding FWP credentials.
   </div>
   <div class='para'>
-    It MAY be technically feasible using a FIDO key associated with a FWP credential
+    It MAY be technically feasible using a FIDO key associated with an FWP credential
 for Web Authentication as well, but this would be a deployment decision
 by the <span class='actor'>Issuer</span>.
   </div>
@@ -105,12 +107,35 @@ by the <span class='actor'>Issuer</span>.
   </div>
   <div>This section describes the different steps needed to perform a payment using FWP.
 The foundation for the description is the following sequence diagram where each step
-is linked to a boxed number:
+is linked to a <i>clickable</i> number in a box:
 </div>
-  <div style='overflow-x:auto;padding:8pt 0 5pt 0'>
+  <div style='overflow-x:auto;padding:8pt 0'>
     @statediagram@
   </div>
-  <div id='paymentui' class='spacepara'>Core Receipt Data</div>
+<div>Note that this specification does not elaborate on the return data from
+the <b class='actor'>Acquirer</b> and <b class='actor'>Issuer</b>,
+ because this is payment network specific.</div>
+<div id='preq' class='numbox'>1</div>
+<div>In this step the <b class='actor'>Merchant</b></div>
+<div id='paymentui' class='numbox'>2</div>
+<div>In this step the <b class='actor'>Merchant</b></div>
+ <div id='userauth' class='numbox'>3</div>
+<div>In this step the <b class='actor'>Merchant</b></div>
+ <div id='fpwcore' class='numbox'>4</div>
+<div>In this step the <b class='actor'>Merchant</b></div>
+<div id='pres' class='numbox'>5</div>
+<div>In this step the <b class='actor'>Merchant</b></div>
+<div id='presproc' class='numbox'>6</div>
+<div>In this step the <b class='actor'>Merchant</b></div>
+<div id='areq' class='numbox'>7</div>
+<div>In this step the <b class='actor'>Merchant</b></div>
+<div id='areqproc' class='numbox'>8</div>
+<div>In this step the <b class='actor'>Merchant</b></div>
+<div id='ireq' class='numbox'>9</div>
+<div>In this step the <b class='actor'>Merchant</b></div>
+<div id='ireqproc' class='numbox'>10</div>
+<div>In this step the <b class='actor'>Merchant</b></div>
+<div id='paymentui' class='spacepara'>Core Receipt Data</div>
   <div style='overflow-x:auto;padding-bottom:5pt'>
     <img style='display:block;width:220pt;box-shadow:2pt 2pt 3pt #808080;border-width:1pt;border-style:solid;border-color:darkgrey' alt='Payment UI' src='images/ui.svg'>
   </div>
@@ -126,13 +151,14 @@ is linked to a boxed number:
     Core Receipt Data ghr 88 jj nl<br>
     ff<br>
     kk kjkhjkjkk yhjj jgj g hgh ghghg</div>
-<div class='header'>
+<div id='extensions' class='header'>
 Possible Extensions
 </div>
 <div>
 The FWP core is loosely derived from a PoC system known as  
-<a href='https://cyberphone.github.io/doc/saturn/' title='Saturn'>Saturn<img src='images/xtl.svg' alt='link' /></a>.
-By building on this core, the following Saturn features are imaginable:
+<a href='https://cyberphone.github.io/doc/saturn/' 
+title='Saturn'>Saturn<img src='images/xtl.svg' alt='link' /></a>.
+By building on this core, Saturn features like the following would be fairly easy to add:
 <ul>
   <li>
     Support for <i>non-direct payments</i>,
@@ -141,13 +167,30 @@ By building on this core, the following Saturn features are imaginable:
 <li>
   Support for universal digital receipts.
 </li>
+<li>
+  Support for private messaging and additional authentication information between the
+ <b class='actor'>Issuer</b> and <b class='actor'>User</b>.
+</li>
 </ul>
 </div>
-<div class='header'>
+<div class='para'>
+A radical change would be moving the FWP implementation down into the client platform layer.
+This would open FWP to other payment scenarios like point-of-sale (PoS) and person-to-person (P2P).
+It would also make it easier for browser vendors adopting the FWP system.
+</div>
+<div id='version' class='header'>
   Author and Version
 </div>
 <div>
 The FWP specification is currently authored by Anders Rundgren (<code>anders.rundgren.net@gmail.com</code>).<br/>
-Current version: 0.1, 2020-03-09
+Document version: 0.1, 2020-03-09
+</div>
+<div class='header'>
+  Trademarks
+</div>
+<div id='trademarks'>
+  FIDO is a registered trademark of the FIDO alliance.<br/>
+  EMV is a registered trademark of EMVCo.<br/>&nbsp;<br/>
+  This specification represents an <i>independent effort</i>, not associated with the FIDO alliance or EMVCo.
 </div>
 </body></html>

@@ -272,13 +272,13 @@ public class StateDiagram {
         number(uiX, uiTop + (UI_BORDER + STROKE_WIDTH) / 2, "#paymentui");
         seqY += SEQ_Y_DISTANCE + SEQ_Y_SLACK_AFTER_UI + UI_HEIGHT - PROC_HEIGHT;
         dashedArrow(0, 1, "Authorization", "#userauth");
-        processing(1, "#init");
+        processing(1, "#fpwcore");
         arrow(1, 2, "PRES", "#pres");
-        processing(2, "#merchant");
+        processing(2, "#presproc");
         arrow(2, 3, "AREQ", "#areq");
-        processing(3, "#acquirer");
+        processing(3, "#areqproc");
         arrow(3, 4, "IREQ", "#ireq");
-        processing(4, "#issuer");
+        processing(4, "#ireqproc");
   //      dashedArrow(4, 3, "Out of Scope", "#outofscope");
  
         seqY -= PROC_HEIGHT * 0.2;
