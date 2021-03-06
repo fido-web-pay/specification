@@ -3,14 +3,17 @@
 <link rel='icon' href='images/favicon.png' sizes='192x192'>
 <title>FIDO Web Pay</title><style type='text/css'>
 .header {font-size:1.5em;margin:1em 0 0.8em 0}
-.para {margin-top:0.8em}
+.para {margin-top: 0.8em}
 .actor {color:darkgreen;font-weight:bolder}
+.box {box-shadow: 0.2em 0.2em 0.2em #d0d0d0;border-width:1px;border-style:solid;border-color:black}
+.numbox {border-width: 1pt;border-style:solid;border-color:black;border-radius:0.3em;display:inline-block;margin: 1.5em 0 0.6em 0;padding: 0 3pt 0.1em 3pt}
 .tftable {border-collapse:collapse;box-shadow:0.3em 0.3em 0.3em #d0d0d0;margin-bottom:0.3em} 
 .tftable td {white-space:nowrap;background-color:#ffffe0;padding:0.4em 0.5em;border-width:1px;border-style:solid;border-color:#a9a9a9}
 .tftable th {white-space:nowrap;padding:0.4em 0.5em;background:linear-gradient(to bottom, #eaeaea 14%,#fcfcfc 52%,#e5e5e5 89%);text-align:center;border-width:1px;border-style:solid;border-color:#a9a9a9}
 .json {word-break:break-all;background-color:#f8f8f8;padding:1em;border-width:1px;border-style:solid;border-color:#a9a9a9;box-shadow:0.3em 0.3em 0.3em #d0d0d0}
 body {margin:1em;font-size:10pt;font-family:Verdana,'Bitstream Vera Sans','DejaVu Sans',Arial,'Liberation Sans';background-color:white} 
-code {font-size:10pt;font-weight:bold;color:maroon}
+code {font-size:10pt}
+.reserved {color:maroon;font-weight:bold}
 ul {margin:0}
 li {margin-top:0.3em}
 a {color:blue;text-decoration:none}
@@ -18,48 +21,50 @@ a {color:blue;text-decoration:none}
 </head>
 <body>
   <img style='max-width:50%' src='images/fwp.svg' alt='logo' title='FWP logotype'>
-  <div class='header'>FIDO Web Pay - Introduction</div>
+  <div id='introduction' class='header'>FIDO&reg; Web Pay - Introduction</div>
   <div>
-    <a href='https://www.emvco.com/' title='EMVCo Site'>EMV<img src='images/xtl.svg' alt='link'></a> represents
+    <a href='https://www.emvco.com/' title='EMVCo Site'>EMV&reg;<img src='images/xtl.svg' alt='link'></a> represents
     the current &quot;Gold Standard&quot; for <i>secure and convenient payments</i>
     in the <u>physical world</u>.
   </div>
   <div class='para'>
-    This document describes FIDO&reg; Web Pay (FWP), which is a <u>Web-adapted</u> version of EMV&reg;,
-    building on <a href='https://fidoalliance.org/fido2/' title='FIDO2 Technology'>FIDO2<img src='images/xtl.svg' alt='link'></a>
+    This document describes FIDO Web Pay (FWP), which is a <u>Web-adapted</u> version of EMV,
+    building on <a href='https://fidoalliance.org/fido2/' 
+title='FIDO2 Technology'>FIDO2<img src='images/xtl.svg' alt='link'></a>
     technology combined with the W3C
-    <a href='https://www.w3.org/TR/payment-request/' title='PaymentRequest'>PaymentRequest<img src='images/xtl.svg' alt='link'></a> API.
+    <a href='https://www.w3.org/TR/payment-request/' 
+title='PaymentRequest'>PaymentRequest<img src='images/xtl.svg' alt='link'></a> API.
   </div>
   <div class='para'>
-    However, unlike EMV, FWP is intended to be usable with <i>any account-based payment system</i>,
+    FWP extends the scope of EMV, by targeting FWP for usage with <i>any account-based payment system</i>,
     including the eurozone's
-    <a href='https://www.europeanpaymentscouncil.eu/' title='European Payments Council'>SEPA Instant<img src='images/xtl.svg' alt='link'></a>.
+    <a href='https://www.europeanpaymentscouncil.eu/'
+       title='European Payments Council'>SEPA Instant<img src='images/xtl.svg' alt='link'></a>.
   </div>
   <div class='para'>
-    Also in contrast to EMV, FWP <i>encrypts user-authorizations</i>, which has the following side effects:
-    <ul>
-      <li>
-        Eliminating dependencies on external tokenization services.
-      </li>
-      <li>
-        Limiting the amount of personally identifiable information (PII), shared
-        with third-parties to the name of the payer's bank.
-        This is compliant with
-        <a href='https://www.pcisecuritystandards.org' title='PCI Site'>PCI<img src='images/xtl.svg' alt='link'></a>
-        requirements as well as with <a href='https://gdprinfo.eu/' title='GDPR Site'>GDPR<img src='images/xtl.svg' alt='link'></a>.
-      </li>
-      <li>
-        Separating the formats for account numbers and financial institution (bank branch) identifiers.
-        The latter would typically be expressed as URLs.
-      </li>
-    </ul>
-  </div>
-  <div class='para'>
-    Although not a part of this specification, the underpinning authorization
-    scheme also opens the door to <i>non-direct payments</i>,
-    including secure (<i>tokenized</i>) versions of Card-on-File.
-  </div>
-  <div class='header'>
+     The primary technical enhancement to EMV, is that the FWP client <i>encrypts</i> user-authorizations
+in order to accomplish the following subgoals:
+  <ul>
+    <li>
+      Eliminate dependencies on external tokenization services.
+    </li>
+    <li>
+      Limit the amount of personally identifiable information (PII), shared
+      with <i>third parties</i>, to the name of the payer's bank.
+      This is presumably compliant with
+      <a href='https://www.pcisecuritystandards.org'
+         title='PCI Site'>PCI<img src='images/xtl.svg' alt='link'></a>
+      requirements as well as with <a href='https://gdprinfo.eu/'
+title='GDPR Site'>GDPR<img src='images/xtl.svg' alt='link'></a>.
+    </li>
+    <li>
+      Separate the formats for account numbers and issuer (bank branch) identifiers.
+      The latter would preferably be expressed as URLs, removing the need for externally managed
+      databases holding issuer payment processor end-points.
+    </li>
+  </ul>
+</div>
+  <div id='prerequisites' class='header'>
     Prerequisites
   </div>
   <div>
@@ -68,18 +73,19 @@ a {color:blue;text-decoration:none}
     one or more <i>payment credentials</i> in an <a href='#enrollment'>Enrollment</a> process.
     A payment credential is supposed to at least contain the following elements:
     <ul>
-      <li>A <span class='actor'>User</span> specific (<i>unique</i>) FIDO key for <i>signing</i> payment authorization data.</li>
+      <li>An identifier to a <span class='actor'>User</span> specific (<i>unique</i>) FIDO key for <i>signing</i> payment authorization data.</li>
       <li>An <span class='actor'>Issuer</span> specific (<i>shared</i>) public key for <i>encrypting</i> payment authorization data.</li>
-      <li>An <code>accountId</code> associated with the FIDO signature key.</li>
-      <li>A <code>paymentMethod</code> URL identifying the payment network.</li>
-      <li>An <code>issuerId</code> in the form of a BIN number or a URL associated with the <span class='actor'>Issuer</span>.</li>
+      <li>An <code class='reserved'>accountId</code> associated with the FIDO signature key.</li>
+      <li>A <code class='reserved'>paymentMethod</code> URL identifying the FWP method for a particular payment network.</li>
+      <li>An <code class='reserved'>issuerId</code> in the form of a
+Bank Identification Number (BIN) or URL associated with the <span class='actor'>Issuer</span>.</li>
       <li>An icon identifying the payment credential for the <span class='actor'>User</span>.</li>
     </ul>
   </div>
-  <div class='para'>
-    Note that FWP effectively forms a browser-resident, universal &quot;wallet&quot;,
+  <div class='para box' style='padding:0.5em 1em;margin-top:1em;display:inline-block'>
+    Note that FWP effectively forms a browser-resident &quot;Wallet&quot;,
     holding any number of payment credentials, each representing a specific <span class='actor'>Issuer</span>
-    and <code>paymentMethod</code>.
+    and <code class='reserved'>paymentMethod</code>.
   </div>
   <div id='enrollment' class='header'>
     Credential Enrollment
@@ -87,12 +93,13 @@ a {color:blue;text-decoration:none}
   <div>
     The exact enrollment process is yet to be defined; the assumption is that it
     could be accomplished by extending the existing W3C
-    <a href='https://www.w3.org/TR/webauthn-2/' title='Web Authentication'>Web&nbsp;Authentication</a> enrollment system.
+    <a href='https://www.w3.org/TR/webauthn-2/' 
+title='Web Authentication'>Web&nbsp;Authentication<img src='images/xtl.svg' alt='link'></a> enrollment system.
     The extension would enable the browser to securely distinguish between &quot;ordinary&quot; FIDO keys,
-    and those targeted for payments.  This is needed for maintaining a local database holding FWP credentials.
+    and those targeted for payments which is required for maintaining a database in the browser holding FWP credentials.
   </div>
   <div class='para'>
-    It MAY be technically feasible using a FIDO key associated with a FWP credential
+    It MAY be technically feasible using a FIDO key associated with an FWP credential
 for Web Authentication as well, but this would be a deployment decision
 by the <span class='actor'>Issuer</span>.
   </div>
@@ -101,10 +108,10 @@ by the <span class='actor'>Issuer</span>.
   </div>
   <div>This section describes the different steps needed to perform a payment using FWP.
 The foundation for the description is the following sequence diagram where each step
-is linked to a boxed number:
+is linked to a <i>clickable</i> number in a box:
 </div>
-  <div style='overflow-x:auto;padding:8pt 0 5pt 0'>
-    <svg style='display:block;width:500pt;box-shadow:0.2em 0.2em 0.2em #d0d0d0;border-width:1px;border-style:solid;border-color:black' viewBox='0 0 606 449.6' xmlns='http://www.w3.org/2000/svg'>
+  <div style='overflow-x:auto;padding:8pt 0'>
+    <svg style='display:block;width:500pt' class='box' viewBox='0 0 606 449.6' xmlns='http://www.w3.org/2000/svg'>
     <title>FIDO Web Pay - State Diagram</title>
     <!-- Anders Rundgren 2021 -->
     <defs>
@@ -613,17 +620,23 @@ is linked to a boxed number:
      inkscape:connector-curvature='0' />
 </svg>
   <text x='63' y='24' fill='black' font-family='sans-serif' font-size='14.399999999999999' text-anchor='middle'>User</text>
-<svg x='163' y='32.0' width='40' height='40.0' viewBox='0 0 72 72' xmlns='http://www.w3.org/2000/svg'>
+<svg x='163' y='32.0' width='40' height='40.0' viewBox='0 0 68 68' xmlns='http://www.w3.org/2000/svg'>
   <title>Browser Symbol</title>
-  <!-- Anders Rundgren 2021 -->
-  <circle cx='36' cy='36' r='36' fill='#5070ff'/>
+  <!-- Anders Ruyndgren 2021-->
+  <defs>
+    <radialGradient id='browserWorld'>
+      <stop offset='0.09' stop-color='#afc6e9'/>
+      <stop offset='0.5' stop-color='#5070ff'/>
+    </radialGradient>
+  </defs>
+  <circle cx='34' cy='34' r='34' fill='url(#browserWorld)'/>
   <g fill='none' stroke='white' stroke-width='2'>
-  <circle cx='36' cy='36' r='30'/>
-  <ellipse cx='36' cy='36' rx='15' ry='30'/>
-  <line x1='36' y1='6' x2='36' y2='66'/>
-  <line x1='6' y1='36' x2='66' y2='36'/>
-  <line x1='9.5' y1='21' x2='62.5' y2='21'/>
-  <line x1='9.5' y1='51' x2='62.5' y2='51'/>
+    <circle cx='34' cy='34' r='30'/>
+    <ellipse cx='34' cy='34' rx='13' ry='30'/>
+    <line x1='34' y1='4' x2='34' y2='64'/>
+    <line x1='4' y1='34' x2='64' y2='34'/>
+    <line x1='7.5' y1='19' x2='60.5' y2='19'/>
+    <line x1='7.5' y1='49' x2='60.5' y2='49'/>
   </g>
 </svg>
   <text x='183' y='24' fill='black' font-family='sans-serif' font-size='14.399999999999999' text-anchor='middle'>Browser</text>
@@ -2057,7 +2070,7 @@ is linked to a boxed number:
         <rect fill='#f2f2f2' height='6' id='svg_13' stroke='#404040' width='90' x='10' y='59'/>
     </g>
 </svg>  <text x='543' y='24' fill='black' font-family='sans-serif' font-size='14.399999999999999' text-anchor='middle'>Issuer</text>
-  <line x1='302.4' y1='96' x2='191.1' y2='96' stroke-width='1' stroke='black' marker-end='url(#arrowHead)'/>
+  <line x1='302.4' y1='96' x2='191.1' y2='96' stroke-width='0.8' stroke='black' marker-end='url(#arrowHead)'/>
   <text x='243' y='90.4' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>PREQ</text>
   <a href='#preq'>
   <rect x='295.75' y='88.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
@@ -2071,7 +2084,7 @@ is linked to a boxed number:
   <rect x='132.5' y='112.25' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
   <text x='139.75' y='123.5' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>2</text>
   </a>
-  <line x1='63.6' y1='188' x2='174.9' y2='188' stroke-width='1' stroke='black' marker-end='url(#arrowHead)' stroke-dasharray='4'/>
+  <line x1='63.6' y1='188' x2='174.9' y2='188' stroke-width='0.8' stroke='black' marker-end='url(#arrowHead)' stroke-dasharray='4'/>
   <text x='123' y='182.4' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>Authorization</text>
   <a href='#userauth'>
   <rect x='55.75' y='180.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
@@ -2080,11 +2093,11 @@ is linked to a boxed number:
   <path fill='black' opacity='0.4' d='M146,210.75 l86,0 l-8,22 l-86,0Z' filter='url(#dropShaddow)'/>
   <path fill='#fff2cc' stroke='#404040' stroke-width='0.5' d='M144,208.75 l86,0 l-8,22 l-86,0Z'/>
   <text x='185.8' y='224' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>Processing</text>
-  <a href='#init'>
+  <a href='#fpwcore'>
   <rect x='132.5' y='212.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
   <text x='139.75' y='224' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>4</text>
   </a>
-  <line x1='183.6' y1='252' x2='294.9' y2='252' stroke-width='1' stroke='black' marker-end='url(#arrowHead)'/>
+  <line x1='183.6' y1='252' x2='294.9' y2='252' stroke-width='0.8' stroke='black' marker-end='url(#arrowHead)'/>
   <text x='243' y='246.4' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>PRES</text>
   <a href='#pres'>
   <rect x='175.75' y='244.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
@@ -2093,11 +2106,11 @@ is linked to a boxed number:
   <path fill='black' opacity='0.4' d='M266,274.75 l86,0 l-8,22 l-86,0Z' filter='url(#dropShaddow)'/>
   <path fill='#fff2cc' stroke='#404040' stroke-width='0.5' d='M264,272.75 l86,0 l-8,22 l-86,0Z'/>
   <text x='305.8' y='288' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>Processing</text>
-  <a href='#merchant'>
+  <a href='#presproc'>
   <rect x='252.5' y='276.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
   <text x='259.75' y='288' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>6</text>
   </a>
-  <line x1='303.6' y1='316' x2='414.9' y2='316' stroke-width='1' stroke='black' marker-end='url(#arrowHead)'/>
+  <line x1='303.6' y1='316' x2='414.9' y2='316' stroke-width='0.8' stroke='black' marker-end='url(#arrowHead)'/>
   <text x='363' y='310.4' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>AREQ</text>
   <a href='#areq'>
   <rect x='295.75' y='308.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
@@ -2106,11 +2119,11 @@ is linked to a boxed number:
   <path fill='black' opacity='0.4' d='M386,338.75 l86,0 l-8,22 l-86,0Z' filter='url(#dropShaddow)'/>
   <path fill='#fff2cc' stroke='#404040' stroke-width='0.5' d='M384,336.75 l86,0 l-8,22 l-86,0Z'/>
   <text x='425.8' y='352' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>Processing</text>
-  <a href='#acquirer'>
+  <a href='#areqproc'>
   <rect x='372.5' y='340.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
   <text x='379.75' y='352' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>8</text>
   </a>
-  <line x1='423.6' y1='380' x2='534.9' y2='380' stroke-width='1' stroke='black' marker-end='url(#arrowHead)'/>
+  <line x1='423.6' y1='380' x2='534.9' y2='380' stroke-width='0.8' stroke='black' marker-end='url(#arrowHead)'/>
   <text x='483' y='374.4' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>IREQ</text>
   <a href='#ireq'>
   <rect x='415.75' y='372.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
@@ -2119,13 +2132,36 @@ is linked to a boxed number:
   <path fill='black' opacity='0.4' d='M506,402.75 l86,0 l-8,22 l-86,0Z' filter='url(#dropShaddow)'/>
   <path fill='#fff2cc' stroke='#404040' stroke-width='0.5' d='M504,400.75 l86,0 l-8,22 l-86,0Z'/>
   <text x='545.8' y='416' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>Processing</text>
-  <a href='#issuer'>
+  <a href='#ireqproc'>
   <rect x='490.4' y='404.75' width='18.2' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
   <text x='498.75' y='416' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>10</text>
   </a>
 </svg>
   </div>
-  <div id='paymentui' class='spacepara'>Core Receipt Data</div>
+<div>Note that this specification does not elaborate on the return data from
+the <b class='actor'>Acquirer</b> and <b class='actor'>Issuer</b>,
+ because this is payment network specific.</div>
+<div id='preq' class='numbox'>1</div>
+<div>In this step the <b class='actor'>Merchant</b></div>
+<div id='paymentui' class='numbox'>2</div>
+<div>In this step the <b class='actor'>Merchant</b></div>
+ <div id='userauth' class='numbox'>3</div>
+<div>In this step the <b class='actor'>Merchant</b></div>
+ <div id='fpwcore' class='numbox'>4</div>
+<div>In this step the <b class='actor'>Merchant</b></div>
+<div id='pres' class='numbox'>5</div>
+<div>In this step the <b class='actor'>Merchant</b></div>
+<div id='presproc' class='numbox'>6</div>
+<div>In this step the <b class='actor'>Merchant</b></div>
+<div id='areq' class='numbox'>7</div>
+<div>In this step the <b class='actor'>Merchant</b></div>
+<div id='areqproc' class='numbox'>8</div>
+<div>In this step the <b class='actor'>Merchant</b></div>
+<div id='ireq' class='numbox'>9</div>
+<div>In this step the <b class='actor'>Merchant</b></div>
+<div id='ireqproc' class='numbox'>10</div>
+<div>In this step the <b class='actor'>Merchant</b></div>
+<div id='paymentui' class='spacepara'>Core Receipt Data</div>
   <div style='overflow-x:auto;padding-bottom:5pt'>
     <img style='display:block;width:220pt;box-shadow:2pt 2pt 3pt #808080;border-width:1pt;border-style:solid;border-color:darkgrey' alt='Payment UI' src='images/ui.svg'>
   </div>
@@ -2140,31 +2176,56 @@ is linked to a boxed number:
   <div style='font-family:monospace'>
     Core Receipt Data ghr 88 jj nl<br>
     ff<br>
-    kk kjkhjkjkk yhjj jgj g hgh ghghg
-  </div><div class='spacepara'>Order Data</div>
-
-  <div style='overflow-x:auto'>
-    <table class='tftable'>
-      <tr><th>Description</th><th>Quantity</th><th>Subtotal</th></tr>
-      <tr><td>Model Rocket<br>SpaceX Falcon Heavy<br>Scale 1:200</td><td style='text-align:right'>1</td><td style='text-align:right'>499.99 EUR</td></tr>
-    </table>
-  </div>
-  <div style='text-align:center' class='spacepara'>Shipping</div>
-  <div style='overflow-x:auto'>
-    <table class='tftable'>
-      <tr><th>Description</th><th>Cost</th></tr>
-      <tr><td>Free shipping</td><td style='text-align:right'>0.00 EUR</td></tr>
-    </table>
-  </div>
-  <table>
-    <tr><td>Return Policy:<br>Items can be returned within 30 days of receipt of delivery using the Online Returns Center. Once the item is received at our Customer Support Center, it takes 2 business days for the refund to be processed and 3-5 business days for the refund amount to show up in your account.</td></tr>
-  </table>
-  <div style='text-align:center' class='spacepara'>Payment Details</div>
-  <div style='overflow-x:auto'>
-    <table class='tftable'>
-      <tr><th>Provider Name</th><th>Account Type</th><th>Account Id</th><th>Transaction Id</th><th>Time Stamp</th><th>Request Id</th></tr>
-      <tr><td><a href='https://192.168.1.67:8442/webpay-payerbank'>My Bank</a></td><td>Bank Direct</td><td>FR*0131</td><td>#0100345123</td><td>2021-02-24 04:24:26 UTC</td><td>2021022400000002</td></tr>
-    </table>
-  </div>
-  <div style='margin-top:2em'><a href='2021022400000002/VS8_RUv8oV5boXYW36UVSw?json'>Switch to JSON view</a></div>
+    kk kjkhjkjkk yhjj jgj g hgh ghghg</div>
+<div id='extensions' class='header'>
+Possible Extensions
+</div>
+<div>
+The FWP core is loosely derived from a PoC system known as  
+<a href='https://cyberphone.github.io/doc/saturn/' 
+title='Saturn'>Saturn<img src='images/xtl.svg' alt='link' /></a>.
+By building on this core, Saturn features like the following could potentially be added:
+<ul style='margin-bottom:0.3em'>
+  <li>
+    Support for <i>non-direct payments</i>,
+    including secure (<i>tokenized</i>) versions of Card-on-File.
+</li>
+<li>
+  Support for universal digital receipts.
+</li>
+<li>
+  Support for private messaging and additional authentication information between the
+ <b class='actor'>Issuer</b> and <b class='actor'>User</b>.
+</li>
+</ul>
+Not though that the features above also have implications on the PaymentRequest API. 
+</div>
+<div class='para'>
+A radical change would be moving the FWP implementation down into the client platform layer.
+This would open FWP to other payment scenarios like point-of-sale (PoS) and person-to-person (P2P).
+It would also make it considerably easier for alternative browser vendors adopting the FWP system.
+</div>
+<div id='acknowledgements' class='header'>
+  Acknowledgements
+</div>
+<div>
+The FWP specification was heavily influenced by an earlier Microsoft research project
+called <a href='https://en.wikipedia.org/wiki/Windows_CardSpace'
+title='CardSpace'>Windows CardSpace<img src='images/xtl.svg' alt='link'></a>.
+</div>
+<div id='version' class='header'>
+  Author and Version
+</div>
+<div>
+The FWP specification is currently authored by Anders Rundgren (<code>anders.rundgren.net@gmail.com</code>).<br/>
+Document version: 0.1, 2020-03-09
+</div>
+<div class='header'>
+  Trademarks
+</div>
+<div id='trademarks'>
+  FIDO is a registered trademark of the FIDO alliance.<br/>
+  EMV is a registered trademark of EMVCo.<br/>&nbsp;<br/>
+  This specification represents an <i>independent effort</i>, not associated with the FIDO alliance or EMVCo.
+</div>
 </body></html>

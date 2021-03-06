@@ -26,7 +26,7 @@ public class StateDiagram {
 
     static final double STROKE_WIDTH = 0.5;
 
-    static final double ARROW_WIDTH = 1;
+    static final double ARROW_WIDTH = 0.8;
     static final double ARROW_HEAD_WIDTH = 5;
     static final double ARROW_HEAD_LENGTH = 7;
     static final double ARROW_HEAD_GUTTER = 0.5;

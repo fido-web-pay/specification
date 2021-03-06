@@ -21,11 +21,11 @@ a {color:blue;text-decoration:none}
 </head>
 <body>
   <img style='max-width:50%' src='images/fwp.svg' alt='logo' title='FWP logotype'>
-  <div class='header'>FIDO&reg; Web Pay - Introduction</div>
+  <div id='introduction' class='header'>FIDO&reg; Web Pay - Introduction</div>
   <div>
     <a href='https://www.emvco.com/' title='EMVCo Site'>EMV&reg;<img src='images/xtl.svg' alt='link'></a> represents
     the current &quot;Gold Standard&quot; for <i>secure and convenient payments</i>
-    in the <u>Physical world</u>.
+    in the <u>physical world</u>.
   </div>
   <div class='para'>
     This document describes FIDO Web Pay (FWP), which is a <u>Web-adapted</u> version of EMV,
@@ -36,13 +36,14 @@ title='FIDO2 Technology'>FIDO2<img src='images/xtl.svg' alt='link'></a>
 title='PaymentRequest'>PaymentRequest<img src='images/xtl.svg' alt='link'></a> API.
   </div>
   <div class='para'>
-    However, unlike EMV, FWP is intended to be usable with <i>any account-based payment system</i>,
+    FWP extends the scope of EMV, by targeting FWP for usage with <i>any account-based payment system</i>,
     including the eurozone's
-    <a href='https://www.europeanpaymentscouncil.eu/' 
-title='European Payments Council'>SEPA Instant<img src='images/xtl.svg' alt='link'></a>.
+    <a href='https://www.europeanpaymentscouncil.eu/'
+       title='European Payments Council'>SEPA Instant<img src='images/xtl.svg' alt='link'></a>.
   </div>
   <div class='para'>
-    Also in contrast to EMV, the FWP client <i>encrypts</i> user-authorizations to accomplish the following subgoals:
+     The primary technical enhancement to EMV, is that the FWP client <i>encrypts</i> user-authorizations
+in order to accomplish the following subgoals:
   <ul>
     <li>
       Eliminate dependencies on external tokenization services.
@@ -58,12 +59,12 @@ title='GDPR Site'>GDPR<img src='images/xtl.svg' alt='link'></a>.
     </li>
     <li>
       Separate the formats for account numbers and issuer (bank branch) identifiers.
-      The latter would typically be expressed as URLs, removing the need for externally managed
+      The latter would preferably be expressed as URLs, removing the need for externally managed
       databases holding issuer payment processor end-points.
     </li>
   </ul>
 </div>
-  <div class='header'>
+  <div id='prerequisites' class='header'>
     Prerequisites
   </div>
   <div>
@@ -75,7 +76,7 @@ title='GDPR Site'>GDPR<img src='images/xtl.svg' alt='link'></a>.
       <li>An identifier to a <span class='actor'>User</span> specific (<i>unique</i>) FIDO key for <i>signing</i> payment authorization data.</li>
       <li>An <span class='actor'>Issuer</span> specific (<i>shared</i>) public key for <i>encrypting</i> payment authorization data.</li>
       <li>An <code class='reserved'>accountId</code> associated with the FIDO signature key.</li>
-      <li>A <code class='reserved'>paymentMethod</code> URL identifying the payment network.</li>
+      <li>A <code class='reserved'>paymentMethod</code> URL identifying the FWP method for a particular payment network.</li>
       <li>An <code class='reserved'>issuerId</code> in the form of a
 Bank Identification Number (BIN) or URL associated with the <span class='actor'>Issuer</span>.</li>
       <li>An icon identifying the payment credential for the <span class='actor'>User</span>.</li>
@@ -95,7 +96,7 @@ Bank Identification Number (BIN) or URL associated with the <span class='actor'>
     <a href='https://www.w3.org/TR/webauthn-2/' 
 title='Web Authentication'>Web&nbsp;Authentication<img src='images/xtl.svg' alt='link'></a> enrollment system.
     The extension would enable the browser to securely distinguish between &quot;ordinary&quot; FIDO keys,
-    and those targeted for payments.  This is needed for maintaining a local database holding FWP credentials.
+    and those targeted for payments which is required for maintaining a database in the browser holding FWP credentials.
   </div>
   <div class='para'>
     It MAY be technically feasible using a FIDO key associated with an FWP credential
@@ -158,8 +159,8 @@ Possible Extensions
 The FWP core is loosely derived from a PoC system known as  
 <a href='https://cyberphone.github.io/doc/saturn/' 
 title='Saturn'>Saturn<img src='images/xtl.svg' alt='link' /></a>.
-By building on this core, Saturn features like the following would be fairly easy to add:
-<ul>
+By building on this core, Saturn features like the following could potentially be added:
+<ul style='margin-bottom:0.3em'>
   <li>
     Support for <i>non-direct payments</i>,
     including secure (<i>tokenized</i>) versions of Card-on-File.
@@ -172,11 +173,20 @@ By building on this core, Saturn features like the following would be fairly eas
  <b class='actor'>Issuer</b> and <b class='actor'>User</b>.
 </li>
 </ul>
+Not though that the features above also have implications on the PaymentRequest API. 
 </div>
 <div class='para'>
 A radical change would be moving the FWP implementation down into the client platform layer.
 This would open FWP to other payment scenarios like point-of-sale (PoS) and person-to-person (P2P).
-It would also make it easier for browser vendors adopting the FWP system.
+It would also make it considerably easier for alternative browser vendors adopting the FWP system.
+</div>
+<div id='acknowledgements' class='header'>
+  Acknowledgements
+</div>
+<div>
+The FWP specification was heavily influenced by an earlier Microsoft research project
+called <a href='https://en.wikipedia.org/wiki/Windows_CardSpace'
+title='CardSpace'>Windows CardSpace<img src='images/xtl.svg' alt='link'></a>.
 </div>
 <div id='version' class='header'>
   Author and Version
