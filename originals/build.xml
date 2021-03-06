@@ -6,7 +6,7 @@
   <property name="originals.dir" location="."/>
 
     <target name="help">
-    <echo message="Targets: statediagram production"/>
+    <echo message="Targets: statediagram publish draft"/>
   </target>
 	
   <target name="_compile">
@@ -37,8 +37,7 @@
     <delete dir="${temp.dir}"/>
   </target>
 
-    <target name="production" depends="_compile">
-        <property name="file" value=""/>
+    <target name="draft" depends="_compile">
         <java fork="yes"
               classname="Production"
                 dir="${temp.dir}"
@@ -50,5 +49,9 @@
         </java>
         <delete dir="${temp.dir}"/>
     </target>
+
+  <target name="publish" depends="draft">
+    <copy file="../draft.html" tofile="../index.html" overwrite="true"/>
+  </target>
 
 </project>

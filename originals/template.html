@@ -50,7 +50,7 @@ in order to accomplish the following subgoals:
     </li>
     <li>
       Limit the amount of personally identifiable information (PII), shared
-      with <i>third parties</i>, to the name of the payer's bank.
+      with <i>third parties</i>, to the name of the user's bank.
       This is presumably compliant with
       <a href='https://www.pcisecuritystandards.org'
          title='PCI Site'>PCI<img src='images/xtl.svg' alt='link'></a>
@@ -59,11 +59,25 @@ title='GDPR Site'>GDPR<img src='images/xtl.svg' alt='link'></a>.
     </li>
     <li>
       Separate the formats for account numbers and issuer (bank branch) identifiers.
-      The latter would preferably be expressed as URLs, removing the need for externally managed
+      The latter should preferably be expressed as URLs, removing the need for externally managed
       databases holding issuer payment processor end-points.
     </li>
   </ul>
 </div>
+  <div id='scope-limitations' class='header'>
+    Scope Limitations
+  </div>
+  <div>
+    Note that FWP is not a payment system, it is a <i>payment authorization</i> scheme,
+    exclusively dealing with the <i>user's</i> part of the payment process.
+    That is, the backend infrastructure and associated APIs are essentially out of scope for this specification.
+    However, FWP assertions MUST (due to the <i>end-2-end security concept</i>),
+    indeed be routed to the designated issuer &quot;verbatim&quot;, albeit usually together with other related data.
+  </div>
+  <div class='para'>
+    It is assumed that at <i>this stage</i>, backend APIs will be defined by the respectively payment network,
+rather than becoming a unified standard.
+  </div>
   <div id='prerequisites' class='header'>
     Prerequisites
   </div>
@@ -173,7 +187,7 @@ By building on this core, Saturn features like the following could potentially b
  <b class='actor'>Issuer</b> and <b class='actor'>User</b>.
 </li>
 </ul>
-Not though that the features above also have implications on the PaymentRequest API. 
+Not though that the features above would have implications on the PaymentRequest API. 
 </div>
 <div class='para'>
 A radical change would be moving the FWP implementation down into the client platform layer.
@@ -184,7 +198,7 @@ It would also make it considerably easier for alternative browser vendors adopti
   Acknowledgements
 </div>
 <div>
-The FWP specification was heavily influenced by an earlier Microsoft research project
+The FWP core was heavily influenced by an earlier Microsoft research project
 called <a href='https://en.wikipedia.org/wiki/Windows_CardSpace'
 title='CardSpace'>Windows CardSpace<img src='images/xtl.svg' alt='link'></a>.
 </div>
