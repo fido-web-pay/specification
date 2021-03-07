@@ -6,7 +6,7 @@
 .para {margin-top: 0.8em}
 .actor {color:darkgreen;font-weight:bolder}
 .box {box-shadow: 0.2em 0.2em 0.2em #d0d0d0;border-width:1px;border-style:solid;border-color:black}
-.numbox {border-width: 1pt;border-style:solid;border-color:black;border-radius:0.3em;display:inline-block;margin: 1.5em 0 0.6em 0;padding: 0 3pt 0.1em 3pt}
+.numbox {border-width: 1pt;border-style:solid;border-color:black;border-radius:0.3em;display:inline-block;margin: 1.5em 0.6em 0.6em 0;padding: 0 3pt 0.1em 3pt}
 .tftable {border-collapse:collapse;box-shadow:0.3em 0.3em 0.3em #d0d0d0;margin-bottom:0.3em} 
 .tftable td {white-space:nowrap;background-color:#ffffe0;padding:0.4em 0.5em;border-width:1px;border-style:solid;border-color:#a9a9a9}
 .tftable th {white-space:nowrap;padding:0.4em 0.5em;background:linear-gradient(to bottom, #eaeaea 14%,#fcfcfc 52%,#e5e5e5 89%);text-align:center;border-width:1px;border-style:solid;border-color:#a9a9a9}
@@ -21,28 +21,29 @@ a {color:blue;text-decoration:none}
 </head>
 <body>
   <img style='max-width:50%' src='images/fwp.svg' alt='logo' title='FWP logotype'>
-  <div id='introduction' class='header'>FIDO&reg; Web Pay - Introduction</div>
+  <div id='introduction' class='header'>Introduction</div>
   <div>
     <a href='https://www.emvco.com/' title='EMVCo Site'>EMV&reg;<img src='images/xtl.svg' alt='link'></a> represents
     the current &quot;Gold Standard&quot; for <i>secure and convenient payments</i>
-    in the <u>physical world</u>.
+    in the physical world.
   </div>
   <div class='para'>
-    This document describes FIDO Web Pay (FWP), which is a <u>Web-adapted</u> version of EMV,
-    building on <a href='https://fidoalliance.org/fido2/' 
-title='FIDO2 Technology'>FIDO2<img src='images/xtl.svg' alt='link'></a>
-    technology combined with the W3C
-    <a href='https://www.w3.org/TR/payment-request/' 
-title='PaymentRequest'>PaymentRequest<img src='images/xtl.svg' alt='link'></a> API.
+    This document describes FIDO&reg; Web Pay (FWP), which is a Web-adapted version of EMV,
+    building on the technology underpinning <a href='https://fidoalliance.org/fido2/'
+                             title='FIDO2 Technology'>FIDO2<img src='images/xtl.svg' alt='link'></a>
+    combined with the W3C
+    <a href='https://www.w3.org/TR/payment-request/'
+       title='PaymentRequest'>PaymentRequest<img src='images/xtl.svg' alt='link'></a> API.
   </div>
   <div class='para'>
-    FWP extends the scope of EMV, by targeting FWP for usage with <i>any account-based payment system</i>,
+    Through an extension to EMV, FWP can be applied to <i>any account-based payment system</i>,
     including the eurozone's
     <a href='https://www.europeanpaymentscouncil.eu/'
        title='European Payments Council'>SEPA Instant<img src='images/xtl.svg' alt='link'></a>.
   </div>
   <div class='para'>
-     The primary technical enhancement to EMV, is that the FWP client <i>encrypts</i> user-authorizations
+     Apart from obvious data format differences (JSON/JavaScript versus ISO7816), the primary technical
+enhancement to EMV, is that the FWP client <i>encrypts</i> user-authorizations
 in order to accomplish the following subgoals:
   <ul>
     <li>
@@ -64,19 +65,35 @@ title='GDPR Site'>GDPR<img src='images/xtl.svg' alt='link'></a>.
     </li>
   </ul>
 </div>
-  <div id='scope-limitations' class='header'>
-    Scope Limitations
+  <div id='scope' class='header'>
+    Scope
   </div>
   <div>
     Note that FWP is not a payment system, it is a <i>payment authorization</i> scheme,
     exclusively dealing with the <i>user's</i> part of the payment process.
-    That is, the backend infrastructure and associated APIs are essentially out of scope for this specification.
-    However, FWP assertions MUST (due to the <i>end-2-end security concept</i>),
-    indeed be routed to the designated issuer &quot;verbatim&quot;, albeit usually together with other related data.
+    That is, the backend infrastructure and associated APIs are out of scope for this specification
+    and are therefore only described at a &quot;conceptual&quot; level.
+    Note though that regardless of the backend design, FWP assertions
+    MUST (due to the EMV <i>end-2-end security model</i>),
+    always be routed back to the designated issuer &quot;verbatim&quot;
+    (together with other required data) in order to initiate a payment transaction.
   </div>
   <div class='para'>
-    It is assumed that at <i>this stage</i>, backend APIs will be defined by the respectively payment network,
-rather than becoming a unified standard.
+    It is assumed that <i>at this stage in time</i>,
+    backend infrastructures will be <i>independently defined</i> by each payment network
+    rather than becoming a unified standard.  Also see <a href="#integration">Integration</a>.
+  </div>
+  <div id='terminology' class='header'>
+    Terminology
+  </div>
+  <div>
+    Throughout the rest of this document, actor names are
+    written as <span class='actor'>Actor Name</span>.
+    The <span class='actor'>Browser</span> actor is in this specification
+    considered to be equivalent to &quot;User Agent&quot;.
+    An <span class='actor'>Acquirer</span> is in this specification
+    denoting any service or network acting as a <i>trusted intermediary</i> between
+    a <span class='actor'>Merchant</span> and an <span class='actor'>Issuer</span>.
   </div>
   <div id='prerequisites' class='header'>
     Prerequisites
@@ -102,15 +119,17 @@ Bank Identification Number (BIN) or URL associated with the <span class='actor'>
     and <code class='reserved'>paymentMethod</code>.
   </div>
   <div id='enrollment' class='header'>
-    Credential Enrollment
+    Enrollment
   </div>
   <div>
     The exact enrollment process is yet to be defined; the assumption is that it
     could be accomplished by extending the existing W3C
     <a href='https://www.w3.org/TR/webauthn-2/' 
 title='Web Authentication'>Web&nbsp;Authentication<img src='images/xtl.svg' alt='link'></a> enrollment system.
-    The extension would enable the browser to securely distinguish between &quot;ordinary&quot; FIDO keys,
-    and those targeted for payments which is required for maintaining a database in the browser holding FWP credentials.
+    The extension would enable the <span class='actor'>Browser</span> 
+to securely distinguish between &quot;ordinary&quot; FIDO keys,
+    and those targeted for payments which is required for maintaining
+ a <i>database</i> in the <span class='actor'>Browser</span> holding FWP credentials.
   </div>
   <div class='para'>
     It MAY be technically feasible using a FIDO key associated with an FWP credential
@@ -120,7 +139,7 @@ by the <span class='actor'>Issuer</span>.
   <div id='operation' class='header'>
     Detailed Operation
   </div>
-  <div>This section describes the different steps needed to perform a payment using FWP.
+  <div>This section describes the different steps needed to authorize a payment operation using FWP.
 The foundation for the description is the following sequence diagram where each step
 is linked to a <i>clickable</i> number in a box:
 </div>
@@ -2085,8 +2104,8 @@ is linked to a <i>clickable</i> number in a box:
     </g>
 </svg>  <text x='543' y='24' fill='black' font-family='sans-serif' font-size='14.399999999999999' text-anchor='middle'>Issuer</text>
   <line x1='302.4' y1='96' x2='191.1' y2='96' stroke-width='0.8' stroke='black' marker-end='url(#arrowHead)'/>
-  <text x='243' y='90.4' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>PREQ</text>
-  <a href='#preq'>
+  <text x='243' y='90.4' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>PaymentRequest</text>
+  <a href='#step1'>
   <rect x='295.75' y='88.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
   <text x='302' y='100' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>1</text>
   </a>
@@ -2094,59 +2113,59 @@ is linked to a <i>clickable</i> number in a box:
   <rect x='139.75' y='116.75' width='86' height='50' fill='white' stroke-width='0.5' stroke='black'/>
   <rect x='139.75' y='116.75' width='86' height='5' fill='#deeafc' stroke-width='0.5' stroke='black'/>
   <text x='183' y='146' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>Payment UI</text>
-  <a href='#paymentui'>
+  <a href='#step2'>
   <rect x='132.5' y='112.25' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
   <text x='139.75' y='123.5' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>2</text>
   </a>
   <line x1='63.6' y1='188' x2='174.9' y2='188' stroke-width='0.8' stroke='black' marker-end='url(#arrowHead)' stroke-dasharray='4'/>
   <text x='123' y='182.4' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>Authorization</text>
-  <a href='#userauth'>
+  <a href='#step3'>
   <rect x='55.75' y='180.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
   <text x='63' y='192' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>3</text>
   </a>
   <path fill='black' opacity='0.4' d='M146,210.75 l86,0 l-8,22 l-86,0Z' filter='url(#dropShaddow)'/>
   <path fill='#fff2cc' stroke='#404040' stroke-width='0.5' d='M144,208.75 l86,0 l-8,22 l-86,0Z'/>
   <text x='185.8' y='224' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>Processing</text>
-  <a href='#fpwcore'>
+  <a href='#step4'>
   <rect x='132.5' y='212.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
   <text x='139.75' y='224' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>4</text>
   </a>
   <line x1='183.6' y1='252' x2='294.9' y2='252' stroke-width='0.8' stroke='black' marker-end='url(#arrowHead)'/>
-  <text x='243' y='246.4' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>PRES</text>
-  <a href='#pres'>
+  <text x='243' y='246.4' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>FWP Assertion</text>
+  <a href='#step5'>
   <rect x='175.75' y='244.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
   <text x='183' y='256' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>5</text>
   </a>
   <path fill='black' opacity='0.4' d='M266,274.75 l86,0 l-8,22 l-86,0Z' filter='url(#dropShaddow)'/>
   <path fill='#fff2cc' stroke='#404040' stroke-width='0.5' d='M264,272.75 l86,0 l-8,22 l-86,0Z'/>
   <text x='305.8' y='288' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>Processing</text>
-  <a href='#presproc'>
+  <a href='#step6'>
   <rect x='252.5' y='276.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
   <text x='259.75' y='288' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>6</text>
   </a>
   <line x1='303.6' y1='316' x2='414.9' y2='316' stroke-width='0.8' stroke='black' marker-end='url(#arrowHead)'/>
   <text x='363' y='310.4' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>AREQ</text>
-  <a href='#areq'>
+  <a href='#step7'>
   <rect x='295.75' y='308.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
   <text x='303' y='320' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>7</text>
   </a>
   <path fill='black' opacity='0.4' d='M386,338.75 l86,0 l-8,22 l-86,0Z' filter='url(#dropShaddow)'/>
   <path fill='#fff2cc' stroke='#404040' stroke-width='0.5' d='M384,336.75 l86,0 l-8,22 l-86,0Z'/>
   <text x='425.8' y='352' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>Processing</text>
-  <a href='#areqproc'>
+  <a href='#step8'>
   <rect x='372.5' y='340.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
   <text x='379.75' y='352' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>8</text>
   </a>
   <line x1='423.6' y1='380' x2='534.9' y2='380' stroke-width='0.8' stroke='black' marker-end='url(#arrowHead)'/>
   <text x='483' y='374.4' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>IREQ</text>
-  <a href='#ireq'>
+  <a href='#step9'>
   <rect x='415.75' y='372.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
   <text x='423' y='384' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>9</text>
   </a>
   <path fill='black' opacity='0.4' d='M506,402.75 l86,0 l-8,22 l-86,0Z' filter='url(#dropShaddow)'/>
   <path fill='#fff2cc' stroke='#404040' stroke-width='0.5' d='M504,400.75 l86,0 l-8,22 l-86,0Z'/>
   <text x='545.8' y='416' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>Processing</text>
-  <a href='#ireqproc'>
+  <a href='#step10'>
   <rect x='490.4' y='404.75' width='18.2' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
   <text x='498.75' y='416' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>10</text>
   </a>
@@ -2155,44 +2174,108 @@ is linked to a <i>clickable</i> number in a box:
 <div>Note that this specification does not elaborate on the return data from
 the <b class='actor'>Acquirer</b> and <b class='actor'>Issuer</b>,
  because this is payment network specific.</div>
-<div id='preq' class='numbox'>1</div>
+<div id='step1' class='numbox'>1</div>Initiate PaymentRequest
 <div>In this step the <b class='actor'>Merchant</b></div>
-<div id='paymentui' class='numbox'>2</div>
-<div>In this step the <b class='actor'>Merchant</b></div>
- <div id='userauth' class='numbox'>3</div>
-<div>In this step the <b class='actor'>Merchant</b></div>
- <div id='fpwcore' class='numbox'>4</div>
-<div>In this step the <b class='actor'>Merchant</b></div>
-<div id='pres' class='numbox'>5</div>
-<div>In this step the <b class='actor'>Merchant</b></div>
-<div id='presproc' class='numbox'>6</div>
-<div>In this step the <b class='actor'>Merchant</b></div>
-<div id='areq' class='numbox'>7</div>
-<div>In this step the <b class='actor'>Merchant</b></div>
-<div id='areqproc' class='numbox'>8</div>
-<div>In this step the <b class='actor'>Merchant</b></div>
-<div id='ireq' class='numbox'>9</div>
-<div>In this step the <b class='actor'>Merchant</b></div>
-<div id='ireqproc' class='numbox'>10</div>
-<div>In this step the <b class='actor'>Merchant</b></div>
-<div id='paymentui' class='spacepara'>Core Receipt Data</div>
+ <div style='overflow-x:auto;padding:8pt 0'>
+<pre style="margin:0">
+const methodData = [{
+  supportedMethods: 'https://emvco.com/spc/visa'
+},{
+  supportedMethods: 'https://emvco.com/spc/mastercard'
+},{  
+  supportedMethods: 'https://europeanpaymentsinitiative.eu/spc'
+}];
+
+const request = new PaymentRequest(methodData,{
+  id: '7040566321',   // Mandatory for SPC
+  total: {label: null, amount: {currency: 'EUR', value: '435.00'}},
+  payee: 'Space Shop'   // Possible API enhancement
+});
+
+const response = await request.show();
+await response.complete('success');
+</pre>
+</div>
+<div id='step2' class='numbox'>2</div>Show Payment Authorization UI
+<div style='margin-bottom:0.8em'>In this step the <b class='actor'>Browser</b> responds with
+a payment authorization UI like the following:</div>
   <div style='overflow-x:auto;padding-bottom:5pt'>
     <img style='display:block;width:220pt;box-shadow:2pt 2pt 3pt #808080;border-width:1pt;border-style:solid;border-color:darkgrey' alt='Payment UI' src='images/ui.svg'>
   </div>
   <div>Non-normative UI in &quot;dark mode&quot;.</div>
-  <div>
-    <code>
-      Core Receipt Data ghr 88 jj nl<br>
-      ff<br>
-      kk kjkhjkjkk yhjj jgj g hgh ghghg
-    </code>
+  <div class='para'>
+    If the <b class='actor'>User</b> have no matching payment credentials (&quot;Virtual Cards&quot;),
+   the <b class='actor'>Browser</b> MUST indicate that and give the <b class='actor'>User</b>
+an option to return to the <b class='actor'>Merchant</b> &quot;Checkout&quot; page.
   </div>
-  <div style='font-family:monospace'>
-    Core Receipt Data ghr 88 jj nl<br>
-    ff<br>
-    kk kjkhjkjkk yhjj jgj g hgh ghghg</div>
+  <div class='para'>
+    If the <b class='actor'>User</b> have multiple matching payment credentials,
+    the <b class='actor'>Browser</b> MUST provide a way to select a specific credential.
+    In the sample UI shown above, the <b class='actor'>User</b>
+    can swipe credentials to the left and right, while arrow symbols are used to show if there
+    are more credentials available.  That is, if there is no arrow, the credential selector is
+at an end point.
+  </div>
+<div id='step3' class='numbox'>3</div>User Authorization
+<div>In this step the <b class='actor'>User</b>
+<i>authorizes</i> the request with a fingerprint, PIN, or similar.
+A successful user authorization causes the next step to be performed.</div>
+<div id='step4' class='numbox'>4</div>Create FWP Assertion
+<div>In this step the <b class='actor'>Browser</b>
+creates an FWP assertion which requires the following operations:</div>
+<div id="3.1"class='para'>
+3.1 Blahm blah
+</div>
+<div id='step5' class='numbox'>5</div>Return FWP Assertion
+<div>In this step the <b class='actor'>Browser</b>
+returns the completed FWP assertion to the
+<b class='actor'>Merchant</b> through the ? </div>
+<div id='step6' class='numbox'>6</div>
+<div>In this step the <b class='actor'>Merchant</b></div>
+<div id='step7' class='numbox'>7</div>
+<div>In this step the <b class='actor'>Merchant</b></div>
+<div id='step8' class='numbox'>8</div>
+<div>In this step the <b class='actor'>Merchant</b></div>
+<div id='step9' class='numbox'>9</div>
+<div>In this step the <b class='actor'>Merchant</b></div>
+<div id='step10' class='numbox'>10</div>
+<div>In this step the <b class='actor'>Merchant</b></div>
+
+<div id='integration' class='header'>
+Integration
+</div>
+<div>
+It is obvious that the integration of systems like FWP in payment networks
+is crucial for acceptance by the market.
+</div>
+<div class="para">
+  For card based payments FWP implementations can build on the existing
+  EMV foundation since essentially only the formats differ.
+  Although the lack of a PAN (card number) in FWP may appear as a major obstacle,
+  the <code class='reserved'>issuerId</code> would in this case hold a &quot;neutered&quot; PAN where
+  the BIN (Bank Identification Number) is set, while the rest are set to zeroes + Luhn check digit.
+  E.g. VISA: 4972039000000004.  However, using <b class='actor'>Issuer</b> URLs
+  is also a viable alternative for card payments because the payment processors
+  associated with &quot;regular&quot; EMV and FWP payments do probably not
+  use the same end point.
+</div>  
+<div class="para">
+  For account-to-account payments there are currently no generally agreed upon standards
+  for consumer payments, making it hard to come up with FWP implementation guidlines.
+  Remapping existing card based systems and infrastructures seems though like a possible path.
+</div>
+<div class="para">
+  Open Banking may though become a factor because there is work under way making non-OAuth2
+  requests a part of Open Banking APIs.  There are good reasons for that since current Open Banking
+  payment APIs presume that the <b class='actor'>User</b> in some OOB way informs the
+  <b class='actor'>Merchant</b> who their <b class='actor'>Issuer</b> is, which becomes
+  quite impractical when the number of issuers grow.  In an Open Banking scenario powered by FWP,
+  a Payment Initiation Service Provider (PISP) would effectively perform the same tasks as a
+  traditional <b class='actor'>Acquirer</b>, albeit regulated.  That is, there would unlikely
+  be any <b class='actor'>User</b> interactions with such a PISP.
+</div>
 <div id='extensions' class='header'>
-Possible Extensions
+Extensions
 </div>
 <div>
 The FWP core is loosely derived from a PoC system known as  
@@ -2228,11 +2311,16 @@ called <a href='https://en.wikipedia.org/wiki/Windows_CardSpace'
 title='CardSpace'>Windows CardSpace<img src='images/xtl.svg' alt='link'></a>.
 </div>
 <div id='version' class='header'>
-  Author and Version
+  Version
+</div>
+<div>
+Document version: 0.1, 2020-03-09
+</div>
+<div id='authors' class='header'>
+  Authors
 </div>
 <div>
 The FWP specification is currently authored by Anders Rundgren (<code>anders.rundgren.net@gmail.com</code>).<br/>
-Document version: 0.1, 2020-03-09
 </div>
 <div class='header'>
   Trademarks
