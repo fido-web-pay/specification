@@ -64,7 +64,7 @@ public class StateDiagram {
 */
 
     int currNum = 1;
-    void number(double centerX, double centerY, String url) {
+    void number(double centerX, double centerY) {
         int n = currNum++;
         double width = NUMB_WIDTH;
         double fontX = centerX;
@@ -74,8 +74,8 @@ public class StateDiagram {
         if (n == 1 || (n > 9 && n != 11 &&  n < 20)) {
             fontX -= FONT_SIZE / 10;
         }
-       svg.append("  <a href='")
-           .append(url)
+       svg.append("  <a href='#step")
+           .append(n)
            .append("'>\n  <rect x='")
            .append(convert(centerX - (width + STROKE_WIDTH) / 2))
            .append("' y='")
@@ -111,7 +111,7 @@ public class StateDiagram {
            .append("</text>\n");
     }
 
-    void processing(int vbar, String url) {
+    void processing(int vbar) {
         double rectY = seqY - (PROC_HEIGHT + STROKE_WIDTH) / 2;
         double startX = center(vbar) - PROC_WIDTH / 2 + PROC_SLANT / 2;
         svg.append("  <path fill='black' opacity='0.4' d='M")
@@ -143,19 +143,19 @@ public class StateDiagram {
            .append(convert(-PROC_WIDTH))
            .append(",0Z'/>\n");
         text(center(vbar) + NUMB_WIDTH / 5, seqY, "Processing");
-        number(startX - PROC_SLANT / 2 - STROKE_WIDTH / 2, seqY, url);
+        number(startX - PROC_SLANT / 2 - STROKE_WIDTH / 2, seqY);
         seqY += SEQ_Y_DISTANCE + SEQ_Y_SLACK_AFTER_UI;
     }
 
-    void dashedArrow(int from, int to, String label, String url) {
-        _arrow(from, to, label, " stroke-dasharray='4'", url);
+    void dashedArrow(int from, int to, String label) {
+        _arrow(from, to, label, " stroke-dasharray='4'");
     }
 
-    void arrow(int from, int to, String label, String url) {
-        _arrow(from, to, label, "", url);
+    void arrow(int from, int to, String label) {
+        _arrow(from, to, label, "");
     }
 
-    void _arrow(int from, int to, String label, String additional, String url) {
+    void _arrow(int from, int to, String label, String additional) {
         double startX = (to > from ? VBAR_WIDTH : -VBAR_WIDTH) / 2;
         double endX = to > from ? -ARROW_HEAD_LENGTH - ARROW_HEAD_GUTTER : ARROW_HEAD_LENGTH + ARROW_HEAD_GUTTER;
         String arrowY = convert(seqY);
@@ -174,7 +174,7 @@ public class StateDiagram {
            .append(additional)
            .append("/>\n");
         text(textX, seqY - FONT_SIZE * 0.8, label);
-        number(center(from), seqY, url);
+        number(center(from), seqY);
         seqY += SEQ_Y_DISTANCE;
     }
 
@@ -232,7 +232,7 @@ public class StateDiagram {
         actor("acquirer.svg", "Acquirer", 3);
         actor("issuer.svg",   "Issuer",   4);
 
-        arrow(2, 1, "PREQ", "#preq");
+        arrow(2, 1, "PaymentRequest");
 
         double uiY = seqY + (UI_HEIGHT - PROC_HEIGHT) / 2;
         double uiTop = uiY - (UI_HEIGHT + STROKE_WIDTH) / 2;
@@ -269,16 +269,16 @@ public class StateDiagram {
            .append(convert(STROKE_WIDTH))
            .append("' stroke='black'/>\n");  
         text(center(1), uiY, "Payment UI");
-        number(uiX, uiTop + (UI_BORDER + STROKE_WIDTH) / 2, "#paymentui");
+        number(uiX, uiTop + (UI_BORDER + STROKE_WIDTH) / 2);
         seqY += SEQ_Y_DISTANCE + SEQ_Y_SLACK_AFTER_UI + UI_HEIGHT - PROC_HEIGHT;
-        dashedArrow(0, 1, "Authorization", "#userauth");
-        processing(1, "#fpwcore");
-        arrow(1, 2, "PRES", "#pres");
-        processing(2, "#presproc");
-        arrow(2, 3, "AREQ", "#areq");
-        processing(3, "#areqproc");
-        arrow(3, 4, "IREQ", "#ireq");
-        processing(4, "#ireqproc");
+        dashedArrow(0, 1, "Authorization");
+        processing(1);
+        arrow(1, 2, "FWP Assertion");
+        processing(2);
+        arrow(2, 3, "AREQ");
+        processing(3);
+        arrow(3, 4, "IREQ");
+        processing(4);
   //      dashedArrow(4, 3, "Out of Scope", "#outofscope");
  
         seqY -= PROC_HEIGHT * 0.2;
