@@ -6,13 +6,14 @@
 .para {margin-top: 0.8em}
 .actor {color:darkgreen;font-weight:bolder}
 .box {box-shadow: 0.2em 0.2em 0.2em #d0d0d0;border-width:1px;border-style:solid;border-color:black}
-.numbox {border-width: 1pt;border-style:solid;border-color:black;border-radius:0.3em;display:inline-block;margin: 1.5em 0.6em 0.6em 0;padding: 0 3pt 0.1em 3pt}
+.numbox {border-width:1pt;border-style:solid;border-color:black;border-radius:0.3em;display:inline-block;margin: 1.5em 0.6em 0.6em 0;padding: 0 3pt 0.1em 3pt}
 .tftable {border-collapse:collapse;box-shadow:0.3em 0.3em 0.3em #d0d0d0;margin-bottom:0.3em} 
 .tftable td {white-space:nowrap;background-color:#ffffe0;padding:0.4em 0.5em;border-width:1px;border-style:solid;border-color:#a9a9a9}
 .tftable th {white-space:nowrap;padding:0.4em 0.5em;background:linear-gradient(to bottom, #eaeaea 14%,#fcfcfc 52%,#e5e5e5 89%);text-align:center;border-width:1px;border-style:solid;border-color:#a9a9a9}
 .json {word-break:break-all;background-color:#f8f8f8;padding:1em;border-width:1px;border-style:solid;border-color:#a9a9a9;box-shadow:0.3em 0.3em 0.3em #d0d0d0}
 body {margin:1em;font-size:10pt;font-family:Verdana,'Bitstream Vera Sans','DejaVu Sans',Arial,'Liberation Sans';background-color:white} 
 code {font-size:10pt}
+pre {margin: 0.8em 0;padding: 0.6em 1em;overflow-x: auto;background-color: #f8f8f8}
 .reserved {color:maroon;font-weight:bold}
 ul {margin:0}
 li {margin-top:0.3em}
@@ -81,7 +82,7 @@ title='GDPR Site'>GDPR<img src='images/xtl.svg' alt='link'></a>.
   <div class='para'>
     It is assumed that <i>at this stage in time</i>,
     backend infrastructures will be <i>independently defined</i> by each payment network
-    rather than becoming a unified standard.  Also see <a href="#integration">Integration</a>.
+    rather than becoming a unified standard.  See also <a href="#integration">Integration</a>.
   </div>
   <div id='terminology' class='header'>
     Terminology
@@ -100,16 +101,19 @@ title='GDPR Site'>GDPR<img src='images/xtl.svg' alt='link'></a>.
   </div>
   <div>
     The steps outlined in <a href='#operation'>Detailed Operation</a>
- depend on that the <span class='actor'>User</span> already has received
-    one or more <i>payment credentials</i> in an <a href='#enrollment'>Enrollment</a> process.
+    depend on that the <span class='actor'>User</span> already has received
+    one or more <i>payment credentials</i>
+    (&quot;Virtual Cards&quot;) in an <a href='#enrollment'>Enrollment</a> process.
     A payment credential is supposed to at least contain the following elements:
     <ul>
       <li>An identifier to a <span class='actor'>User</span> specific (<i>unique</i>) FIDO key for <i>signing</i> payment authorization data.</li>
       <li>An <span class='actor'>Issuer</span> specific (<i>shared</i>) public key for <i>encrypting</i> payment authorization data.</li>
       <li>An <code class='reserved'>accountId</code> associated with the FIDO signature key.</li>
       <li>A <code class='reserved'>paymentMethod</code> URL identifying the FWP method for a particular payment network.</li>
-      <li>An <code class='reserved'>issuerId</code> in the form of a
-Bank Identification Number (BIN) or URL associated with the <span class='actor'>Issuer</span>.</li>
+      <li>
+        An <code class='reserved'>issuerId</code> in the form of a
+        Bank Identification Number (BIN) or URL associated with the <span class='actor'>Issuer</span>.
+      </li>
       <li>An icon identifying the payment credential for the <span class='actor'>User</span>.</li>
     </ul>
   </div>
@@ -149,37 +153,78 @@ is linked to a <i>clickable</i> number in a box:
 <div>Note that this specification does not elaborate on the return data from
 the <b class='actor'>Acquirer</b> and <b class='actor'>Issuer</b>,
  because this is payment network specific.</div>
-<div id='step1' class='numbox'>1</div>Initiate PaymentRequest
-<div>In this step the <b class='actor'>Merchant</b></div>
- <div style='overflow-x:auto;padding:8pt 0'>
-<pre style="margin:0">
+<div id='seq-1' class='numbox'>1</div>Initiate PaymentRequest
+<div>
+  At this point the <b class='actor'>User</b> is assumed to have clicked on
+  a &quot;Buy&quot; button (after first having selected an FWP compliant payment method),
+  causing a <b class='actor'>Merchant</b> Web page to invoke 
+  the <code>doPaymentRequest()</code> method:
+</div>
+<pre class="box">
+// FWP sample code
+
 const methodData = [{
-  supportedMethods: 'https://emvco.com/spc/visa'
-},{
-  supportedMethods: 'https://emvco.com/spc/mastercard'
-},{  
-  supportedMethods: 'https://europeanpaymentsinitiative.eu/spc'
+  supportedMethods: 'fido-web-pay',
+  data: {
+    payee: 'Space Shop',  // Shown in the UI
+    networks: [{
+      name: 'https://emvco.com/fwp/mastercard'
+    },{
+      name: 'https://emvco.com/fwp/visa'
+    },{
+      name: 'https://europeanpaymentsinitiative.eu/fwp',
+      networkData: 'additional stuff...'
+    }]
+  }
 }];
 
 const request = new PaymentRequest(methodData,{
-  id: '7040566321',   // Mandatory for SPC
-  total: {label: null, amount: {currency: 'EUR', value: '435.00'}},
-  payee: 'Space Shop'   // Possible API enhancement
+  id: '7040566321',   // Mandatory for FWP
+  total: {label: null, amount: {currency: 'EUR', value: '435.00'}}
 });
 
-const response = await request.show();
-await response.complete('success');
+async function doPaymentRequest() {
+  const response = await request.show();
+  await response.complete('success');
+  return response.details;
+}
 </pre>
+<div>
+When the <code>show()</code> method is invoked, the <span class='actor'>Browser</span>
+(FWP implementation) MUST perform the the following checks:
+<ul>
+<li>There is an accompanying <code>data</code> property holding a <i>JSON-serializable</i> JavaScript <code>Object</code> type.</li>
+<li>The <code>data</code> object contains a <code>payee</code> property holding a <i>non-empty</i> JavaScript <code>String</code> argument.</li>
+<li>The <code>data</code> object contains a <code>networks</code> property holding a <i>non-empty</i> JavaScript <code>Array</code> argument.</li>
+<li>That each element in the <code>networks</code> array holds a <i>JSON-serializable</i> JavaScript Object type.</li>
+<li>That each element in the <code>networks</code> array contains a <code>name</code>
+ property holding a <i>non-empty</i> JavaScript <code>String</code> argument.</li>
+<li>That none of the elements in the <code>networks</code> array contain other elements, with the exception of
+an <i>optional</i> <code>networkData</code> property holding arbitrary JavaScript data.</li>
+<li>There is a <i>single</i> <code>PaymentItem</code> having a <code>label</code> property with the argument <code>null</code>.</li>
+<li>There is an <code>id</code> argument included in the <code>details</code> parameter to the <code>PaymentRequest</code> constructor.</li>
+</ul>
 </div>
-<div id='step2' class='numbox'>2</div>Show Payment Authorization UI
-<div style='margin-bottom:0.8em'>In this step the <b class='actor'>Browser</b> responds with
+<div class='para'>Any deviations MUST throw an exeption.</div>
+<div class='para'>Note that the <code>name</code> properties in the <code>networks</code>
+array denote the actual payment methods, corresponding to the <code>paymentMethod</code>
+property in <a href='#prerequisites'>FWP credentials</a>.</div>
+<div class='para'>
+  Note that the <code>canMakePayment()</code> method MUST return <code>true</code>
+if the <span class='actor'>User</span> have one or more FWP credentials,
+regardless if they match the associated <code>PaymentRequest</code> list or not;
+else it MUST return <code>false</code>.
+</div>
+<div id='seq-2' class='numbox'>2</div>Show Payment Authorization UI
+<div style='margin-bottom:0.8em'>After a successful invocation of the <code>show()</code>
+method, the <b class='actor'>Browser</b> responds with
 a payment authorization UI like the following:</div>
   <div style='overflow-x:auto;padding-bottom:5pt'>
     <img style='display:block;width:220pt;box-shadow:2pt 2pt 3pt #808080;border-width:1pt;border-style:solid;border-color:darkgrey' alt='Payment UI' src='images/ui.svg'>
   </div>
   <div>Non-normative UI in &quot;dark mode&quot;.</div>
   <div class='para'>
-    If the <b class='actor'>User</b> have no matching payment credentials (&quot;Virtual Cards&quot;),
+    If the <b class='actor'>User</b> have no matching payment credentials,
    the <b class='actor'>Browser</b> MUST indicate that and give the <b class='actor'>User</b>
 an option to return to the <b class='actor'>Merchant</b> &quot;Checkout&quot; page.
   </div>
@@ -191,30 +236,80 @@ an option to return to the <b class='actor'>Merchant</b> &quot;Checkout&quot; pa
     are more credentials available.  That is, if there is no arrow, the credential selector is
 at an end point.
   </div>
-<div id='step3' class='numbox'>3</div>User Authorization
-<div>In this step the <b class='actor'>User</b>
+<div id='seq-3' class='numbox'>3</div>User Authorization
+<div>At this point the <b class='actor'>User</b>
 <i>authorizes</i> the request with a fingerprint, PIN, or similar.
 A successful user authorization causes the next step to be performed.</div>
-<div id='step4' class='numbox'>4</div>Create FWP Assertion
-<div>In this step the <b class='actor'>Browser</b>
-creates an FWP assertion which requires the following operations:</div>
-<div id="3.1"class='para'>
-3.1 Blahm blah
+<div id='seq-4' class='numbox'>4</div>Create FWP Assertion
+<div>At this point the <b class='actor'>Browser</b>
+creates an FWP assertion which requires the following steps to be performed:</div>
+<div id="seq-4.1" class='para'>
+4.1 Copy Core PaymentRequest Data
 </div>
-<div id='step5' class='numbox'>5</div>Return FWP Assertion
-<div>In this step the <b class='actor'>Browser</b>
+<div class='para'>
+Create a JSON object representing the core payment request data supplied
+by the <b class='actor'>Merchant</b>.  For the sample code this should
+return the following object:
+</div>
+<pre class="box">
+{
+  "id": "7040566321",
+  "payee": "Space Shop",
+  "amount": {
+    "currency": "EUR",
+    "value": "435.00"
+  }
+}
+</pre>
+<div>This <i>strictly defined</i> object is subsequently referred to as PRD.</div>
+<div id="seq-4.2" class='para'>
+4.2 Create a Hash of PRD
+</div>
+<div class='para'>
+  Calculate a Base64Url-encoded SHA256 hash of PRD, canonicalized according to
+  <a href='https://tools.ietf.org/html/rfc8785' 
+title='JCS/RFC8785'>RFC&nbsp;8785<img src='images/xtl.svg' alt='link'></a>. 
+The resulting string is subsequently referred to as PRDHASH.</div>
+  <div class='para'>
+    Expressed as a formula: PRDHASH = BASE64URL(SHA256(RFC8785(PRD))).
+  </div>
+<div class='para'>
+  Applied to the sample data, this operation should return "Zf6qUOoA3NWM77rksuji2tE7tlGHrzu9K5Y_AGn5tkw".
+</div>
+
+<div id='seq-5' class='numbox'>5</div>Return FWP Assertion
+<div>At this point the <b class='actor'>Browser</b>
 returns the completed FWP assertion to the
 <b class='actor'>Merchant</b> through the ? </div>
-<div id='step6' class='numbox'>6</div>
-<div>In this step the <b class='actor'>Merchant</b></div>
-<div id='step7' class='numbox'>7</div>
-<div>In this step the <b class='actor'>Merchant</b></div>
-<div id='step8' class='numbox'>8</div>
-<div>In this step the <b class='actor'>Merchant</b></div>
-<div id='step9' class='numbox'>9</div>
-<div>In this step the <b class='actor'>Merchant</b></div>
-<div id='step10' class='numbox'>10</div>
-<div>In this step the <b class='actor'>Merchant</b></div>
+<div id='seq-6' class='numbox'>6</div>
+<div>At this point the <b class='actor'>Merchant</b></div>
+<div id='seq-7' class='numbox'>7</div>
+<div>At this point the <b class='actor'>Merchant</b></div>
+<div id='seq-8' class='numbox'>8</div>
+<div>At this point the <b class='actor'>Merchant</b></div>
+<div id='seq-9' class='numbox'>9</div>
+<div>At this point the <b class='actor'>Merchant</b></div>
+<div id='seq-10' class='numbox'>10</div>Issuer IREQ Processing
+<div>
+  At this point the <b class='actor'>Issuer</b>
+  The Issuer MUST now perform a number of steps to verify the correctness of the received AREQ. With respect to the User the following steps are the most significant:
+
+  10.1 Decrypt the encryptedAuthorization object in AREQ using the Issuer specific (but shared) decryption key. Set result as AD.
+
+  10.2 Retrieve the signature key declared in the JWS header of the AD signature element. Abort if unknown.
+
+  10.3 Verify that the retrieved signature key is associated with the AD accountId element. Abort on failure.
+
+  10.4 Validate the AD signature using the retrieved signature key. Abort on failure.
+
+  10.5 Perform the same calculation as specified in 4.1 on the received paymentRequest object and compare the result with the AD requestHash. Abort on failure.
+
+  10.6 Check that the AD timeStamp element is within limits. Tentative: CurrentTime - 600s < timeStamp < CurrentTime + 60s. Abort on failure.
+
+  10.7 To cope with possible replays, check that the received AD has not already been utilized. Ideally, the Issuer should support idempotent operation to facilitate benign transaction retries.
+
+  Available funds also needs to be validated but that is out of scope for this specification.
+</div>
 
 <div id='integration' class='header'>
 Integration
@@ -240,7 +335,7 @@ is crucial for acceptance by the market.
   Remapping existing card based systems and infrastructures seems though like a possible path.
 </div>
 <div class="para">
-  Open Banking may though become a factor because there is work under way making non-OAuth2
+  Open Banking may also become a factor because there is work under way making non-OAuth2
   requests a part of Open Banking APIs.  There are good reasons for that since current Open Banking
   payment APIs presume that the <b class='actor'>User</b> in some OOB way informs the
   <b class='actor'>Merchant</b> who their <b class='actor'>Issuer</b> is, which becomes
@@ -270,7 +365,7 @@ By building on this core, Saturn features like the following could potentially b
  <b class='actor'>Issuer</b> and <b class='actor'>User</b>.
 </li>
 </ul>
-Not though that the features above would have implications on the PaymentRequest API. 
+Not that some of the features above could impact the PaymentRequest API. 
 </div>
 <div class='para'>
 A radical change would be moving the FWP implementation down into the client platform layer.

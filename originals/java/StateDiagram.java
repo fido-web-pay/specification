@@ -74,7 +74,7 @@ public class StateDiagram {
         if (n == 1 || (n > 9 && n != 11 &&  n < 20)) {
             fontX -= FONT_SIZE / 10;
         }
-       svg.append("  <a href='#step")
+        svg.append("  <a href='#seq-")
            .append(n)
            .append("'>\n  <rect x='")
            .append(convert(centerX - (width + STROKE_WIDTH) / 2))
