@@ -3,12 +3,12 @@
 <link rel='icon' href='images/favicon.png' sizes='192x192'>
 <title>FIDO Web Pay</title><style type='text/css'>
 .header {font-size:1.6em;margin:1em 0 0.8em 0}
-.step {font-size: 1.2em;color:indigo}
+.step {font-size:1.2em;color:indigo;margin-top:1.5em;margin-bottom:0.6em}
 .para {margin-top: 0.8em}
 .actor {color:darkgreen;font-weight:bolder}
-.comment {padding:0.5em 1em;margin-top:1em;display:inline-block;background-color:floralwhite}
+.comment {padding:0.5em 1em;margin-top:1.5em;display:inline-block;background-color:floralwhite}
 .box {box-shadow: 0.2em 0.2em 0.2em #d0d0d0;border-width:1px;border-style:solid;border-color:black}
-.numbox {border-width:1pt;border-style:solid;border-color:black;border-radius:0.3em;display:inline-block;margin: 1.5em 0.6em 0.6em 0;padding: 0 3pt 0.1em 3pt}
+.numbox {border-width:1pt;border-style:solid;border-color:black;border-radius:0.3em;display:inline-block;margin-right:0.6em;padding: 0 3pt 0.1em 3pt}
 .tftable {border-collapse:collapse;box-shadow:0.3em 0.3em 0.3em #d0d0d0;margin-bottom:0.3em} 
 .tftable td {white-space:nowrap;background-color:#ffffe0;padding:0.4em 0.5em;border-width:1px;border-style:solid;border-color:#a9a9a9}
 .tftable th {white-space:nowrap;padding:0.4em 0.5em;background:linear-gradient(to bottom, #eaeaea 14%,#fcfcfc 52%,#e5e5e5 89%);text-align:center;border-width:1px;border-style:solid;border-color:#a9a9a9}
@@ -280,7 +280,7 @@ A successful user authorization causes the next step to be performed.
 At this point the <b class='actor'>Browser</b>
 creates an FWP assertion which requires the following steps to be performed:
 </div>
-<div id="seq-4.1" class='step para'>4.1 Extract PaymentRequest Core Data (PRCD)</div>
+<div id="seq-4.1" class='step'>4.1 Extract PaymentRequest Core Data (PRCD)</div>
 <div class='para'>
   Create a JSON object representing the core payment request data supplied
   by the <b class='actor'>Merchant</b>.  For the sample code this should
@@ -300,7 +300,7 @@ creates an FWP assertion which requires the following steps to be performed:
   This <i>strictly defined</i> object is subsequently referred to as
   PaymentRequest Core Data (PRCD).
 </div>
-<div id="seq-4.2" class='step para'>4.2 Create a Hash of PaymentRequest Core Data (PRCD)</div>
+<div id="seq-4.2" class='step'>4.2 Create a Hash of PaymentRequest Core Data (PRCD)</div>
 <div class='para'>
   Calculate a Base64Url-encoded SHA256 hash of PRCD, canonicalized according to
   <a href='https://tools.ietf.org/html/rfc8785'
@@ -313,7 +313,7 @@ creates an FWP assertion which requires the following steps to be performed:
 <div class='para'>
   Applied to the sample data, this operation should return "-5AfYJfNayqcxJs2nqkUm7EKKLS1oPumgWNWc1BCPuQ".
 </div>
-<div id="seq-4.3" class='step para'>
+<div id="seq-4.3" class='step'>
   4.3 Create Authorization Data (AD)
 </div>
 <div class='para'>
@@ -349,7 +349,7 @@ creates an FWP assertion which requires the following steps to be performed:
   Authorization Data (AD).
 </div>
 
-<div id="seq-4.4" class='step para'>4.4 Create Signed Authorization Data (SAD)</div>
+<div id="seq-4.4" class='step'>4.4 Create Signed Authorization Data (SAD)</div>
 <div class='para'>
   Using the FIDO signature key associated with the selected
   payment credential, sign AD using
@@ -399,7 +399,7 @@ creates an FWP assertion which requires the following steps to be performed:
   "y": "mCbcvUzm44j3Lt2b5BPyQloQ91tf2D2V-gzeUxWaUdg"
 }
 </pre>
-<div id='seq-4.5' class="step para">4.5 Create Encrypted Signed Authorization Data (ESAD)</div>
+<div id='seq-4.5' class="step">4.5 Create Encrypted Signed Authorization Data (ESAD)</div>
 <div class="para">
   For privacy and security reasons, Signed Authorization Data (SAD) objects
   MUST be encrypted by a public key provided by the <b class='actor'>Issuer</b>
@@ -436,7 +436,7 @@ dvTiFvSkQ
 constraints usually associated with FIDO, do not apply.
 </div> 
 
-<div id="seq-4.6" class='step para'>4.6 Assemble FWP Assertion Data</div>
+<div id="seq-4.6" class='step'>4.6 Assemble FWP Assertion Data</div>
 <div class='para'>
   Create a JSON object representing an FWP assertion.
   For the sample code this should result in the following object:
