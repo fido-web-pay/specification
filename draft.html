@@ -2,19 +2,21 @@
 <meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'>
 <link rel='icon' href='images/favicon.png' sizes='192x192'>
 <title>FIDO Web Pay</title><style type='text/css'>
-.header {font-size:1.5em;margin:1em 0 0.8em 0}
+.header {font-size:1.6em;margin:1em 0 0.8em 0}
+.step {font-size: 1.2em;color:indigo}
 .para {margin-top: 0.8em}
 .actor {color:darkgreen;font-weight:bolder}
+.comment {padding:0.5em 1em;margin-top:1em;display:inline-block;background-color:floralwhite}
 .box {box-shadow: 0.2em 0.2em 0.2em #d0d0d0;border-width:1px;border-style:solid;border-color:black}
-.numbox {border-width: 1pt;border-style:solid;border-color:black;border-radius:0.3em;display:inline-block;margin: 1.5em 0.6em 0.6em 0;padding: 0 3pt 0.1em 3pt}
+.numbox {border-width:1pt;border-style:solid;border-color:black;border-radius:0.3em;display:inline-block;margin: 1.5em 0.6em 0.6em 0;padding: 0 3pt 0.1em 3pt}
 .tftable {border-collapse:collapse;box-shadow:0.3em 0.3em 0.3em #d0d0d0;margin-bottom:0.3em} 
 .tftable td {white-space:nowrap;background-color:#ffffe0;padding:0.4em 0.5em;border-width:1px;border-style:solid;border-color:#a9a9a9}
 .tftable th {white-space:nowrap;padding:0.4em 0.5em;background:linear-gradient(to bottom, #eaeaea 14%,#fcfcfc 52%,#e5e5e5 89%);text-align:center;border-width:1px;border-style:solid;border-color:#a9a9a9}
 .json {word-break:break-all;background-color:#f8f8f8;padding:1em;border-width:1px;border-style:solid;border-color:#a9a9a9;box-shadow:0.3em 0.3em 0.3em #d0d0d0}
-body {margin:1em;font-size:10pt;font-family:Verdana,'Bitstream Vera Sans','DejaVu Sans',Arial,'Liberation Sans';background-color:white} 
-code {font-size:10pt}
-.reserved {color:maroon;font-weight:bold}
-ul {margin:0}
+body {margin:1em;font-size:10pt;font-family:Verdana,'Bitstream Vera Sans','DejaVu Sans',Arial,'Liberation Sans';background-color:white}
+code {font-size:10pt;color:maroon;font-weight:bold}
+pre {margin: 0.8em 0;padding: 0.6em 1em;overflow-x: auto;background-color: #f8f8f8}
+ul {margin: 0;padding-left:2em}
 li {margin-top:0.3em}
 a {color:blue;text-decoration:none}
 </style>
@@ -81,7 +83,7 @@ title='GDPR Site'>GDPR<img src='images/xtl.svg' alt='link'></a>.
   <div class='para'>
     It is assumed that <i>at this stage in time</i>,
     backend infrastructures will be <i>independently defined</i> by each payment network
-    rather than becoming a unified standard.  Also see <a href="#integration">Integration</a>.
+    rather than becoming a unified standard.  See also <a href="#integration">Integration</a>.
   </div>
   <div id='terminology' class='header'>
     Terminology
@@ -100,20 +102,30 @@ title='GDPR Site'>GDPR<img src='images/xtl.svg' alt='link'></a>.
   </div>
   <div>
     The steps outlined in <a href='#operation'>Detailed Operation</a>
- depend on that the <span class='actor'>User</span> already has received
-    one or more <i>payment credentials</i> in an <a href='#enrollment'>Enrollment</a> process.
+    depend on that the <span class='actor'>User</span> already has received
+    one or more <i>payment credentials</i>
+    (&quot;Virtual Cards&quot;) in an <a href='#enrollment'>Enrollment</a> process.
     A payment credential is supposed to at least contain the following elements:
     <ul>
       <li>An identifier to a <span class='actor'>User</span> specific (<i>unique</i>) FIDO key for <i>signing</i> payment authorization data.</li>
-      <li>An <span class='actor'>Issuer</span> specific (<i>shared</i>) public key for <i>encrypting</i> payment authorization data.</li>
+      <li>A JOSE-compliant <code class='reserved'>signatureAlgorithm</code> for FWP <a href='#seq-4.4'>signatures</a>.</li>
+      <li>A <code class='reserved'>encryptionKey</code> holding an
+<span class='actor'>Issuer</span> specific (<i>shared</i>) public key in JWK
+ (<a href='https://tools.ietf.org/html/rfc7517'
+  title='JWK/RFC7517'>RFC7517<img src='images/xtl.svg' alt='link'></a>)
+ format for <i>encrypting</i> payment authorization data.</li>
+      <li>A JOSE-compliant <code class='reserved'>contentEncryptionAlgorithm</code> for FWP <a href='#seq-4.5'>encryption</a>.</li>
+      <li>A JOSE-compliant <code class='reserved'>keyEncryptionAlgorithm</code> for FWP <a href='#seq-4.5'>encryption</a>.</li>
       <li>An <code class='reserved'>accountId</code> associated with the FIDO signature key.</li>
       <li>A <code class='reserved'>paymentMethod</code> URL identifying the FWP method for a particular payment network.</li>
-      <li>An <code class='reserved'>issuerId</code> in the form of a
-Bank Identification Number (BIN) or URL associated with the <span class='actor'>Issuer</span>.</li>
+      <li>
+        An <code class='reserved'>issuerId</code> in the form of a
+        Bank Identification Number (BIN) or URL associated with the <span class='actor'>Issuer</span>.
+      </li>
       <li>An icon identifying the payment credential for the <span class='actor'>User</span>.</li>
     </ul>
   </div>
-  <div class='para box' style='padding:0.5em 1em;margin-top:1em;display:inline-block'>
+  <div class='para box comment'>
     Note that FWP effectively forms a browser-resident &quot;Wallet&quot;,
     holding any number of payment credentials, each representing a specific <span class='actor'>Issuer</span>
     and <code class='reserved'>paymentMethod</code>.
@@ -2105,7 +2117,7 @@ is linked to a <i>clickable</i> number in a box:
 </svg>  <text x='543' y='24' fill='black' font-family='sans-serif' font-size='14.399999999999999' text-anchor='middle'>Issuer</text>
   <line x1='302.4' y1='96' x2='191.1' y2='96' stroke-width='0.8' stroke='black' marker-end='url(#arrowHead)'/>
   <text x='243' y='90.4' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>PaymentRequest</text>
-  <a href='#step1'>
+  <a href='#seq-1'>
   <rect x='295.75' y='88.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
   <text x='302' y='100' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>1</text>
   </a>
@@ -2113,59 +2125,59 @@ is linked to a <i>clickable</i> number in a box:
   <rect x='139.75' y='116.75' width='86' height='50' fill='white' stroke-width='0.5' stroke='black'/>
   <rect x='139.75' y='116.75' width='86' height='5' fill='#deeafc' stroke-width='0.5' stroke='black'/>
   <text x='183' y='146' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>Payment UI</text>
-  <a href='#step2'>
+  <a href='#seq-2'>
   <rect x='132.5' y='112.25' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
   <text x='139.75' y='123.5' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>2</text>
   </a>
   <line x1='63.6' y1='188' x2='174.9' y2='188' stroke-width='0.8' stroke='black' marker-end='url(#arrowHead)' stroke-dasharray='4'/>
   <text x='123' y='182.4' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>Authorization</text>
-  <a href='#step3'>
+  <a href='#seq-3'>
   <rect x='55.75' y='180.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
   <text x='63' y='192' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>3</text>
   </a>
   <path fill='black' opacity='0.4' d='M146,210.75 l86,0 l-8,22 l-86,0Z' filter='url(#dropShaddow)'/>
   <path fill='#fff2cc' stroke='#404040' stroke-width='0.5' d='M144,208.75 l86,0 l-8,22 l-86,0Z'/>
   <text x='185.8' y='224' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>Processing</text>
-  <a href='#step4'>
+  <a href='#seq-4'>
   <rect x='132.5' y='212.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
   <text x='139.75' y='224' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>4</text>
   </a>
   <line x1='183.6' y1='252' x2='294.9' y2='252' stroke-width='0.8' stroke='black' marker-end='url(#arrowHead)'/>
   <text x='243' y='246.4' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>FWP Assertion</text>
-  <a href='#step5'>
+  <a href='#seq-5'>
   <rect x='175.75' y='244.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
   <text x='183' y='256' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>5</text>
   </a>
   <path fill='black' opacity='0.4' d='M266,274.75 l86,0 l-8,22 l-86,0Z' filter='url(#dropShaddow)'/>
   <path fill='#fff2cc' stroke='#404040' stroke-width='0.5' d='M264,272.75 l86,0 l-8,22 l-86,0Z'/>
   <text x='305.8' y='288' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>Processing</text>
-  <a href='#step6'>
+  <a href='#seq-6'>
   <rect x='252.5' y='276.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
   <text x='259.75' y='288' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>6</text>
   </a>
   <line x1='303.6' y1='316' x2='414.9' y2='316' stroke-width='0.8' stroke='black' marker-end='url(#arrowHead)'/>
   <text x='363' y='310.4' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>AREQ</text>
-  <a href='#step7'>
+  <a href='#seq-7'>
   <rect x='295.75' y='308.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
   <text x='303' y='320' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>7</text>
   </a>
   <path fill='black' opacity='0.4' d='M386,338.75 l86,0 l-8,22 l-86,0Z' filter='url(#dropShaddow)'/>
   <path fill='#fff2cc' stroke='#404040' stroke-width='0.5' d='M384,336.75 l86,0 l-8,22 l-86,0Z'/>
   <text x='425.8' y='352' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>Processing</text>
-  <a href='#step8'>
+  <a href='#seq-8'>
   <rect x='372.5' y='340.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
   <text x='379.75' y='352' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>8</text>
   </a>
   <line x1='423.6' y1='380' x2='534.9' y2='380' stroke-width='0.8' stroke='black' marker-end='url(#arrowHead)'/>
   <text x='483' y='374.4' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>IREQ</text>
-  <a href='#step9'>
+  <a href='#seq-9'>
   <rect x='415.75' y='372.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
   <text x='423' y='384' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>9</text>
   </a>
   <path fill='black' opacity='0.4' d='M506,402.75 l86,0 l-8,22 l-86,0Z' filter='url(#dropShaddow)'/>
   <path fill='#fff2cc' stroke='#404040' stroke-width='0.5' d='M504,400.75 l86,0 l-8,22 l-86,0Z'/>
   <text x='545.8' y='416' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>Processing</text>
-  <a href='#step10'>
+  <a href='#seq-10'>
   <rect x='490.4' y='404.75' width='18.2' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
   <text x='498.75' y='416' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>10</text>
   </a>
@@ -2174,79 +2186,343 @@ is linked to a <i>clickable</i> number in a box:
 <div>Note that this specification does not elaborate on the return data from
 the <b class='actor'>Acquirer</b> and <b class='actor'>Issuer</b>,
  because this is payment network specific.</div>
-<div id='step1' class='numbox'>1</div>Initiate PaymentRequest
-<div>In this step the <b class='actor'>Merchant</b></div>
- <div style='overflow-x:auto;padding:8pt 0'>
-<pre style="margin:0">
+<div class='step'><div id='seq-1' class='numbox'>1</div>Initiate PaymentRequest</div>
+<div>
+  At this point the <b class='actor'>User</b> is assumed to have clicked on
+  a &quot;Buy&quot; button (after first having selected an FWP compliant payment method),
+  causing a <b class='actor'>Merchant</b> Web page to invoke 
+  the <code>doPaymentRequest()</code> method:
+</div>
+<pre class="box">
+// FWP sample code
+
 const methodData = [{
-  supportedMethods: 'https://emvco.com/spc/visa'
-},{
-  supportedMethods: 'https://emvco.com/spc/mastercard'
-},{  
-  supportedMethods: 'https://europeanpaymentsinitiative.eu/spc'
+  supportedMethods: 'fido-web-pay',
+  data: {
+    payee: 'Space Shop',  // Shown in the UI
+    networks: [{
+      name: 'https://emvco.com/fwp/mastercard'
+    },{
+      name: 'https://emvco.com/fwp/visa'
+    },{
+      name: 'https://europeanpaymentsinitiative.eu/fwp',
+      networkData: 'additional stuff...'
+    }]
+  }
 }];
 
 const request = new PaymentRequest(methodData,{
-  id: '7040566321',   // Mandatory for SPC
-  total: {label: null, amount: {currency: 'EUR', value: '435.00'}},
-  payee: 'Space Shop'   // Possible API enhancement
+  id: '7040566321',   // Mandatory for FWP
+  total: {label: null, amount: {currency: 'EUR', value: '435.00'}}
 });
 
-const response = await request.show();
-await response.complete('success');
+async function doPaymentRequest() {
+  const response = await request.show();
+  await response.complete('success');
+  return response.details;
+}
 </pre>
+<div>
+  When the <code>show()</code> method is invoked, the <span class='actor'>Browser</span>
+  (FWP implementation) MUST perform the the following checks:
+  <ul>
+    <li>
+      There is an accompanying <code>data</code> property holding a
+      <i>JSON-serializable</i> JavaScript <code>Object</code> type.
+    </li>
+    <li>
+      The <code>data</code> object contains a <code>payee</code>
+      property holding a <i>non-empty</i> JavaScript <code>String</code> argument.
+    </li>
+    <li>
+      The <code>data</code> object contains a <code>networks</code>
+      property holding a <i>non-empty</i> JavaScript <code>Array</code> argument.
+    </li>
+    <li>
+      That each element in the <code>networks</code> array holds a
+      <i>JSON-serializable</i> JavaScript Object type.
+    </li>
+    <li>
+      That each element in the <code>networks</code> array contains a <code>name</code>
+      property holding a <i>non-empty</i> JavaScript <code>String</code> argument.
+    </li>
+    <li>
+      That none of the elements in the <code>networks</code> array contain other
+      elements, with the exception of an <i>optional</i> <code>networkData</code>
+      property holding arbitrary JavaScript data.
+    </li>
+    <li>
+      There is a <i>single</i> <code>PaymentItem</code> having a
+      <code>label</code> property with the argument <code>null</code>.
+    </li>
+    <li>
+      There is a <i>non-empty</i> <code>id</code> argument included in the
+      <code>details</code> parameter to the <code>PaymentRequest</code> constructor.
+    </li>
+  </ul>
 </div>
-<div id='step2' class='numbox'>2</div>Show Payment Authorization UI
-<div style='margin-bottom:0.8em'>In this step the <b class='actor'>Browser</b> responds with
-a payment authorization UI like the following:</div>
+<div class='para'>Any deviations MUST throw an exeption.</div>
+<div class='para'>Note that the <code>name</code> properties in the <code>networks</code>
+array denote the actual payment methods, corresponding to the <code>paymentMethod</code>
+property in <a href='#prerequisites'>FWP credentials</a>.</div>
+<div class='para'>
+  Note that the <code>canMakePayment()</code> method MUST return <code>true</code>
+if the <span class='actor'>User</span> have one or more FWP credentials,
+regardless if they match the associated <code>PaymentRequest</code> list or not;
+else it MUST return <code>false</code>.
+</div>
+<div class='step'><div id='seq-2' class='numbox'>2</div>Show Payment Authorization UI</div>
+  <div style='margin-bottom:0.8em'>
+    After a successful invocation of the <code>show()</code>
+    method, the <b class='actor'>Browser</b> responds with
+    a payment authorization UI like the following:
+  </div>
   <div style='overflow-x:auto;padding-bottom:5pt'>
     <img style='display:block;width:220pt;box-shadow:2pt 2pt 3pt #808080;border-width:1pt;border-style:solid;border-color:darkgrey' alt='Payment UI' src='images/ui.svg'>
   </div>
   <div>Non-normative UI in &quot;dark mode&quot;.</div>
   <div class='para'>
-    If the <b class='actor'>User</b> have no matching payment credentials (&quot;Virtual Cards&quot;),
-   the <b class='actor'>Browser</b> MUST indicate that and give the <b class='actor'>User</b>
-an option to return to the <b class='actor'>Merchant</b> &quot;Checkout&quot; page.
+    If the <b class='actor'>User</b> have no matching payment credentials,
+    the <b class='actor'>Browser</b> MUST indicate that and give the <b class='actor'>User</b>
+    an option to return to the <b class='actor'>Merchant</b> &quot;Checkout&quot; page.
   </div>
   <div class='para'>
     If the <b class='actor'>User</b> have multiple matching payment credentials,
     the <b class='actor'>Browser</b> MUST provide a way to select a specific credential.
     In the sample UI shown above, the <b class='actor'>User</b>
     can swipe credentials to the left and right, while arrow symbols are used to show if there
-    are more credentials available.  That is, if there is no arrow, the credential selector is
-at an end point.
+    are more credentials available.  That is, if there is no left arrow, the credential selector is
+    at the left end point.
   </div>
-<div id='step3' class='numbox'>3</div>User Authorization
-<div>In this step the <b class='actor'>User</b>
+<div class='step'><div id='seq-3' class='numbox'>3</div>Perform User Authorization</div>
+<div>
+At this point the <b class='actor'>User</b>
 <i>authorizes</i> the request with a fingerprint, PIN, or similar.
-A successful user authorization causes the next step to be performed.</div>
-<div id='step4' class='numbox'>4</div>Create FWP Assertion
-<div>In this step the <b class='actor'>Browser</b>
-creates an FWP assertion which requires the following operations:</div>
-<div id="3.1"class='para'>
-3.1 Blahm blah
+A successful user authorization causes the next step to be performed.
 </div>
-<div id='step5' class='numbox'>5</div>Return FWP Assertion
-<div>In this step the <b class='actor'>Browser</b>
-returns the completed FWP assertion to the
-<b class='actor'>Merchant</b> through the ? </div>
-<div id='step6' class='numbox'>6</div>
-<div>In this step the <b class='actor'>Merchant</b></div>
-<div id='step7' class='numbox'>7</div>
-<div>In this step the <b class='actor'>Merchant</b></div>
-<div id='step8' class='numbox'>8</div>
-<div>In this step the <b class='actor'>Merchant</b></div>
-<div id='step9' class='numbox'>9</div>
-<div>In this step the <b class='actor'>Merchant</b></div>
-<div id='step10' class='numbox'>10</div>
-<div>In this step the <b class='actor'>Merchant</b></div>
+<div class='step'><div id='seq-4' class='numbox'>4</div>Create FWP Assertion</div>
+<div>
+At this point the <b class='actor'>Browser</b>
+creates an FWP assertion which requires the following steps to be performed:
+</div>
+<div id="seq-4.1" class='step para'>4.1 Extract PaymentRequest Core Data (PRCD)</div>
+<div class='para'>
+  Create a JSON object representing the core payment request data supplied
+  by the <b class='actor'>Merchant</b>.  For the sample code this should
+  result in the following object:
+</div>
+<pre class="box">
+{
+  "id": "7040566321",
+  "payee": "Space Shop",
+  "amount": {
+    "currency": "EUR",
+    "value": "435.00"
+  }
+}
+</pre>
+<div>
+  This <i>strictly defined</i> object is subsequently referred to as
+  PaymentRequest Core Data (PRCD).
+</div>
+<div id="seq-4.2" class='step para'>4.2 Create a Hash of PaymentRequest Core Data (PRCD)</div>
+<div class='para'>
+  Calculate a Base64Url-encoded SHA256 hash of PRCD, canonicalized according to
+  <a href='https://tools.ietf.org/html/rfc8785'
+      title='JCS/RFC8785'>RFC8785<img src='images/xtl.svg' alt='link'></a>.
+  The resulting string is subsequently referred to as PRCDHASH.
+</div>
+<div class='para'>
+  Expressed as a formula: PRCDHASH = BASE64URL(SHA256(RFC8785(PRCD))).
+</div>
+<div class='para'>
+  Applied to the sample data, this operation should return "-5AfYJfNayqcxJs2nqkUm7EKKLS1oPumgWNWc1BCPuQ".
+</div>
+<div id="seq-4.3" class='step para'>
+  4.3 Create Authorization Data (AD)
+</div>
+<div class='para'>
+  Create a JSON object representing the data to authorize.
+  For the sample code this should result in the following object:
+</div>
+<pre class="box">
+{
+  "requestHash": {
+    "algorithm": "S256",
+    "value": "-5AfYJfNayqcxJs2nqkUm7EKKLS1oPumgWNWc1BCPuQ"
+  },
+  "payeeHost": "spaceshop.com",
+  "accountId": "FR7630002111110020050014382",
+  "paymentMethod": "https://europeanpaymentsinitiative.eu/fwp",
+  "networkData": "additional stuff...",
+  "userAuthorizationMethod": "FINGERPRINT",
+  "platformData": {
+    "operatingSystem": {
+      "name": "Android",
+      "version": "10"
+    },
+    "userAgent": {
+      "name": "Chrome",
+      "version": "95"
+    }
+  },
+  "timeStamp": "2021-03-09T10:32:35+01:00"
+}
+</pre>
+<div>
+  This <i>strictly defined</i> object is subsequently referred to as
+  Authorization Data (AD).
+</div>
+
+<div id="seq-4.4" class='step para'>4.4 Create Signed Authorization Data (SAD)</div>
+<div class='para'>
+  Using the FIDO signature key associated with the selected
+  payment credential, sign AD using
+  <a href='https://tools.ietf.org/html/draft-jordan-jws-ct-02'
+      title='JWS/CT'>JWS/CT<img src='images/xtl.svg' alt='link'></a>.
+  For the sample code this should result in the following object:
+</div>
+<pre class="box">
+{
+  "requestHash": {
+    "algorithm": "S256",
+    "value": "-5AfYJfNayqcxJs2nqkUm7EKKLS1oPumgWNWc1BCPuQ"
+  },
+  "payeeHost": "spaceshop.com",
+  "accountId": "FR7630002111110020050014382",
+  "paymentMethod": "https://europeanpaymentsinitiative.eu/fwp",
+  "networkData": "additional stuff...",
+  "userAuthorizationMethod": "FINGERPRINT",
+  "platformData": {
+    "operatingSystem": {
+      "name": "Android",
+      "version": "10"
+    },
+    "userAgent": {
+      "name": "Chrome",
+      "version": "95"
+    }
+  },
+  "timeStamp": "2021-03-09T10:32:35+01:00",
+  "signature": "eyJhbGciOiJFUzI1NiIsImp3ayI6eyJrdHkiOiJFQyIsImNydiI6IlAtMjU2IiwieCI6IjZCS3hwdHk4Y0ktZXhEekNraC1nb1U2ZFhxM01iY1kwY2QxTGFBeGlOclUiLCJ5IjoibUNiY3ZVem00NGozTHQyYjVCUHlRbG9ROTF0ZjJEMlYtZ3plVXhXYVVkZyJ9fQ..x5Cn16130rB1CBOo5h7rU_3Ln96Xc2aC1B3tkzmfPMaKTkf3LyDmUlT6IM_RRUiXGKBc0PkCnt0LnQG_-kYjcw"
+}
+</pre>
+<div>
+  This <i>strictly defined</i> object is subsequently referred to as
+  Signed Authorization Data (SAD).
+</div>
+<div class='para'>
+  To simplify backend processing, the public key associated with the FIDO key of
+  the selected payment credential MUST be included in the JWS header.
+  In the sample the following key was used:
+</div>
+<pre class="box">
+{
+  "kty": "EC",
+  "crv": "P-256",
+  "x": "6BKxpty8cI-exDzCkh-goU6dXq3MbcY0cd1LaAxiNrU",
+  "y": "mCbcvUzm44j3Lt2b5BPyQloQ91tf2D2V-gzeUxWaUdg"
+}
+</pre>
+<div id='seq-4.5' class="step para">4.5 Create Encrypted Signed Authorization Data (ESAD)</div>
+<div class="para">
+  For privacy and security reasons, Signed Authorization Data (SAD) objects
+  MUST be encrypted by a public key provided by the <b class='actor'>Issuer</b>
+  through the selected payment credential's <code>encryptionKey</code> element.
+  This specification mandates using JWE
+  (<a href='https://tools.ietf.org/html/rfc7516'
+      title='JWE'>RFC7516<img src='images/xtl.svg' alt='link'></a>),
+  in the compact serialization mode. The selection between
+  RSA or ECDH encryption schemes is at the discretion of the <b class='actor'>Issuer</b>.
+  SAD objects MUST be JSON-serialized to UTF-8 before being encrypted.
+  The resulting JWE string would look something like this
+  (with line breaks for display purposes only):
+</div>
+<pre class="box">
+eyJhbGciOiJSU0EtT0FFUCIsImVuYyI6IkEyNTZHQ00ifQ.OKOawDo13gRp2oja
+HV7LFpZcgV7T6DVZKTyKOMTYUmKoTCVJRgckCL9kiMT03JGeipsEdY3mx_etLbb
+WSrFr05kLzcSr4qKAq7YN7e9jwQRb23nfa6c9d-StnImGyFDbSv04uVuxIp5Zms
+1gNxKKK2Da14B8S4rzVRltdYwam_lDp5XnZAYpQdb76FdIKLaVmqgfwX7XWRxv2
+322i-vDxRfqNzo_tETKzpVLzfiwQyeyPGLBIO56YJ7eObdv0je8860ppamavo35
+UgoRdbYaBcoh9QcfylQr66oc6vFWXRcZ_ZT2LawVCWTIy3brGPi6UklfCpIMfIj
+f7iGdXKHzg.48V1_ALb6US04U3b.5eym8TW_c8SuK0ltJ3rpYIzOeDQz7TALvtu
+6UG9oMo4vpzs9tX_EFShS8iB7j6jiSdiwkIr3ajwQzaBtQD_A.XFBoMYUZodetZ
+dvTiFvSkQ
+</pre>
+<div>
+  This <i>strictly defined</i> object is subsequently referred to as
+  Encrypted Signed Authorization Data (ESAD).
+</div>
+<div class='para'>
+  Note that the JWE header MUST include the <code>encryptionKey</code> as well.
+</div>
+<div class='para box comment'>
+  Note that due to the end-2-end encryption scheme, the domain 
+constraints usually associated with FIDO, do not apply.
+</div> 
+
+<div id="seq-4.6" class='step para'>4.6 Assemble FWP Assertion Data</div>
+<div class='para'>
+  Create a JSON object representing an FWP assertion.
+  For the sample code this should result in the following object:
+</div>
+<pre class="box">
+{
+  "encryptedAuthorization": "<i>ESAD</i>",
+  "paymentMethod": "https://europeanpaymentsinitiative.eu/fwp",
+  "issuerId": "https://mybank.fr/payment"
+}
+</pre>
+<div>Note that <i>ESAD</i> is just a placeholder, the actual ESAD string
+can as seen in the previous step be quite long.</div>
+<div>
+  This <i>strictly defined</i> object is subsequently referred to as
+  Authorization Data (AD).
+</div>
+
+
+<div class="step"><div id='seq-5' class='numbox'>5</div>Return FWP Assertion</div>
+<div>
+  At this point the <b class='actor'>Browser</b>
+  returns the completed FWP assertion to the
+  <b class='actor'>Merchant</b> through the ?
+</div>
+<div id='seq-6' class='numbox'>6</div>
+<div>At this point the <b class='actor'>Merchant</b></div>
+<div id='seq-7' class='numbox'>7</div>
+<div>At this point the <b class='actor'>Merchant</b></div>
+<div id='seq-8' class='numbox'>8</div>
+<div>At this point the <b class='actor'>Merchant</b></div>
+<div id='seq-9' class='numbox'>9</div>
+<div>At this point the <b class='actor'>Merchant</b></div>
+<div id='seq-10' class='numbox'>10</div>Issuer IREQ Processing
+<div>
+  At this point the <b class='actor'>Issuer</b>
+  The Issuer MUST now perform a number of steps to verify the correctness of the received AREQ. With respect to the User the following steps are the most significant:
+
+  10.1 Decrypt the encryptedAuthorization object in AREQ using the Issuer specific (but shared) decryption key. Set result as AD.
+
+  10.2 Retrieve the signature key declared in the JWS header of the AD signature element. Abort if unknown.
+
+  10.3 Verify that the retrieved signature key is associated with the AD accountId element. Abort on failure.
+
+  10.4 Validate the AD signature using the retrieved signature key. Abort on failure.
+
+  10.5 Perform the same calculation as specified in 4.1 on the received paymentRequest object and compare the result with the AD requestHash. Abort on failure.
+
+  10.6 Check that the AD timeStamp element is within limits. Tentative: CurrentTime - 600s &lt; timeStamp &lt; CurrentTime + 60s. Abort on failure.
+
+  10.7 To cope with possible replays, check that the received AD has not already been utilized. Ideally, the Issuer should support idempotent operation to facilitate benign transaction retries.
+
+  Available funds also needs to be validated but that is out of scope for this specification.
+</div>
 
 <div id='integration' class='header'>
-Integration
+  Integration
 </div>
 <div>
-It is obvious that the integration of systems like FWP in payment networks
-is crucial for acceptance by the market.
+  It is obvious that the integration of systems like FWP in payment networks
+  is crucial for acceptance by the market.
 </div>
 <div class="para">
   For card based payments FWP implementations can build on the existing
@@ -2258,14 +2534,14 @@ is crucial for acceptance by the market.
   is also a viable alternative for card payments because the payment processors
   associated with &quot;regular&quot; EMV and FWP payments do probably not
   use the same end point.
-</div>  
+</div>
 <div class="para">
   For account-to-account payments there are currently no generally agreed upon standards
   for consumer payments, making it hard to come up with FWP implementation guidlines.
   Remapping existing card based systems and infrastructures seems though like a possible path.
 </div>
 <div class="para">
-  Open Banking may though become a factor because there is work under way making non-OAuth2
+  Open Banking may also become a factor because there is work under way making non-OAuth2
   requests a part of Open Banking APIs.  There are good reasons for that since current Open Banking
   payment APIs presume that the <b class='actor'>User</b> in some OOB way informs the
   <b class='actor'>Merchant</b> who their <b class='actor'>Issuer</b> is, which becomes
@@ -2275,59 +2551,59 @@ is crucial for acceptance by the market.
   be any <b class='actor'>User</b> interactions with such a PISP.
 </div>
 <div id='extensions' class='header'>
-Extensions
+  Extensions
 </div>
 <div>
-The FWP core is loosely derived from a PoC system known as  
-<a href='https://cyberphone.github.io/doc/saturn/' 
-title='Saturn'>Saturn<img src='images/xtl.svg' alt='link' /></a>.
-By building on this core, Saturn features like the following could potentially be added:
-<ul style='margin-bottom:0.3em'>
-  <li>
-    Support for <i>non-direct payments</i>,
-    including secure (<i>tokenized</i>) versions of Card-on-File.
-</li>
-<li>
-  Support for universal digital receipts.
-</li>
-<li>
-  Support for private messaging and additional authentication information between the
- <b class='actor'>Issuer</b> and <b class='actor'>User</b>.
-</li>
-</ul>
-Not though that the features above would have implications on the PaymentRequest API. 
+  The FWP core is loosely derived from a PoC system known as
+  <a href='https://cyberphone.github.io/doc/saturn/'
+      title='Saturn'>Saturn<img src='images/xtl.svg' alt='link' /></a>.
+  By building on this core, Saturn features like the following could potentially be added:
+  <ul style='margin-bottom:0.3em'>
+    <li>
+      Support for <i>non-direct payments</i>,
+      including secure (<i>tokenized</i>) versions of Card-on-File.
+    </li>
+    <li>
+      Support for universal digital receipts.
+    </li>
+    <li>
+      Support for private messaging and additional authentication information between the
+      <b class='actor'>Issuer</b> and <b class='actor'>User</b>.
+    </li>
+  </ul>
+  Not that some of the features above could impact the PaymentRequest API.
 </div>
 <div class='para'>
-A radical change would be moving the FWP implementation down into the client platform layer.
-This would open FWP to other payment scenarios like point-of-sale (PoS) and person-to-person (P2P).
-It would also make it considerably easier for alternative browser vendors adopting the FWP system.
+  A radical change would be moving the FWP implementation down into the client platform layer.
+  This would open FWP to other payment scenarios like point-of-sale (PoS) and person-to-person (P2P).
+  It would also make it considerably easier for alternative browser vendors adopting the FWP system.
 </div>
 <div id='acknowledgements' class='header'>
   Acknowledgements
 </div>
 <div>
-The FWP core was heavily influenced by an earlier Microsoft research project
-called <a href='https://en.wikipedia.org/wiki/Windows_CardSpace'
-title='CardSpace'>Windows CardSpace<img src='images/xtl.svg' alt='link'></a>.
+  The FWP core was heavily influenced by an earlier Microsoft research project
+  called <a href='https://en.wikipedia.org/wiki/Windows_CardSpace'
+            title='CardSpace'>Windows CardSpace<img src='images/xtl.svg' alt='link'></a>.
 </div>
 <div id='version' class='header'>
   Version
 </div>
 <div>
-Document version: 0.1, 2020-03-09
+  Document version: 0.1, 2020-03-09
 </div>
 <div id='authors' class='header'>
   Authors
 </div>
 <div>
-The FWP specification is currently authored by Anders Rundgren (<code>anders.rundgren.net@gmail.com</code>).<br/>
+  The FWP specification is currently authored by Anders Rundgren (<code>anders.rundgren.net@gmail.com</code>).<br />
 </div>
 <div class='header'>
   Trademarks
 </div>
 <div id='trademarks'>
-  FIDO is a registered trademark of the FIDO alliance.<br/>
-  EMV is a registered trademark of EMVCo.<br/>&nbsp;<br/>
+  FIDO is a registered trademark of the FIDO alliance.<br />
+  EMV is a registered trademark of EMVCo.<br />&nbsp;<br />
   This specification represents an <i>independent effort</i>, not associated with the FIDO alliance or EMVCo.
 </div>
 </body></html>

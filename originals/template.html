@@ -198,20 +198,43 @@ async function doPaymentRequest() {
 }
 </pre>
 <div>
-When the <code>show()</code> method is invoked, the <span class='actor'>Browser</span>
-(FWP implementation) MUST perform the the following checks:
-<ul>
-<li>There is an accompanying <code>data</code> property holding a <i>JSON-serializable</i> JavaScript <code>Object</code> type.</li>
-<li>The <code>data</code> object contains a <code>payee</code> property holding a <i>non-empty</i> JavaScript <code>String</code> argument.</li>
-<li>The <code>data</code> object contains a <code>networks</code> property holding a <i>non-empty</i> JavaScript <code>Array</code> argument.</li>
-<li>That each element in the <code>networks</code> array holds a <i>JSON-serializable</i> JavaScript Object type.</li>
-<li>That each element in the <code>networks</code> array contains a <code>name</code>
- property holding a <i>non-empty</i> JavaScript <code>String</code> argument.</li>
-<li>That none of the elements in the <code>networks</code> array contain other elements, with the exception of
-an <i>optional</i> <code>networkData</code> property holding arbitrary JavaScript data.</li>
-<li>There is a <i>single</i> <code>PaymentItem</code> having a <code>label</code> property with the argument <code>null</code>.</li>
-<li>There is an <code>id</code> argument included in the <code>details</code> parameter to the <code>PaymentRequest</code> constructor.</li>
-</ul>
+  When the <code>show()</code> method is invoked, the <span class='actor'>Browser</span>
+  (FWP implementation) MUST perform the the following checks:
+  <ul>
+    <li>
+      There is an accompanying <code>data</code> property holding a
+      <i>JSON-serializable</i> JavaScript <code>Object</code> type.
+    </li>
+    <li>
+      The <code>data</code> object contains a <code>payee</code>
+      property holding a <i>non-empty</i> JavaScript <code>String</code> argument.
+    </li>
+    <li>
+      The <code>data</code> object contains a <code>networks</code>
+      property holding a <i>non-empty</i> JavaScript <code>Array</code> argument.
+    </li>
+    <li>
+      That each element in the <code>networks</code> array holds a
+      <i>JSON-serializable</i> JavaScript Object type.
+    </li>
+    <li>
+      That each element in the <code>networks</code> array contains a <code>name</code>
+      property holding a <i>non-empty</i> JavaScript <code>String</code> argument.
+    </li>
+    <li>
+      That none of the elements in the <code>networks</code> array contain other
+      elements, with the exception of an <i>optional</i> <code>networkData</code>
+      property holding arbitrary JavaScript data.
+    </li>
+    <li>
+      There is a <i>single</i> <code>PaymentItem</code> having a
+      <code>label</code> property with the argument <code>null</code>.
+    </li>
+    <li>
+      There is a <i>non-empty</i> <code>id</code> argument included in the
+      <code>details</code> parameter to the <code>PaymentRequest</code> constructor.
+    </li>
+  </ul>
 </div>
 <div class='para'>Any deviations MUST throw an exeption.</div>
 <div class='para'>Note that the <code>name</code> properties in the <code>networks</code>
@@ -364,8 +387,9 @@ creates an FWP assertion which requires the following steps to be performed:
   Signed Authorization Data (SAD).
 </div>
 <div class='para'>
-  In order to simplify backend processing, the public key associated with the selected payment
-  credential MUST be included in the JWS header.  In the sample the following key was used:
+  To simplify backend processing, the public key associated with the FIDO key of
+  the selected payment credential MUST be included in the JWS header.
+  In the sample the following key was used:
 </div>
 <pre class="box">
 {
@@ -383,11 +407,11 @@ creates an FWP assertion which requires the following steps to be performed:
   This specification mandates using JWE
   (<a href='https://tools.ietf.org/html/rfc7516'
       title='JWE'>RFC7516<img src='images/xtl.svg' alt='link'></a>),
-  in the compact serialization mode. The selection between an
-  RSA or ECDH encryption scheme is at the discretion of the <b class='actor'>Issuer</b>.
+  in the compact serialization mode. The selection between
+  RSA or ECDH encryption schemes is at the discretion of the <b class='actor'>Issuer</b>.
   SAD objects MUST be JSON-serialized to UTF-8 before being encrypted.
   The resulting JWE string would look something like this
-(with line breaks for display purposes only):
+  (with line breaks for display purposes only):
 </div>
 <pre class="box">
 eyJhbGciOiJSU0EtT0FFUCIsImVuYyI6IkEyNTZHQ00ifQ.OKOawDo13gRp2oja
@@ -411,6 +435,27 @@ dvTiFvSkQ
   Note that due to the end-2-end encryption scheme, the domain 
 constraints usually associated with FIDO, do not apply.
 </div> 
+
+<div id="seq-4.6" class='step para'>4.6 Assemble FWP Assertion Data</div>
+<div class='para'>
+  Create a JSON object representing an FWP assertion.
+  For the sample code this should result in the following object:
+</div>
+<pre class="box">
+{
+  "encryptedAuthorization": "<i>ESAD</i>",
+  "paymentMethod": "https://europeanpaymentsinitiative.eu/fwp",
+  "issuerId": "https://mybank.fr/payment"
+}
+</pre>
+<div>Note that <i>ESAD</i> is just a placeholder, the actual ESAD string
+can as seen in the previous step be quite long.</div>
+<div>
+  This <i>strictly defined</i> object is subsequently referred to as
+  Authorization Data (AD).
+</div>
+
+
 <div class="step"><div id='seq-5' class='numbox'>5</div>Return FWP Assertion</div>
 <div>
   At this point the <b class='actor'>Browser</b>
