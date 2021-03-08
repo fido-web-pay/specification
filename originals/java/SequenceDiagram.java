@@ -5,9 +5,9 @@ import java.io.FileInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 
-public class StateDiagram {
+public class SequenceDiagram   {
 
-    static final String FILE_NAME = "statediagram.svg";
+    static final String FILE_NAME = "sequencediagram.svg";
 
     static final double ACTOR_TOP_Y = 32;
     static final double ACTOR_HEIGHT = 40;
@@ -223,7 +223,7 @@ public class StateDiagram {
 
      }
 
-    StateDiagram(String originalBase) throws Exception {
+    SequenceDiagram  (String originalBase) throws Exception {
         this.originalBase = originalBase;
 
         actor("user.svg",     "User",     0);
@@ -351,7 +351,7 @@ public class StateDiagram {
 
     public static void main(String[] argc) {
         try {
-            new StateDiagram(argc[0] + File.separator);
+            new SequenceDiagram  (argc[0] + File.separator);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

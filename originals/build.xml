@@ -6,7 +6,7 @@
   <property name="originals.dir" location="."/>
 
     <target name="help">
-    <echo message="Targets: statediagram publish draft"/>
+    <echo message="Targets: sequencediagram publish draft"/>
   </target>
 	
   <target name="_compile">
@@ -23,10 +23,10 @@
 
   </target>
 
-  <target name="statediagram" depends="_compile">
+  <target name="sequencediagram" depends="_compile">
     <property name="file" value=""/>
     <java fork="yes"
-          classname="StateDiagram"
+          classname="SequenceDiagram"
     	    dir="${temp.dir}"
           failonerror="true">
     	<classpath>
@@ -39,7 +39,7 @@
 
     <target name="draft" depends="_compile">
         <java fork="yes"
-              classname="Production"
+              classname="CreateDocument"
                 dir="${temp.dir}"
               failonerror="true">
             <classpath>

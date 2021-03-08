@@ -2,7 +2,7 @@
 <meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'>
 <link rel='icon' href='images/favicon.png' sizes='192x192'>
 <title>FIDO Web Pay</title><style type='text/css'>
-.header {font-size:1.5em;margin:1em 0 0.8em 0}
+.header {font-size:1.6em;margin:1em 0 0.8em 0}
 .para {margin-top: 0.8em}
 .actor {color:darkgreen;font-weight:bolder}
 .box {box-shadow: 0.2em 0.2em 0.2em #d0d0d0;border-width:1px;border-style:solid;border-color:black}
@@ -11,10 +11,9 @@
 .tftable td {white-space:nowrap;background-color:#ffffe0;padding:0.4em 0.5em;border-width:1px;border-style:solid;border-color:#a9a9a9}
 .tftable th {white-space:nowrap;padding:0.4em 0.5em;background:linear-gradient(to bottom, #eaeaea 14%,#fcfcfc 52%,#e5e5e5 89%);text-align:center;border-width:1px;border-style:solid;border-color:#a9a9a9}
 .json {word-break:break-all;background-color:#f8f8f8;padding:1em;border-width:1px;border-style:solid;border-color:#a9a9a9;box-shadow:0.3em 0.3em 0.3em #d0d0d0}
-body {margin:1em;font-size:10pt;font-family:Verdana,'Bitstream Vera Sans','DejaVu Sans',Arial,'Liberation Sans';background-color:white} 
-code {font-size:10pt}
+body {margin:1em;font-size:10pt;font-family:Verdana,'Bitstream Vera Sans','DejaVu Sans',Arial,'Liberation Sans';background-color:white}
+  code {font-size:10pt;color:maroon;font-weight:bold}
 pre {margin: 0.8em 0;padding: 0.6em 1em;overflow-x: auto;background-color: #f8f8f8}
-.reserved {color:maroon;font-weight:bold}
 ul {margin:0}
 li {margin-top:0.3em}
 a {color:blue;text-decoration:none}
@@ -107,9 +106,14 @@ title='GDPR Site'>GDPR<img src='images/xtl.svg' alt='link'></a>.
     A payment credential is supposed to at least contain the following elements:
     <ul>
       <li>An identifier to a <span class='actor'>User</span> specific (<i>unique</i>) FIDO key for <i>signing</i> payment authorization data.</li>
-      <li>An <span class='actor'>Issuer</span> specific (<i>shared</i>) public key for <i>encrypting</i> payment authorization data.</li>
-      <li>A JOSE-compliant <code class='reserved'>contentEncryptionAlgorithm</code> for <a href='#seq-4.5'>encryption</a> usage.</li>
-      <li>A JOSE-compliant <code class='reserved'>keyEncryptionAlgorithm</code> for <a href='#seq-4.5'>encryption</a> usage.</li>
+      <li>A JOSE-compliant <code class='reserved'>signatureAlgorithm</code> for FWP <a href='#seq-4.4'>signatures</a>.</li>
+      <li>A <code class='reserved'>encryptionKey</code> holding an
+<span class='actor'>Issuer</span> specific (<i>shared</i>) public key in JWK
+ (<a href='https://tools.ietf.org/html/rfc7517'
+  title='JWK/RFC7517'>RFC7517<img src='images/xtl.svg' alt='link'></a>)
+ format for <i>encrypting</i> payment authorization data.</li>
+      <li>A JOSE-compliant <code class='reserved'>contentEncryptionAlgorithm</code> for FWP <a href='#seq-4.5'>encryption</a>.</li>
+      <li>A JOSE-compliant <code class='reserved'>keyEncryptionAlgorithm</code> for FWP <a href='#seq-4.5'>encryption</a>.</li>
       <li>An <code class='reserved'>accountId</code> associated with the FIDO signature key.</li>
       <li>A <code class='reserved'>paymentMethod</code> URL identifying the FWP method for a particular payment network.</li>
       <li>
@@ -150,7 +154,7 @@ The foundation for the description is the following sequence diagram where each 
 is linked to a <i>clickable</i> number in a box:
 </div>
   <div style='overflow-x:auto;padding:8pt 0'>
-    @statediagram@
+    @sequencediagram@
   </div>
 <div>Note that this specification does not elaborate on the return data from
 the <b class='actor'>Acquirer</b> and <b class='actor'>Issuer</b>,
@@ -235,8 +239,8 @@ an option to return to the <b class='actor'>Merchant</b> &quot;Checkout&quot; pa
     the <b class='actor'>Browser</b> MUST provide a way to select a specific credential.
     In the sample UI shown above, the <b class='actor'>User</b>
     can swipe credentials to the left and right, while arrow symbols are used to show if there
-    are more credentials available.  That is, if there is no arrow, the credential selector is
-at an end point.
+    are more credentials available.  That is, if there is no left arrow, the credential selector is
+    at the left end point.
   </div>
 <div id='seq-3' class='numbox'>3</div>User Authorization
 <div>At this point the <b class='actor'>User</b>
@@ -362,9 +366,9 @@ credential MUST be included in the JWS header.  In the sample the following key 
   "y": "mCbcvUzm44j3Lt2b5BPyQloQ91tf2D2V-gzeUxWaUdg"
 }
 </pre>
-<div>4.5 Create Encrypted Signed Authorization Data (ESAD)
+<div id='seq-4.5'>4.5 Create Encrypted Signed Authorization Data (ESAD)
 </div>
-<div id='seq-4.5' class='para'>
+<div class='para'>
 For privacy and security reasons, the Signed Authorization Data (SAD) object 
 MUST be encrypted by a public key provided by the <b class='actor'>Issuer</b>
 through the selected payment credential.

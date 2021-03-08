@@ -5,16 +5,16 @@ import java.io.FileInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 
-public class Production {
+public class CreateDocument  {
 
     String originalBase;
 
-    Production(String originalBase) throws Exception {
+    CreateDocument (String originalBase) throws Exception {
         this.originalBase = originalBase;
         String template = readOriginal("template.html");
-        String statediagram = readOriginal(StateDiagram.FILE_NAME);
+        String statediagram = readOriginal(SequenceDiagram.FILE_NAME);
         statediagram = "<svg style='display:block;width:500pt' class='box' " + statediagram.substring(statediagram.indexOf("<svg ") + 5);
-        template = template.replace("@statediagram@", statediagram);
+        template = template.replace("@sequencediagram@", statediagram);
         new FileOutputStream(originalBase + ".." + File.separator + "draft.html").write(template.getBytes("utf-8"));
      }
 
@@ -35,7 +35,7 @@ public class Production {
 
     public static void main(String[] argc) {
         try {
-            new Production(argc[0] + File.separator);
+            new CreateDocument (argc[0] + File.separator);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
