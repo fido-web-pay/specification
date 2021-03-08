@@ -1,0 +1,22 @@
+{
+  "requestHash": {
+    "algorithm": "S256",
+    "value": "-5AfYJfNayqcxJs2nqkUm7EKKLS1oPumgWNWc1BCPuQ"
+  },
+  "payeeHost": "spaceshop.com",
+  "accountId": "FR7630002111110020050014382",
+  "paymentMethod": "https://europeanpaymentsinitiative.eu/fwp",
+  "networkData": "additional stuff...",
+  "userAuthorizationMethod": "FINGERPRINT",
+  "platformData": {
+    "operatingSystem": {
+      "name": "Android",
+      "version": "10"
+    },
+    "userAgent": {
+      "name": "Chrome",
+      "version": "95"
+    }
+  },
+  "timeStamp": "2021-03-09T10:32:35+01:00"
+}

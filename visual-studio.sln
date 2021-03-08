@@ -14,12 +14,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		index.html = index.html
 		originals\issuer.svg = originals\issuer.svg
 		originals\merchant.svg = originals\merchant.svg
+		originals\prd.json = originals\prd.json
 		originals\java\Production.java = originals\java\Production.java
 		README.md = README.md
+		originals\signed-ad.json = originals\signed-ad.json
 		originals\java\StateDiagram.java = originals\java\StateDiagram.java
 		originals\statediagram.svg = originals\statediagram.svg
 		originals\template.html = originals\template.html
 		images\ui.svg = images\ui.svg
+		originals\unsigned-ad.json = originals\unsigned-ad.json
 		originals\user.svg = originals\user.svg
 		images\xtl.svg = images\xtl.svg
 	EndProjectSection
