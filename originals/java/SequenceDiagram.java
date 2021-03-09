@@ -275,9 +275,9 @@ public class SequenceDiagram   {
         processing(1);
         arrow(1, 2, "FWP Assertion");
         processing(2);
-        arrow(2, 3, "AREQ");
+        arrow(2, 3, "AcquirerRequest");
         processing(3);
-        arrow(3, 4, "IREQ");
+        arrow(3, 4, "IssuerRequest");
         processing(4);
   //      dashedArrow(4, 3, "Out of Scope", "#outofscope");
  
