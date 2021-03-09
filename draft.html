@@ -3,19 +3,19 @@
 <link rel='icon' href='images/favicon.png' sizes='192x192'>
 <title>FIDO Web Pay</title><style type='text/css'>
 .header {font-size:1.6em;margin:1em 0 0.8em 0}
-.step {font-size: 1.2em;color:indigo}
+.step {font-size:1.2em;color:indigo;margin-top:1.5em;margin-bottom:0.6em}
 .para {margin-top: 0.8em}
 .actor {color:darkgreen;font-weight:bolder}
-.comment {padding:0.5em 1em;margin-top:1em;display:inline-block;background-color:floralwhite}
+.comment {padding:0.5em 1em;margin-top:1.5em;display:inline-block;background-color:floralwhite}
 .box {box-shadow: 0.2em 0.2em 0.2em #d0d0d0;border-width:1px;border-style:solid;border-color:black}
-.numbox {border-width:1pt;border-style:solid;border-color:black;border-radius:0.3em;display:inline-block;margin: 1.5em 0.6em 0.6em 0;padding: 0 3pt 0.1em 3pt}
-.tftable {border-collapse:collapse;box-shadow:0.3em 0.3em 0.3em #d0d0d0;margin-bottom:0.3em} 
-.tftable td {white-space:nowrap;background-color:#ffffe0;padding:0.4em 0.5em;border-width:1px;border-style:solid;border-color:#a9a9a9}
-.tftable th {white-space:nowrap;padding:0.4em 0.5em;background:linear-gradient(to bottom, #eaeaea 14%,#fcfcfc 52%,#e5e5e5 89%);text-align:center;border-width:1px;border-style:solid;border-color:#a9a9a9}
+.numbox {border-width:1pt;border-style:solid;border-color:black;border-radius:0.3em;display:inline-block;margin-right:0.6em;padding: 0 3pt 0.1em 3pt}
+.tftable {border-collapse:collapse;box-shadow:0.2em 0.2em 0.2em #d0d0d0;margin:0.6em 0 1em 0}
+.tftable td {background-color: floralwhite;padding: 0.4em 0.5em;border-width: 1px;border-style: solid; border-color: black}
+.tftable th {font-weight: normal;padding: 0.4em 0.5em;background-color: #f8f8f8;text-align: center;border-width: 1px;border-style: solid; border-color: black}
 .json {word-break:break-all;background-color:#f8f8f8;padding:1em;border-width:1px;border-style:solid;border-color:#a9a9a9;box-shadow:0.3em 0.3em 0.3em #d0d0d0}
 body {margin:1em;font-size:10pt;font-family:Verdana,'Bitstream Vera Sans','DejaVu Sans',Arial,'Liberation Sans';background-color:white}
 code {font-size:10pt;color:maroon;font-weight:bold}
-pre {margin: 0.8em 0;padding: 0.6em 1em;overflow-x: auto;background-color: #f8f8f8}
+pre {margin: 0.8em 0 1em 0;padding:0.6em 1em;overflow-x: auto;background-color:#f8f8f8}
 ul {margin: 0;padding-left:2em}
 li {margin-top:0.3em}
 a {color:blue;text-decoration:none}
@@ -127,7 +127,7 @@ title='GDPR Site'>GDPR<img src='images/xtl.svg' alt='link'></a>.
   </div>
   <div class='para box comment'>
     Note that FWP effectively forms a browser-resident &quot;Wallet&quot;,
-    holding any number of payment credentials, each representing a specific <span class='actor'>Issuer</span>
+    holding an arbitrary number of payment credentials, each representing a specific <span class='actor'>Issuer</span>
     and <code class='reserved'>paymentMethod</code>.
   </div>
   <div id='enrollment' class='header'>
@@ -2252,7 +2252,7 @@ async function doPaymentRequest() {
       property holding arbitrary JavaScript data.
     </li>
     <li>
-      There is a <i>single</i> <code>PaymentItem</code> having a
+      There is only <i>one</i> <code>PaymentItem</code> and it has a
       <code>label</code> property with the argument <code>null</code>.
     </li>
     <li>
@@ -2305,7 +2305,7 @@ A successful user authorization causes the next step to be performed.
 At this point the <b class='actor'>Browser</b>
 creates an FWP assertion which requires the following steps to be performed:
 </div>
-<div id="seq-4.1" class='step para'>4.1 Extract PaymentRequest Core Data (PRCD)</div>
+<div id="seq-4.1" class='step'>4.1 Extract PaymentRequest Core Data (PRCD)</div>
 <div class='para'>
   Create a JSON object representing the core payment request data supplied
   by the <b class='actor'>Merchant</b>.  For the sample code this should
@@ -2321,11 +2321,17 @@ creates an FWP assertion which requires the following steps to be performed:
   }
 }
 </pre>
+<div>Description:</div>
+<table class='tftable'>
+<tr><th>Element</th><th>Comment</th></tr>
+<tr><td><code>id</code></td><td><b class='actor'>Merchant</b> transaction ID. Copy of of details.id</td></tr>
+<tr><td><code>payee</code></td><td><b class='actor'>Merchant</b> common name</td></tr>
+<tr><td><code>amount</code></td><td>Amount of money requested by the <b class='actor'>Merchant</b></td></tr>
+</table>
 <div>
-  This <i>strictly defined</i> object is subsequently referred to as
-  PaymentRequest Core Data (PRCD).
+  This object is subsequently referred to as PaymentRequest Core Data (PRCD).
 </div>
-<div id="seq-4.2" class='step para'>4.2 Create a Hash of PaymentRequest Core Data (PRCD)</div>
+<div id="seq-4.2" class='step'>4.2 Create a Hash of PaymentRequest Core Data (PRCD)</div>
 <div class='para'>
   Calculate a Base64Url-encoded SHA256 hash of PRCD, canonicalized according to
   <a href='https://tools.ietf.org/html/rfc8785'
@@ -2338,7 +2344,7 @@ creates an FWP assertion which requires the following steps to be performed:
 <div class='para'>
   Applied to the sample data, this operation should return "-5AfYJfNayqcxJs2nqkUm7EKKLS1oPumgWNWc1BCPuQ".
 </div>
-<div id="seq-4.3" class='step para'>
+<div id="seq-4.3" class='step'>
   4.3 Create Authorization Data (AD)
 </div>
 <div class='para'>
@@ -2369,12 +2375,30 @@ creates an FWP assertion which requires the following steps to be performed:
   "timeStamp": "2021-03-09T10:32:35+01:00"
 }
 </pre>
+<div>Description:</div>
+<table class='tftable'>
+<tr><th>Element</th><th>Comment</th></tr>
+<tr><td><code>requestHash</code></td><td>PRCDHASH and associated hash algorithm</td></tr>
+<tr><td><code>payeeHost</code></td><td>Host name as interpreted by the <b class='actor'>Browser</b>.
+Incuded for optional validation by the <b class='actor'>Issuer</b>, aided by the <b class='actor'>Aquirer</b></td></tr>
+<tr><td><code>accountId</code></td><td><b class='actor'>User</b> account number associated with the selected crdential</td></tr>
+<tr><td><code>paymentMethod</code></td><td>Payment method associated with the selected credential.
+Included for completeness</td></tr>
+<tr><td><code>networkData</code></td><td><i>Optional</i>.  This element MUST only be featured if
+specified in the <code>PaymentRequest</code> constructor.
+Exclusively used by the <b class='actor'>Issuer</b></td></tr>
+<tr><td><code>userAuthorizationMethod</code></td><td>Currently FINGERPRINT, FACERECOGNITION, and PIN are supported.
+Included for security and logging purposes</td></tr>
+<tr><td><code>platformData</code></td><td>Up-to-date information about the core <i>software</i> components.
+<i>Device data</i> is assumed to be established during credential enrollment.
+Included for security and logging purposes</td></tr>
+<tr><td><code>timeStamp</code></td><td>ISO time stamp generated by the <b class='actor'>Browser</b></td></tr>
+</table>
 <div>
-  This <i>strictly defined</i> object is subsequently referred to as
-  Authorization Data (AD).
+  This object is subsequently referred to as Authorization Data (AD).
 </div>
 
-<div id="seq-4.4" class='step para'>4.4 Create Signed Authorization Data (SAD)</div>
+<div id="seq-4.4" class='step'>4.4 Create Signed Authorization Data (SAD)</div>
 <div class='para'>
   Using the FIDO signature key associated with the selected
   payment credential, sign AD using
@@ -2408,9 +2432,9 @@ creates an FWP assertion which requires the following steps to be performed:
 }
 </pre>
 <div>
-  This <i>strictly defined</i> object is subsequently referred to as
-  Signed Authorization Data (SAD).
+  This operation adds a single element (<code>signature</code>) to AD.
 </div>
+<div class='para'>  This object is subsequently referred to as Signed Authorization Data (SAD).</div>
 <div class='para'>
   To simplify backend processing, the public key associated with the FIDO key of
   the selected payment credential MUST be included in the JWS header.
@@ -2424,7 +2448,7 @@ creates an FWP assertion which requires the following steps to be performed:
   "y": "mCbcvUzm44j3Lt2b5BPyQloQ91tf2D2V-gzeUxWaUdg"
 }
 </pre>
-<div id='seq-4.5' class="step para">4.5 Create Encrypted Signed Authorization Data (ESAD)</div>
+<div id='seq-4.5' class="step">4.5 Create Encrypted Signed Authorization Data (ESAD)</div>
 <div class="para">
   For privacy and security reasons, Signed Authorization Data (SAD) objects
   MUST be encrypted by a public key provided by the <b class='actor'>Issuer</b>
@@ -2450,8 +2474,7 @@ f7iGdXKHzg.48V1_ALb6US04U3b.5eym8TW_c8SuK0ltJ3rpYIzOeDQz7TALvtu
 dvTiFvSkQ
 </pre>
 <div>
-  This <i>strictly defined</i> object is subsequently referred to as
-  Encrypted Signed Authorization Data (ESAD).
+  This object is subsequently referred to as Encrypted Signed Authorization Data (ESAD).
 </div>
 <div class='para'>
   Note that the JWE header MUST include the <code>encryptionKey</code> as well.
@@ -2461,7 +2484,7 @@ dvTiFvSkQ
 constraints usually associated with FIDO, do not apply.
 </div> 
 
-<div id="seq-4.6" class='step para'>4.6 Assemble FWP Assertion Data</div>
+<div id="seq-4.6" class='step'>4.6 Assemble FWP Assertion</div>
 <div class='para'>
   Create a JSON object representing an FWP assertion.
   For the sample code this should result in the following object:
@@ -2473,13 +2496,20 @@ constraints usually associated with FIDO, do not apply.
   "issuerId": "https://mybank.fr/payment"
 }
 </pre>
-<div>Note that <i>ESAD</i> is just a placeholder, the actual ESAD string
-can as seen in the previous step be quite long.</div>
+<div>Description:</div>
+<table class='tftable'>
+<tr><th>Element</th><th>Comment</th></tr>
+<tr><td><code>encryptedAuthorization</code></td><td>
+  Holds the Encrypted Signed Authorization Data.
+  Here shown as a placeholder only
+  (the actual ESAD string
+  can as seen in the previous step be quite long)</td></tr>
+<tr><td><code>paymentMethod</code></td><td>Payment method associated with the selected credential</td></tr>
+<tr><td><code>issuerId</code></td><td>Issuer Id associated with the selected credential</td></tr>
+</table>
 <div>
-  This <i>strictly defined</i> object is subsequently referred to as
-  Authorization Data (AD).
+  The resulting object represents the FWP Assertion.
 </div>
-
 
 <div class="step"><div id='seq-5' class='numbox'>5</div>Return FWP Assertion</div>
 <div>
