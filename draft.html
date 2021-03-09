@@ -8,14 +8,14 @@
 .actor {color:darkgreen;font-weight:bolder}
 .comment {padding:0.5em 1em;margin-top:1.5em;display:inline-block;background-color:floralwhite}
 .box {box-shadow: 0.2em 0.2em 0.2em #d0d0d0;border-width:1px;border-style:solid;border-color:black}
-.numbox {border-width:1pt;border-style:solid;border-color:black;border-radius:0.3em;display:inline-block;margin-right:0.6em;padding: 0 3pt 0.1em 3pt}
+.numbox {border-width:1pt;border-style:solid;border-color:black;border-radius:0.3em;display:inline-block;margin-right:0.6em;padding:0 3pt}
 .tftable {border-collapse:collapse;box-shadow:0.2em 0.2em 0.2em #d0d0d0;margin:0.6em 0 1em 0}
 .tftable td {background-color: floralwhite;padding: 0.4em 0.5em;border-width: 1px;border-style: solid; border-color: black}
 .tftable th {font-weight: normal;padding: 0.4em 0.5em;background-color: #f8f8f8;text-align: center;border-width: 1px;border-style: solid; border-color: black}
 .json {word-break:break-all;background-color:#f8f8f8;padding:1em;border-width:1px;border-style:solid;border-color:#a9a9a9;box-shadow:0.3em 0.3em 0.3em #d0d0d0}
-body {margin:1em;font-size:10pt;font-family:Verdana,'Bitstream Vera Sans','DejaVu Sans',Arial,'Liberation Sans';background-color:white}
-code {font-size:10pt;color:maroon;font-weight:bold}
-pre {margin: 0.8em 0 1em 0;padding:0.6em 1em;overflow-x: auto;background-color:#f8f8f8}
+body {margin:1em;font-size:10pt;font-family:Roboto,Verdana,'Bitstream Vera Sans','DejaVu Sans',Arial,'Liberation Sans';background-color:white}
+code {font-family:'Noto Mono',monospace;color:maroon;font-weight:bolder}
+pre {font-family:'Noto Mono',monospace;margin: 0.8em 0 1em 0;padding:0.6em 1em;overflow-x:auto;background-color: #f8f8f8}
 ul {margin: 0;padding-left:2em}
 li {margin-top:0.3em}
 a {color:blue;text-decoration:none}
@@ -144,11 +144,16 @@ to securely distinguish between &quot;ordinary&quot; FIDO keys,
  a <i>database</i> in the <span class='actor'>Browser</span> holding FWP credentials.
   </div>
   <div class='para'>
+    It would be great if the enrollment system could handle
+  <i>multiple credentials in a single operation</i>, because an <span class='actor'>Issuer</span> may want to
+    support an International card network as well as a national or regional payment network &#x1f609;
+  </div>
+  <div class='para'>
     It MAY be technically feasible using a FIDO key associated with an FWP credential
 for Web Authentication as well, but this would be a deployment decision
 by the <span class='actor'>Issuer</span>.
   </div>
-  <div id='operation' class='header'>
+ <div id='operation' class='header'>
     Detailed Operation
   </div>
   <div>This section describes the different steps needed to authorize a payment operation using FWP.
@@ -2098,23 +2103,20 @@ is linked to a <i>clickable</i> number in a box:
             <feGaussianBlur stdDeviation='2'/>
         </filter>
     </defs>
-    <g class='layer'>
-        <title>Layer 1</title>
-         <rect fill='#ffffff' height='31.5' id='svg_2' width='76' x='17' y='29'/>
-        <path d='m19.5,17.5l21.67,0l0,11l-10.67,0l0,31.5l-11,0' fill='#a0a0a0' filter='url(#bankShaddow)'/>
-        <rect fill='url(#bankPillar)' height='31.5' id='svg_4' width='11' x='17' y='27'/>
-        <path d='m41,17.5l21.67,0l0,11l-10.67,0l0,31.5l-11,0' fill='#a0a0a0' filter='url(#bankShaddow)' id='svg_5'/>
-        <rect fill='url(#bankPillar)' height='31.5' id='svg_6' width='11' x='38.66' y='27'/>
-        <path d='m62.5,17.5l21.67,0l0,11l-10.67,0l0,31.5l-11,0' fill='#a0a0a0' filter='url(#bankShaddow)' id='svg_7'/>
-        <rect fill='url(#bankPillar)' height='31.5' id='svg_8' width='11' x='60.33' y='27'/>
-        <path d='m 84,17.5 h 16.77181 L 102.05176,28.779896 95,28.5 V 60 h -11' fill='#a0a0a0' filter='url(#bankShaddow)'/>
-        <rect fill='url(#bankPillar)' height='31.5' id='svg_9' width='11' x='82' y='27'/>
-        <path d='m10,16l45,-15l45,15' fill='#e0e0e0' id='svg_10' stroke='#404040' stroke-linecap='round'/>
-        <rect fill='#f2f2f2' height='10' id='svg_11' stroke='#404040' width='90' x='10' y='16.5'/>
-        <rect fill='#f2f2f2' height='6' id='svg_12' stroke='#404040' width='100' x='5' y='65'/>
-        <rect fill='#f2f2f2' height='6' id='svg_13' stroke='#404040' width='90' x='10' y='59'/>
-    </g>
-</svg>  <text x='543' y='24' fill='black' font-family='sans-serif' font-size='14.399999999999999' text-anchor='middle'>Issuer</text>
+    <path d='m19.5,17.5l21.67,0l0,11l-10.67,0l0,31.5l-11,0' fill='#a0a0a0' filter='url(#bankShaddow)'/>
+    <rect fill='url(#bankPillar)' height='31.5' width='11' x='17' y='27'/>
+    <path d='m41,17.5l21.67,0l0,11l-10.67,0l0,31.5l-11,0' fill='#a0a0a0' filter='url(#bankShaddow)'/>
+    <rect fill='url(#bankPillar)' height='31.5' width='11' x='38.66' y='27'/>
+    <path d='m62.5,17.5l21.67,0l0,11l-10.67,0l0,31.5l-11,0' fill='#a0a0a0' filter='url(#bankShaddow)'/>
+    <rect fill='url(#bankPillar)' height='31.5' width='11' x='60.33' y='27'/>
+    <path d='m 84,17.5 h 16.77181 L 102.05176,28.779896 95,28.5 V 60 h -11' fill='#a0a0a0' filter='url(#bankShaddow)'/>
+    <rect fill='url(#bankPillar)' height='31.5' width='11' x='82' y='27'/>
+    <path d='m10,16l45,-15l45,15' fill='#e0e0e0' stroke='#404040' stroke-linecap='round'/>
+    <rect fill='#f2f2f2' height='10' stroke='#404040' width='90' x='10' y='16.5'/>
+    <rect fill='#f2f2f2' height='6' stroke='#404040' width='100' x='5' y='65'/>
+    <rect fill='#f2f2f2' height='6' stroke='#404040' width='90' x='10' y='59'/>
+</svg>
+  <text x='543' y='24' fill='black' font-family='sans-serif' font-size='14.399999999999999' text-anchor='middle'>Issuer</text>
   <line x1='302.4' y1='96' x2='191.1' y2='96' stroke-width='0.8' stroke='black' marker-end='url(#arrowHead)'/>
   <text x='243' y='90.4' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>PaymentRequest</text>
   <a href='#seq-1'>
@@ -2156,7 +2158,7 @@ is linked to a <i>clickable</i> number in a box:
   <text x='259.75' y='288' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>6</text>
   </a>
   <line x1='303.6' y1='316' x2='414.9' y2='316' stroke-width='0.8' stroke='black' marker-end='url(#arrowHead)'/>
-  <text x='363' y='310.4' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>AREQ</text>
+  <text x='363' y='310.4' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>AcquirerRequest</text>
   <a href='#seq-7'>
   <rect x='295.75' y='308.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
   <text x='303' y='320' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>7</text>
@@ -2169,7 +2171,7 @@ is linked to a <i>clickable</i> number in a box:
   <text x='379.75' y='352' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>8</text>
   </a>
   <line x1='423.6' y1='380' x2='534.9' y2='380' stroke-width='0.8' stroke='black' marker-end='url(#arrowHead)'/>
-  <text x='483' y='374.4' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>IREQ</text>
+  <text x='483' y='374.4' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>IssuerRequest</text>
   <a href='#seq-9'>
   <rect x='415.75' y='372.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
   <text x='423' y='384' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>9</text>
@@ -2508,132 +2510,143 @@ constraints usually associated with FIDO, do not apply.
 <tr><td><code>issuerId</code></td><td>Issuer Id associated with the selected credential</td></tr>
 </table>
 <div>
-  The resulting object represents the FWP Assertion.
+  The resulting object represents an FWP assertion that is made available
+  to the <code>PaymentRequest</code> invocation code via the
+<code>PaymentResponse.details</code> element.
 </div>
 
-<div class="step"><div id='seq-5' class='numbox'>5</div>Return FWP Assertion</div>
+<div class="step"><div id='seq-5' class='numbox'>5</div>Send FWP Assertion</div>
 <div>
-  At this point the <b class='actor'>Browser</b>
-  returns the completed FWP assertion to the
-  <b class='actor'>Merchant</b> through the ?
+  At this point the checkout Web code would normally
+  send the completed FWP assertion to the
+  <b class='actor'>Merchant</b> server through a FORM&nbsp;POST
+or <code>fetch()</code> operation.
 </div>
-<div id='seq-6' class='numbox'>6</div>
-<div>At this point the <b class='actor'>Merchant</b></div>
-<div id='seq-7' class='numbox'>7</div>
-<div>At this point the <b class='actor'>Merchant</b></div>
-<div id='seq-8' class='numbox'>8</div>
-<div>At this point the <b class='actor'>Merchant</b></div>
-<div id='seq-9' class='numbox'>9</div>
-<div>At this point the <b class='actor'>Merchant</b></div>
-<div id='seq-10' class='numbox'>10</div>Issuer IREQ Processing
-<div>
-  At this point the <b class='actor'>Issuer</b>
-  The Issuer MUST now perform a number of steps to verify the correctness of the received AREQ. With respect to the User the following steps are the most significant:
+<div class="step"><div id='seq-6' class='numbox'>6</div>Create AcquirerRequest Message</div>
 
-  10.1 Decrypt the encryptedAuthorization object in AREQ using the Issuer specific (but shared) decryption key. Set result as AD.
+<div>After receiving an FWP assertion, a <b class='actor'>Merchant</b> would normally need
+to create a specific message for its <b class='actor'>Acquirer</b> service.</div>
+<div class="comment box">Since FWP provides &quot;account neutrality&quot;, 
+a <b class='actor'>Merchant</b> may use different <b class='actor'>Acquirer</b>
+service providers, depending on <code>paymentMethod</code>.</div>
+<div class="step">
+  <div id='seq-7' class='numbox'>7</div>Send AcquirerRequest Message
+</div>
+  <div>At this point the <b class='actor'>Merchant</b></div>
+  <div id='seq-8' class='numbox'>8</div>
+  <div>At this point the <b class='actor'>Merchant</b></div>
+  <div id='seq-9' class='numbox'>9</div>
+  <div>At this point the <b class='actor'>Merchant</b></div>
+  <div id='seq-10' class='numbox'>10</div>Issuer IREQ Processing
+  <div>
+    At this point the <b class='actor'>Issuer</b>
+    The Issuer MUST now perform a number of steps to verify the correctness of the received AREQ. With respect to the User the following steps are the most significant:
 
-  10.2 Retrieve the signature key declared in the JWS header of the AD signature element. Abort if unknown.
+    10.1 Decrypt the encryptedAuthorization object in AREQ using the Issuer specific (but shared) decryption key. Set result as AD.
 
-  10.3 Verify that the retrieved signature key is associated with the AD accountId element. Abort on failure.
+    10.2 Retrieve the signature key declared in the JWS header of the AD signature element. Abort if unknown.
 
-  10.4 Validate the AD signature using the retrieved signature key. Abort on failure.
+    10.3 Verify that the retrieved signature key is associated with the AD accountId element. Abort on failure.
 
-  10.5 Perform the same calculation as specified in 4.1 on the received paymentRequest object and compare the result with the AD requestHash. Abort on failure.
+    10.4 Validate the AD signature using the retrieved signature key. Abort on failure.
 
-  10.6 Check that the AD timeStamp element is within limits. Tentative: CurrentTime - 600s &lt; timeStamp &lt; CurrentTime + 60s. Abort on failure.
+    10.5 Perform the same calculation as specified in 4.1 on the received paymentRequest object and compare the result with the AD requestHash. Abort on failure.
 
-  10.7 To cope with possible replays, check that the received AD has not already been utilized. Ideally, the Issuer should support idempotent operation to facilitate benign transaction retries.
+    10.6 Check that the AD timeStamp element is within limits. Tentative: CurrentTime - 600s &lt; timeStamp &lt; CurrentTime + 60s. Abort on failure.
 
-  Available funds also needs to be validated but that is out of scope for this specification.
-</div>
+    10.7 To cope with possible replays, check that the received AD has not already been utilized. Ideally, the Issuer should support idempotent operation to facilitate benign transaction retries.
 
-<div id='integration' class='header'>
-  Integration
-</div>
-<div>
-  It is obvious that the integration of systems like FWP in payment networks
-  is crucial for acceptance by the market.
-</div>
-<div class="para">
-  For card based payments FWP implementations can build on the existing
-  EMV foundation since essentially only the formats differ.
-  Although the lack of a PAN (card number) in FWP may appear as a major obstacle,
-  the <code class='reserved'>issuerId</code> would in this case hold a &quot;neutered&quot; PAN where
-  the BIN (Bank Identification Number) is set, while the rest are set to zeroes + Luhn check digit.
-  E.g. VISA: 4972039000000004.  However, using <b class='actor'>Issuer</b> URLs
-  is also a viable alternative for card payments because the payment processors
-  associated with &quot;regular&quot; EMV and FWP payments do probably not
-  use the same end point.
-</div>
-<div class="para">
-  For account-to-account payments there are currently no generally agreed upon standards
-  for consumer payments, making it hard to come up with FWP implementation guidlines.
-  Remapping existing card based systems and infrastructures seems though like a possible path.
-</div>
-<div class="para">
-  Open Banking may also become a factor because there is work under way making non-OAuth2
-  requests a part of Open Banking APIs.  There are good reasons for that since current Open Banking
-  payment APIs presume that the <b class='actor'>User</b> in some OOB way informs the
-  <b class='actor'>Merchant</b> who their <b class='actor'>Issuer</b> is, which becomes
-  quite impractical when the number of issuers grow.  In an Open Banking scenario powered by FWP,
-  a Payment Initiation Service Provider (PISP) would effectively perform the same tasks as a
-  traditional <b class='actor'>Acquirer</b>, albeit regulated.  That is, there would unlikely
-  be any <b class='actor'>User</b> interactions with such a PISP.
-</div>
-<div id='extensions' class='header'>
-  Extensions
-</div>
-<div>
-  The FWP core is loosely derived from a PoC system known as
-  <a href='https://cyberphone.github.io/doc/saturn/'
-      title='Saturn'>Saturn<img src='images/xtl.svg' alt='link' /></a>.
-  By building on this core, Saturn features like the following could potentially be added:
-  <ul style='margin-bottom:0.3em'>
-    <li>
-      Support for <i>non-direct payments</i>,
-      including secure (<i>tokenized</i>) versions of Card-on-File.
-    </li>
-    <li>
-      Support for universal digital receipts.
-    </li>
-    <li>
-      Support for private messaging and additional authentication information between the
-      <b class='actor'>Issuer</b> and <b class='actor'>User</b>.
-    </li>
-  </ul>
-  Not that some of the features above could impact the PaymentRequest API.
-</div>
-<div class='para'>
-  A radical change would be moving the FWP implementation down into the client platform layer.
-  This would open FWP to other payment scenarios like point-of-sale (PoS) and person-to-person (P2P).
-  It would also make it considerably easier for alternative browser vendors adopting the FWP system.
-</div>
-<div id='acknowledgements' class='header'>
-  Acknowledgements
-</div>
-<div>
-  The FWP core was heavily influenced by an earlier Microsoft research project
-  called <a href='https://en.wikipedia.org/wiki/Windows_CardSpace'
-            title='CardSpace'>Windows CardSpace<img src='images/xtl.svg' alt='link'></a>.
-</div>
-<div id='version' class='header'>
-  Version
-</div>
-<div>
-  Document version: 0.1, 2020-03-09
-</div>
-<div id='authors' class='header'>
-  Authors
-</div>
-<div>
-  The FWP specification is currently authored by Anders Rundgren (<code>anders.rundgren.net@gmail.com</code>).<br />
-</div>
-<div class='header'>
-  Trademarks
-</div>
-<div id='trademarks'>
-  FIDO is a registered trademark of the FIDO alliance.<br />
-  EMV is a registered trademark of EMVCo.<br />&nbsp;<br />
-  This specification represents an <i>independent effort</i>, not associated with the FIDO alliance or EMVCo.
-</div>
+    Available funds also needs to be validated but that is out of scope for this specification.
+  </div>
+
+  <div id='integration' class='header'>
+    Integration
+  </div>
+  <div>
+    It is obvious that the integration of systems like FWP in payment networks
+    is crucial for acceptance by the market.
+  </div>
+  <div class="para">
+    For card based payments FWP implementations can build on the existing
+    EMV foundation since essentially only the formats differ.
+    Although the lack of a PAN (card number) in FWP may appear as a major obstacle,
+    the <code class='reserved'>issuerId</code> would in this case hold a &quot;neutered&quot; PAN where
+    the BIN (Bank Identification Number) is set, while the rest are set to zeroes + Luhn check digit.
+    E.g. VISA: 4972039000000004.  However, using <b class='actor'>Issuer</b> URLs
+    is also a viable alternative for card payments because the payment processors
+    associated with &quot;regular&quot; EMV and FWP payments do probably not
+    use the same end point.
+  </div>
+  <div class="para">
+    For account-to-account payments there are currently no generally agreed upon standards
+    for consumer payments, making it hard to come up with FWP implementation guidlines.
+    Remapping existing card based systems and infrastructures seems though like a possible path.
+  </div>
+  <div class="para">
+    Open Banking may also become a factor because there is work under way making non-OAuth2
+    requests a part of Open Banking APIs.  There are good reasons for that since current Open Banking
+    payment APIs presume that the <b class='actor'>User</b> in some OOB way informs the
+    <b class='actor'>Merchant</b> who their <b class='actor'>Issuer</b> is, which becomes
+    quite impractical when the number of issuers grow.  In an Open Banking scenario powered by FWP,
+    a Payment Initiation Service Provider (PISP) would effectively perform the same tasks as a
+    traditional <b class='actor'>Acquirer</b>, albeit regulated.  That is, there would unlikely
+    be any <b class='actor'>User</b> interactions with such a PISP.
+  </div>
+  <div id='extensions' class='header'>
+    Extensions
+  </div>
+  <div>
+    The FWP core is loosely derived from a PoC system known as
+    <a href='https://cyberphone.github.io/doc/saturn/'
+       title='Saturn'>Saturn<img src='images/xtl.svg' alt='link' /></a>.
+    By building on this core, Saturn features like the following could potentially be added:
+    <ul style='margin-bottom:0.3em'>
+      <li>
+        Support for <i>non-direct payments</i>,
+        including secure (<i>tokenized</i>) versions of Card-on-File.
+      </li>
+      <li>
+        Support for universal digital receipts.
+      </li>
+      <li>
+        Support for private messaging and additional authentication information between the
+        <b class='actor'>Issuer</b> and <b class='actor'>User</b>.
+      </li>
+    </ul>
+    Not that some of the features above could impact the PaymentRequest API.
+  </div>
+  <div class='para'>
+    A radical change would be moving the FWP implementation down into the client platform layer.
+    This would open FWP to other payment scenarios like point-of-sale (PoS) and person-to-person (P2P).
+    It would also make it considerably easier for alternative browser vendors adopting the FWP system.
+  </div>
+  <div id='acknowledgements' class='header'>
+    Acknowledgements
+  </div>
+  <div>
+    The FWP core was heavily influenced by an earlier Microsoft research project
+    called <a href='https://en.wikipedia.org/wiki/Windows_CardSpace'
+              title='CardSpace'>Windows CardSpace<img src='images/xtl.svg' alt='link'></a>.
+  </div>
+  <div id='version' class='header'>
+    Version
+  </div>
+  <table class="tftable">
+    <tr><th>Date</th><th>Version</th><th>Comment</th></tr>
+    <tr><td>2020-03-10</td><td>0.1</td><td>Initial publishing</td></tr>
+  </table>
+  <div id='authors' class='header'>
+    Authors
+  </div>
+  <div>
+    The FWP specification is currently authored by Anders Rundgren (<code>anders.rundgren.net@gmail.com</code>).<br />
+  </div>
+  <div class='header'>
+    Trademarks
+  </div>
+  <div id='trademarks'>
+    FIDO is a registered trademark of the FIDO alliance.<br />
+    EMV is a registered trademark of EMVCo.<br />&nbsp;<br />
+    This specification represents an <i>independent effort</i>, not associated with the FIDO alliance or EMVCo.
+  </div>
 </body></html>
