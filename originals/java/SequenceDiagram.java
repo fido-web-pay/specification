@@ -288,7 +288,7 @@ public class SequenceDiagram   {
             .append(" ")
             .append(convert(seqY + 10))
             .append("' xmlns='http://www.w3.org/2000/svg'>\n" +
-  "    <title>FIDO Web Pay - State Diagram</title>\n" +
+  "    <title>FIDO Web Pay - Sequence Diagram</title>\n" +
   "    <!-- Anders Rundgren 2021 -->\n" +
   "    <defs>\n" +
   "    <filter id='dropShaddow'>\n" +
