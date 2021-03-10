@@ -6,6 +6,7 @@
 .step {font-size:1.2em;color:indigo;margin-top:1.5em;margin-bottom:0.6em}
 .para {margin-top: 0.8em}
 .actor {color:darkgreen;font-weight:500}
+.msg {font-weight:500}
 .comment {padding:0.5em 1em;margin-top:1.5em;display:inline-block;background-color:floralwhite}
 .box {box-shadow: 0.2em 0.2em 0.2em #d0d0d0;border-width:1px;border-style:solid;border-color:black}
 .numbox {border-width:1pt;border-style:solid;border-color:black;border-radius:0.3em;display:inline-block;margin-right:0.6em;padding:0 3pt}
@@ -479,7 +480,7 @@ constraints usually associated with FIDO, do not apply.
 
 <div id="seq-4.6" class="step">4.6 Assemble FWP Assertion</div>
 <div class="para">
-  Create a JSON object representing an FWP assertion.
+  Create a JSON object representing an <span class="msg">FWP Assertion</span>.
   For the sample code this should result in the following object:
 </div>
 <pre class="box">
@@ -500,7 +501,7 @@ constraints usually associated with FIDO, do not apply.
 <tr><td><code>issuerId</code></td><td>Issuer Id associated with the selected credential</td></tr>
 </table>
 <div>
-  The resulting object represents an FWP assertion that is made available
+  The <span class="msg">FWP Assertion</span> is made available
   to the <code>PaymentRequest</code> invocation code via the
 <code>PaymentResponse.details</code> element.
 </div>
@@ -508,13 +509,14 @@ constraints usually associated with FIDO, do not apply.
 <div class="step"><div id="seq-5" class="numbox">5</div>Send FWP Assertion</div>
 <div>
   At this point the checkout Web code would normally
-  send the completed FWP assertion to the
+  send the completed <span class="msg">FWP Assertion</span> to the
   <b class="actor">Merchant</b> server through a FORM&nbsp;POST
 or <code>fetch()</code> operation.
 </div>
 <div class="step"><div id="seq-6" class="numbox">6</div>Create AcquirerRequest Message</div>
 
-<div>After receiving an FWP assertion, a <b class="actor">Merchant</b> would usually call an
+<div>After receiving the <span class="msg">FWP Assertion</span>,
+the <b class="actor">Merchant</b> would usually call an
 <b class="actor">Acquirer</b> with a specifically crafted object (which
 is out of scope for this specification).
 The following hypothetical sample outlines such an object:</div>
@@ -572,10 +574,10 @@ The following hypothetical sample outlines such an object:</div>
   <div id="seq-7" class="numbox">7</div>Send AcquirerRequest Message
 </div>
 <div>
-  At this point the <b class="actor">Merchant</b> sends the completed <code>AquirerRequest</code>
+  At this point the <b class="actor">Merchant</b> sends the completed <kbd>AquirerRequest</kbd>
   object to the appropriate <b class="actor">Acquirer</b>.
 </div>
-<div class="para">Note that authentication of <b class="actor">Merchant</b> is out of scope
+<div class="para">Note that authentication of the <b class="actor">Merchant</b> is out of scope
 for this specfication.</div>
 <div class="comment box">
   Since FWP offers &quot;Payment System Neutrality&quot;,
@@ -583,10 +585,80 @@ for this specfication.</div>
   service providers, depending on <code>paymentMethod</code>.
 </div>
 <div class="step">
-  <div id="seq-8" class="numbox">8</div>
+  <div id="seq-8" class="numbox">8</div>Create IssuerRequest Message
 </div>
-  <div>At this point the <b class="actor">Merchant</b></div>
-  <div id="seq-9" class="numbox">9</div>
+  <div>After successfully having authenticated the <b class="actor">Merchant</b> request,
+the <b class="actor">Acquirer</b> MUST perform a number ckecks including:</div>
+<ul>
+<li>
+That <code>paymentRequest</code> is properly formatted and that
+the <code>payee</code> attribute
+matches the <b class="actor">Merchant</b> common name registered with the <b class="actor">Acquirer</b>.
+</li>
+<li>
+That the <code>paymentMethod</code> is supported.
+</li>
+<li>
+That the format of the <code>issuerId</code> matches <code>paymentMethod</code>.
+</li>
+<li>
+  That the <code>receiveAccount</code> matches a <b class="actor">Merchant</b> account 
+registered with the <b class="actor">Acquirer</b>.
+</li>
+<li>
+  That the <code>timeStamp</code> is within &quot;reasonable limits&quot;.
+</li>
+<li>
+That the rest of the expected parameters are available as well that there are no unknown elements.
+</li>
+</ul>
+<div class="para">Any deviations MUST cause the request to be rejected.
+Fault handling is out of scope for
+this specification.</div>
+<div class="para">The next step is creating a suitable IssuerRequest message.  
+The following is an example of such an object:</div>
+<pre class="box">
+{
+  "acquirerMessage": {
+    "paymentRequest": {
+      "id": "7040566321",
+      "payee": "Space Shop",
+        "amount": {
+        "currency": "EUR",
+        "value": "435.00"
+      }
+    },
+    "encryptedAuthorization": <i>"ESAD"</i>,
+    "paymentMethod": "https://europeanpaymentsinitiative.eu/fwp",
+    "networkData": "additional stuff...",
+    "issuerId": "https://mybank.fr/payment"
+    "receiveAccount": "123456789",
+    "clientIp": "220.13.198.144",
+    "timeStamp": "2021-03-09T10:32:36+01:00"
+  },
+  "payeeHost": "spaceshop.com",
+  "timeStamp": "2021-03-09T10:32:37+01:00"
+}
+</pre>
+
+<div>Description:</div>
+<table class="tftable">
+  <tr><th>Element</th><th>Comment</th></tr>
+  <tr>
+    <td><code>aquirerRequest</code></td>
+    <td>Copy of the message received from the <b class="actor">Merchant</b></td>
+  </tr>
+  <tr>
+    <td><code>payeeHost</code></td>
+    <td>
+      The <b class="actor">Merchant</b> host name registered by the <b class="actor">Acquirer</b>
+    </td>
+  </tr>
+  <tr><td><code>timeStamp</code></td><td>ISO time stamp generated by the <b class="actor">Acquirer</b></td></tr>
+</table>
+<div class="step">
+  <div id="seq-9" class="numbox">9</div>Sending IssuerRequest Message
+</div>
   <div>At this point the <b class="actor">Merchant</b></div>
   <div id="seq-10" class="numbox">10</div>Issuer IREQ Processing
   <div>
