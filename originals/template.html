@@ -315,7 +315,7 @@ creates an FWP assertion which requires the following steps to be performed:
 <div>
   This object is subsequently referred to as PaymentRequest Core Data (PRCD).
 </div>
-<div id="seq-4.2" class="step">4.2 Create a Hash of PaymentRequest Core Data (PRCD)</div>
+<div id="seq-4.2" class="step">4.2 Create a Hash of PaymentRequest Core Data (PRCDHASH)</div>
 <div class="para">
   Calculate a Base64Url-encoded SHA256 hash of PRCD, canonicalized according to
   <a href="https://tools.ietf.org/html/rfc8785"
@@ -610,9 +610,9 @@ or <code>fetch()</code> operation.
     for this specfication.
   </div>
   <div class="comment box">
-    Since FWP offers &quot;Payment System Neutrality&quot;,
+    Since FWP supports <i>multiple</i> and <i>independent</i> payment systems,
     a <b class="actor">Merchant</b> may use different <b class="actor">Acquirer</b>
-    service providers, depending on <code>paymentMethod</code>.
+    service providers, depending on received <code>paymentMethod</code>.
   </div>
   <div class="step">
     <div id="seq-8" class="numbox">8</div>Process AcquirerRequest and Create IssuerRequest Object
@@ -705,9 +705,104 @@ would presumably be sent to <kbd>https://mybank.fr/payment</kbd>.</div>
     <div id="seq-10" class="numbox">10</div>Processing IssuerRequest
   </div>
   <div>
-    At this point the <b class="actor">Issuer</b> MUST perform a number of steps to verify the
+    Before initiating a payment transaction the <b class="actor">Issuer</b>
+    MUST decode and perform a number of steps to verify the
     correctness of the received <span class="msg">IssuerRequest</span> object.
+    Any deviation MUST terminate the operation in progress and return an
+    error message to the <b class="actor">Acquirer</b> in a not here specified manner.
+</div>
+ <div class="step">
+    10.1 Core Validation.
+ </div>
+ <ul>
+   <li>
+     Verify that <span class="msg">IssuerRequest</span> schema-wise is properly formatted.
+   </li>
+   <li>
+     Verify that the <code>timeStamp</code> is within &quot;reasonable limits&quot;.
+   </li>
+   <li>
+     Verify that <code>acquirerRequest.paymentMethod</code> is supported.
+   </li>
+   <li>
+     Verify that <code>acquirerRequest.receiveAccount</code> is compatible with <code>acquirerRequest.paymentMethod</code>.
+   </li>
+   <li>
+     Verify that <code>acquirerRequest.issuerId</code> is compatible with <code>acquirerRequest.paymentMethod</code>
+     as well as matching the <b class="actor">Issuer</b>.
+   </li>
+ </ul>
+
+<div class="step">
+10.2 Decode and Verify PaymentRequest Core Data (PRCD)
+</div>
+<ul>
+<li>
+  Verify that the <code>acquirerRequest.paymentRequest</code> data represents a valid <a href="#seq-4.1">PRCD</a> object.
+</li>
+<li>
+  Calculate a <a href="#seq-4.2">PRCDHASH</a> string of the <code>acquirerRequest.paymentRequest</code> data.
+</li>
+</ul>
+<div class="step">
+  10.3 Extract Signed Authorization Data (SAD)
+</div>
+<ul>
+<li>
+Decode the JWE compatible <a href="#seq-4.5">ESAD</a> string supplied in the 
+<code>acquirerRequest.encryptedAuthorization</code>.
+</li>
+<li>
+Verify that the public key suppled in the JWE header matches an exising private key of the <b class="actor">Issuer</b>.
+</li>
+<li>
+Decrypt the ESAD string using the private key located in the previous operation.
+</li>
+<li>
+Parse the result of the previous operation as JSON and set result as <a href="#seq-4.4">SAD</a>.
+</li>
+<li>
+Verify that the SAD object schema-wise has the proper format.
+</li>
+</ul>
+<div class="step">
+  10.4 Validate Request Data
+</div>
+<ul>
+<li>
+Verify that the previosly calculated PRCDHASH is equivalent to <code>SAD.requestHash.value</code>.
+That is, verifying that the <b class="actor">Merchant</b> payment claim corresponds to what the
+<b class="actor">User</b> have actually <i>seen and authorized</i>.
+</li>
+<li>
+Verify that <code>acquirerRequest.payeeHost</code> is equivalent to <code>SAD.payeeHost</code>.
+That is, adding yet another test that the <b class="actor">User</b> indeed have interacted with the
+right <b class="actor">Merchant</b>.
+</li>
+<li>
+Verify that an <i>optional</i> <code>SAD.networkData</code> complies with the <b class="actor">Issuer</b> specific requirements.
+</li>
+<li>
+Verify that the JWK supplied in the JWS header matches a <b class="actor">User</b>
+account equal to <code>SAD.accountId</code>. 
+</li>
+</ul>
+
+<div class="step">
+  10.5 Validate Authorization Signature
+</div>
+<ul>
+<li>
+Verify the JWS/CT signature of the recovered SAD object.
+</li>
+<li>
+Verify that the JWK supplied in the JWS header matches a <b class="actor">User</b>
+account equal to <code>SAD.accountId</code>. 
+</li>
+</ul>
     With respect to the <b class="actor">User</b> the following steps are the most significant:
+
+
 
     10.1 Decrypt the encryptedAuthorization object in AREQ using the Issuer specific decryption key. Set result as AD.
 
@@ -724,7 +819,6 @@ would presumably be sent to <kbd>https://mybank.fr/payment</kbd>.</div>
     10.7 To cope with possible replays, check that the received AD has not already been utilized. Ideally, the Issuer should support idempotent operation to facilitate benign transaction retries.
 
     Available funds also needs to be validated but that is out of scope for this specification.
-  </div>
 
   <div id="integration" class="header">
     Integration
