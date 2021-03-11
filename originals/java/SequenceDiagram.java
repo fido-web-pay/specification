@@ -20,7 +20,7 @@ public class SequenceDiagram   {
     static final double VBAR_START_Y = ACTOR_TOP_Y + ACTOR_HEIGHT - 5;
     static final double VBAR_X_DISTANCE = 120;
     static final double VBAR_START_X = PROC_WIDTH / 2 + 20;
-    static final String VBAR_COLOR = "#cc2020";
+    static final String VBAR_COLOR = "black";
 
     static final double NUMB_WIDTH = 14;
 
@@ -30,6 +30,7 @@ public class SequenceDiagram   {
     static final double ARROW_HEAD_WIDTH = 5;
     static final double ARROW_HEAD_LENGTH = 7;
     static final double ARROW_HEAD_GUTTER = 0.5;
+    static final String ARROW_COLOR = "#cc2020";
 
     static final double DROP_OFFSET = 2;
 
@@ -42,10 +43,12 @@ public class SequenceDiagram   {
     static final double UI_HEIGHT = 50;
     static final double UI_BORDER = 5;
  
-    static final String CLICKABLE_COLOR = "blue";
+    static final String CLICKABLE_COLOR = "#4366ff";
 
     static final double SEQ_Y_DISTANCE = 32;
     static final double SEQ_Y_SLACK_AFTER_UI = 0;
+ 
+    static final String FONT_FAMILY = "Roboto,sans-serif";
 
     String originalBase;
 
@@ -84,9 +87,7 @@ public class SequenceDiagram   {
            .append(convert(width))
            .append("' height='")
            .append(convert(NUMB_WIDTH))
-           .append("' rx='3' fill='white' stroke='")
-           .append(CLICKABLE_COLOR)
-           .append("' stroke-width='")
+           .append("' rx='3' fill='white' stroke='black' stroke-width='")
            .append(convert(STROKE_WIDTH))
            .append("'/>\n");
         _text(fontX, centerY, String.valueOf(n), FONT_SIZE, CLICKABLE_COLOR);
@@ -104,7 +105,7 @@ public class SequenceDiagram   {
            .append(convert(centerY + FONT_OFFSET))
            .append("' fill='")
            .append(color)
-           .append("' font-family='sans-serif' font-size='")
+           .append("' font-family='" + FONT_FAMILY + "' font-size='")
            .append(convert(fontSize))
            .append("' text-anchor='middle'>")
            .append(text)
@@ -170,7 +171,7 @@ public class SequenceDiagram   {
            .append(arrowY)
            .append("' stroke-width='")
            .append(convert(ARROW_WIDTH))
-           .append("' stroke='black' marker-end='url(#arrowHead)'")
+           .append("' stroke='" + ARROW_COLOR + "' marker-end='url(#arrowHead)'")
            .append(additional)
            .append("/>\n");
         text(textX, seqY - FONT_SIZE * 0.8, label);
@@ -307,7 +308,7 @@ public class SequenceDiagram   {
             .append(convert(ARROW_HEAD_WIDTH / 2))
             .append(", 0 ")
             .append(convert(ARROW_HEAD_WIDTH))
-            .append("'/>\n" +
+            .append("' fill='" + ARROW_COLOR + "'/>\n" +
                "    </marker>\n" +
                "  </defs>\n");
         for (int i = 0; i < 5; i++) {

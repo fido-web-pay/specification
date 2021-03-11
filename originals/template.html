@@ -780,11 +780,16 @@ That is, adding yet another test that the <b class="actor">User</b> indeed have 
 right <b class="actor">Merchant</b>.
 </li>
 <li>
+  Vereify that the <code>SAD.timeStamp</code> is within limits. 
+ <i>Tentative:</i> CurrentTime - 600s &lt; <code>SAD.timeStamp</code> &lt; CurrentTime + 60s.
+</li>
+<li>
 Verify that an <i>optional</i> <code>SAD.networkData</code> complies with the <b class="actor">Issuer</b> specific requirements.
 </li>
 <li>
-Verify that the JWK supplied in the JWS header matches a <b class="actor">User</b>
-account equal to <code>SAD.accountId</code>. 
+<i>Optional</i>.  To cope with possible replays, verify that the received SAD
+has not already been utilized. Ideally, the <b class="actor">Issuer</b>
+SHOULD support <i>idempotent operation</i> to facilitate benign transaction retries.
 </li>
 </ul>
 
@@ -794,33 +799,22 @@ account equal to <code>SAD.accountId</code>.
 <ul>
 <li>
 Verify the JWS/CT signature of the recovered SAD object.
+Since the public key is supplied in the JWS header, signature validation does not require database lookups.
 </li>
 <li>
-Verify that the JWK supplied in the JWS header matches a <b class="actor">User</b>
+Verify that the suppled public key matches a <b class="actor">User</b>
 account equal to <code>SAD.accountId</code>. 
 </li>
 </ul>
-    With respect to the <b class="actor">User</b> the following steps are the most significant:
-
-
-
-    10.1 Decrypt the encryptedAuthorization object in AREQ using the Issuer specific decryption key. Set result as AD.
-
-    10.2 Retrieve the signature key declared in the JWS header of the AD signature element. Abort if unknown.
-
-    10.3 Verify that the retrieved signature key is associated with the AD accountId element. Abort on failure.
-
-    10.4 Validate the AD signature using the retrieved signature key. Abort on failure.
-
-    10.5 Perform the same calculation as specified in 4.1 on the received paymentRequest object and compare the result with the AD requestHash. Abort on failure.
-
-    10.6 Check that the AD timeStamp element is within limits. Tentative: CurrentTime - 600s &lt; timeStamp &lt; CurrentTime + 60s. Abort on failure.
-
-    10.7 To cope with possible replays, check that the received AD has not already been utilized. Ideally, the Issuer should support idempotent operation to facilitate benign transaction retries.
-
-    Available funds also needs to be validated but that is out of scope for this specification.
-
-  <div id="integration" class="header">
+<div class="step">
+  Other Validation Steps
+</div> 
+<div>
+Obviously there are other things to verify but these are not directly related to FWP,
+like checking that the <b class="actor">User</b> has funds available matching the
+current request.
+</div>
+ <div id="integration" class="header">
     Integration
   </div>
   <div>
@@ -892,18 +886,23 @@ account equal to <code>SAD.accountId</code>.
     called <a href="https://en.wikipedia.org/wiki/Windows_CardSpace"
               title="CardSpace">Windows CardSpace<img src="images/xtl.svg" alt="link"></a>.
   </div>
+  <div class="para">
+    The <b class="actor">User</b> icon was derived from
+        <a href="https://commons.wikimedia.org/wiki/File:Crystal_Clear_kdm_user_female.svg"
+           title="User Icon">
+https://commons.wikimedia.org/wiki/File:Crystal_Clear_kdm_user_female.svg<img src="images/xtl.svg" alt="link"></a></div>
   <div id="version" class="header">
     Version
   </div>
   <table class="tftable">
     <tr><th>Date</th><th>Version</th><th>Comment</th></tr>
-    <tr><td>2020-03-10</td><td>0.1</td><td>Initial publishing</td></tr>
+    <tr><td>2020-03-12</td><td>0.1</td><td>Initial publishing</td></tr>
   </table>
   <div id="authors" class="header">
     Authors
   </div>
   <div>
-    The FWP specification is currently authored by Anders Rundgren (<kbd>anders.rundgren.net@gmail.com</kbd>).<br />
+    The FWP specification is currently authored by Anders Rundgren (anders.rundgren.net@gmail.com).<br />
   </div>
   <div class="header">
     Trademarks
