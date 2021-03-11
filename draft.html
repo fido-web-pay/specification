@@ -20,7 +20,7 @@ kbd {font-family: "Noto Mono",monospace;font-weight:bolder}
 pre {font-family:"Noto Mono",monospace;margin: 0.8em 0 1em 0;padding:0.6em 1em;overflow-x:auto;background-color: #f8f8f8}
 ul {margin: 0;padding-left:2em}
 li {margin-top:0.3em}
-a {color:#4366bf;text-decoration:none;font-weight:500}
+a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -41,7 +41,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500}
   </div>
   <div class="para">
     Through an extension to EMV, FWP can be applied to <i>any account-based payment system</i>,
-    including the eurozone"s
+    including the eurozone's
     <a href="https://www.europeanpaymentscouncil.eu/"
        title="European Payments Council">SEPA Instant<img src="images/xtl.svg" alt="link"></a>.
   </div>
@@ -55,7 +55,7 @@ in order to accomplish the following subgoals:
     </li>
     <li>
       Limit the amount of personally identifiable information (PII), shared
-      with <i>third parties</i>, to the name of the user"s bank.
+      with <i>third parties</i>, to the name of the user's bank.
       This is presumably compliant with
       <a href="https://www.pcisecuritystandards.org"
          title="PCI Site">PCI<img src="images/xtl.svg" alt="link"></a>
@@ -74,11 +74,11 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
   </div>
   <div>
     Note that FWP is not a payment system, it is a <i>payment authorization</i> scheme,
-    exclusively dealing with the <i>user"s</i> part of the payment process.
+    exclusively dealing with the <i>user's</i> part of the payment process.
     That is, the backend infrastructure and associated APIs are out of scope for this specification
     and are therefore only described at a &quot;conceptual&quot; level.
     Note though that regardless of the backend design, FWP assertions
-    MUST (due to the EMV <i>end-2-end security model</i>),
+    must (due to the EMV <i>end-2-end security model</i>),
     always be routed back to the designated issuer &quot;verbatim&quot;
     (together with other required data) in order to initiate a payment transaction.
   </div>
@@ -131,7 +131,8 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
   </div>
   <div class="para box comment">
     Note that FWP effectively forms a browser-resident &quot;Wallet&quot;,
-    holding an arbitrary number of payment credentials, each representing a specific <span class="actor">Issuer</span>
+    holding an arbitrary number of payment credentials, each representing a 
+    specific <span class="actor">Issuer</span>
     and <code class="reserved">paymentMethod</code>.
   </div>
   <div id="enrollment" class="header">
@@ -173,14 +174,14 @@ is linked to a <i>clickable</i> number in a box:
       <feGaussianBlur stdDeviation='1.3'/>
     </filter>
     <marker id='arrowHead' markerWidth='7' markerHeight='5' refX='0' refY='2.5' orient='auto' markerUnits='userSpaceOnUse'>
-      <polygon points='0 0, 7 2.5, 0 5'/>
+      <polygon points='0 0, 7 2.5, 0 5' fill='#cc2020'/>
     </marker>
   </defs>
-  <line x1='63' y1='67' x2='63' y2='439.6' stroke-width='1.2' stroke='#cc2020'/>
-  <line x1='183' y1='67' x2='183' y2='439.6' stroke-width='1.2' stroke='#cc2020'/>
-  <line x1='303' y1='67' x2='303' y2='439.6' stroke-width='1.2' stroke='#cc2020'/>
-  <line x1='423' y1='67' x2='423' y2='439.6' stroke-width='1.2' stroke='#cc2020'/>
-  <line x1='543' y1='67' x2='543' y2='439.6' stroke-width='1.2' stroke='#cc2020'/>
+  <line x1='63' y1='67' x2='63' y2='439.6' stroke-width='1.2' stroke='black'/>
+  <line x1='183' y1='67' x2='183' y2='439.6' stroke-width='1.2' stroke='black'/>
+  <line x1='303' y1='67' x2='303' y2='439.6' stroke-width='1.2' stroke='black'/>
+  <line x1='423' y1='67' x2='423' y2='439.6' stroke-width='1.2' stroke='black'/>
+  <line x1='543' y1='67' x2='543' y2='439.6' stroke-width='1.2' stroke='black'/>
 <svg x='43' y='32.0' width='40' height='40.0'
    xmlns:dc='http://purl.org/dc/elements/1.1/'
    xmlns:cc='http://creativecommons.org/ns#'
@@ -673,7 +674,7 @@ is linked to a <i>clickable</i> number in a box:
      style='fill:url(#linearGradient3312);stroke:#1f1f1f;stroke-width:1.65679765px'
      inkscape:connector-curvature='0' />
 </svg>
-  <text x='63' y='24' fill='black' font-family='sans-serif' font-size='14.399999999999999' text-anchor='middle'>User</text>
+  <text x='63' y='24' fill='black' font-family='Roboto,sans-serif' font-size='14.399999999999999' text-anchor='middle'>User</text>
 <svg x='163' y='32.0' width='40' height='40.0' viewBox='0 0 68 68' xmlns='http://www.w3.org/2000/svg'>
   <title>Browser Symbol</title>
   <!-- Anders Ruyndgren 2021-->
@@ -693,7 +694,7 @@ is linked to a <i>clickable</i> number in a box:
     <line x1='7.5' y1='49' x2='60.5' y2='49'/>
   </g>
 </svg>
-  <text x='183' y='24' fill='black' font-family='sans-serif' font-size='14.399999999999999' text-anchor='middle'>Browser</text>
+  <text x='183' y='24' fill='black' font-family='Roboto,sans-serif' font-size='14.399999999999999' text-anchor='middle'>Browser</text>
 <svg x='274.6666666666667' y='32.0' width='56.666666666666664' height='40.0'
    xmlns:dc='http://purl.org/dc/elements/1.1/'
    xmlns:cc='http://creativecommons.org/ns#'
@@ -1314,785 +1315,98 @@ is linked to a <i>clickable</i> number in a box:
      fill='#fdfac7'
      id='rect78' />
 </svg>
-  <text x='303' y='24' fill='black' font-family='sans-serif' font-size='14.399999999999999' text-anchor='middle'>Merchant</text>
-<svg x='400.4697330285968' y='32.0' width='45.060533942806344' height='40.0'
+  <text x='303' y='24' fill='black' font-family='Roboto,sans-serif' font-size='14.399999999999999' text-anchor='middle'>Merchant</text>
+<svg x='403' y='32.0' width='40' height='40.0'
    xmlns:dc='http://purl.org/dc/elements/1.1/'
    xmlns:cc='http://creativecommons.org/ns#'
    xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
    xmlns:svg='http://www.w3.org/2000/svg'
    xmlns='http://www.w3.org/2000/svg'
+   xmlns:sodipodi='http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd'
+   xmlns:inkscape='http://www.inkscape.org/namespaces/inkscape'
    version='1.1'
-   id='svg833'
+   id='Layer_1'
+   x='0'
+   y='0'
+   viewBox='0 0 34.707485 34.707485'
+   enable-background='new 0 0 42 32'
    xml:space='preserve'
-   viewBox='0 0 1088.7462 966.4743'><metadata
-     id='metadata839'><rdf:RDF><cc:Work
-         rdf:about=''><dc:format>image/svg+xml</dc:format><dc:type
-           rdf:resource='http://purl.org/dc/dcmitype/StillImage' /><dc:title></dc:title></cc:Work></rdf:RDF></metadata><defs
-     id='defs837'><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath849'><path
-         d='M 0,798.583 H 1055.947 V 0 H 0 Z'
-         id='path847' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath969'><path
-         d='M 444.764,633.242 V 59.334 h 366.104 v 724.807 z'
-         id='path967' /></clipPath><linearGradient
-       x1='0'
-       y1='0'
-       x2='1'
-       y2='0'
-       gradientUnits='userSpaceOnUse'
-       gradientTransform='matrix(366.10352,0,0,-366.10352,444.76367,421.7373)'
-       spreadMethod='pad'
-       id='linearGradient979'><stop
-         style='stop-opacity:1;stop-color:#f9a72b'
-         offset='0'
-         id='stop975' /><stop
-         style='stop-opacity:1;stop-color:#ffcd2a'
-         offset='1'
-         id='stop977' /></linearGradient><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath989'><path
-         d='M 470.269,524.396 V 409.312 l 314.313,69.366 v 157.437 z'
-         id='path987' /></clipPath><linearGradient
-       x1='0'
-       y1='0'
-       x2='1'
-       y2='0'
-       gradientUnits='userSpaceOnUse'
-       gradientTransform='matrix(-9.3e-6,211.92946,211.92946,9.3e-6,627.42578,421.24902)'
-       spreadMethod='pad'
-       id='linearGradient1001'><stop
-         style='stop-opacity:1;stop-color:#b3d5cd'
-         offset='0'
-         id='stop995' /><stop
-         style='stop-opacity:1;stop-color:#d8ecdc'
-         offset='0.913978'
-         id='stop997' /><stop
-         style='stop-opacity:1;stop-color:#d8ecdc'
-         offset='1'
-         id='stop999' /></linearGradient><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1011'><path
-         d='M 0,798.583 H 1055.947 V 0 H 0 Z'
-         id='path1009' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1047'><path
-         d='M 470.269,636.115 H 784.582 V 514.363 H 470.269 Z'
-         id='path1045' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1063'><path
-         d='m 591.856,593.707 h 79.191 V 434.261 h -79.191 z'
-         id='path1061' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1079'><path
-         d='m 706.181,636.411 h 79.186 v -176.47 h -79.186 z'
-         id='path1077' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1095'><path
-         d='M 470.269,372.756 V 247.297 l 314.313,43.674 V 448.44 Z'
-         id='path1093' /></clipPath><linearGradient
-       x1='0'
-       y1='0'
-       x2='1'
-       y2='0'
-       gradientUnits='userSpaceOnUse'
-       gradientTransform='matrix(-8.2e-6,187.9521,187.9521,8.2e-6,627.42578,257.88379)'
-       spreadMethod='pad'
-       id='linearGradient1107'><stop
-         style='stop-opacity:1;stop-color:#b3d5cd'
-         offset='0'
-         id='stop1101' /><stop
-         style='stop-opacity:1;stop-color:#d8ecdc'
-         offset='0.913978'
-         id='stop1103' /><stop
-         style='stop-opacity:1;stop-color:#d8ecdc'
-         offset='1'
-         id='stop1105' /></linearGradient><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1117'><path
-         d='M 0,798.583 H 1055.947 V 0 H 0 Z'
-         id='path1115' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1153'><path
-         d='M 470.269,448.44 H 784.582 V 361.816 H 470.269 Z'
-         id='path1151' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1169'><path
-         d='m 591.856,421.299 h 79.191 V 263.676 h -79.191 z'
-         id='path1167' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1185'><path
-         d='m 706.181,448.623 h 79.186 V 279.777 h -79.186 z'
-         id='path1183' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1201'><path
-         d='M 119.464,205.287 V 65.525 l 371.814,1.231 5.975,195.828 z'
-         id='path1199' /></clipPath><linearGradient
-       x1='0'
-       y1='0'
-       x2='1'
-       y2='0'
-       gradientUnits='userSpaceOnUse'
-       gradientTransform='matrix(377.78906,0,0,-377.78906,119.46387,164.05469)'
-       spreadMethod='pad'
-       id='linearGradient1211'><stop
-         style='stop-opacity:1;stop-color:#f9a72b'
-         offset='0'
-         id='stop1207' /><stop
-         style='stop-opacity:1;stop-color:#ffcd2a'
-         offset='1'
-         id='stop1209' /></linearGradient><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1221'><path
-         d='M 0,798.583 H 1055.947 V 0 H 0 Z'
-         id='path1219' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1237'><path
-         d='M 20.5171,283.214 H 497.253 V 205.287 H 20.5171 Z'
-         id='path1235' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1253'><path
-         d='M 215.788,219.896 V 65.525 h 66.944 v 164.524 z'
-         id='path1251' /></clipPath><linearGradient
-       x1='0'
-       y1='0'
-       x2='1'
-       y2='0'
-       gradientUnits='userSpaceOnUse'
-       gradientTransform='matrix(-9e-6,-205.81676,-205.81676,9e-6,249.25977,275.48437)'
-       spreadMethod='pad'
-       id='linearGradient1265'><stop
-         style='stop-opacity:1;stop-color:#d9b091'
-         offset='0'
-         id='stop1259' /><stop
-         style='stop-opacity:1;stop-color:#0b264f'
-         offset='0.994595'
-         id='stop1261' /><stop
-         style='stop-opacity:1;stop-color:#0b264f'
-         offset='1'
-         id='stop1263' /></linearGradient><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1275'><path
-         d='M 141.728,209.028 V 66.642 h 52.957 v 150.051 z'
-         id='path1273' /></clipPath><linearGradient
-       x1='0'
-       y1='0'
-       x2='1'
-       y2='0'
-       gradientUnits='userSpaceOnUse'
-       gradientTransform='matrix(-9e-6,-205.80666,-205.80666,9e-6,168.20654,275.47754)'
-       spreadMethod='pad'
-       id='linearGradient1287'><stop
-         style='stop-opacity:1;stop-color:#d9b091'
-         offset='0'
-         id='stop1281' /><stop
-         style='stop-opacity:1;stop-color:#0b264f'
-         offset='0.994595'
-         id='stop1283' /><stop
-         style='stop-opacity:1;stop-color:#0b264f'
-         offset='1'
-         id='stop1285' /></linearGradient><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1297'><path
-         d='M 810.868,59.334 H 935.795 V 681.481 L 810.868,784.141 Z'
-         id='path1295' /></clipPath><linearGradient
-       x1='0'
-       y1='0'
-       x2='1'
-       y2='0'
-       gradientUnits='userSpaceOnUse'
-       gradientTransform='matrix(124.92773,0,0,-124.92773,810.86719,421.7373)'
-       spreadMethod='pad'
-       id='linearGradient1307'><stop
-         style='stop-opacity:1;stop-color:#f9a72b'
-         offset='0'
-         id='stop1303' /><stop
-         style='stop-opacity:1;stop-color:#ffcd2a'
-         offset='1'
-         id='stop1305' /></linearGradient><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1317'><path
-         d='m 860.205,355.982 57.753,-9.953 v 258.73 l -57.753,29.858 z'
-         id='path1315' /></clipPath><linearGradient
-       x1='0'
-       y1='0'
-       x2='1'
-       y2='0'
-       gradientUnits='userSpaceOnUse'
-       gradientTransform='matrix(-1.25e-5,286.17249,286.17249,1.25e-5,889.08203,346.43359)'
-       spreadMethod='pad'
-       id='linearGradient1329'><stop
-         style='stop-opacity:1;stop-color:#b3d5cd'
-         offset='0'
-         id='stop1323' /><stop
-         style='stop-opacity:1;stop-color:#d8ecdc'
-         offset='0.913978'
-         id='stop1325' /><stop
-         style='stop-opacity:1;stop-color:#d8ecdc'
-         offset='1'
-         id='stop1327' /></linearGradient><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1339'><path
-         d='M 0,798.583 H 1055.947 V 0 H 0 Z'
-         id='path1337' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1347'><path
-         d='m 860.205,582.671 h 57.753 v -83.017 h -57.753 z'
-         id='path1345' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1363'><path
-         d='m 860.205,479.44 h 57.753 v -90.652 h -57.753 z'
-         id='path1361' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1379'><path
-         d='m 860.205,634.617 h 57.753 v -34.656 h -57.753 z'
-         id='path1377' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1395'><path
-         d='m 860.205,453.058 h 57.753 V 431.46 h -57.753 z'
-         id='path1393' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1411'><path
-         d='m 860.205,546.81 h 57.753 v -28.292 h -57.753 z'
-         id='path1409' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1435'><path
-         d='m 908.289,704.081 h 27.506 V 90.1816 h -27.506 z'
-         id='path1433' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1451'><path
-         d='M 26.706,421.732 V 269.803 l 361.159,75.969 v 197.179 z'
-         id='path1449' /></clipPath><linearGradient
-       x1='0'
-       y1='0'
-       x2='1'
-       y2='0'
-       gradientUnits='userSpaceOnUse'
-       gradientTransform='matrix(361.15918,0,0,-361.15918,26.706055,406.37695)'
-       spreadMethod='pad'
-       id='linearGradient1461'><stop
-         style='stop-opacity:1;stop-color:#f9a72b'
-         offset='0'
-         id='stop1457' /><stop
-         style='stop-opacity:1;stop-color:#ffcd2a'
-         offset='1'
-         id='stop1459' /></linearGradient><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1471'><path
-         d='m 62.586,388.733 v -99.72 l 284.016,70.858 v 125.684 z'
-         id='path1469' /></clipPath><linearGradient
-       x1='0'
-       y1='0'
-       x2='1'
-       y2='0'
-       gradientUnits='userSpaceOnUse'
-       gradientTransform='matrix(-8e-6,183.6514,183.6514,8e-6,204.59424,299.3584)'
-       spreadMethod='pad'
-       id='linearGradient1483'><stop
-         style='stop-opacity:1;stop-color:#b3d5cd'
-         offset='0'
-         id='stop1477' /><stop
-         style='stop-opacity:1;stop-color:#d8ecdc'
-         offset='0.913978'
-         id='stop1479' /><stop
-         style='stop-opacity:1;stop-color:#d8ecdc'
-         offset='1'
-         id='stop1481' /></linearGradient><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1493'><path
-         d='M 0,798.583 H 1055.947 V 0 H 0 Z'
-         id='path1491' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1529'><path
-         d='M 62.5864,485.555 H 346.602 V 380.043 H 62.5864 Z'
-         id='path1527' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1545'><path
-         d='m 172.457,450.645 h 71.554 V 315.966 h -71.554 z'
-         id='path1543' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1561'><path
-         d='m 275.762,485.796 h 71.551 V 341.918 h -71.551 z'
-         id='path1559' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1605'><path
-         d='M 343.532,119.915 H 448.271 V 90.7861 H 343.532 Z'
-         id='path1603' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1625'><path
-         d='M 343.532,212.886 H 448.271 V 191.783 H 343.532 Z'
-         id='path1623' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1641'><path
-         d='m 343.532,211.812 h 97.299 V 104.154 h -97.299 z'
-         id='path1639' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1665'><path
-         d='m 696.85,118.394 h 84.044 V 89.8975 H 696.85 Z'
-         id='path1663' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1685'><path
-         d='m 696.85,207.957 h 84.044 V 190.633 H 696.85 Z'
-         id='path1683' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1701'><path
-         d='m 696.85,207.178 h 78.075 V 103.23 H 696.85 Z'
-         id='path1699' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1721'><path
-         d='M 854.816,387.816 H 1042.67 V 169.251 H 854.816 Z'
-         id='path1719' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1761'><path
-         d='M 854.816,387.816 H 1042.67 V 169.251 H 854.816 Z'
-         id='path1759' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1777'><path
-         d='m 911.708,344.219 h 22.551 v -10.254 h -22.551 z'
-         id='path1775' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1793'><path
-         d='m 896.312,296.229 h 14.38 v -6.541 h -14.38 z'
-         id='path1791' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1809'><path
-         d='m 952.687,320.831 h 14.383 v -6.538 h -14.383 z'
-         id='path1807' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1865'><path
-         d='m 817.532,301.32 h 17.734 v -8.061 h -17.734 z'
-         id='path1863' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1881'><path
-         d='m 795.715,200.094 h 11.306 v -5.14 h -11.306 z'
-         id='path1879' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1897'><path
-         d='m 813.451,241.061 h 11.313 v -5.143 h -11.313 z'
-         id='path1895' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1913'><path
-         d='m 813.054,284.926 h 5.659 v -2.572 h -5.659 z'
-         id='path1911' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1929'><path
-         d='m 825.557,210.75 h 5.662 v -2.574 h -5.662 z'
-         id='path1927' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath1965'><path
-         d='m 790.554,332.569 h 94.072 v -177.02 h -94.072 z'
-         id='path1963' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath2001'><path
-         d='m 583.12,279.041 h 60.734 V 157.995 H 583.12 Z'
-         id='path1999' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath2017'><path
-         d='m 598.354,267.975 h 14.501 v -6.592 h -14.501 z'
-         id='path2015' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath2033'><path
-         d='m 580.512,185.2 h 9.25 v -4.204 h -9.25 z'
-         id='path2031' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath2049'><path
-         d='m 595.018,218.7 h 9.25 v -4.201 h -9.25 z'
-         id='path2047' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath2065'><path
-         d='m 594.691,254.574 h 4.629 v -2.107 h -4.629 z'
-         id='path2063' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath2081'><path
-         d='m 604.917,193.917 h 4.629 v -2.107 h -4.629 z'
-         id='path2079' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath2121'><path
-         d='M 464.403,277.154 H 584.692 V 137.199 H 464.403 Z'
-         id='path2119' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath2161'><path
-         d='M 464.403,277.154 H 584.692 V 137.199 H 464.403 Z'
-         id='path2159' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath2177'><path
-         d='m 500.833,249.237 h 14.442 v -6.561 h -14.442 z'
-         id='path2175' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath2193'><path
-         d='m 490.973,218.511 h 9.211 v -4.191 h -9.211 z'
-         id='path2191' /></clipPath><clipPath
-       clipPathUnits='userSpaceOnUse'
-       id='clipPath2209'><path
-         d='m 527.074,234.263 h 9.208 v -4.184 h -9.208 z'
-         id='path2207' /></clipPath><filter
-       style='color-interpolation-filters:sRGB'
-       id='filter4999'
-       x='-0.010502922'
-       width='1.0210057'
-       y='-0.51706696'
-       height='2.0341339'><feGaussianBlur
-         stdDeviation='4.1363396'
-         id='feGaussianBlur5001' /></filter><filter
-       style='color-interpolation-filters:sRGB'
-       id='filter1451'
-       x='-0.0085702725'
-       width='1.0171405'
-       y='-0.42192113'
-       height='1.8438421'><feGaussianBlur
-         stdDeviation='3.3752091'
-         id='feGaussianBlur1453' /></filter><filter
-       style='color-interpolation-filters:sRGB'
-       id='filter1513'
-       x='-0.34040752'
-       width='1.680815'
-       y='-0.016341574'
-       height='1.0326833'><feGaussianBlur
-         stdDeviation='5.3600975'
-         id='feGaussianBlur1515' /></filter></defs><g
-     id='g963'
-     transform='matrix(1.9054262,0,0,-1.3333333,-766.8341,1045.5213)'><g
-       id='g965'
-       clip-path='url(#clipPath969)'><g
-         id='g971'><g
-           id='g973'><path
-             d='M 444.764,633.242 V 59.334 h 366.104 v 724.807 z'
-             style='fill:url(#linearGradient979);stroke:none'
-             id='path981' /></g></g></g></g><g
-     id='g983'
-     transform='matrix(1.9054262,0,0,-1.3333333,-766.8341,1045.5213)'><g
-       id='g985'
-       clip-path='url(#clipPath989)'><g
-         id='g991'><g
-           id='g993'><path
-             d='M 470.269,524.396 V 409.312 l 314.313,69.366 v 157.437 z'
-             style='fill:url(#linearGradient1001);stroke:none'
-             id='path1003' /></g></g></g></g><g
-     id='g1005'
-     transform='matrix(1.9054262,0,0,-1.3333333,-766.8341,1045.5213)'><g
-       id='g1007'
-       clip-path='url(#clipPath1011)'><g
-         id='g1013'
-         transform='translate(506.4863,416.4717)'><path
-           d='M 0,0 -9.055,-1.817 V 116.818 L 0,119.823 Z'
-           style='fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none'
-           id='path1015' /></g><g
-         id='g1017'
-         transform='translate(549.1689,425.2061)'><path
-           d='M 0,0 -9.051,-1.876 V 122.382 L 0,125.462 Z'
-           style='fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none'
-           id='path1019' /></g><g
-         id='g1021'
-         transform='translate(591.8564,434.2612)'><path
-           d='M 0,0 -9.058,-1.948 V 127.998 L 0,131.158 Z'
-           style='fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none'
-           id='path1023' /></g><g
-         id='g1025'
-         transform='translate(634.5352,443.6079)'><path
-           d='m 0,0 -9.054,-2.005 v 135.69 L 0,136.914 Z'
-           style='fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none'
-           id='path1027' /></g><g
-         id='g1029'
-         transform='translate(677.2246,453.2476)'><path
-           d='M 0,0 -9.056,-2.07 V 139.41 L 0,142.71 Z'
-           style='fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none'
-           id='path1031' /></g><g
-         id='g1033'
-         transform='translate(719.9072,463.1616)'><path
-           d='M 0,0 -9.058,-2.125 V 145.173 L 0,148.542 Z'
-           style='fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none'
-           id='path1035' /></g><g
-         id='g1037'
-         transform='translate(762.5889,473.3379)'><path
-           d='M 0,0 -9.051,-2.179 V 150.976 L 0,154.403 Z'
-           style='fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none'
-           id='path1039' /></g><g
-         id='g1041'><g
-           id='g1043' /><g
-           id='g1055'><g
-             clip-path='url(#clipPath1047)'
-             opacity='0.320007'
-             id='g1053'><g
-               transform='translate(784.582,622.3882)'
-               id='g1051'><path
-                 d='m 0,0 -314.313,-108.025 v 10.032 L 0,13.727 Z'
-                 style='fill:#515c6e;fill-opacity:1;fill-rule:nonzero;stroke:none'
-                 id='path1049' /></g></g></g></g><g
-         id='g1057'><g
-           id='g1059' /><g
-           id='g1071'><g
-             clip-path='url(#clipPath1063)'
-             opacity='0.600006'
-             id='g1069'><g
-               transform='translate(650.0801,586.103)'
-               id='g1067'><path
-                 d='m 0,0 -58.224,-151.842 23.887,5.195 55.304,154.251 z'
-                 style='fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none'
-                 id='path1065' /></g></g></g></g><g
-         id='g1073'><g
-           id='g1075' /><g
-           id='g1087'><g
-             clip-path='url(#clipPath1079)'
-             opacity='0.600006'
-             id='g1085'><g
-               transform='translate(764.4053,628.4307)'
-               id='g1083'><path
-                 d='m 0,0 -58.225,-168.489 23.887,5.619 55.3,170.85 z'
-                 style='fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none'
-                 id='path1081' /></g></g></g></g></g></g><g
-     id='g1089'
-     transform='matrix(1.9054262,0,0,-1.3333333,-766.8341,1045.5213)'><g
-       id='g1091'
-       clip-path='url(#clipPath1095)'><g
-         id='g1097'><g
-           id='g1099'><path
-             d='M 470.269,372.756 V 247.297 l 314.313,43.674 V 448.44 Z'
-             style='fill:url(#linearGradient1107);stroke:none'
-             id='path1109' /></g></g></g></g><g
-     id='g1111'
-     transform='matrix(1.9054262,0,0,-1.3333333,-766.8341,1045.5213)'><g
-       id='g1113'
-       clip-path='url(#clipPath1117)'><g
-         id='g1119'
-         transform='translate(506.4863,252.0654)'><path
-           d='M 0,0 -9.055,-1.201 V 127.202 L 0,129.382 Z'
-           style='fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none'
-           id='path1121' /></g><g
-         id='g1123'
-         transform='translate(549.1689,257.8125)'><path
-           d='M 0,0 -9.051,-1.227 V 131.746 L 0,133.938 Z'
-           style='fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none'
-           id='path1125' /></g><g
-         id='g1127'
-         transform='translate(591.8564,263.6758)'><path
-           d='M 0,0 -9.058,-1.247 V 136.229 L 0,138.426 Z'
-           style='fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none'
-           id='path1129' /></g><g
-         id='g1131'
-         transform='translate(634.5352,269.6348)'><path
-           d='M 0,0 -9.054,-1.269 V 140.629 L 0,142.821 Z'
-           style='fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none'
-           id='path1133' /></g><g
-         id='g1135'
-         transform='translate(677.2246,275.6631)'><path
-           d='M 0,0 -9.056,-1.286 V 144.937 L 0,147.125 Z'
-           style='fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none'
-           id='path1137' /></g><g
-         id='g1139'
-         transform='translate(719.9072,281.7363)'><path
-           d='M 0,0 -9.058,-1.291 V 149.147 L 0,151.322 Z'
-           style='fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none'
-           id='path1141' /></g><g
-         id='g1143'
-         transform='translate(762.5889,287.8301)'><path
-           d='M 0,0 -9.051,-1.29 V 153.255 L 0,155.41 Z'
-           style='fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none'
-           id='path1145' /></g><g
-         id='g1147'><g
-           id='g1149' /><g
-           id='g1161'><g
-             clip-path='url(#clipPath1153)'
-             opacity='0.320007'
-             id='g1159'><g
-               transform='translate(784.582,434.709)'
-               id='g1157'><path
-                 d='m 0,0 -314.313,-72.893 v 10.94 L 0,13.731 Z'
-                 style='fill:#515c6e;fill-opacity:1;fill-rule:nonzero;stroke:none'
-                 id='path1155' /></g></g></g></g><g
-         id='g1163'><g
-           id='g1165' /><g
-           id='g1177'><g
-             clip-path='url(#clipPath1169)'
-             opacity='0.600006'
-             id='g1175'><g
-               transform='translate(650.0801,416.2227)'
-               id='g1173'><path
-                 d='m 0,0 -58.224,-152.547 23.887,3.327 55.304,154.297 z'
-                 style='fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none'
-                 id='path1171' /></g></g></g></g><g
-         id='g1179'><g
-           id='g1181' /><g
-           id='g1193'><g
-             clip-path='url(#clipPath1185)'
-             opacity='0.600006'
-             id='g1191'><g
-               transform='translate(764.4053,443.6714)'
-               id='g1189'><path
-                 d='m 0,0 -58.225,-163.894 23.887,3.406 55.3,165.439 z'
-                 style='fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none'
-                 id='path1187' /></g></g></g></g></g></g><g
-     id='g1247'
-     transform='matrix(1.9054262,0,0,-1.3333333,-107.26016,1020.5376)'><g
-       id='g1249'
-       clip-path='url(#clipPath1253)'><g
-         id='g1255'><g
-           id='g1257'><path
-             d='M 215.788,219.896 V 65.525 h 66.944 v 164.524 z'
-             style='fill:url(#linearGradient1265);stroke:none'
-             id='path1267' /></g></g></g></g><g
-     id='g1269'
-     transform='matrix(1.9054262,0,0,-1.3333333,-86.971996,1020.5376)'><g
-       id='g1271'
-       clip-path='url(#clipPath1275)'><g
-         id='g1277'><g
-           id='g1279'><path
-             d='M 141.728,209.028 V 66.642 h 52.957 v 150.051 z'
-             style='fill:url(#linearGradient1287);stroke:none'
-             id='path1289' /></g></g></g></g><g
-     id='g1291'
-     transform='matrix(1.9054262,0,0,-1.3333333,-766.8341,1045.5213)'><g
-       id='g1293'
-       clip-path='url(#clipPath1297)'><g
-         id='g1299'><g
-           id='g1301'><path
-             d='M 810.868,59.334 H 935.795 V 681.481 L 810.868,784.141 Z'
-             style='fill:url(#linearGradient1307);stroke:none'
-             id='path1309' /></g></g></g></g><g
-     id='g1311'
-     transform='matrix(1.9054262,0,0,-1.3333333,-766.8341,1045.5213)'><g
-       id='g1313'
-       clip-path='url(#clipPath1317)'><g
-         id='g1319'><g
-           id='g1321'><path
-             d='m 860.205,355.982 57.753,-9.953 v 258.73 l -57.753,29.858 z'
-             style='fill:url(#linearGradient1329);stroke:none'
-             id='path1331' /></g></g></g></g><g
-     id='g1333'
-     transform='matrix(1.9054262,0,0,-1.3541142,-766.8341,1060.6943)'><g
-       id='g1335'
-       clip-path='url(#clipPath1339)'><g
-         id='g1341'><g
-           id='g1343' /><g
-           id='g1355'><g
-             clip-path='url(#clipPath1347)'
-             opacity='0.600006'
-             id='g1353'><g
-               transform='translate(917.958,582.6714)'
-               id='g1351'><path
-                 d='M 0,0 -57.753,-61.323 V -83.018 L 0,-23.07 Z'
-                 style='fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none'
-                 id='path1349' /></g></g></g></g><g
-         id='g1357'><g
-           id='g1359' /><g
-           id='g1371'><g
-             clip-path='url(#clipPath1363)'
-             opacity='0.600006'
-             id='g1369'><g
-               transform='translate(917.958,479.4399)'
-               id='g1367'><path
-                 d='M 0,0 -57.753,-69.257 V -90.652 L 0,-20.713 Z'
-                 style='fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none'
-                 id='path1365' /></g></g></g></g><g
-         id='g1373'><g
-           id='g1375' /><g
-           id='g1387'><g
-             clip-path='url(#clipPath1379)'
-             opacity='0.320007'
-             id='g1385'><g
-               transform='translate(917.958,599.9609)'
-               id='g1383'><path
-                 d='m 0,0 -57.753,29.481 v 5.175 L 0,4.799 Z'
-                 style='fill:#515c6e;fill-opacity:1;fill-rule:nonzero;stroke:none'
-                 id='path1381' /></g></g></g></g><g
-         id='g1389'><g
-           id='g1391' /><g
-           id='g1403'><g
-             clip-path='url(#clipPath1395)'
-             opacity='0.320007'
-             id='g1401'><g
-               transform='translate(917.958,431.46)'
-               id='g1399'><path
-                 d='m 0,0 -57.753,16.523 v 5.075 L 0,4.71 Z'
-                 style='fill:#515c6e;fill-opacity:1;fill-rule:nonzero;stroke:none'
-                 id='path1397' /></g></g></g></g><g
-         id='g1405'><g
-           id='g1407' /><g
-           id='g1419'><g
-             clip-path='url(#clipPath1411)'
-             opacity='0.320007'
-             id='g1417'><g
-               transform='translate(917.958,518.5181)'
-               id='g1415'><path
-                 d='m 0,0 -57.753,23.218 v 5.074 L 0,4.709 Z'
-                 style='fill:#515c6e;fill-opacity:1;fill-rule:nonzero;stroke:none'
-                 id='path1413' /></g></g></g></g><g
-         id='g1421'
-         transform='translate(808.6885,674.7524)'><path
-           d='M 0,0 28.238,-18.69 V 28.605 L 0,55.42 Z'
-           style='fill:#f6921e;fill-opacity:1;fill-rule:nonzero;stroke:none'
-           id='path1423' /></g><g
-         id='g1425'
-         transform='translate(808.6885,434.1934)'><path
-           d='M 0,0 28.238,-18.691 V 28.604 L 0,55.419 Z'
-           style='fill:#f6921e;fill-opacity:1;fill-rule:nonzero;stroke:none'
-           id='path1427' /></g><g
-         id='g1429'><g
-           id='g1431' /><g
-           id='g1443'><g
-             clip-path='url(#clipPath1435)'
-             opacity='0.179993'
-             id='g1441'><g
-               transform='translate(908.2891,704.0811)'
-               id='g1439'><path
-                 d='m 0,0 v -613.899 h 26.871 l 0.635,591.298 z'
-                 style='fill:#6f2c20;fill-opacity:1;fill-rule:nonzero;stroke:none'
-                 id='path1437' /></g></g></g></g></g></g><g
-     id='g1651'
-     transform='matrix(1.9054262,0,0,-1.3333333,734.82021,755.94187)'><path
-       d='m 0,0 -98.437,-14.267 v -113.02 H 0 Z'
-       style='fill:#929497;fill-opacity:1;fill-rule:nonzero;stroke:none'
-       id='path1653' /></g><g
-     id='g1655'
-     transform='matrix(1.9054262,0,0,-1.3333333,721.10099,768.24534)'><path
-       d='M 0,0 -84.044,-11.392 V -118.06 H 0 Z'
-       style='fill:#c4c5c7;fill-opacity:1;fill-rule:nonzero;stroke:none'
-       id='path1657' /></g><g
-     id='g1659'
-     transform='matrix(1.9054262,0,0,-1.3333333,-766.8341,1045.5213)'><g
-       id='g1661' /><g
-       id='g1673'><g
-         clip-path='url(#clipPath1665)'
-         opacity='0.399994'
-         id='g1671'><g
-           transform='translate(696.8496,116.5654)'
-           id='g1669'><path
-             d='M 0,0 52.962,1.828 V -10.105 L 84.044,-9.51 V -26.668 H 0 Z'
-             style='fill:#929497;fill-opacity:1;fill-rule:nonzero;stroke:none'
-             id='path1667' /></g></g></g></g><g
-     id='g1675'
-     transform='matrix(1.9054262,0,0,-1.3333333,645.97235,775.19707)'><path
-       d='M 0,0 -5.182,-0.703 V -112.846 H 0 Z'
-       style='fill:#929497;fill-opacity:1;fill-rule:nonzero;stroke:none'
-       id='path1677' /></g><g
-     id='g1679'
-     transform='matrix(1.9054262,0,0,-1.3333333,-766.8341,1045.5213)'><g
-       id='g1681' /><g
-       id='g1693'><g
-         clip-path='url(#clipPath1685)'
-         opacity='0.5'
-         id='g1691'><g
-           transform='translate(780.8936,201.3936)'
-           id='g1689'><path
-             d='m 0,0 -84.044,-10.761 v 5.933 L 0,6.563 Z'
-             style='fill:#515c6e;fill-opacity:1;fill-rule:nonzero;stroke:none'
-             id='path1687' /></g></g></g></g><g
-     id='g1695'
-     transform='matrix(1.9054262,0,0,-1.3333333,-766.8341,1045.5213)'><g
-       id='g1697' /><g
-       id='g1709'><g
-         clip-path='url(#clipPath1701)'
-         opacity='0.419998'
-         id='g1707'><g
-           transform='translate(767.3701,206.1924)'
-           id='g1705'><path
-             d='m 0,0 -70.521,-94.977 v -7.985 L 7.555,0.985 Z'
-             style='fill:#fffce6;fill-opacity:1;fill-rule:nonzero;stroke:none'
-             id='path1703' /></g></g></g></g><path
-     d='M 1088.7462,940.40933 H 0 v 26.065 h 1088.7462 z'
-     style='fill:#afae44;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.25007'
-     id='path2239' /></svg>
-  <text x='423' y='24' fill='black' font-family='sans-serif' font-size='14.399999999999999' text-anchor='middle'>Acquirer</text>
+   sodipodi:docname='new-gears.svg'
+   inkscape:version='1.0.2 (e86c870879, 2021-01-15, custom)'><sodipodi:namedview
+   pagecolor='#ffffff'
+   bordercolor='#666666'
+   borderopacity='1'
+   objecttolerance='10'
+   gridtolerance='10'
+   guidetolerance='10'
+   inkscape:pageopacity='0'
+   inkscape:pageshadow='2'
+   inkscape:window-width='1817'
+   inkscape:window-height='1037'
+   id='namedview10'
+   showgrid='false'
+   inkscape:zoom='8.1206796'
+   inkscape:cx='15.176138'
+   inkscape:cy='23.976453'
+   inkscape:window-x='0'
+   inkscape:window-y='0'
+   inkscape:window-maximized='0'
+   inkscape:current-layer='Layer_1'
+   fit-margin-top='0'
+   fit-margin-left='0'
+   fit-margin-right='0'
+   fit-margin-bottom='0'
+   inkscape:document-rotation='0'
+   inkscape:lockguides='false' /><metadata
+   id='metadata17'><rdf:RDF><cc:Work
+       rdf:about=''><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource='http://purl.org/dc/dcmitype/StillImage' /><dc:title></dc:title></cc:Work></rdf:RDF></metadata><defs
+   id='defs15'>
+	
+	
+	
+	
+</defs>
+<rect
+     style='opacity:1;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.4;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1'
+     id='rect838'
+     width='34.307484'
+     height='34.307484'
+     x='0.2'
+     y='0.2'
+     ry='2.4380951' /><g
+   id='g841'
+   transform='translate(-9.1354275,1.1454149)'
+   style='stroke:#c87137;stroke-opacity:1;fill:none'><path
+     fill='#828282'
+     d='m 27.338224,5.9187619 c -0.04,0.061 -0.185,0.138 -0.259,0.138 l -1.861,-0.018 c -0.452,0 -0.905,0.321 -1.053,0.746 0,0 -0.082,0.233 -0.172,0.59 -0.09,0.357 -0.128,0.601 -0.128,0.601 -0.07,0.451 0.181,0.95 0.584,1.161 l 1.641,0.86 c 0.063,0.033 0.156,0.1720001 0.166,0.2730001 l 0.093,0.635 c 0.015,0.07 -0.033,0.23 -0.084,0.28 l -1.322,1.296 c -0.331,0.324 -0.418,0.878 -0.19,1.313 l 0.599,1 c 0.253,0.372 0.801,0.562 1.231,0.428 l 1.824,-0.558 c 0.099,0 0.198,0.038 0.254,0.083 l 0.515,0.38 c 0.06,0.04 0.139,0.187 0.138,0.259 l -0.018,1.852 c -0.004,0.456 0.316,0.913 0.746,1.063 0,0 0.233,0.082 0.59,0.172 0.357,0.09 0.601,0.128 0.601,0.128 0.026,0.004 0.13,0.012 0.156,0.012 0.408,0 0.822,-0.245 1.005,-0.596 l 0.86,-1.641 c 0.033,-0.063 0.172,-0.156 0.273,-0.166 l 0.663,-0.096 c 0.1,0 0.218,0.052 0.251,0.086 l 1.296,1.322 c 0.315,0.322 0.846,0.437 1.313,0.19 l 0.999,-0.599 c 0.382,-0.26 0.567,-0.79 0.429,-1.231 l -0.552,-1.767 c -0.021,-0.068 0.012,-0.232 0.078,-0.311 l 0.38,-0.515 c 0.04,-0.061 0.185,-0.138 0.259,-0.138 l 1.861,0.018 c 0.452,0 0.905,-0.321 1.053,-0.746 0,0 0.082,-0.233 0.172,-0.59 0.09,-0.357 0.128,-0.601 0.128,-0.601 0.07,-0.451 -0.181,-0.95 -0.584,-1.161 l -1.641,-0.8600001 c -0.063,-0.033 -0.156,-0.172 -0.166,-0.273 l -0.092,-0.633 c -0.015,-0.07 0.033,-0.23 0.084,-0.28 l 1.322,-1.296 c 0.331,-0.324 0.418,-0.878 0.19,-1.313 l -0.599,-1 c -0.253,-0.371 -0.8,-0.563 -1.231,-0.429 l -1.825,0.558 c -0.099,0 -0.198,-0.038 -0.254,-0.083 l -0.515,-0.38 c -0.06,-0.04 -0.139,-0.187 -0.138,-0.259 l 0.018,-1.852 c 0.004,-0.456 -0.316,-0.913 -0.746,-1.063 0,0 -0.233,-0.082 -0.59,-0.172 -0.357,-0.09 -0.601,-0.128 -0.601,-0.128 -0.026,-0.003 -0.13,-0.011 -0.156,-0.011 -0.408,0 -0.822,0.245 -1.005,0.596 l -0.86,1.641 c -0.033,0.063 -0.172,0.156 -0.273,0.166 l -0.663,0.095 c -0.1,0 -0.218,-0.052 -0.251,-0.086 l -1.296,-1.322 c -0.314,-0.321 -0.844,-0.437 -1.313,-0.19 l -1,0.598 c -0.382,0.26 -0.567,0.79 -0.429,1.231 l 0.552,1.767 c 0.021,0.068 -0.012,0.232 -0.078,0.311 z'
+     id='path6'
+     style='fill:none;stroke:#c87137;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1' /><path
+     fill='#828282'
+     d='m 32.782313,12.261224 c 1.654,0 3,-1.346 3,-2.9999995 0,-1.654 -1.346,-3 -3,-3 -1.654,0 -3,1.346 -3,3 0,1.6539995 1.346,2.9999995 3,2.9999995 z'
+     id='path8'
+     style='fill:#ffffff;stroke:#c87137;stroke-opacity:1;fill-opacity:1' /></g>
+<g
+     id='g847'
+     transform='translate(-21.935427,14.032489)'
+     style='stroke:#009a00;stroke-opacity:1'><path
+     fill='#828282'
+     d='m 27.338224,5.9187619 c -0.04,0.061 -0.185,0.138 -0.259,0.138 l -1.861,-0.018 c -0.452,0 -0.905,0.321 -1.053,0.746 0,0 -0.082,0.233 -0.172,0.59 -0.09,0.357 -0.128,0.601 -0.128,0.601 -0.07,0.451 0.181,0.95 0.584,1.161 l 1.641,0.86 c 0.063,0.033 0.156,0.1720001 0.166,0.2730001 l 0.093,0.635 c 0.015,0.07 -0.033,0.23 -0.084,0.28 l -1.322,1.296 c -0.331,0.324 -0.418,0.878 -0.19,1.313 l 0.599,1 c 0.253,0.372 0.801,0.562 1.231,0.428 l 1.824,-0.558 c 0.099,0 0.198,0.038 0.254,0.083 l 0.515,0.38 c 0.06,0.04 0.139,0.187 0.138,0.259 l -0.018,1.852 c -0.004,0.456 0.316,0.913 0.746,1.063 0,0 0.233,0.082 0.59,0.172 0.357,0.09 0.601,0.128 0.601,0.128 0.026,0.004 0.13,0.012 0.156,0.012 0.408,0 0.822,-0.245 1.005,-0.596 l 0.86,-1.641 c 0.033,-0.063 0.172,-0.156 0.273,-0.166 l 0.663,-0.096 c 0.1,0 0.218,0.052 0.251,0.086 l 1.296,1.322 c 0.315,0.322 0.846,0.437 1.313,0.19 l 0.999,-0.599 c 0.382,-0.26 0.567,-0.79 0.429,-1.231 l -0.552,-1.767 c -0.021,-0.068 0.012,-0.232 0.078,-0.311 l 0.38,-0.515 c 0.04,-0.061 0.185,-0.138 0.259,-0.138 l 1.861,0.018 c 0.452,0 0.905,-0.321 1.053,-0.746 0,0 0.082,-0.233 0.172,-0.59 0.09,-0.357 0.128,-0.601 0.128,-0.601 0.07,-0.451 -0.181,-0.95 -0.584,-1.161 l -1.641,-0.8600001 c -0.063,-0.033 -0.156,-0.172 -0.166,-0.273 l -0.092,-0.633 c -0.015,-0.07 0.033,-0.23 0.084,-0.28 l 1.322,-1.296 c 0.331,-0.324 0.418,-0.878 0.19,-1.313 l -0.599,-1 c -0.253,-0.371 -0.8,-0.563 -1.231,-0.429 l -1.825,0.558 c -0.099,0 -0.198,-0.038 -0.254,-0.083 l -0.515,-0.38 c -0.06,-0.04 -0.139,-0.187 -0.138,-0.259 l 0.018,-1.852 c 0.004,-0.456 -0.316,-0.913 -0.746,-1.063 0,0 -0.233,-0.082 -0.59,-0.172 -0.357,-0.09 -0.601,-0.128 -0.601,-0.128 -0.026,-0.003 -0.13,-0.011 -0.156,-0.011 -0.408,0 -0.822,0.245 -1.005,0.596 l -0.86,1.641 c -0.033,0.063 -0.172,0.156 -0.273,0.166 l -0.663,0.095 c -0.1,0 -0.218,-0.052 -0.251,-0.086 l -1.296,-1.322 c -0.314,-0.321 -0.844,-0.437 -1.313,-0.19 l -1,0.598 c -0.382,0.26 -0.567,0.79 -0.429,1.231 l 0.552,1.767 c 0.021,0.068 -0.012,0.232 -0.078,0.311 z'
+     id='path843'
+     style='fill:none;stroke:#009a00;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1' /><path
+     fill='#828282'
+     d='m 32.782313,12.261224 c 1.654,0 3,-1.346 3,-2.9999995 0,-1.654 -1.346,-3 -3,-3 -1.654,0 -3,1.346 -3,3 0,1.6539995 1.346,2.9999995 3,2.9999995 z'
+     id='path845'
+     style='fill:#ffffff;stroke:#009a00;stroke-opacity:1;fill-opacity:1' /></g><rect
+   style='fill:#f2f2f2;fill-opacity:1;stroke:#d9bc65;stroke-width:0.4;stroke-opacity:0.997059'
+   id='rect836'
+   width='0.34829932'
+   height='0.087074831'
+   x='40.838093'
+   y='42.753742'
+   ry='0.043537416'
+   rx='0.043537416' /></svg>
+  <text x='423' y='24' fill='black' font-family='Roboto,sans-serif' font-size='14.399999999999999' text-anchor='middle'>Acquirer</text>
 <svg x='512.4444444444445' y='32.0' width='61.111111111111114' height='40.0' viewBox='0 0 110 72' xmlns='http://www.w3.org/2000/svg'>
   <title>FIDO Web Pay - Issuer</title>
   <!-- Anders Rundgren 2021-->
@@ -2122,72 +1436,72 @@ is linked to a <i>clickable</i> number in a box:
   <rect fill='#f2f2f2' height='6' stroke='#404040' width='100' x='5' y='65'/>
   <rect fill='#f2f2f2' height='6' stroke='#404040' width='90' x='10' y='59'/>
 </svg>
-  <text x='543' y='24' fill='black' font-family='sans-serif' font-size='14.399999999999999' text-anchor='middle'>Issuer</text>
-  <line x1='302.4' y1='96' x2='191.1' y2='96' stroke-width='0.8' stroke='black' marker-end='url(#arrowHead)'/>
-  <text x='243' y='90.4' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>PaymentRequest</text>
+  <text x='543' y='24' fill='black' font-family='Roboto,sans-serif' font-size='14.399999999999999' text-anchor='middle'>Issuer</text>
+  <line x1='302.4' y1='96' x2='191.1' y2='96' stroke-width='0.8' stroke='#cc2020' marker-end='url(#arrowHead)'/>
+  <text x='243' y='90.4' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>PaymentRequest</text>
   <a href='#seq-1'>
-  <rect x='295.75' y='88.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
-  <text x='302' y='100' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>1</text>
+  <rect x='295.75' y='88.75' width='14' height='14' rx='3' fill='white' stroke='#404040' stroke-width='0.5'/>
+  <text x='302' y='100' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>1</text>
   </a>
   <rect x='141.75' y='118.75' width='86' height='50' fill='black' opacity='0.4' filter='url(#dropShaddow)'/>
   <rect x='139.75' y='116.75' width='86' height='50' fill='white' stroke-width='0.5' stroke='black'/>
   <rect x='139.75' y='116.75' width='86' height='5' fill='#deeafc' stroke-width='0.5' stroke='black'/>
-  <text x='183' y='146' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>Payment UI</text>
+  <text x='183' y='146' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>Payment UI</text>
   <a href='#seq-2'>
-  <rect x='132.5' y='112.25' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
-  <text x='139.75' y='123.5' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>2</text>
+  <rect x='132.5' y='112.25' width='14' height='14' rx='3' fill='white' stroke='#404040' stroke-width='0.5'/>
+  <text x='139.75' y='123.5' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>2</text>
   </a>
-  <line x1='63.6' y1='188' x2='174.9' y2='188' stroke-width='0.8' stroke='black' marker-end='url(#arrowHead)' stroke-dasharray='4'/>
-  <text x='123' y='182.4' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>Authorization</text>
+  <line x1='63.6' y1='188' x2='174.9' y2='188' stroke-width='0.8' stroke='#cc2020' marker-end='url(#arrowHead)' stroke-dasharray='4'/>
+  <text x='123' y='182.4' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>Authorization</text>
   <a href='#seq-3'>
-  <rect x='55.75' y='180.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
-  <text x='63' y='192' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>3</text>
+  <rect x='55.75' y='180.75' width='14' height='14' rx='3' fill='white' stroke='#404040' stroke-width='0.5'/>
+  <text x='63' y='192' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>3</text>
   </a>
   <path fill='black' opacity='0.4' d='M146,210.75 l86,0 l-8,22 l-86,0Z' filter='url(#dropShaddow)'/>
-  <path fill='#fff2cc' stroke='#404040' stroke-width='0.5' d='M144,208.75 l86,0 l-8,22 l-86,0Z'/>
-  <text x='185.8' y='224' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>Processing</text>
+  <path fill='#fff2dc' stroke='#404040' stroke-width='0.5' d='M144,208.75 l86,0 l-8,22 l-86,0Z'/>
+  <text x='185.8' y='224' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>Processing</text>
   <a href='#seq-4'>
-  <rect x='132.5' y='212.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
-  <text x='139.75' y='224' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>4</text>
+  <rect x='132.5' y='212.75' width='14' height='14' rx='3' fill='white' stroke='#404040' stroke-width='0.5'/>
+  <text x='139.75' y='224' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>4</text>
   </a>
-  <line x1='183.6' y1='252' x2='294.9' y2='252' stroke-width='0.8' stroke='black' marker-end='url(#arrowHead)'/>
-  <text x='243' y='246.4' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>FWP Assertion</text>
+  <line x1='183.6' y1='252' x2='294.9' y2='252' stroke-width='0.8' stroke='#cc2020' marker-end='url(#arrowHead)'/>
+  <text x='243' y='246.4' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>FWP Assertion</text>
   <a href='#seq-5'>
-  <rect x='175.75' y='244.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
-  <text x='183' y='256' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>5</text>
+  <rect x='175.75' y='244.75' width='14' height='14' rx='3' fill='white' stroke='#404040' stroke-width='0.5'/>
+  <text x='183' y='256' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>5</text>
   </a>
   <path fill='black' opacity='0.4' d='M266,274.75 l86,0 l-8,22 l-86,0Z' filter='url(#dropShaddow)'/>
-  <path fill='#fff2cc' stroke='#404040' stroke-width='0.5' d='M264,272.75 l86,0 l-8,22 l-86,0Z'/>
-  <text x='305.8' y='288' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>Processing</text>
+  <path fill='#fff2dc' stroke='#404040' stroke-width='0.5' d='M264,272.75 l86,0 l-8,22 l-86,0Z'/>
+  <text x='305.8' y='288' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>Processing</text>
   <a href='#seq-6'>
-  <rect x='252.5' y='276.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
-  <text x='259.75' y='288' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>6</text>
+  <rect x='252.5' y='276.75' width='14' height='14' rx='3' fill='white' stroke='#404040' stroke-width='0.5'/>
+  <text x='259.75' y='288' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>6</text>
   </a>
-  <line x1='303.6' y1='316' x2='414.9' y2='316' stroke-width='0.8' stroke='black' marker-end='url(#arrowHead)'/>
-  <text x='363' y='310.4' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>AcquirerRequest</text>
+  <line x1='303.6' y1='316' x2='414.9' y2='316' stroke-width='0.8' stroke='#cc2020' marker-end='url(#arrowHead)'/>
+  <text x='363' y='310.4' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>AcquirerRequest</text>
   <a href='#seq-7'>
-  <rect x='295.75' y='308.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
-  <text x='303' y='320' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>7</text>
+  <rect x='295.75' y='308.75' width='14' height='14' rx='3' fill='white' stroke='#404040' stroke-width='0.5'/>
+  <text x='303' y='320' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>7</text>
   </a>
   <path fill='black' opacity='0.4' d='M386,338.75 l86,0 l-8,22 l-86,0Z' filter='url(#dropShaddow)'/>
-  <path fill='#fff2cc' stroke='#404040' stroke-width='0.5' d='M384,336.75 l86,0 l-8,22 l-86,0Z'/>
-  <text x='425.8' y='352' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>Processing</text>
+  <path fill='#fff2dc' stroke='#404040' stroke-width='0.5' d='M384,336.75 l86,0 l-8,22 l-86,0Z'/>
+  <text x='425.8' y='352' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>Processing</text>
   <a href='#seq-8'>
-  <rect x='372.5' y='340.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
-  <text x='379.75' y='352' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>8</text>
+  <rect x='372.5' y='340.75' width='14' height='14' rx='3' fill='white' stroke='#404040' stroke-width='0.5'/>
+  <text x='379.75' y='352' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>8</text>
   </a>
-  <line x1='423.6' y1='380' x2='534.9' y2='380' stroke-width='0.8' stroke='black' marker-end='url(#arrowHead)'/>
-  <text x='483' y='374.4' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>IssuerRequest</text>
+  <line x1='423.6' y1='380' x2='534.9' y2='380' stroke-width='0.8' stroke='#cc2020' marker-end='url(#arrowHead)'/>
+  <text x='483' y='374.4' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>IssuerRequest</text>
   <a href='#seq-9'>
-  <rect x='415.75' y='372.75' width='14' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
-  <text x='423' y='384' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>9</text>
+  <rect x='415.75' y='372.75' width='14' height='14' rx='3' fill='white' stroke='#404040' stroke-width='0.5'/>
+  <text x='423' y='384' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>9</text>
   </a>
   <path fill='black' opacity='0.4' d='M506,402.75 l86,0 l-8,22 l-86,0Z' filter='url(#dropShaddow)'/>
-  <path fill='#fff2cc' stroke='#404040' stroke-width='0.5' d='M504,400.75 l86,0 l-8,22 l-86,0Z'/>
-  <text x='545.8' y='416' fill='black' font-family='sans-serif' font-size='12' text-anchor='middle'>Processing</text>
+  <path fill='#fff2dc' stroke='#404040' stroke-width='0.5' d='M504,400.75 l86,0 l-8,22 l-86,0Z'/>
+  <text x='545.8' y='416' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>Processing</text>
   <a href='#seq-10'>
-  <rect x='490.4' y='404.75' width='18.2' height='14' rx='3' fill='white' stroke='blue' stroke-width='0.5'/>
-  <text x='498.75' y='416' fill='blue' font-family='sans-serif' font-size='12' text-anchor='middle'>10</text>
+  <rect x='490.4' y='404.75' width='18.2' height='14' rx='3' fill='white' stroke='#404040' stroke-width='0.5'/>
+  <text x='498.75' y='416' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>10</text>
   </a>
 </svg>
   </div>
@@ -2232,47 +1546,47 @@ async function doPaymentRequest() {
 </pre>
 <div>
   When the <code>show()</code> method is invoked, the <span class="actor">Browser</span>
-  (FWP implementation) MUST perform the the following checks:
-  <ul>
-    <li>
-      There is an accompanying <code>data</code> property holding a
-      <i>JSON-serializable</i> JavaScript <kbd>Object</kbd> type.
-    </li>
-    <li>
-      The <code>data</code> object contains a <code>payee</code>
-      property holding a <i>non-empty</i> JavaScript <kbd>String</kbd> argument.
-    </li>
-    <li>
-      The <code>data</code> object contains a <code>networks</code>
-      property holding a <i>non-empty</i> JavaScript <kbd>Array</kbd> argument.
-    </li>
-    <li>
-      That each element in the <code>networks</code> array holds a
-      <i>JSON-serializable</i> JavaScript <kbd>Object</kbd> type.
-    </li>
-    <li>
-      That each element in the <code>networks</code> array contains a <code>name</code>
-      property holding a <i>non-empty</i> JavaScript <kbd>String</kbd> argument.
-    </li>
-    <li>
-      That none of the elements in the <code>networks</code> array contain other
-      elements, with the exception of an <i>optional</i> <code>networkData</code>
-      property holding arbitrary JavaScript data.
-    </li>
-    <li>
-      There is only <i>one</i> <code>PaymentItem</code> and it has a
-      <code>label</code> property with the argument <kbd>null</kbd>.
-    </li>
-    <li>
-      There is a <i>non-empty</i> <code>id</code> argument included in the
-      <code>details</code> parameter to the <code>PaymentRequest</code> constructor.
-    </li>
-  </ul>
+  (FWP implementation) MUST perform the following checks:
 </div>
-<div class="para">Any deviations MUST throw an exeption.</div>
+<ul>
+  <li>
+    There is an accompanying <code>data</code> attribute holding a
+    <i>JSON-serializable</i> JavaScript <kbd>Object</kbd> type.
+  </li>
+  <li>
+    The <code>data</code> object contains a <code>payee</code>
+    attribute holding a <i>non-empty</i> JavaScript <kbd>String</kbd> argument.
+  </li>
+  <li>
+    The <code>data</code> object contains a <code>networks</code>
+    attribute holding a JavaScript <kbd>Array</kbd> argument.
+  </li>
+  <li>
+    That the <code>networks</code> array holds a <i>non-empty</i> list of
+    <i>JSON-serializable</i> JavaScript <kbd>Object</kbd>s.
+  </li>
+  <li>
+    That each object in the <code>networks</code> array contains a <code>name</code>
+    attribute holding a <i>non-empty</i> JavaScript <kbd>String</kbd> argument.
+  </li>
+  <li>
+    That none of the objects in the <code>networks</code> array contain other
+    attributes, with the exception of an <i>optional</i> <code>networkData</code>
+    attribute holding arbitrary JavaScript data.
+  </li>
+  <li>
+    There is only <i>one</i> <code>PaymentItem</code> and it has a
+    <code>label</code> attribute with the argument <kbd>null</kbd>.
+  </li>
+  <li>
+    There is a <i>non-empty</i> <code>id</code> argument included in the
+    <code>details</code> parameter to the <code>PaymentRequest</code> constructor.
+  </li>
+</ul>
+<div class="para">Any deviations MUST throw an exception.</div>
 <div class="para">Note that the <code>name</code> properties in the <code>networks</code>
 array denote the actual payment methods, corresponding to the <code>paymentMethod</code>
-property in <a href="#prerequisites">FWP credentials</a>.</div>
+attribute in <a href="#prerequisites">FWP credentials</a>.</div>
 <div class="para">
   Note that the <code>canMakePayment()</code> method MUST return <kbd>true</kbd>
 if the <span class="actor">User</span> have one or more FWP credentials,
@@ -2332,14 +1646,14 @@ creates an FWP assertion which requires the following steps to be performed:
 <div>Description:</div>
 <table class="tftable">
 <tr><th>Element</th><th>Comment</th></tr>
-<tr><td><code>id</code></td><td><b class="actor">Merchant</b> transaction ID. Copy of of details.id</td></tr>
+<tr><td><code>id</code></td><td><b class="actor">Merchant</b> transaction ID. Copy of <code>details.id</code></td></tr>
 <tr><td><code>payee</code></td><td><b class="actor">Merchant</b> common name</td></tr>
 <tr><td><code>amount</code></td><td>Amount of money requested by the <b class="actor">Merchant</b></td></tr>
 </table>
 <div>
   This object is subsequently referred to as PaymentRequest Core Data (PRCD).
 </div>
-<div id="seq-4.2" class="step">4.2 Create a Hash of PaymentRequest Core Data (PRCD)</div>
+<div id="seq-4.2" class="step">4.2 Create a Hash of PaymentRequest Core Data (PRCDHASH)</div>
 <div class="para">
   Calculate a Base64Url-encoded SHA256 hash of PRCD, canonicalized according to
   <a href="https://tools.ietf.org/html/rfc8785"
@@ -2391,10 +1705,14 @@ creates an FWP assertion which requires the following steps to be performed:
     <td><code>payeeHost</code></td>
     <td>
       Host name as interpreted by the <b class="actor">Browser</b>.
-      Incuded for optional validation by the <b class="actor">Issuer</b>, aided by the <b class="actor">Acquirer</b>
+      Included for optional validation by the <b class="actor">Issuer</b>, 
+      aided by the <b class="actor">Acquirer</b>
     </td>
   </tr>
-  <tr><td><code>accountId</code></td><td><b class="actor">User</b> account number associated with the selected crdential</td></tr>
+  <tr>
+    <td><code>accountId</code></td>
+    <td><b class="actor">User</b> account number associated with the selected credential</td>
+  </tr>
   <tr>
     <td><code>paymentMethod</code></td>
     <td>
@@ -2405,7 +1723,7 @@ creates an FWP assertion which requires the following steps to be performed:
   <tr>
     <td><code>networkData</code></td>
     <td>
-      <i>Optional</i>.  This element MUST be included if
+      <i>Optional</i>.  This attribute MUST be included if
       specified in the <code>PaymentRequest</code> constructor
       for the particular <code>paymentMethod</code>, otherwise it MUST NOT be defined
     </td>
@@ -2465,14 +1783,14 @@ creates an FWP assertion which requires the following steps to be performed:
 }
 </pre>
 <div>
-  This operation adds a single element (<code>signature</code>) to AD.
+  This operation adds a single attribute (<code>signature</code>) to AD.
 </div>
-<div class="para">  This object is subsequently referred to as Signed Authorization Data (SAD).</div>
+<div class="para">  The resulting object is subsequently referred to as Signed Authorization Data (SAD).</div>
 <div class="para">
   <span style="color:red">
     NOTE: The current FIDO authenticator API (CTAP2)
     <i>is not compatible with JWS</i>,
-    which may require a slighly modified way dealing with the inner part of JWS/CT:
+    which may require a slightly modified way dealing with the inner part of JWS/CT:
   </span>
   <a href="https://github.com/w3c/webauthn/issues/1581"
      title="GitHub Issue">https://github.com/w3c/webauthn/issues/1581<img src="images/xtl.svg" alt="link"></a>.
@@ -2495,7 +1813,7 @@ creates an FWP assertion which requires the following steps to be performed:
 <div class="para">
   For privacy and security reasons, Signed Authorization Data (SAD) objects
   MUST be encrypted by a public key provided by the <b class="actor">Issuer</b>
-  through the selected payment credential"s <code>encryptionKey</code> element.
+  through the <code>encryptionKey</code> attribute of the selected payment credential.
   This specification mandates using JWE
   (<a href="https://tools.ietf.org/html/rfc7516"
       title="JWE">RFC7516<img src="images/xtl.svg" alt="link"></a>),
@@ -2524,7 +1842,7 @@ dvTiFvSkQ
 </div>
 <div class="para box comment">
   Note that due to the end-2-end encryption scheme, the domain 
-constraints usually associated with FIDO, do not apply.
+constraints associated with Web Authentication do not apply.
 </div> 
 
 <div id="seq-4.6" class="step">4.6 Assemble FWP Assertion</div>
@@ -2552,7 +1870,7 @@ constraints usually associated with FIDO, do not apply.
 <div>
   The <span class="msg">FWP Assertion</span> is made available
   to the <code>PaymentRequest</code> invocation code via the
-<code>PaymentResponse.details</code> element.
+<code>PaymentResponse.details</code> attribute.
 </div>
 
 <div class="step"><div id="seq-5" class="numbox">5</div>Send FWP Assertion</div>
@@ -2598,15 +1916,15 @@ or <code>fetch()</code> operation.
       <td><code>paymentRequest</code></td>
       <td>Copy of <a href="#seq-4.1">PRCD</a>, <i>recreated</i> by the <b class="actor">Merchant</b></td>
     </tr>
-    <tr><td><code>encryptedAuthorization</code></td><td>Copy of the same element in the <a href="#seq-4.6">FWP Assertion</a></td></tr>
-    <tr><td><code>paymentMethod</code></td><td>Copy of the same element in the <a href="#seq-4.6">FWP Assertion</a></td></tr>
+    <tr><td><code>encryptedAuthorization</code></td><td>Copy of the same attribute in the <a href="#seq-4.6">FWP Assertion</a></td></tr>
+    <tr><td><code>paymentMethod</code></td><td>Copy of the same attribute in the <a href="#seq-4.6">FWP Assertion</a></td></tr>
     <tr>
       <td><code>networkData</code></td>
       <td>
         <i>Optional</i>.  See <a href="#seq-4.3">Authorization Data</a>
       </td>
     </tr>
-    <tr><td><code>issuerId</code></td><td>Copy of the same element in the <a href="#seq-4.6">FWP Assertion</a></td></tr>
+    <tr><td><code>issuerId</code></td><td>Copy of the same attribute in the <a href="#seq-4.6">FWP Assertion</a></td></tr>
     <tr>
       <td><code>receiveAccount</code></td>
       <td>
@@ -2631,12 +1949,12 @@ or <code>fetch()</code> operation.
   </div>
   <div class="para">
     Note that authentication of the <b class="actor">Merchant</b> is out of scope
-    for this specfication.
+    for this specification.
   </div>
   <div class="comment box">
-    Since FWP offers &quot;Payment System Neutrality&quot;,
+    Since FWP supports <i>multiple</i> and <i>independent</i> payment systems,
     a <b class="actor">Merchant</b> may use different <b class="actor">Acquirer</b>
-    service providers, depending on <code>paymentMethod</code>.
+    service providers, depending on received <code>paymentMethod</code>.
   </div>
   <div class="step">
     <div id="seq-8" class="numbox">8</div>Process AcquirerRequest and Create IssuerRequest Object
@@ -2675,7 +1993,8 @@ or <code>fetch()</code> operation.
   </div>
   <div class="para">
     The next step is creating a suitable <span class="msg">IssuerRequest</span> object.
-    The exact definition is likely to be specific for each payment network and is therefore out of scope for this specification.
+    The exact definition is likely to be specific for each payment network and 
+    is therefore out of scope for this specification.
     The following <i>sample</i> outlines such an object:
   </div>
 <pre class="box">
@@ -2720,37 +2039,128 @@ or <code>fetch()</code> operation.
   <div class="step">
     <div id="seq-9" class="numbox">9</div>Send IssuerRequest Object
   </div>
-  <div>At this point the <b class="actor">Acquirer</b> sends the completed <span class="msg">IssuerRequest</span>
- object to the appropriate <b class="actor">Issuer</b>.
-Note that locating <b class="actor">Issuer</b> is depending on the payment network and <code>issuerId</code>.
-The sample the <span class="msg">IssuerRequest</span> object
-would presumably be sent to <kbd>https://mybank.fr/payment</kbd>.</div>
+  <div>
+    At this point the <b class="actor">Acquirer</b> sends the completed <span class="msg">IssuerRequest</span>
+    object to the designated <b class="actor">Issuer</b>.
+    Note that the method used for locating the proper <b class="actor">Issuer</b> depends on
+    the <code>paymentMethod</code> and <code>issuerId</code> attributes.
+    In the sample the <span class="msg">IssuerRequest</span> object
+    would presumably be sent to <span class="msg">https://mybank.fr/payment</span>.
+  </div>
   <div class="step">
     <div id="seq-10" class="numbox">10</div>Processing IssuerRequest
   </div>
   <div>
-    At this point the <b class="actor">Issuer</b> MUST perform a number of steps to verify the
-correctness of the received <span class="msg">IssuerRequest</span>.
-With respect to the <b class="actor">User</b> the following steps are the most significant:
+    Before initiating a payment transaction the <b class="actor">Issuer</b>
+    MUST decode and perform a number of steps to verify the
+    correctness of the received <span class="msg">IssuerRequest</span> object.
+    Any deviation MUST terminate the operation in progress and return an
+    error message to the <b class="actor">Acquirer</b> in a not here specified manner.
+</div>
+ <div class="step">
+    10.1 Core Validation.
+ </div>
+ <ul>
+   <li>
+     Verify that <span class="msg">IssuerRequest</span> schema-wise is properly formatted.
+   </li>
+   <li>
+     Verify that the <code>timeStamp</code> is within &quot;reasonable limits&quot;.
+   </li>
+   <li>
+     Verify that <code>acquirerRequest.paymentMethod</code> is supported.
+   </li>
+   <li>
+     Verify that <code>acquirerRequest.receiveAccount</code> is compatible with <code>acquirerRequest.paymentMethod</code>.
+   </li>
+   <li>
+     Verify that <code>acquirerRequest.issuerId</code> is compatible with <code>acquirerRequest.paymentMethod</code>
+     as well as matching the <b class="actor">Issuer</b>.
+   </li>
+ </ul>
 
-    10.1 Decrypt the encryptedAuthorization object in AREQ using the Issuer specific (but shared) decryption key. Set result as AD.
+<div class="step">
+10.2 Decode and Verify PaymentRequest Core Data (PRCD)
+</div>
+<ul>
+<li>
+  Verify that the <code>acquirerRequest.paymentRequest</code> data represents a valid <a href="#seq-4.1">PRCD</a> object.
+</li>
+<li>
+  Calculate a <a href="#seq-4.2">PRCDHASH</a> string of the <code>acquirerRequest.paymentRequest</code> data.
+</li>
+</ul>
+<div class="step">
+  10.3 Extract Signed Authorization Data (SAD)
+</div>
+<ul>
+<li>
+Decode the JWE compatible <a href="#seq-4.5">ESAD</a> string supplied in the 
+<code>acquirerRequest.encryptedAuthorization</code>.
+</li>
+<li>
+Verify that the public key suppled in the JWE header matches an existing private key of the <b class="actor">Issuer</b>.
+</li>
+<li>
+Decrypt the ESAD string using the private key retrieved in the previous operation.
+</li>
+<li>
+Parse the result of the previous operation as JSON and set result as <a href="#seq-4.4">SAD</a>.
+</li>
+<li>
+Verify that the SAD object schema-wise has the proper format.
+</li>
+</ul>
+<div class="step">
+  10.4 Validate Request Data
+</div>
+<ul>
+<li>
+Verify that the previously calculated PRCDHASH is equivalent to <code>SAD.requestHash.value</code>.
+That is, verifying that the <b class="actor">Merchant</b> payment claim corresponds to what the
+<b class="actor">User</b> have actually <i>seen and authorized</i>.
+</li>
+<li>
+Verify that <code>acquirerRequest.payeeHost</code> is equivalent to <code>SAD.payeeHost</code>.
+That is, adding yet another test that the <b class="actor">User</b> indeed have interacted with the
+right <b class="actor">Merchant</b>.
+</li>
+<li>
+  Vereify that the <code>SAD.timeStamp</code> is within limits. 
+ <i>Tentative:</i> CurrentTime - 600s &lt; <code>SAD.timeStamp</code> &lt; CurrentTime + 60s.
+</li>
+<li>
+Verify that an <i>optional</i> <code>SAD.networkData</code> complies with the <b class="actor">Issuer</b> specific requirements.
+</li>
+<li>
+<i>Optional</i>.  To cope with possible replays, verify that the received SAD
+has not already been utilized. Ideally, the <b class="actor">Issuer</b>
+SHOULD support <i>idempotent operation</i> to facilitate benign transaction retries.
+</li>
+</ul>
 
-    10.2 Retrieve the signature key declared in the JWS header of the AD signature element. Abort if unknown.
-
-    10.3 Verify that the retrieved signature key is associated with the AD accountId element. Abort on failure.
-
-    10.4 Validate the AD signature using the retrieved signature key. Abort on failure.
-
-    10.5 Perform the same calculation as specified in 4.1 on the received paymentRequest object and compare the result with the AD requestHash. Abort on failure.
-
-    10.6 Check that the AD timeStamp element is within limits. Tentative: CurrentTime - 600s &lt; timeStamp &lt; CurrentTime + 60s. Abort on failure.
-
-    10.7 To cope with possible replays, check that the received AD has not already been utilized. Ideally, the Issuer should support idempotent operation to facilitate benign transaction retries.
-
-    Available funds also needs to be validated but that is out of scope for this specification.
-  </div>
-
-  <div id="integration" class="header">
+<div class="step">
+  10.5 Validate Authorization Signature
+</div>
+<ul>
+<li>
+Verify the JWS/CT signature of the recovered SAD object.
+Since the public key is included in the JWS header, signature validation does not require database lookups.
+</li>
+<li>
+Verify that the aforementioned public key matches a <b class="actor">User</b>
+account equal to <code>SAD.accountId</code>. 
+</li>
+</ul>
+<div class="step">
+  Other Validation Steps
+</div> 
+<div>
+Obviously there are other things to verify but these are not directly related to FWP,
+like checking that the <b class="actor">User</b> has funds available matching the
+current request.
+</div>
+ <div id="integration" class="header">
     Integration
   </div>
   <div>
@@ -2765,12 +2175,12 @@ With respect to the <b class="actor">User</b> the following steps are the most s
     the BIN (Bank Identification Number) is set, while the rest are set to zeroes + Luhn check digit.
     E.g. VISA: 4972039000000004.  However, using <b class="actor">Issuer</b> URLs
     is also a viable alternative for card payments because the payment processors
-    associated with &quot;regular&quot; EMV and FWP payments do probably not
-    use the same end point.
+    associated with &quot;regular&quot; EMV and FWP payments would probably not
+    share end point.
   </div>
   <div class="para">
     For account-to-account payments there are currently no generally agreed upon standards
-    for consumer payments, making it hard to come up with FWP implementation guidlines.
+    for consumer payments, making it hard to come up with FWP implementation guidelines.
     Remapping existing card based systems and infrastructures seems though like a possible path.
   </div>
   <div class="para">
@@ -2822,18 +2232,23 @@ With respect to the <b class="actor">User</b> the following steps are the most s
     called <a href="https://en.wikipedia.org/wiki/Windows_CardSpace"
               title="CardSpace">Windows CardSpace<img src="images/xtl.svg" alt="link"></a>.
   </div>
+  <div class="para">
+    The <b class="actor">User</b> icon was derived from
+        <a href="https://commons.wikimedia.org/wiki/File:Crystal_Clear_kdm_user_female.svg"
+           title="User Icon">
+https://commons.wikimedia.org/wiki/File:Crystal_Clear_kdm_user_female.svg<img src="images/xtl.svg" alt="link"></a></div>
   <div id="version" class="header">
     Version
   </div>
   <table class="tftable">
     <tr><th>Date</th><th>Version</th><th>Comment</th></tr>
-    <tr><td>2020-03-10</td><td>0.1</td><td>Initial publishing</td></tr>
+    <tr><td>2020-03-12</td><td>0.1</td><td>Initial publishing</td></tr>
   </table>
   <div id="authors" class="header">
     Authors
   </div>
   <div>
-    The FWP specification is currently authored by Anders Rundgren (<kbd>anders.rundgren.net@gmail.com</kbd>).<br />
+    The FWP specification is currently authored by Anders Rundgren (anders.rundgren.net@gmail.com).<br />
   </div>
   <div class="header">
     Trademarks
