@@ -15,6 +15,8 @@ public class SequenceDiagram   {
     static final double PROC_WIDTH = 86;
     static final double PROC_SLANT = 8;
     static final double PROC_HEIGHT = 22;
+    static final String PROC_COLOR = "#fff2dc";
+    static final String PROC_STROKE = "#404040";
 
     static final double VBAR_WIDTH = 1.2;
     static final double VBAR_START_Y = ACTOR_TOP_Y + ACTOR_HEIGHT - 5;
@@ -87,7 +89,7 @@ public class SequenceDiagram   {
            .append(convert(width))
            .append("' height='")
            .append(convert(NUMB_WIDTH))
-           .append("' rx='3' fill='white' stroke='black' stroke-width='")
+           .append("' rx='3' fill='white' stroke='" + PROC_STROKE + "' stroke-width='")
            .append(convert(STROKE_WIDTH))
            .append("'/>\n");
         _text(fontX, centerY, String.valueOf(n), FONT_SIZE, CLICKABLE_COLOR);
@@ -129,7 +131,7 @@ public class SequenceDiagram   {
            .append(" l")
            .append(convert(-PROC_WIDTH))
            .append(",0Z' filter='url(#dropShaddow)'/>\n")
-           .append("  <path fill='#fff2cc' stroke='#404040' stroke-width='0.5' d='M")
+           .append("  <path fill='" + PROC_COLOR + "' stroke='" + PROC_STROKE + "' stroke-width='0.5' d='M")
            .append(convert(startX))
            .append(',')
            .append(convert(rectY))

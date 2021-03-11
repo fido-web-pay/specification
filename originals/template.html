@@ -14,7 +14,7 @@
 .tftable td {background-color: floralwhite;padding: 0.4em 0.5em;border-width: 1px;border-style: solid; border-color: black}
 .tftable th {font-weight: normal;padding: 0.4em 0.5em;background-color: #f8f8f8;text-align: center;border-width: 1px;border-style: solid; border-color: black}
 .json {word-break:break-all;background-color:#f8f8f8;padding:1em;border-width:1px;border-style:solid;border-color:#a9a9a9;box-shadow:0.3em 0.3em 0.3em #d0d0d0}
-body {margin:1em;font-size:10pt;font-family:Roboto,Verdana,"Bitstream Vera Sans","DejaVu Sans",Arial,"Liberation Sans";background-color:white}
+body {margin:1em;font-size:10pt;font-family:Roboto,sans-serif;background-color:white}
 code {font-family:"Noto Mono",monospace;color:maroon;font-weight:bolder}
 kbd {font-family: "Noto Mono",monospace;font-weight:bolder}
 pre {font-family:"Noto Mono",monospace;margin: 0.8em 0 1em 0;padding:0.6em 1em;overflow-x:auto;background-color: #f8f8f8}
@@ -54,7 +54,7 @@ in order to accomplish the following subgoals:
       Eliminate dependencies on external tokenization services.
     </li>
     <li>
-      Limit the amount of personally identifiable information (PII), shared
+      Limit the amount of personally identifiable information (PII) shared
       with <i>third parties</i>, to the name of the user's bank.
       This is presumably compliant with
       <a href="https://www.pcisecuritystandards.org"
@@ -63,7 +63,7 @@ in order to accomplish the following subgoals:
 title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
     </li>
     <li>
-      Separate the formats for account numbers and issuer (bank branch) identifiers.
+      Separate the format for account numbers from issuer (bank branch) identifiers.
       The latter should preferably be expressed as URLs, removing the need for externally managed
       databases holding issuer payment processor end-points.
     </li>
@@ -131,8 +131,9 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
   </div>
   <div class="para box comment">
     Note that FWP effectively forms a browser-resident &quot;Wallet&quot;,
-    holding an arbitrary number of payment credentials, each representing a 
-    specific <span class="actor">Issuer</span>
+    holding an arbitrary number of payment credentials, each representing a
+    specific <span class="actor">Issuer</span>,
+    <span class="actor">User</span> account,
     and <code class="reserved">paymentMethod</code>.
   </div>
   <div id="enrollment" class="header">
@@ -151,7 +152,8 @@ to securely distinguish between &quot;ordinary&quot; FIDO keys,
   <div class="para">
     It would be great if the enrollment system could handle
   <i>multiple credentials in a single operation</i>, because an <span class="actor">Issuer</span> may want to
-    support an International card network as well as a national or regional payment network &#x1f609;
+    support an International card network as well as a national or regional payment network 
+    <span style="font-family:Roboto,sans-serif,Segoe UI">&#x1f60e;</span>
   </div>
   <div class="para">
     It MAY be technically feasible using a FIDO key associated with an FWP credential
@@ -565,8 +567,8 @@ or <code>fetch()</code> operation.
   },
   "encryptedAuthorization": <i>"ESAD"</i>,
   "paymentMethod": "https://europeanpaymentsinitiative.eu/fwp",
-  "networkData": "additional stuff...",
   "issuerId": "https://mybank.fr/payment"
+  "networkData": "additional stuff...",
   "receiveAccount": "123456789",
   "clientIp": "220.13.198.144",
   "timeStamp": "2021-03-09T10:32:36+01:00"
@@ -580,14 +582,20 @@ or <code>fetch()</code> operation.
       <td>Copy of <a href="#seq-4.1">PRCD</a>, <i>recreated</i> by the <b class="actor">Merchant</b></td>
     </tr>
     <tr><td><code>encryptedAuthorization</code></td><td>Copy of the same attribute in the <a href="#seq-4.6">FWP Assertion</a></td></tr>
-    <tr><td><code>paymentMethod</code></td><td>Copy of the same attribute in the <a href="#seq-4.6">FWP Assertion</a></td></tr>
+    <tr>
+      <td><code>paymentMethod</code></td>
+      <td>Copy of the same attribute in the <a href="#seq-4.6">FWP Assertion</a></td>
+    </tr>
+    <tr>
+      <td><code>issuerId</code></td>
+      <td>Copy of the same attribute in the <a href="#seq-4.6">FWP Assertion</a></td>
+    </tr>
     <tr>
       <td><code>networkData</code></td>
       <td>
         <i>Optional</i>.  See <a href="#seq-4.3">Authorization Data</a>
       </td>
     </tr>
-    <tr><td><code>issuerId</code></td><td>Copy of the same attribute in the <a href="#seq-4.6">FWP Assertion</a></td></tr>
     <tr>
       <td><code>receiveAccount</code></td>
       <td>
@@ -660,7 +668,7 @@ or <code>fetch()</code> operation.
     is therefore out of scope for this specification.
     The following <i>sample</i> outlines such an object:
   </div>
-<pre class="box">
+  <pre class="box">
 {
   "acquirerRequest": {
     "paymentRequest": {
@@ -673,8 +681,8 @@ or <code>fetch()</code> operation.
     },
     "encryptedAuthorization": <i>"ESAD"</i>,
     "paymentMethod": "https://europeanpaymentsinitiative.eu/fwp",
-    "networkData": "additional stuff...",
     "issuerId": "https://mybank.fr/payment"
+    "networkData": "additional stuff...",
     "receiveAccount": "123456789",
     "clientIp": "220.13.198.144",
     "timeStamp": "2021-03-09T10:32:36+01:00"
@@ -762,7 +770,8 @@ Decode the JWE compatible <a href="#seq-4.5">ESAD</a> string supplied in the
 <code>acquirerRequest.encryptedAuthorization</code>.
 </li>
 <li>
-Verify that the public key suppled in the JWE header matches an existing private key of the <b class="actor">Issuer</b>.
+Verify that the public key declared in the JWE header matches an
+existing decryption (private) key of the <b class="actor">Issuer</b>.
 </li>
 <li>
 Decrypt the ESAD string using the private key retrieved in the previous operation.
@@ -789,7 +798,7 @@ That is, adding yet another test that the <b class="actor">User</b> indeed have 
 right <b class="actor">Merchant</b>.
 </li>
 <li>
-  Vereify that the <code>SAD.timeStamp</code> is within limits. 
+  Verify that the <code>SAD.timeStamp</code> is within limits. 
  <i>Tentative:</i> CurrentTime - 600s &lt; <code>SAD.timeStamp</code> &lt; CurrentTime + 60s.
 </li>
 <li>
@@ -827,7 +836,7 @@ current request.
     Integration
   </div>
   <div>
-    It is obvious that the integration of systems like FWP in payment networks
+    It is pretty clear that the integration of systems like FWP in payment networks
     is crucial for acceptance by the market.
   </div>
   <div class="para">
@@ -843,8 +852,8 @@ current request.
   </div>
   <div class="para">
     For account-to-account payments there are currently no generally agreed upon standards
-    for consumer payments, making it hard to come up with FWP implementation guidelines.
-    Remapping existing card based systems and infrastructures seems though like a possible path.
+    for consumer payments, but remapping existing card based systems and infrastructures
+    seems though like a possible path.
   </div>
   <div class="para">
     Open Banking may also become a factor because there is work under way making non-OAuth2
