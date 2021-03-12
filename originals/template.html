@@ -493,6 +493,13 @@ creates an FWP assertion which requires the following steps to be performed:
       title="JWE">RFC7516<img src="images/xtl.svg" alt="link"></a>),
   in the compact serialization mode. The selection between
   RSA or ECDH encryption schemes is at the discretion of the <b class="actor">Issuer</b>.
+</div>
+<div class="para">
+  The actual JWE algorithms to use are defined by the
+  <code>contentEncryptionAlgorithm</code> and 
+  <code>keyEncryptionAlgorithm</code> attributes of the selected payment credential.
+</div>
+<div class="para">
   SAD objects MUST be JSON-serialized to UTF-8 before being encrypted.
   The resulting JWE string would look something like this
   (with line breaks for display purposes only):

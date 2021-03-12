@@ -6,7 +6,7 @@
   <property name="originals.dir" location="."/>
 
     <target name="help">
-    <echo message="Targets: sequencediagram publish draft"/>
+    <echo message="Targets: sequencediagram acquirericon publish draft"/>
   </target>
 	
   <target name="_compile">
@@ -49,6 +49,19 @@
         </java>
         <delete dir="${temp.dir}"/>
     </target>
+
+  <target name="acquirericon" depends="_compile">
+    <java fork="yes"
+          classname="AcquirerIcon"
+            dir="${temp.dir}"
+          failonerror="true">
+      <classpath>
+        <pathelement path="${temp.dir}"/>
+      </classpath>
+      <arg value="${originals.dir}"/>
+    </java>
+    <delete dir="${temp.dir}"/>
+  </target>
 
   <target name="publish" depends="draft">
     <copy file="../draft.html" tofile="../index.html" overwrite="true"/>

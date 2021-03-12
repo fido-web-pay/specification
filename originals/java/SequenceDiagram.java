@@ -354,7 +354,7 @@ public class SequenceDiagram   {
 
     public static void main(String[] argc) {
         try {
-            new SequenceDiagram  (argc[0] + File.separator);
+            new SequenceDiagram(argc[0] + File.separator);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
