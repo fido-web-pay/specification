@@ -5,7 +5,7 @@ import java.io.FileOutputStream;
 
 public class AcquirerIcon {
 
-    static final double COG_STROKE_WIDTH = 5;
+    static final double COG_STROKE_WIDTH = 20;
 
      static final double BIG_X            = 500;
      static final double BIG_Y            = 500;
@@ -16,8 +16,8 @@ public class AcquirerIcon {
      static final double BIG_GEAR_ANGLE   = 0;
      static final double BIG_OUTER_WIDTH_PERCENT  = 0.1;
      static final double BIG_INNER_WIDTH_PERCENT  = 0.5;
-     static final String BIG_STROKE       = "blue";
-     static final String BIG_FILL         = "red";
+     static final String BIG_STROKE       = "#c87137";
+     static final String BIG_FILL         = "#ffeb61";
 
     StringBuilder svg = new StringBuilder("<svg x='0' y='0' width='1000' height='1000' " +
                                           "xmlns='http://www.w3.org/2000/svg'>\n");
@@ -60,7 +60,7 @@ public class AcquirerIcon {
                  String stroke, String fill) throws Exception {
             svg.append("<path stroke='")
                .append(stroke)
-               .append("' fill='")
+               .append("' stroke-width='" + COG_STROKE_WIDTH + "' fill='")
                .append(fill)
                .append("' d='M");
             center = new Cordinates(x, y);
@@ -76,7 +76,16 @@ public class AcquirerIcon {
                   System.out.println(gearAngle);
                 gearAngle += (Math.PI * 2) / cogs;
             }
-            svg.append("z'/>\n");
+            svg.append("z'/>\n")
+               .append("<circle stroke='")
+               .append(stroke)
+               .append("' stroke-width='" + COG_STROKE_WIDTH + "' fill='white' r='")
+               .append(shaftRadius)
+               .append("' cx='")
+               .append(x)
+               .append("' cy='")
+               .append(y)
+               .append("'/>\n");
             System.out.println(svg.toString());
         }
   
