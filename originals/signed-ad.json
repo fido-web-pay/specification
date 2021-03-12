@@ -1,4 +1,5 @@
 {
+  "version": "1",
   "requestHash": {
     "algorithm": "S256",
     "value": "-5AfYJfNayqcxJs2nqkUm7EKKLS1oPumgWNWc1BCPuQ"
@@ -19,5 +20,5 @@
     }
   },
   "timeStamp": "2021-03-09T10:32:35+01:00",
-  "signature": "eyJhbGciOiJFUzI1NiIsImp3ayI6eyJrdHkiOiJFQyIsImNydiI6IlAtMjU2IiwieCI6IjZCS3hwdHk4Y0ktZXhEekNraC1nb1U2ZFhxM01iY1kwY2QxTGFBeGlOclUiLCJ5IjoibUNiY3ZVem00NGozTHQyYjVCUHlRbG9ROTF0ZjJEMlYtZ3plVXhXYVVkZyJ9fQ..x5Cn16130rB1CBOo5h7rU_3Ln96Xc2aC1B3tkzmfPMaKTkf3LyDmUlT6IM_RRUiXGKBc0PkCnt0LnQG_-kYjcw"
+  "signature": "eyJhbGciOiJFUzI1NiJ9..5WaPL_S0zLIAzkptti7CxdAqXtgosdG2lUWoELuy3ONSWUGJC5vxnkcdA0jYsebcomHpfpsmO5Y6IcZ8bBdvQA"
 }

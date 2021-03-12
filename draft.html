@@ -92,7 +92,7 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
   </div>
   <div>
     Throughout the rest of this document, actor names are
-    written as <span class="actor">Actor Name</span>.
+    written as <span class="actor">Name</span>.
     The <span class="actor">Browser</span> actor is in this specification
     considered to be equivalent to &quot;User Agent&quot;.
     An <span class="actor">Acquirer</span> is in this specification
@@ -104,7 +104,7 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
   </div>
   <div>
     The steps outlined in <a href="#operation">Detailed Operation</a>
-    depend on that the <span class="actor">User</span> already has received
+    depend on that the <span class="actor">User</span> already have received
     one or more <i>payment credentials</i>
     (&quot;Virtual Cards&quot;) in an <a href="#enrollment">Enrollment</a> process.
     A payment credential is supposed to at least contain the following elements:
@@ -1515,13 +1515,13 @@ the <b class="actor">Acquirer</b> and <b class="actor">Issuer</b>,
   At this point the <b class="actor">User</b> is assumed to have clicked on
   a &quot;Buy&quot; button (after first having selected an FWP compliant payment method),
   causing a <b class="actor">Merchant</b> Web page to invoke 
-  the <code>doPaymentRequest()</code> method:
+  a custom doPaymentRequest() method, like in the following sample:
 </div>
 <pre class="box">
 // FWP sample code
 
 const methodData = [{
-  supportedMethods: "fido-web-pay",
+  supportedMethods: "fido-web-pay/v1",
   data: {
     payee: "Space Shop",  // Shown in the UI
     networks: [{
@@ -1547,7 +1547,7 @@ async function doPaymentRequest() {
 }
 </pre>
 <div>
-  When the <code>show()</code> method is invoked, the <span class="actor">Browser</span>
+  When the <code>PaymentRequest.show()</code> method is invoked, the <span class="actor">Browser</span>
   (FWP implementation) MUST perform the following checks:
 </div>
 <ul>
@@ -1564,7 +1564,7 @@ async function doPaymentRequest() {
     attribute holding a JavaScript <kbd>Array</kbd> argument.
   </li>
   <li>
-    That the <code>networks</code> array holds a <i>non-empty</i> list of
+    The <code>networks</code> array holds a <i>non-empty</i> list of
     <i>JSON-serializable</i> JavaScript <kbd>Object</kbd>s.
   </li>
   <li>
@@ -1590,14 +1590,14 @@ async function doPaymentRequest() {
 array denote the actual payment methods, corresponding to the <code>paymentMethod</code>
 attribute in <a href="#prerequisites">FWP credentials</a>.</div>
 <div class="para">
-  Note that the <code>canMakePayment()</code> method MUST return <kbd>true</kbd>
+  Note that the <code>PaymentRequest.canMakePayment()</code> method MUST return <kbd>true</kbd>
 if the <span class="actor">User</span> have one or more FWP credentials,
 regardless if they match the associated <code>PaymentRequest</code> list or not;
 else it MUST return <kbd>false</kbd>.
 </div>
 <div class="step"><div id="seq-2" class="numbox">2</div>Show Payment Authorization UI</div>
   <div style="margin-bottom:0.8em">
-    After a successful invocation of the <code>show()</code>
+    After a successful invocation of the <code>PaymentRequest.show()</code>
     method, the <b class="actor">Browser</b> responds with
     a payment authorization UI like the following:
   </div>
@@ -1606,12 +1606,12 @@ else it MUST return <kbd>false</kbd>.
   </div>
   <div>Non-normative UI in &quot;dark mode&quot;.</div>
   <div class="para">
-    If the <b class="actor">User</b> have no matching payment credentials,
+    If the <b class="actor">User</b> has no matching payment credentials,
     the <b class="actor">Browser</b> MUST indicate that and give the <b class="actor">User</b>
     an option to return to the <b class="actor">Merchant</b> &quot;Checkout&quot; page.
   </div>
   <div class="para">
-    If the <b class="actor">User</b> have multiple matching payment credentials,
+    If the <b class="actor">User</b> has multiple matching payment credentials,
     the <b class="actor">Browser</b> MUST provide a way to select a specific credential.
     In the sample UI shown above, the <b class="actor">User</b>
     can swipe credentials to the left and right, while arrow symbols are used to show if there
@@ -1677,6 +1677,7 @@ creates an FWP assertion which requires the following steps to be performed:
 </div>
 <pre class="box">
 {
+  "version": "1",
   "requestHash": {
     "algorithm": "S256",
     "value": "-5AfYJfNayqcxJs2nqkUm7EKKLS1oPumgWNWc1BCPuQ"
@@ -1702,12 +1703,19 @@ creates an FWP assertion which requires the following steps to be performed:
 <div>Description:</div>
 <table class="tftable">
   <tr><th>Element</th><th>Comment</th></tr>
-  <tr><td><code>requestHash</code></td><td>PRCDHASH and associated hash algorithm</td></tr>
+  <tr>
+    <td><code>version</code></td>
+    <td>FWP assertion data version.  This specification covers version &quot;1&quot;</td>
+  </tr>
+  <tr>
+    <td><code>requestHash</code></td>
+    <td>PRCDHASH and associated hash algorithm</td>
+  </tr>
   <tr>
     <td><code>payeeHost</code></td>
     <td>
       Host name as interpreted by the <b class="actor">Browser</b>.
-      Included for optional validation by the <b class="actor">Issuer</b>, 
+      Included for optional validation by the <b class="actor">Issuer</b>,
       aided by the <b class="actor">Acquirer</b>
     </td>
   </tr>
@@ -1761,6 +1769,7 @@ creates an FWP assertion which requires the following steps to be performed:
 </div>
 <pre class="box">
 {
+  "version": "1",
   "requestHash": {
     "algorithm": "S256",
     "value": "-5AfYJfNayqcxJs2nqkUm7EKKLS1oPumgWNWc1BCPuQ"
@@ -1781,7 +1790,7 @@ creates an FWP assertion which requires the following steps to be performed:
     }
   },
   "timeStamp": "2021-03-09T10:32:35+01:00",
-  "signature": "eyJhbGciOiJFUzI1NiIsImp3ayI6eyJrdHkiOiJFQyIsImNydiI6IlAtMjU2IiwieCI6IjZCS3hwdHk4Y0ktZXhEekNraC1nb1U2ZFhxM01iY1kwY2QxTGFBeGlOclUiLCJ5IjoibUNiY3ZVem00NGozTHQyYjVCUHlRbG9ROTF0ZjJEMlYtZ3plVXhXYVVkZyJ9fQ..x5Cn16130rB1CBOo5h7rU_3Ln96Xc2aC1B3tkzmfPMaKTkf3LyDmUlT6IM_RRUiXGKBc0PkCnt0LnQG_-kYjcw"
+  "signature": "eyJhbGciOiJFUzI1NiJ9..5WaPL_S0zLIAzkptti7CxdAqXtgosdG2lUWoELuy3ONSWUGJC5vxnkcdA0jYsebcomHpfpsmO5Y6IcZ8bBdvQA"
 }
 </pre>
 <div>
@@ -1918,7 +1927,10 @@ or <code>fetch()</code> operation.
       <td><code>paymentRequest</code></td>
       <td>Copy of <a href="#seq-4.1">PRCD</a>, <i>recreated</i> by the <b class="actor">Merchant</b></td>
     </tr>
-    <tr><td><code>encryptedAuthorization</code></td><td>Copy of the same attribute in the <a href="#seq-4.6">FWP Assertion</a></td></tr>
+    <tr>
+      <td><code>encryptedAuthorization</code></td>
+      <td>Copy of the same attribute in the <a href="#seq-4.6">FWP Assertion</a></td>
+    </tr>
     <tr>
       <td><code>paymentMethod</code></td>
       <td>Copy of the same attribute in the <a href="#seq-4.6">FWP Assertion</a></td>
@@ -2034,7 +2046,10 @@ or <code>fetch()</code> operation.
     <tr><th>Element</th><th>Comment</th></tr>
     <tr>
       <td><code>acquirerRequest</code></td>
-      <td>Copy of the <a href="#seq-6">AcquirerRequest</a> object received from the <b class="actor">Merchant</b></td>
+      <td>
+        Copy of the <a href="#seq-6">AcquirerRequest</a> object
+        received from the <b class="actor">Merchant</b>
+      </td>
     </tr>
     <tr>
       <td><code>payeeHost</code></td>
@@ -2042,7 +2057,10 @@ or <code>fetch()</code> operation.
         The <b class="actor">Merchant</b> host name registered by the <b class="actor">Acquirer</b>
       </td>
     </tr>
-    <tr><td><code>timeStamp</code></td><td>ISO time stamp generated by the <b class="actor">Acquirer</b></td></tr>
+    <tr>
+      <td><code>timeStamp</code></td>
+      <td>ISO time stamp generated by the <b class="actor">Acquirer</b></td>
+    </tr>
   </table>
   <div class="step">
     <div id="seq-9" class="numbox">9</div>Send IssuerRequest Object
@@ -2079,10 +2097,12 @@ or <code>fetch()</code> operation.
      Verify that <code>acquirerRequest.paymentMethod</code> is supported.
    </li>
    <li>
-     Verify that <code>acquirerRequest.receiveAccount</code> is compatible with <code>acquirerRequest.paymentMethod</code>.
+     Verify that <code>acquirerRequest.receiveAccount</code> 
+is compatible with <code>acquirerRequest.paymentMethod</code>.
    </li>
    <li>
-     Verify that <code>acquirerRequest.issuerId</code> is compatible with <code>acquirerRequest.paymentMethod</code>
+     Verify that <code>acquirerRequest.issuerId</code> 
+is compatible with <code>acquirerRequest.paymentMethod</code>
      as well as matching the <b class="actor">Issuer</b>.
    </li>
  </ul>
@@ -2092,10 +2112,12 @@ or <code>fetch()</code> operation.
 </div>
 <ul>
 <li>
-  Verify that the <code>acquirerRequest.paymentRequest</code> data represents a valid <a href="#seq-4.1">PRCD</a> object.
+  Verify that the <code>acquirerRequest.paymentRequest</code> 
+data represents a valid <a href="#seq-4.1">PRCD</a> object.
 </li>
 <li>
-  Calculate a <a href="#seq-4.2">PRCDHASH</a> string of the <code>acquirerRequest.paymentRequest</code> data.
+  Calculate a <a href="#seq-4.2">PRCDHASH</a> string of the 
+<code>acquirerRequest.paymentRequest</code> data.
 </li>
 </ul>
 <div class="step">
@@ -2125,26 +2147,31 @@ Verify that the SAD object schema-wise has the proper format.
 </div>
 <ul>
 <li>
+Verify that <code>SAD.version</code> is supported.
+</li>
+<li>
 Verify that the previously calculated PRCDHASH is equivalent to <code>SAD.requestHash.value</code>.
 That is, verifying that the <b class="actor">Merchant</b> payment claim corresponds to what the
 <b class="actor">User</b> have actually <i>seen and authorized</i>.
 </li>
 <li>
 Verify that <code>acquirerRequest.payeeHost</code> is equivalent to <code>SAD.payeeHost</code>.
-That is, adding yet another test that the <b class="actor">User</b> indeed have interacted with the
-right <b class="actor">Merchant</b>.
+That is, verifying that the <b class="actor">User</b> was not subject to phishing.
+Note that phishing attacks against FWP are not useful for stealing money,
+but for redirecting purchased goods to another address.
 </li>
 <li>
-  Verify that the <code>SAD.timeStamp</code> is within limits. 
- <i>Tentative:</i> CurrentTime - 600s &lt; <code>SAD.timeStamp</code> &lt; CurrentTime + 60s.
+  Verify that the <code>SAD.timeStamp</code> is within &quot;reasonable limits&quot;.
+  <i>Tentative:</i> CurrentTime - 600s &lt; <code>SAD.timeStamp</code> &lt; CurrentTime + 60s.
 </li>
 <li>
-Verify that an <i>optional</i> <code>SAD.networkData</code> complies with the <b class="actor">Issuer</b> specific requirements.
+Verify that the <i>optional</i> <code>SAD.networkData</code> attribute complies 
+with the <b class="actor">Issuer</b> specific requirements.
 </li>
 <li>
 <i>Optional</i>.  To cope with possible replays, verify that the received SAD
 has not already been utilized. Ideally, the <b class="actor">Issuer</b>
-SHOULD support <i>idempotent operation</i> to facilitate benign transaction retries.
+SHOULD support <i>idempotent operation</i> to facilitate legitimate transaction retries.
 </li>
 </ul>
 
@@ -2154,7 +2181,8 @@ SHOULD support <i>idempotent operation</i> to facilitate benign transaction retr
 <ul>
 <li>
 Verify the JWS/CT signature of the recovered SAD object.
-Since the public key is included in the JWS header, signature validation does not require database lookups.
+Since the public key is included in the JWS header, signature validation 
+does not require database lookups.
 </li>
 <li>
 Verify that the aforementioned public key matches a <b class="actor">User</b>
@@ -2183,9 +2211,9 @@ current request.
     the <code class="reserved">issuerId</code> would in this case hold a &quot;neutered&quot; PAN where
     the BIN (Bank Identification Number) is set, while the rest are set to zeroes + Luhn check digit.
     E.g. VISA: 4972039000000004.  However, using <b class="actor">Issuer</b> URLs
-    is also a viable alternative for card payments because the payment processors
+    is also a viable alternative for card payments because payment processors
     associated with &quot;regular&quot; EMV and FWP payments would probably not
-    share end point.
+    share end points.
   </div>
   <div class="para">
     For account-to-account payments there are currently no generally agreed upon standards
@@ -2206,17 +2234,17 @@ current request.
     Extensions
   </div>
   <div>
-    The FWP core is loosely derived from a PoC system known as
+    The FWP <i>client</i> is loosely derived from a proof-of-concept system called
     <a href="https://cyberphone.github.io/doc/saturn/"
        title="Saturn">Saturn<img src="images/xtl.svg" alt="link" /></a>.
-    By building on this core, Saturn features like the following could potentially be added:
+    By continuing along this path, features like the following could potentially be added:
     <ul style="margin-bottom:0.3em">
       <li>
         Support for <i>non-direct payments</i>,
         including secure (<i>tokenized</i>) versions of Card-on-File.
       </li>
       <li>
-        Support for <i>refunding</i> a <b class="actor">User</b>.
+        Support for <b class="actor">User</b> <i>refunding</i>.
       </li>
       <li>
         Support for universal <i>digital receipts</i>.
@@ -2226,13 +2254,23 @@ current request.
         <b class="actor">Issuer</b> and <b class="actor">User</b>.
       </li>
     </ul>
-    Not that some of the features above could impact the PaymentRequest API.
+    Note that <i>some</i> of the features above could impact the PaymentRequest API.
   </div>
   <div class="para">
     A radical change would be moving the FWP implementation down into the client platform layer.
-    This would open FWP to other payment scenarios like point-of-sale (PoS) and person-to-person (P2P).
-    It would also make it considerably easier for alternative browser vendors adopting the FWP system.
+    This would open FWP to other scenarios like:
   </div>
+<ul style="margin-bottom:0.3em">
+  <li>
+    Point-of-sale (PoS) payments.
+  </li>
+  <li>
+    Person-to-person (P2P) payments.
+  </li>
+</ul>
+    Such a change would also make it considerably easier for alternative 
+browser vendors adopting the FWP system
+since they would not have to build a copy of FWP themselves.
   <div id="acknowledgements" class="header">
     Acknowledgements
   </div>
@@ -2242,12 +2280,13 @@ current request.
               title="CardSpace">Windows CardSpace<img src="images/xtl.svg" alt="link"></a>.
   </div>
   <div class="para">
-    The <b class="actor">User</b> icon was derived from
-        <a href="https://commons.wikimedia.org/wiki/File:Crystal_Clear_kdm_user_female.svg"
+    The <b class="actor">User</b> icon was fetched from
+        <a style="word-break:break-all;white-space:normal"
+ href="https://commons.wikimedia.org/wiki/File:Crystal_Clear_kdm_user_female.svg"
            title="User Icon">
 https://commons.wikimedia.org/wiki/File:Crystal_Clear_kdm_user_female.svg<img src="images/xtl.svg" alt="link"></a></div>
-  <div id="version" class="header">
-    Version
+  <div id="documenthistory" class="header">
+    Document History
   </div>
   <table class="tftable">
     <tr><th>Date</th><th>Version</th><th>Comment</th></tr>
