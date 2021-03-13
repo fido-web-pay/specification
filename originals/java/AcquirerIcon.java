@@ -23,7 +23,7 @@ public class AcquirerIcon {
     static final double BIG_X            = 390;
     static final double BIG_Y            = 610;
     static final double BIG_OUTER_RADIUS = 300;
-    static final double BIG_INNER_RADIUS = 200;
+    static final double BIG_INNER_RADIUS = 190;
     static final int    BIG_COGS         = 12;
     static final double BIG_SHAFT_RADIUS = 80;
     static final double BIG_GEAR_ANGLE   = 15;
