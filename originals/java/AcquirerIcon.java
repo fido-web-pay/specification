@@ -43,7 +43,7 @@ public class AcquirerIcon {
     static final int    SMALL_COGS         = 6;
     static final double SMALL_SHAFT_RADIUS = 50;
     static final double SMALL_GEAR_ANGLE   = -12.5;
-    static final double SMALL_OUTER_WIDTH_PERCENT  = 0.20;
+    static final double SMALL_OUTER_WIDTH_PERCENT  = 0.15;
     static final double SMALL_INNER_WIDTH_PERCENT  = 0.90;
     static final String SMALL_STROKE       = "#c87137";
     static final String SMALL_GRADIENT_ID  = "smallGearGid";
