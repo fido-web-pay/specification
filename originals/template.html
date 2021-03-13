@@ -927,7 +927,8 @@ current request.
     Note that <i>some</i> of the features above could impact the PaymentRequest API.
   </div>
   <div class="para">
-    A radical change would be moving the FWP implementation down into the client platform layer.
+    A radical change would be moving the FWP implementation 
+    (including the credential database), down into the client platform layer.
     This would open FWP to other scenarios like:
   </div>
 <ul style="margin-bottom:0.3em">
@@ -941,6 +942,8 @@ current request.
     Such a change would also make it considerably easier for alternative 
 browser vendors adopting the FWP system
 since they would not have to build a copy of FWP themselves.
+This would also <i>relieve users from having to enroll payment credentials
+  for each browser they want to use</i>.
   <div id="acknowledgements" class="header">
     Acknowledgements
   </div>

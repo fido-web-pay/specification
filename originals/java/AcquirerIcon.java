@@ -13,9 +13,9 @@ public class AcquirerIcon {
     static final double SHAFT_STROKE_WIDTH = 15;
     static final String SHAFT_STROKE       = "grey";
     static final String SHAFT_GRADIENT_ID  = "shaftGid";
-    static final double SHAFT_GRADIENT_INITIAL_STOP = 0.4;
+    static final double SHAFT_GRADIENT_INITIAL_STOP = 0.5;
     static final double SHAFT_GRADIENT_STOP  = 1;
-    static final String SHAFT_GRADIENT_STOP_COLOR   = "#d0d0ff";
+    static final String SHAFT_GRADIENT_STOP_COLOR   = "#8080ff";
     static final String SHAFT_GRADIENT_INNER_COLOR  = "white";
 
     static final double COG_STROKE_WIDTH = 20;
@@ -39,12 +39,12 @@ public class AcquirerIcon {
     static final double SMALL_X            = BIG_X + 330;
     static final double SMALL_Y            = BIG_Y - 330;
     static final double SMALL_OUTER_RADIUS = 200;
-    static final double SMALL_INNER_RADIUS = 120;
+    static final double SMALL_INNER_RADIUS = 100;
     static final int    SMALL_COGS         = 6;
     static final double SMALL_SHAFT_RADIUS = 50;
     static final double SMALL_GEAR_ANGLE   = -12.5;
     static final double SMALL_OUTER_WIDTH_PERCENT  = 0.20;
-    static final double SMALL_INNER_WIDTH_PERCENT  = 0.70;
+    static final double SMALL_INNER_WIDTH_PERCENT  = 0.90;
     static final String SMALL_STROKE       = "#c87137";
     static final String SMALL_GRADIENT_ID  = "smallGearGid";
     static final double SMALL_GRADIENT_INITIAL_STOP  = 0;
