@@ -2022,7 +2022,7 @@ or <code>fetch()</code> operation.
     Any deviation MUST terminate the operation in progress and return an
     error message to the <b class="actor">Acquirer</b> in a not here specified manner.
 </div>
- <div class="step">
+ <div id="seq-10.1" class="step">
     10.1 Core Validation.
  </div>
  <ul>
@@ -2046,7 +2046,7 @@ is compatible with <code>acquirerRequest.paymentMethod</code>
    </li>
  </ul>
 
-<div class="step">
+<div id="seq-10.2" class="step">
 10.2 Decode and Verify PaymentRequest Core Data (PRCD)
 </div>
 <ul>
@@ -2059,7 +2059,7 @@ data represents a valid <a href="#seq-4.1">PRCD</a> object.
 <code>acquirerRequest.paymentRequest</code> data.
 </li>
 </ul>
-<div class="step">
+<div id="seq-10.3" class="step">
   10.3 Extract Signed Authorization Data (SAD)
 </div>
 <ul>
@@ -2081,7 +2081,7 @@ Parse the result of the previous operation as JSON and set result as <a href="#s
 Verify that the SAD object schema-wise has the proper format.
 </li>
 </ul>
-<div class="step">
+<div id="seq-10.4" class="step">
   10.4 Validate Request Data
 </div>
 <ul>
@@ -2114,7 +2114,7 @@ SHOULD support <i>idempotent operation</i> to facilitate legitimate transaction 
 </li>
 </ul>
 
-<div class="step">
+<div id="seq-10.5" class="step">
   10.5 Validate Authorization Signature
 </div>
 <ul>
