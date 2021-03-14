@@ -2125,7 +2125,10 @@ does not require database lookups.
 </li>
 <li>
 Verify that the aforementioned public key is linked to a <b class="actor">User</b>
-account equal to <code>SAD.accountId</code>. 
+account equal to <code>SAD.accountId</code>. Note that this verification requires that the received
+public key is converted into a <i>canonical format</i> like JWK &quot;thumbprint&quot;
+(<a href="https://tools.ietf.org/html/rfc7638"
+   title="JWK thumbprint">RFC7638<img src="images/xtl.svg" alt="link"></a>).
 </li>
 </ul>
 <div class="step">
