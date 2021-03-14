@@ -2125,8 +2125,8 @@ does not require database lookups.
 </li>
 <li>
 Verify that the aforementioned public key is linked to a <b class="actor">User</b>
-account equal to <code>SAD.accountId</code>. Note that this verification requires that the received
-public key is converted into a <i>canonical format</i> like JWK &quot;thumbprint&quot;
+account equal to <code>SAD.accountId</code>. Note that this check requires that the received
+public key first is converted into a <i>canonical format</i> like JWK &quot;thumbprint&quot;
 (<a href="https://tools.ietf.org/html/rfc7638"
    title="JWK thumbprint">RFC7638<img src="images/xtl.svg" alt="link"></a>).
 </li>
@@ -2184,6 +2184,9 @@ current request.
       <li>
         Support for <i>non-direct payments</i>,
         including secure (<i>tokenized</i>) versions of Card-on-File.
+      </li>
+      <li>
+        Support for real-time <i>account balances</i>.
       </li>
       <li>
         Support for <b class="actor">User</b> <i>refunding</i>.
