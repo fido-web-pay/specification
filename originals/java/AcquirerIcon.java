@@ -45,11 +45,11 @@ public class AcquirerIcon {
     static final double SMALL_GEAR_ANGLE   = -12.5;
     static final double SMALL_OUTER_WIDTH_PERCENT  = 0.15;
     static final double SMALL_INNER_WIDTH_PERCENT  = 0.90;
-    static final String SMALL_STROKE       = "#c87137";
+    static final String SMALL_STROKE       = "#f27b2b";
     static final String SMALL_GRADIENT_ID  = "smallGearGid";
     static final double SMALL_GRADIENT_INITIAL_STOP  = 0;
-    static final double SMALL_GRADIENT_STOP  = 0.8;
-    static final String SMALL_GRADIENT_STOP_COLOR  = "#ffeb61";
+    static final double SMALL_GRADIENT_STOP  = 1;
+    static final String SMALL_GRADIENT_STOP_COLOR  = "#fcdb1e";
     static final String SMALL_GRADIENT_INNER_COLOR  = "white";
 
     StringBuilder svg;
