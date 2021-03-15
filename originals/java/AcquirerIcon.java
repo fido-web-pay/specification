@@ -47,9 +47,9 @@ public class AcquirerIcon {
     static final double SMALL_INNER_WIDTH_PERCENT  = 0.90;
     static final String SMALL_STROKE       = "#f27b2b";
     static final String SMALL_GRADIENT_ID  = "smallGearGid";
-    static final double SMALL_GRADIENT_INITIAL_STOP  = 0;
+    static final double SMALL_GRADIENT_INITIAL_STOP  = 0.3;
     static final double SMALL_GRADIENT_STOP  = 1;
-    static final String SMALL_GRADIENT_STOP_COLOR  = "#fcdb1e";
+    static final String SMALL_GRADIENT_STOP_COLOR  = "#eccb1e";
     static final String SMALL_GRADIENT_INNER_COLOR  = "white";
 
     StringBuilder svg;

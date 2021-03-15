@@ -7,8 +7,8 @@
       <stop offset='0.8' stop-color='#c4eb4e'/>
     </radialGradient>
     <radialGradient cx='0.5' cy='0.5' id='smallGearGid' r='0.5' spreadMethod='pad'>
-      <stop offset='0.0' stop-color='white'/>
-      <stop offset='1.0' stop-color='#fcdb1e'/>
+      <stop offset='0.3' stop-color='white'/>
+      <stop offset='1.0' stop-color='#eccb1e'/>
     </radialGradient>
     <radialGradient cx='0.5' cy='0.5' id='shaftGid' r='0.5' spreadMethod='pad'>
       <stop offset='0.5' stop-color='white'/>
