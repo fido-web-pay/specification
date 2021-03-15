@@ -1550,6 +1550,10 @@ else it MUST return <kbd>false</kbd>.
     are more credentials available.  That is, if there is no left arrow, the credential selector is
     at the left end point.
   </div>
+   <div class="para">
+    If a selected credential is associated with an <i>external</i> token which is currently not
+    available, the <b class="actor">User</b> should be asked to insert it.
+  </div>
 <div class="step"><div id="seq-3" class="numbox">3</div>Perform User Authorization</div>
 <div>
 At this point the <b class="actor">User</b>
@@ -2239,6 +2243,7 @@ https://commons.wikimedia.org/wiki/File:Crystal_Clear_kdm_user_female.svg<img sr
   <table class="tftable">
     <tr><th>Date</th><th>Version</th><th>Comment</th></tr>
     <tr><td>2020-03-12</td><td>0.1</td><td>Initial publishing</td></tr>
+    <tr><td>2020-03-15</td><td>0.11</td><td>External token comment added</td></tr>
   </table>
   <div id="authors" class="header">
     Authors
