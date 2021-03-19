@@ -37,7 +37,7 @@ public class SequenceDiagram   {
     static final double DROP_OFFSET = 2;
 
     static final int FONT_SIZE = 12;
-    static final double FONT_OFFSET = 4;
+    static final double FONT_OFFSET = 4.3;
 
     static final double HEADER_Y = 20;
 
@@ -76,15 +76,15 @@ public class SequenceDiagram   {
         if (n > 9) {
             width *= 1.3;
         }
-        if (n == 1 || (n > 9 && n != 11 &&  n < 20)) {
-            fontX -= FONT_SIZE / 10;
+        if (n > 9 && n != 11 &&  n < 20) {
+            fontX -= FONT_SIZE / 15.0;
         }
         svg.append("  <a href='#seq-")
            .append(n)
            .append("'>\n  <rect x='")
-           .append(convert(centerX - (width + STROKE_WIDTH) / 2))
+           .append(convert(centerX - width / 2))
            .append("' y='")
-           .append(convert(centerY - (NUMB_WIDTH + STROKE_WIDTH) / 2))
+           .append(convert(centerY - NUMB_WIDTH / 2))
            .append("' width='")
            .append(convert(width))
            .append("' height='")
@@ -145,8 +145,8 @@ public class SequenceDiagram   {
            .append(" l")
            .append(convert(-PROC_WIDTH))
            .append(",0Z'/>\n");
-        text(center(vbar) + NUMB_WIDTH / 5, seqY, "Processing");
-        number(startX - PROC_SLANT / 2 - STROKE_WIDTH / 2, seqY);
+        text(center(vbar) + NUMB_WIDTH / 5, seqY - STROKE_WIDTH / 2, "Processing");
+        number(startX - PROC_SLANT / 2 - STROKE_WIDTH / 2, seqY - STROKE_WIDTH / 2);
         seqY += SEQ_Y_DISTANCE + SEQ_Y_SLACK_AFTER_UI;
     }
 
