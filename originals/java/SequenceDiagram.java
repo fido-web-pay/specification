@@ -48,7 +48,7 @@ public class SequenceDiagram   {
     static final String CLICKABLE_COLOR = "#4366ff";
 
     static final double SEQ_Y_DISTANCE = 32;
-    static final double SEQ_Y_SLACK_AFTER_UI = 0;
+    static final double SEQ_Y_SLACK_AFTER_UI = 1;
  
     static final String FONT_FAMILY = "Roboto,sans-serif";
 
@@ -115,6 +115,7 @@ public class SequenceDiagram   {
     }
 
     void processing(int vbar) {
+        seqY -= SEQ_Y_SLACK_AFTER_UI;
         double rectY = seqY - (PROC_HEIGHT + STROKE_WIDTH) / 2;
         double startX = center(vbar) - PROC_WIDTH / 2 + PROC_SLANT / 2;
         svg.append("  <path fill='black' opacity='0.4' d='M")
@@ -237,6 +238,7 @@ public class SequenceDiagram   {
 
         arrow(2, 1, "PaymentRequest");
 
+        seqY -= SEQ_Y_SLACK_AFTER_UI;
         double uiY = seqY + (UI_HEIGHT - PROC_HEIGHT) / 2;
         double uiTop = uiY - (UI_HEIGHT + STROKE_WIDTH) / 2;
         double uiX = center(1) - (UI_WIDTH + STROKE_WIDTH) / 2;
@@ -272,7 +274,7 @@ public class SequenceDiagram   {
            .append(convert(STROKE_WIDTH))
            .append("' stroke='black'/>\n");  
         text(center(1), uiY, "Payment UI");
-        number(uiX, uiTop + (UI_BORDER + STROKE_WIDTH) / 2);
+        number(uiX, uiTop + UI_BORDER / 2);
         seqY += SEQ_Y_DISTANCE + SEQ_Y_SLACK_AFTER_UI + UI_HEIGHT - PROC_HEIGHT;
         dashedArrow(0, 1, "Authorization");
         processing(1);
