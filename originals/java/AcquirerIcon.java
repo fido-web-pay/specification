@@ -137,7 +137,7 @@ public class AcquirerIcon {
   
     AcquirerIcon(String fileName) throws Exception {
         svg = new StringBuilder(
-            "<svg x='0' y='0' width='1000' height='1000' " +
+            "<svg width='1000' height='1000' " +
             "xmlns='http://www.w3.org/2000/svg'>\n" +
             "  <title>Acquirer Symbol</title>\n" +
             "  <!-- Anders Rundgren 2021 -->\n" +
