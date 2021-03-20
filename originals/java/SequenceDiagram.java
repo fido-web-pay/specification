@@ -48,13 +48,13 @@ public class SequenceDiagram   {
     static final String CLICKABLE_COLOR = "#4366ff";
 
     static final double SEQ_Y_DISTANCE = 32;
-    static final double SEQ_Y_SLACK_AFTER_UI = 1;
+    static final double SEQ_Y_SLACK_AFTER_UI = 4;
  
     static final String FONT_FAMILY = "Roboto,sans-serif";
 
     String originalBase;
 
-    double seqY = 96;
+    double seqY = 100;
 
     StringBuilder svg = new StringBuilder ();
 
@@ -286,7 +286,7 @@ public class SequenceDiagram   {
         processing(4);
   //      dashedArrow(4, 3, "Out of Scope", "#outofscope");
  
-        seqY -= PROC_HEIGHT * 0.2;
+        seqY -= PROC_HEIGHT * 0.5;
         StringBuilder preludium = new StringBuilder("<?xml version='1.0' encoding='utf-8'?>\n" +
                                                     "<svg viewBox='0 0 ")
             .append(convert(center(4) + PROC_WIDTH / 2 + 20))
