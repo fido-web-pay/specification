@@ -33,11 +33,12 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
   </div>
   <div class="para">
     This document describes FIDO&reg; Web Pay (FWP), which is a Web-adapted version of EMV,
-    building on the technology underpinning <a href="https://fidoalliance.org/fido2/"
+    combining the technology underpinning <a href="https://fidoalliance.org/fido2/"
                              title="FIDO2 Technology">FIDO2<img src="images/xtl.svg" alt="link"></a>
-    combined with the W3C
+    with the W3C
     <a href="https://www.w3.org/TR/payment-request/"
-       title="PaymentRequest">PaymentRequest<img src="images/xtl.svg" alt="link"></a> API.
+       title="PaymentRequest">PaymentRequest<img src="images/xtl.svg" alt="link"></a> API and
+    a browser-resident (<i>built-in</i>) payment application.
   </div>
   <div class="para">
     Through an extension to EMV, FWP can be applied to <i>any account-based payment system</i>,
@@ -131,7 +132,7 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
     </ul>
   </div>
   <div class="para box comment">
-    Note that FWP effectively forms a browser-resident &quot;Wallet&quot;,
+    Note that FWP effectively forms a browser &quot;Wallet&quot;,
     holding an arbitrary number of payment credentials, each representing a
     specific <span class="actor">Issuer</span>,
     <span class="actor">User</span> account,
