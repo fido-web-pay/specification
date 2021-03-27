@@ -71,10 +71,18 @@ public class AcquirerIcon {
                               Math.cos(gearAngle) * radius + center.y);
     }
 
+    static String truncateBig(double value) {
+        String truncated = String.format("%.1f", value);
+        if (truncated.endsWith(".0")) {
+            return truncated.substring(0, truncated.length() - 2);
+        }
+        return truncated;
+    }
+
     void writePair(Cordinates next) {
-        svg.append(next.x)
+        svg.append(truncateBig(next.x))
            .append(',')
-           .append(next.y)
+           .append(truncateBig(next.y))
            .append(' '); 
     }
 
@@ -83,57 +91,57 @@ public class AcquirerIcon {
                         double stop,
                         String stopColor,
                         String innerColor) {
-            svg.append("    <radialGradient cx='0.5' cy='0.5' id='")
-               .append(gradientId)
-               .append("' r='0.5' spreadMethod='pad'>\n" +
-                       "      <stop offset='")
-               .append(initialStop)
-               .append("' stop-color='")
-               .append(innerColor)
-               .append("'/>\n" +
-                       "      <stop offset='")
-               .append(stop)
-               .append("' stop-color='")
-               .append(stopColor)
-               .append("'/>\n" +
-                       "    </radialGradient>\n"); 
-        }
+        svg.append("    <radialGradient cx='0.5' cy='0.5' id='")
+            .append(gradientId)
+            .append("' r='0.5' spreadMethod='pad'>\n" +
+                    "      <stop offset='")
+            .append(initialStop)
+            .append("' stop-color='")
+            .append(innerColor)
+            .append("'/>\n" +
+                    "      <stop offset='")
+            .append(stop)
+            .append("' stop-color='")
+            .append(stopColor)
+            .append("'/>\n" +
+                    "    </radialGradient>\n"); 
+    }
 
     void addGear(double x, double y, double outerRadius, double innerRadius,
                  int cogs, double shaftRadius, double gearAngle,
                  double outerWidthPercent, double innerWidthPercent,
                  String stroke, String gradientId) throws Exception {
-            gearAngle = (Math.PI * gearAngle) / 180;
-            svg.append("  <path stroke='")
-               .append(stroke)
-               .append("' stroke-width='" + COG_STROKE_WIDTH + "' fill='url(#")
-               .append(gradientId)
-               .append(")' d='M");
-            center = new Cordinates(x, y);
-            current = new Cordinates(0, 0);
-            double halfCog = Math.PI / cogs;
-            double innerWidthRadiansDiv2 =  innerWidthPercent * halfCog;
-            double outerWidthRadiansDiv2 =  outerWidthPercent * halfCog;
-           for (int cog = 0; cog < cogs; cog++) {
-                writePair(getCordinates(gearAngle - innerWidthRadiansDiv2, innerRadius));
-                writePair(getCordinates(gearAngle - outerWidthRadiansDiv2, outerRadius));
-                writePair(getCordinates(gearAngle + outerWidthRadiansDiv2, outerRadius));
-                writePair(getCordinates(gearAngle + innerWidthRadiansDiv2, innerRadius));
-                gearAngle += (Math.PI * 2) / cogs;
-            }
-            svg.append("z'/>\n")
-               .append("  <circle stroke='")
-               .append(SHAFT_STROKE)
-               .append("' stroke-width='" + SHAFT_STROKE_WIDTH + "' fill='url(#")
-               .append(SHAFT_GRADIENT_ID)
-               .append(")' r='")
-               .append(shaftRadius)
-               .append("' cx='")
-               .append(x)
-               .append("' cy='")
-               .append(y)
-               .append("'/>\n");
+        gearAngle = (Math.PI * gearAngle) / 180;
+        svg.append("  <path stroke='")
+            .append(stroke)
+            .append("' stroke-width='" + truncateBig(COG_STROKE_WIDTH) + "' fill='url(#")
+            .append(gradientId)
+            .append(")' d='M");
+        center = new Cordinates(x, y);
+        current = new Cordinates(0, 0);
+        double halfCog = Math.PI / cogs;
+        double innerWidthRadiansDiv2 =  innerWidthPercent * halfCog;
+        double outerWidthRadiansDiv2 =  outerWidthPercent * halfCog;
+        for (int cog = 0; cog < cogs; cog++) {
+            writePair(getCordinates(gearAngle - innerWidthRadiansDiv2, innerRadius));
+            writePair(getCordinates(gearAngle - outerWidthRadiansDiv2, outerRadius));
+            writePair(getCordinates(gearAngle + outerWidthRadiansDiv2, outerRadius));
+            writePair(getCordinates(gearAngle + innerWidthRadiansDiv2, innerRadius));
+            gearAngle += (Math.PI * 2) / cogs;
         }
+        svg.append("z'/>\n")
+            .append("  <circle stroke='")
+            .append(SHAFT_STROKE)
+            .append("' stroke-width='" + truncateBig(SHAFT_STROKE_WIDTH) + "' fill='url(#")
+            .append(SHAFT_GRADIENT_ID)
+            .append(")' r='")
+            .append(truncateBig(shaftRadius))
+            .append("' cx='")
+            .append(truncateBig(x))
+            .append("' cy='")
+            .append(truncateBig(y))
+            .append("'/>\n");
+    }
   
     AcquirerIcon(String fileName) throws Exception {
         svg = new StringBuilder(
@@ -159,13 +167,14 @@ public class AcquirerIcon {
                        SHAFT_GRADIENT_INNER_COLOR);
         svg.append(
             "  </defs>\n  <rect x='" +
-            (STROKE_WIDTH / 2) + 
+            truncateBig(STROKE_WIDTH / 2) + 
             "' y='" +
-            (STROKE_WIDTH / 2) +
+            truncateBig(STROKE_WIDTH / 2) +
             "' width='" +
-            (WIDTH - STROKE_WIDTH) + "' height='" + 
-            (HEIGHT - STROKE_WIDTH) + 
-            "' rx='" + RADIUS + "' fill='white' stroke='" + STROKE + "' stroke-width='" + STROKE_WIDTH +
+            truncateBig(WIDTH - STROKE_WIDTH) + "' height='" + 
+            truncateBig(HEIGHT - STROKE_WIDTH) + 
+            "' rx='" + truncateBig(RADIUS) + "' fill='white' stroke='" + STROKE + "' stroke-width='" +
+            truncateBig(STROKE_WIDTH) +
             "'/>\n");
         addGear(BIG_X,
                 BIG_Y,
@@ -189,8 +198,7 @@ public class AcquirerIcon {
                 SMALL_INNER_WIDTH_PERCENT,
                 SMALL_STROKE,
                 SMALL_GRADIENT_ID);
-                svg.append("</svg>");
-        new FileOutputStream(fileName).write(svg.toString().getBytes("utf-8"));
+        new FileOutputStream(fileName).write(svg.append("</svg>").toString().getBytes("utf-8"));
     }
 
     public static void main(String[] argc) {
