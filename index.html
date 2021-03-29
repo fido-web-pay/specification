@@ -2043,11 +2043,6 @@ but for redirecting purchased goods to another address.
 Verify that the <i>optional</i> <code>SAD.networkData</code> attribute complies 
 with the <b class="actor">Issuer</b> specific requirements.
 </li>
-<li>
-<i>Optional</i>.  To cope with possible replays, verify that the received SAD
-has not already been utilized. Ideally, the <b class="actor">Issuer</b>
-SHOULD support <i>idempotent operation</i> to facilitate legitimate transaction retries.
-</li>
 </ul>
 
 <div id="seq-10.5" class="step">
@@ -2067,6 +2062,22 @@ public key first is converted into a <i>canonical format</i> like JWK &quot;thum
    title="JWK thumbprint">RFC7638<img src="images/xtl.svg" alt="link"></a>).
 </li>
 </ul>
+<div id="seq-10.6" class="step">
+  10.6 Replay Handling
+</div>
+<div>
+  To cope with possible replays, verify that the received <b class="actor">User</b> authorization
+  has not already been utilized. This can be accomplished by maintaining a lookup cache
+  holding SHA256 hashes of canonicalized (<a href="https://tools.ietf.org/html/rfc8785"
+   title="JCS/RFC8785">RFC8785<img src="images/xtl.svg" alt="link"></a>) SAD objects,
+  associated with already processed requests.
+  Cached items would be removed based on their <code>SAD.timeStamp</code> value.
+</div>
+<div class="para">
+  Ideally, <b class="actor">Issuer</b>s
+  SHOULD support <i>idempotent operation</i> to facilitate transaction retries
+  that may happen due to network glitches or similar.
+</div>
 <div class="step">
   Other Validation Steps
 </div> 
@@ -2176,7 +2187,7 @@ https://commons.wikimedia.org/wiki/File:Crystal_Clear_kdm_user_female.svg<img sr
     <tr><th>Date</th><th>Version</th><th>Comment</th></tr>
     <tr><td>2020-03-12</td><td>0.1</td><td>Initial publishing</td></tr>
     <tr><td>2020-03-15</td><td>0.11</td><td>External token comment added</td></tr>
-    <tr><td>2020-03-29</td><td>0.12</td><td>Changed &quot;Acquirer&quot; to &quot;PSP&quot;</td></tr>
+    <tr><td>2020-03-29</td><td>0.12</td><td>Improved replay handling + Changed &quot;Acquirer&quot; to &quot;PSP&quot;</td></tr>
   </table>
   <div id="authors" class="header">
     Authors
