@@ -10,13 +10,23 @@ public class VerifierIcon {
     static double STROKE_WIDTH           = 15;
     static String STROKE                 = "grey";
 
-    static double SHACKLE_X              = 500;
-    static double SHACKLE_Y              = 500;
-    static double SHACKLE_WIDTH          = 200;
-    static double SHACKLE_HEIGHT         = 300;
-    static double SHACKLE_X_RADIUS       = 60;
-    static double SHACKLE_Y_RADIUS       = 60;
+    static double SHACKLE_X              = 680;
+    static double SHACKLE_Y              = 520;
+    static double SHACKLE_WIDTH          = 220;
+    static double SHACKLE_HEIGHT         = 200;
+    static double SHACKLE_X_RADIUS       = 70;
+    static double SHACKLE_Y_RADIUS       = 70;
+   
+    static double LOCK_WIDTH             = 390;
+    static double LOCK_HEIGHT            = 240;
+    /*
+    <rect fill="url(#svg_8)" height="383.05085" id="svg_7" rx="40" stroke="#7f7f7f" stroke-width="10" width="830.50847" x="84.40678" y="145.42373"/>
 
+    */
+    static double SERVER_X               = 84;
+    static double SERVER_Y               = 146;
+    static double SERVER_WIDTH           = 830;
+    static double SERVER_HEIGHT          = 384;
 
     static final double SHAFT_STROKE_WIDTH = 15;
     static final String SHAFT_STROKE       = "grey";
@@ -165,9 +175,29 @@ public class VerifierIcon {
     }
 
     void padLock() {
-        shackle("black", 60, "");
-        shackle("#b0b0b0", 54, "");
-        shackle("white", 18, " filter='url(#shackleGlow)'");
+        svg.append("  <rect fill='url(#serverGloss)' x='")
+           .append(PSPIcon.truncateBig(SERVER_X))
+           .append("' y='")
+           .append(PSPIcon.truncateBig(SERVER_Y))
+           .append("' width='")
+           .append(PSPIcon.truncateBig(SERVER_WIDTH))
+           .append("' height='")
+           .append(PSPIcon.truncateBig(SERVER_HEIGHT))
+           .append("' rx='45' stroke='#7f7f7f' stroke-width='10'/>\n");
+
+        shackle("black", 70, "");
+        shackle("#b0b0b0", 64, "");
+        shackle("white", 16, " filter='url(#shackleGlow)'");
+
+        svg.append("  <rect fill='url(#goldenLock)' x='")
+           .append(PSPIcon.truncateBig(SHACKLE_X - LOCK_WIDTH / 2))
+           .append("' y='")
+           .append(PSPIcon.truncateBig(SHACKLE_Y + SHACKLE_HEIGHT / 2))
+           .append("' width='")
+           .append(PSPIcon.truncateBig(LOCK_WIDTH))
+           .append("' height='")
+           .append(PSPIcon.truncateBig(LOCK_HEIGHT))
+           .append("' rx='25' stroke='#7f7f7f' stroke-width='10'/>\n");
     }
   
     VerifierIcon(String fileName) throws Exception {
@@ -179,7 +209,17 @@ public class VerifierIcon {
             "  <defs>\n" +
             "    <filter id='shackleGlow'>\n" +
             "      <feGaussianBlur stdDeviation='2'/>\n" +
-            "    </filter>\n");
+            "    </filter>\n" +
+            "    <linearGradient id='goldenLock' x1='0' x2='1' y1='0.3' y2='0.6'>\n" +
+            "      <stop offset='0.1' stop-color='#f0d100'/>\n" +
+            "      <stop offset='0.5' stop-color='#f7f5dc'/>\n" +
+            "      <stop offset='0.9' stop-color='#f0d100'/>\n" +
+            "    </linearGradient>\n" +
+            "    <linearGradient id='serverGloss' x1='0' x2='1' y1='0.3' y2='0.7'>\n" +
+            "      <stop offset='0' stop-color='#dae3f3'/>\n" +
+            "      <stop offset='0.5' stop-color='#dae3f3' stop-opacity='0.6'/>\n" +
+            "      <stop offset='1' stop-color='#dae3f3'/>\n" +
+            "    </linearGradient>\n");
         radialGradient(BIG_GRADIENT_ID,
                        BIG_GRADIENT_INITIAL_STOP,
                        BIG_GRADIENT_STOP,
@@ -212,7 +252,7 @@ public class VerifierIcon {
 
     public static void main(String[] argc) {
         try {
-            new VerifierIcon(argc[0] + File.separator + "verifier3.svg");
+            new VerifierIcon(argc[0] + File.separator + "verifier.svg");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
