@@ -96,10 +96,10 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
     written as <span class="actor">Name</span>.
     The <span class="actor">Browser</span> actor is in this specification
     considered to be equivalent to &quot;User Agent&quot;.
-    An <span class="actor">Acquirer</span> is in this specification
+    A <span class="actor">PSP</span> (Payment System Provider) is in this specification
     denoting any service or network acting as a <i>trusted intermediary</i> between
     a <span class="actor">Merchant</span> and an <span class="actor">Issuer</span>.
-    In the FWP definition, <span class="actor">Merchant</span> is referred to as &quot;payee&quot;.
+    In FWP objects, <span class="actor">Merchant</span> is referred to as &quot;payee&quot;.
   </div>
   <div id="prerequisites" class="header">
     Prerequisites
@@ -191,7 +191,7 @@ is linked to a <i>clickable</i> number in a box:
    viewBox='0 0 128 128'
    version='1.1'
    id='svg3129'>
-
+  <title>User Symbol</title>
   <defs
      id='defs3131'>
     <linearGradient
@@ -648,6 +648,8 @@ is linked to a <i>clickable</i> number in a box:
    viewBox='0 0 68 48'
    version='1.1'
    id='svg158'>
+  <title>Merchant Symbol</title>
+  <!-- Anders Ruyndgren 2021-->
   <defs
      id='defs52'>
     <filter
@@ -1249,7 +1251,7 @@ is linked to a <i>clickable</i> number in a box:
 </svg>
   <text x='303' y='24.3' fill='black' font-family='Roboto,sans-serif' font-size='14.399999999999999' text-anchor='middle'>Merchant</text>
 <svg x='403' y='32.0' width='40' height='40.0' viewBox='0 0 1000 1000' xmlns='http://www.w3.org/2000/svg'>
-  <title>Acquirer Symbol</title>
+  <title>PSP Symbol</title>
   <!-- Anders Rundgren 2021 -->
   <defs>
     <radialGradient cx='0.5' cy='0.5' id='bigGearGid' r='0.5' spreadMethod='pad'>
@@ -1265,14 +1267,14 @@ is linked to a <i>clickable</i> number in a box:
       <stop offset='1.0' stop-color='#8080ff'/>
     </radialGradient>
   </defs>
-  <rect x='7.5' y='7.5' width='985.0' height='985.0' rx='70.0' fill='white' stroke='grey' stroke-width='15.0'/>
-  <path stroke='#009a00' stroke-width='20.0' fill='url(#bigGearGid)' d='M399.94383168615934,799.739611603369 456.20923050645035,902.6026961525538 478.9624724926713,896.5059833371561 476.2581949505139,779.2912395957899 493.48141665285516,769.3474079096305 593.6402236598825,830.2967528307056 610.2967528307056,813.6402236598825 549.3474079096305,713.4814166528552 559.2912395957899,696.2581949505139 676.505983337156,698.9624724926714 682.6026961525538,676.2092305064504 579.739611603369,619.9438316861593 579.739611603369,600.0561683138408 682.6026961525538,543.7907694935498 676.5059833371561,521.0375275073288 559.2912395957899,523.7418050494862 549.3474079096306,506.5185833471449 610.2967528307057,406.3597763401175 593.6402236598827,389.7032471692945 493.4814166528553,450.6525920903695 476.258194950514,440.7087604042101 478.9624724926714,323.49401666284405 456.2092305064506,317.39730384744627 399.9438316861595,420.26038839663096 380.05616831384083,420.26038839663096 323.7907694935499,317.39730384744615 301.037527507329,323.49401666284393 303.7418050494863,440.70876040421 286.518583347145,450.65259209036935 186.35977634011766,389.7032471692942 169.7032471692946,406.3597763401172 230.65259209036952,506.5185833471447 220.7087604042102,523.741805049486 103.4940166628441,521.0375275073284 97.39730384744621,543.7907694935495 200.26038839663096,600.0561683138405 200.26038839663096,619.9438316861592 97.39730384744615,676.2092305064501 103.49401666284399,698.9624724926712 220.7087604042101,696.2581949505138 230.65259209036938,713.481416652855 169.70324716929426,813.6402236598824 186.35977634011746,830.2967528307056 286.51858334714484,769.3474079096305 303.74180504948606,779.2912395957899 301.03752750732866,896.5059833371561 323.79076949354976,902.6026961525538 380.0561683138407,799.739611603369 z'/>
-  <circle stroke='grey' stroke-width='15.0' fill='url(#shaftGid)' r='80.0' cx='390.0' cy='610.0'/>
-  <path stroke='#f27b2b' stroke-width='20.0' fill='url(#smallGearGid)' d='M656.3921779722236,357.162458338772 661.5256590554527,471.2609511926071 692.1653798079869,478.0536137483141 745.0380004054441,376.8147640378108 755.0207381259468,373.66721892483974 856.3996720124997,426.2707403238341 877.6021507213444,403.13229506513164 816.3630453208623,306.7238376078257 818.6285601537231,296.5047605860678 914.8740129570471,235.00978913122702 905.4367709133575,205.07868131681764 791.3250449154182,209.90907357001493 783.6078220277764,202.83754166122802 778.4743409445474,88.73904880739292 747.8346201920132,81.94638625168594 694.9619995945559,183.1852359621892 684.9792618740532,186.33278107516023 583.6003279875003,133.7292596761659 562.3978492786557,156.86770493486824 623.6369546791377,253.27616239217429 621.3714398462769,263.4952394139322 525.1259870429529,324.990210868773 534.5632290866424,354.9213186831822 648.6749550845818,350.0909264299851 z'/>
-  <circle stroke='grey' stroke-width='15.0' fill='url(#shaftGid)' r='50.0' cx='720.0' cy='280.0'/>
-</svg>  <text x='423' y='24.3' fill='black' font-family='Roboto,sans-serif' font-size='14.399999999999999' text-anchor='middle'>Acquirer</text>
+  <rect x='7.5' y='7.5' width='985' height='985' rx='70' fill='white' stroke='grey' stroke-width='15'/>
+  <path stroke='#009a00' stroke-width='20' fill='url(#bigGearGid)' d='M399.9,799.7 456.2,902.6 479,896.5 476.3,779.3 493.5,769.3 593.6,830.3 610.3,813.6 549.3,713.5 559.3,696.3 676.5,699 682.6,676.2 579.7,619.9 579.7,600.1 682.6,543.8 676.5,521 559.3,523.7 549.3,506.5 610.3,406.4 593.6,389.7 493.5,450.7 476.3,440.7 479,323.5 456.2,317.4 399.9,420.3 380.1,420.3 323.8,317.4 301,323.5 303.7,440.7 286.5,450.7 186.4,389.7 169.7,406.4 230.7,506.5 220.7,523.7 103.5,521 97.4,543.8 200.3,600.1 200.3,619.9 97.4,676.2 103.5,699 220.7,696.3 230.7,713.5 169.7,813.6 186.4,830.3 286.5,769.3 303.7,779.3 301,896.5 323.8,902.6 380.1,799.7 z'/>
+  <circle stroke='grey' stroke-width='15' fill='url(#shaftGid)' r='80' cx='390' cy='610'/>
+  <path stroke='#f27b2b' stroke-width='20' fill='url(#smallGearGid)' d='M656.4,357.2 661.5,471.3 692.2,478.1 745,376.8 755,373.7 856.4,426.3 877.6,403.1 816.4,306.7 818.6,296.5 914.9,235 905.4,205.1 791.3,209.9 783.6,202.8 778.5,88.7 747.8,81.9 695,183.2 685,186.3 583.6,133.7 562.4,156.9 623.6,253.3 621.4,263.5 525.1,325 534.6,354.9 648.7,350.1 z'/>
+  <circle stroke='grey' stroke-width='15' fill='url(#shaftGid)' r='50' cx='720' cy='280'/>
+</svg>  <text x='423' y='24.3' fill='black' font-family='Roboto,sans-serif' font-size='14.399999999999999' text-anchor='middle'>PSP</text>
 <svg x='512.4444444444445' y='32.0' width='61.111111111111114' height='40.0' viewBox='0 0 110 72' xmlns='http://www.w3.org/2000/svg'>
-  <title>FIDO Web Pay - Issuer</title>
+  <title>Issuer Symbol</title>
   <!-- Anders Rundgren 2021-->
   <defs>
     <linearGradient id='bankPillar' x1='0' x2='1'>
@@ -1342,7 +1344,7 @@ is linked to a <i>clickable</i> number in a box:
   <text x='259.75' y='288.05' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>6</text>
   </a>
   <line x1='303.6' y1='320' x2='414.9' y2='320' stroke-width='0.8' stroke='#cc2020' marker-end='url(#arrowHead)'/>
-  <text x='363' y='314.7' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>AcquirerRequest</text>
+  <text x='363' y='314.7' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>PSPRequest</text>
   <a href='#seq-7'>
   <rect x='296' y='313' width='14' height='14' rx='3' fill='white' stroke='#404040' stroke-width='0.5'/>
   <text x='303' y='324.3' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>7</text>
@@ -1370,7 +1372,7 @@ is linked to a <i>clickable</i> number in a box:
 </svg>
   </div>
 <div>Note that this specification does not elaborate on the return data from
-the <b class="actor">Acquirer</b> and <b class="actor">Issuer</b>,
+the <b class="actor">PSP</b> and <b class="actor">Issuer</b>,
  because this is payment network specific.</div>
 <div class="step"><div id="seq-1" class="numbox">1</div>Initiate PaymentRequest</div>
 <div>
@@ -1582,7 +1584,7 @@ creates an FWP assertion which requires the following steps to be performed:
     <td>
       Host name as interpreted by the <b class="actor">Browser</b>.
       Included for optional validation by the <b class="actor">Issuer</b>,
-      aided by the <b class="actor">Acquirer</b>
+      aided by the <b class="actor">PSP</b>
     </td>
   </tr>
   <tr>
@@ -1764,13 +1766,13 @@ constraints associated with Web Authentication do not apply.
   <b class="actor">Merchant</b> server through a FORM&nbsp;POST
 or <code>fetch()</code> operation.
 </div>
-<div class="step"><div id="seq-6" class="numbox">6</div>Process FWP Assertion and Create AcquirerRequest Object</div>
+<div class="step"><div id="seq-6" class="numbox">6</div>Process FWP Assertion and Create PSPRequest Object</div>
 
 <div>
   After receiving the <span class="msg">FWP Assertion</span>,
-  the <b class="actor">Merchant</b> would usually call an
-  <b class="actor">Acquirer</b> with a specifically crafted object.
-  The exact definition is likely to be specific for each <b class="actor">Acquirer</b> network
+  the <b class="actor">Merchant</b> would usually call a
+  <b class="actor">PSP</b> with a specifically crafted object.
+  The exact definition is likely to be specific for each <b class="actor">PSP</b> network
   and is therefore out of scope for this specification.
   The following <i>sample</i> outlines such an object:
 </div>
@@ -1834,11 +1836,11 @@ or <code>fetch()</code> operation.
     <tr><td><code>timeStamp</code></td><td>ISO time stamp generated by the <b class="actor">Merchant</b></td></tr>
   </table>
   <div class="step">
-    <div id="seq-7" class="numbox">7</div>Send AcquirerRequest Object
+    <div id="seq-7" class="numbox">7</div>Send PSPRequest Object
   </div>
   <div>
-    At this point the <b class="actor">Merchant</b> sends the completed <span class="msg">AcquirerRequest</span>
-    object to the appropriate <b class="actor">Acquirer</b>.
+    At this point the <b class="actor">Merchant</b> sends the completed <span class="msg">PSPRequest</span>
+    object to the appropriate <b class="actor">PSP</b>.
   </div>
   <div class="para">
     Note that authentication of the <b class="actor">Merchant</b> is out of scope
@@ -1846,22 +1848,22 @@ or <code>fetch()</code> operation.
   </div>
   <div class="comment box">
     Since FWP supports <i>multiple</i> and <i>independent</i> payment systems,
-    a <b class="actor">Merchant</b> may use different <b class="actor">Acquirer</b>
-    service providers, depending on received <code>paymentMethod</code>.
+    a <b class="actor">Merchant</b> may use different <b class="actor">PSP</b>s
+    depending on received <code>paymentMethod</code>.
   </div>
   <div class="step">
-    <div id="seq-8" class="numbox">8</div>Process AcquirerRequest and Create IssuerRequest Object
+    <div id="seq-8" class="numbox">8</div>Process PSPRequest and Create IssuerRequest Object
   </div>
   <div>
     After successfully having authenticated the <b class="actor">Merchant</b> request,
-    the <b class="actor">Acquirer</b> MUST perform a number of checks on the
+    the <b class="actor">PSP</b> MUST perform a number of checks on the
     received object including:
   </div>
   <ul>
     <li>
       That <code>paymentRequest</code> is properly formatted and that
       the <code>payee</code> attribute
-      matches the <b class="actor">Merchant</b> common name registered with the <b class="actor">Acquirer</b>.
+      matches the <b class="actor">Merchant</b> common name registered with the <b class="actor">PSP</b>.
     </li>
     <li>
       That the <code>paymentMethod</code> is supported.
@@ -1871,7 +1873,7 @@ or <code>fetch()</code> operation.
     </li>
     <li>
       That the <code>receiveAccount</code> matches a <b class="actor">Merchant</b> account
-      registered with the <b class="actor">Acquirer</b>.
+      registered with the <b class="actor">PSP</b>.
     </li>
     <li>
       That the <code>timeStamp</code> is within &quot;reasonable limits&quot;.
@@ -1892,7 +1894,7 @@ or <code>fetch()</code> operation.
   </div>
   <pre class="box">
 {
-  "acquirerRequest": {
+  "pspRequest": {
     "paymentRequest": {
       "id": "7040566321",
       "payee": "Space Shop",
@@ -1918,28 +1920,28 @@ or <code>fetch()</code> operation.
   <table class="tftable">
     <tr><th>Element</th><th>Comment</th></tr>
     <tr>
-      <td><code>acquirerRequest</code></td>
+      <td><code>pspRequest</code></td>
       <td>
-        Copy of the <a href="#seq-6">AcquirerRequest</a> object
+        Copy of the <a href="#seq-6">PSPRequest</a> object
         received from the <b class="actor">Merchant</b>
       </td>
     </tr>
     <tr>
       <td><code>payeeHost</code></td>
       <td>
-        The <b class="actor">Merchant</b> host name registered by the <b class="actor">Acquirer</b>
+        The <b class="actor">Merchant</b> host name registered by the <b class="actor">PSP</b>
       </td>
     </tr>
     <tr>
       <td><code>timeStamp</code></td>
-      <td>ISO time stamp generated by the <b class="actor">Acquirer</b></td>
+      <td>ISO time stamp generated by the <b class="actor">PSP</b></td>
     </tr>
   </table>
   <div class="step">
     <div id="seq-9" class="numbox">9</div>Send IssuerRequest Object
   </div>
   <div>
-    At this point the <b class="actor">Acquirer</b> sends the completed <span class="msg">IssuerRequest</span>
+    At this point the <b class="actor">PSP</b> sends the completed <span class="msg">IssuerRequest</span>
     object to the designated <b class="actor">Issuer</b>.
     Note that the method used for locating the proper <b class="actor">Issuer</b> depends on
     the <code>paymentMethod</code> and <code>issuerId</code> attributes.
@@ -1954,7 +1956,7 @@ or <code>fetch()</code> operation.
     MUST decode and perform a number of steps to verify the
     correctness of the received <span class="msg">IssuerRequest</span> object.
     Any deviation MUST terminate the operation in progress and return an
-    error message to the <b class="actor">Acquirer</b> in a not here specified manner.
+    error message to the <b class="actor">PSP</b> in a not here specified manner.
 </div>
  <div id="seq-10.1" class="step">
     10.1 Core Validation.
@@ -1967,15 +1969,15 @@ or <code>fetch()</code> operation.
      Verify that the <code>timeStamp</code> is within &quot;reasonable limits&quot;.
    </li>
    <li>
-     Verify that <code>acquirerRequest.paymentMethod</code> is supported.
+     Verify that the <code>pspRequest.paymentMethod</code> is supported.
    </li>
    <li>
-     Verify that <code>acquirerRequest.receiveAccount</code> 
-is compatible with <code>acquirerRequest.paymentMethod</code>.
+     Verify that the <code>pspRequest.receiveAccount</code> 
+is compatible with the <code>pspRequest.paymentMethod</code>.
    </li>
    <li>
-     Verify that <code>acquirerRequest.issuerId</code> 
-is compatible with <code>acquirerRequest.paymentMethod</code>
+     Verify that the <code>pspRequest.issuerId</code> 
+is compatible with the <code>pspRequest.paymentMethod</code>
      as well as matching the <b class="actor">Issuer</b>.
    </li>
  </ul>
@@ -1985,12 +1987,12 @@ is compatible with <code>acquirerRequest.paymentMethod</code>
 </div>
 <ul>
 <li>
-  Verify that the <code>acquirerRequest.paymentRequest</code> 
+  Verify that the <code>pspRequest.paymentRequest</code> 
 data represents a valid <a href="#seq-4.1">PRCD</a> object.
 </li>
 <li>
   Calculate a <a href="#seq-4.2">PRCDHASH</a> string of the 
-<code>acquirerRequest.paymentRequest</code> data.
+<code>pspRequest.paymentRequest</code> data.
 </li>
 </ul>
 <div id="seq-10.3" class="step">
@@ -1998,8 +2000,8 @@ data represents a valid <a href="#seq-4.1">PRCD</a> object.
 </div>
 <ul>
 <li>
-Decode the JWE compatible <a href="#seq-4.5">ESAD</a> string supplied in the 
-<code>acquirerRequest.encryptedAuthorization</code>.
+Decode the JWE compatible <a href="#seq-4.5">ESAD</a> string supplied in 
+<code>pspRequest.encryptedAuthorization</code>.
 </li>
 <li>
 Verify that the public key declared in the JWE header matches an
@@ -2028,7 +2030,7 @@ That is, verifying that the <b class="actor">Merchant</b> payment claim correspo
 <b class="actor">User</b> have actually <i>seen and authorized</i>.
 </li>
 <li>
-Verify that <code>acquirerRequest.payeeHost</code> is equivalent to <code>SAD.payeeHost</code>.
+Verify that <code>pspRequest.payeeHost</code> is equivalent to <code>SAD.payeeHost</code>.
 That is, verifying that the <b class="actor">User</b> was not subject to phishing.
 Note that phishing attacks against FWP are not useful for stealing money,
 but for redirecting purchased goods to another address.
@@ -2103,7 +2105,7 @@ current request.
     <b class="actor">Merchant</b> who their <b class="actor">Issuer</b> is, which becomes
     quite impractical when the number of issuers grow.  In an Open Banking scenario powered by FWP,
     a Payment Initiation Service Provider (PISP) would effectively perform the same tasks as a
-    traditional <b class="actor">Acquirer</b>, albeit regulated.  That is, there would unlikely
+    traditional <b class="actor">PSP</b>, albeit regulated.  That is, there would unlikely
     be any <b class="actor">User</b> interactions with such a PISP.
   </div>
   <div id="extensions" class="header">
@@ -2162,7 +2164,7 @@ This would also <i>relieve users from having to enroll payment credentials
               title="CardSpace">Windows CardSpace<img src="images/xtl.svg" alt="link"></a>.
   </div>
   <div class="para">
-    The <b class="actor">User</b> icon was fetched from
+    The <b class="actor">User</b> icon was derived from
         <a style="word-break:break-all;white-space:normal"
  href="https://commons.wikimedia.org/wiki/File:Crystal_Clear_kdm_user_female.svg"
            title="User Icon">
@@ -2174,6 +2176,7 @@ https://commons.wikimedia.org/wiki/File:Crystal_Clear_kdm_user_female.svg<img sr
     <tr><th>Date</th><th>Version</th><th>Comment</th></tr>
     <tr><td>2020-03-12</td><td>0.1</td><td>Initial publishing</td></tr>
     <tr><td>2020-03-15</td><td>0.11</td><td>External token comment added</td></tr>
+    <tr><td>2020-03-29</td><td>0.12</td><td>Changed &quot;Acquirer&quot; to &quot;PSP&quot;</td></tr>
   </table>
   <div id="authors" class="header">
     Authors

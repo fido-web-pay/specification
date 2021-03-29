@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 
-public class AcquirerIcon {
+public class PSPIcon {
     static double WIDTH                  = 1000;
     static double HEIGHT                 = 1000;
     static double RADIUS                 = 70;
@@ -54,21 +54,21 @@ public class AcquirerIcon {
 
     StringBuilder svg;
 
-    class Cordinates {
+    class Coordinates {
         double x;
         double y;
-        Cordinates(double x, double y) {
+        Coordinates(double x, double y) {
             this.x = x;
             this.y = y;
         }
     }
 
-    Cordinates center;
-    Cordinates current;
+    Coordinates center;
+    Coordinates current;
 
-    Cordinates getCordinates(double gearAngle, double radius) {
-        return new Cordinates(Math.sin(gearAngle) * radius + center.x,
-                              Math.cos(gearAngle) * radius + center.y);
+    Coordinates getCoordinates(double gearAngle, double radius) {
+        return new Coordinates(Math.sin(gearAngle) * radius + center.x,
+                               Math.cos(gearAngle) * radius + center.y);
     }
 
     static String truncateBig(double value) {
@@ -79,7 +79,7 @@ public class AcquirerIcon {
         return truncated;
     }
 
-    void writePair(Cordinates next) {
+    void writePair(Coordinates next) {
         svg.append(truncateBig(next.x))
            .append(',')
            .append(truncateBig(next.y))
@@ -117,16 +117,16 @@ public class AcquirerIcon {
             .append("' stroke-width='" + truncateBig(COG_STROKE_WIDTH) + "' fill='url(#")
             .append(gradientId)
             .append(")' d='M");
-        center = new Cordinates(x, y);
-        current = new Cordinates(0, 0);
+        center = new Coordinates(x, y);
+        current = new Coordinates(0, 0);
         double halfCog = Math.PI / cogs;
         double innerWidthRadiansDiv2 =  innerWidthPercent * halfCog;
         double outerWidthRadiansDiv2 =  outerWidthPercent * halfCog;
         for (int cog = 0; cog < cogs; cog++) {
-            writePair(getCordinates(gearAngle - innerWidthRadiansDiv2, innerRadius));
-            writePair(getCordinates(gearAngle - outerWidthRadiansDiv2, outerRadius));
-            writePair(getCordinates(gearAngle + outerWidthRadiansDiv2, outerRadius));
-            writePair(getCordinates(gearAngle + innerWidthRadiansDiv2, innerRadius));
+            writePair(getCoordinates(gearAngle - innerWidthRadiansDiv2, innerRadius));
+            writePair(getCoordinates(gearAngle - outerWidthRadiansDiv2, outerRadius));
+            writePair(getCoordinates(gearAngle + outerWidthRadiansDiv2, outerRadius));
+            writePair(getCoordinates(gearAngle + innerWidthRadiansDiv2, innerRadius));
             gearAngle += (Math.PI * 2) / cogs;
         }
         svg.append("z'/>\n")
@@ -143,11 +143,11 @@ public class AcquirerIcon {
             .append("'/>\n");
     }
   
-    AcquirerIcon(String fileName) throws Exception {
+    PSPIcon(String fileName) throws Exception {
         svg = new StringBuilder(
             "<svg width='1000' height='1000' " +
             "xmlns='http://www.w3.org/2000/svg'>\n" +
-            "  <title>Acquirer Symbol</title>\n" +
+            "  <title>PSP Symbol</title>\n" +
             "  <!-- Anders Rundgren 2021 -->\n" +
             "  <defs>\n");
         radialGradient(BIG_GRADIENT_ID,
@@ -203,7 +203,7 @@ public class AcquirerIcon {
 
     public static void main(String[] argc) {
         try {
-            new AcquirerIcon(argc[0] + File.separator + "acquirer.svg");
+            new PSPIcon(argc[0] + File.separator + "psp.svg");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

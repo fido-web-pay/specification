@@ -20,7 +20,7 @@
    viewBox='0 0 128 128'
    version='1.1'
    id='svg3129'>
-
+  <title>User Symbol</title>
   <defs
      id='defs3131'>
     <linearGradient
@@ -477,6 +477,8 @@
    viewBox='0 0 68 48'
    version='1.1'
    id='svg158'>
+  <title>Merchant Symbol</title>
+  <!-- Anders Ruyndgren 2021-->
   <defs
      id='defs52'>
     <filter
@@ -1078,7 +1080,7 @@
 </svg>
   <text x='303' y='24.3' fill='black' font-family='Roboto,sans-serif' font-size='14.399999999999999' text-anchor='middle'>Merchant</text>
 <svg x='403' y='32.0' width='40' height='40.0' viewBox='0 0 1000 1000' xmlns='http://www.w3.org/2000/svg'>
-  <title>Acquirer Symbol</title>
+  <title>PSP Symbol</title>
   <!-- Anders Rundgren 2021 -->
   <defs>
     <radialGradient cx='0.5' cy='0.5' id='bigGearGid' r='0.5' spreadMethod='pad'>
@@ -1099,9 +1101,9 @@
   <circle stroke='grey' stroke-width='15' fill='url(#shaftGid)' r='80' cx='390' cy='610'/>
   <path stroke='#f27b2b' stroke-width='20' fill='url(#smallGearGid)' d='M656.4,357.2 661.5,471.3 692.2,478.1 745,376.8 755,373.7 856.4,426.3 877.6,403.1 816.4,306.7 818.6,296.5 914.9,235 905.4,205.1 791.3,209.9 783.6,202.8 778.5,88.7 747.8,81.9 695,183.2 685,186.3 583.6,133.7 562.4,156.9 623.6,253.3 621.4,263.5 525.1,325 534.6,354.9 648.7,350.1 z'/>
   <circle stroke='grey' stroke-width='15' fill='url(#shaftGid)' r='50' cx='720' cy='280'/>
-</svg>  <text x='423' y='24.3' fill='black' font-family='Roboto,sans-serif' font-size='14.399999999999999' text-anchor='middle'>Acquirer</text>
+</svg>  <text x='423' y='24.3' fill='black' font-family='Roboto,sans-serif' font-size='14.399999999999999' text-anchor='middle'>PSP</text>
 <svg x='512.4444444444445' y='32.0' width='61.111111111111114' height='40.0' viewBox='0 0 110 72' xmlns='http://www.w3.org/2000/svg'>
-  <title>FIDO Web Pay - Issuer</title>
+  <title>Issuer Symbol</title>
   <!-- Anders Rundgren 2021-->
   <defs>
     <linearGradient id='bankPillar' x1='0' x2='1'>
@@ -1171,7 +1173,7 @@
   <text x='259.75' y='288.05' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>6</text>
   </a>
   <line x1='303.6' y1='320' x2='414.9' y2='320' stroke-width='0.8' stroke='#cc2020' marker-end='url(#arrowHead)'/>
-  <text x='363' y='314.7' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>AcquirerRequest</text>
+  <text x='363' y='314.7' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>PSPRequest</text>
   <a href='#seq-7'>
   <rect x='296' y='313' width='14' height='14' rx='3' fill='white' stroke='#404040' stroke-width='0.5'/>
   <text x='303' y='324.3' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>7</text>

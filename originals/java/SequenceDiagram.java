@@ -233,7 +233,7 @@ public class SequenceDiagram   {
         actor("user.svg",     "User",     0);
         actor("browser.svg",  "Browser",  1);
         actor("merchant.svg", "Merchant", 2);
-        actor("acquirer.svg", "Acquirer", 3);
+        actor("psp.svg",      "PSP",      3);
         actor("issuer.svg",   "Issuer",   4);
 
         arrow(2, 1, "PaymentRequest");
@@ -280,7 +280,7 @@ public class SequenceDiagram   {
         processing(1);
         arrow(1, 2, "FWP Assertion");
         processing(2);
-        arrow(2, 3, "AcquirerRequest");
+        arrow(2, 3, "PSPRequest");
         processing(3);
         arrow(3, 4, "IssuerRequest");
         processing(4);
