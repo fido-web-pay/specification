@@ -12,18 +12,14 @@ public class VerifierIcon {
 
     static double SHACKLE_X              = 680;
     static double SHACKLE_Y              = 520;
-    static double SHACKLE_WIDTH          = 220;
-    static double SHACKLE_HEIGHT         = 200;
-    static double SHACKLE_X_RADIUS       = 70;
-    static double SHACKLE_Y_RADIUS       = 70;
+    static double SHACKLE_WIDTH          = 140;
+    static double SHACKLE_HEIGHT         = 160;
+    static double SHACKLE_X_RADIUS       = 50;
+    static double SHACKLE_Y_RADIUS       = 50;
    
-    static double LOCK_WIDTH             = 390;
-    static double LOCK_HEIGHT            = 240;
-    /*
-    <rect fill="url(#svg_8)" height="383.05085" id="svg_7" rx="40" stroke="#7f7f7f" stroke-width="10" width="830.50847" x="84.40678" y="145.42373"/>
-
-    */
-    static double SERVER_X               = 84;
+    static double LOCK_WIDTH             = 260;
+    static double LOCK_HEIGHT            = 160;
+ 
     static double SERVER_Y               = 146;
     static double SERVER_WIDTH           = 830;
     static double SERVER_HEIGHT          = 384;
@@ -174,20 +170,18 @@ public class VerifierIcon {
        .append("'/>\n");
     }
 
-    void padLock() {
-        svg.append("  <rect fill='url(#serverGloss)' x='")
-           .append(PSPIcon.truncateBig(SERVER_X))
-           .append("' y='")
-           .append(PSPIcon.truncateBig(SERVER_Y))
-           .append("' width='")
-           .append(PSPIcon.truncateBig(SERVER_WIDTH))
-           .append("' height='")
-           .append(PSPIcon.truncateBig(SERVER_HEIGHT))
-           .append("' rx='45' stroke='#7f7f7f' stroke-width='10'/>\n");
+    void ventilation(double x) {
+         svg.append("  <rect fill='#dae3f3' height='302' stroke='#7f7f7f' stroke-width='10' " +
+                    "width='20' x='")
+            .append(PSPIcon.truncateBig(x))
+            .append("' y='184'/>\n");
+    }
+ 
 
-        shackle("black", 70, "");
-        shackle("#b0b0b0", 64, "");
-        shackle("white", 16, " filter='url(#shackleGlow)'");
+    void padLock() {
+        shackle("#808080", 60, "");
+        shackle("#b0b0b0", 40, "");
+        shackle("white", 14, " filter='url(#shackleGlow)'");
 
         svg.append("  <rect fill='url(#goldenLock)' x='")
            .append(PSPIcon.truncateBig(SHACKLE_X - LOCK_WIDTH / 2))
@@ -216,10 +210,14 @@ public class VerifierIcon {
             "      <stop offset='0.9' stop-color='#f0d100'/>\n" +
             "    </linearGradient>\n" +
             "    <linearGradient id='serverGloss' x1='0' x2='1' y1='0.3' y2='0.7'>\n" +
-            "      <stop offset='0' stop-color='#dae3f3'/>\n" +
-            "      <stop offset='0.5' stop-color='#dae3f3' stop-opacity='0.6'/>\n" +
-            "      <stop offset='1' stop-color='#dae3f3'/>\n" +
-            "    </linearGradient>\n");
+            "      <stop offset='0' stop-color='#d2ddef'/>\n" +
+            "      <stop offset='0.5' stop-color='#edf2ff'/>\n" +
+            "      <stop offset='1' stop-color='#d2ddef'/>\n" +
+            "    </linearGradient>\n" +
+            "    <radialGradient cx='0.5' cy='0.5' id='powerOn' r='0.5'>\n" +
+            "      <stop offset='0' stop-color='#eaebef'/>\n" +
+            "      <stop offset='1' stop-color='#ff5656'/>\n" +
+            "    </radialGradient>\n");
         radialGradient(BIG_GRADIENT_ID,
                        BIG_GRADIENT_INITIAL_STOP,
                        BIG_GRADIENT_STOP,
@@ -246,7 +244,25 @@ public class VerifierIcon {
             "' rx='" + PSPIcon.truncateBig(RADIUS) + "' fill='white' stroke='" + STROKE + "' stroke-width='" + 
             PSPIcon.truncateBig(STROKE_WIDTH) +
             "'/>\n");
+
+       svg.append("  <rect fill='url(#serverGloss)' x='")
+           .append(PSPIcon.truncateBig((WIDTH - SERVER_WIDTH) / 2))
+           .append("' y='")
+           .append(PSPIcon.truncateBig(SERVER_Y))
+           .append("' width='")
+           .append(PSPIcon.truncateBig(SERVER_WIDTH))
+           .append("' height='")
+           .append(PSPIcon.truncateBig(SERVER_HEIGHT))
+           .append("' rx='45' stroke='#7f7f7f' stroke-width='10'/>\n" +
+                   "  <circle cx='160' cy='215' fill='url(#powerOn)' r='32' stroke='#333333' stroke-width='5'/>\n");
+        double x = 240;
+        for (int i = 0; i < 3 ; i++) {
+            ventilation(x);
+            x += 70;
+        }
+
         padLock();
+
         new FileOutputStream(fileName).write(svg.append("</svg>").toString().getBytes("utf-8"));
     }
 
