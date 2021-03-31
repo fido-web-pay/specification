@@ -10,8 +10,8 @@ public class VerifierIcon {
     static double STROKE_WIDTH           = 15;
     static String STROKE                 = "grey";
 
-    static double SHACKLE_X              = 680;
-    static double SHACKLE_Y              = 520;
+    static double SHACKLE_X              = 650;
+    static double SHACKLE_Y              = 706;
     static double SHACKLE_WIDTH          = 140;
     static double SHACKLE_HEIGHT         = 160;
     static double SHACKLE_X_RADIUS       = 50;
@@ -20,51 +20,10 @@ public class VerifierIcon {
     static double LOCK_WIDTH             = 260;
     static double LOCK_HEIGHT            = 160;
  
-    static double SERVER_Y               = 146;
+    static double SERVER_Y               = 86;
     static double SERVER_WIDTH           = 830;
-    static double SERVER_HEIGHT          = 384;
-
-    static final double SHAFT_STROKE_WIDTH = 15;
-    static final String SHAFT_STROKE       = "grey";
-    static final String SHAFT_GRADIENT_ID  = "shaftGid";
-    static final double SHAFT_GRADIENT_INITIAL_STOP = 0.5;
-    static final double SHAFT_GRADIENT_STOP  = 1;
-    static final String SHAFT_GRADIENT_STOP_COLOR   = "#8080ff";
-    static final String SHAFT_GRADIENT_INNER_COLOR  = "white";
-
-    static final double COG_STROKE_WIDTH = 20;
-
-    static final double BIG_X            = 390;
-    static final double BIG_Y            = 610;
-    static final double BIG_OUTER_RADIUS = 300;
-    static final double BIG_INNER_RADIUS = 190;
-    static final int    BIG_COGS         = 12;
-    static final double BIG_SHAFT_RADIUS = 80;
-    static final double BIG_GEAR_ANGLE   = 15;
-    static final double BIG_OUTER_WIDTH_PERCENT  = 0.15;
-    static final double BIG_INNER_WIDTH_PERCENT  = 0.8;
-    static final String BIG_STROKE       = "#009a00";
-    static final String BIG_GRADIENT_ID  = "bigGearGid";
-    static final double BIG_GRADIENT_INITIAL_STOP  = 0;
-    static final double BIG_GRADIENT_STOP  = 0.8;
-    static final String BIG_GRADIENT_STOP_COLOR   = "#c4eb4e";
-    static final String BIG_GRADIENT_INNER_COLOR  = "white";
-
-    static final double SMALL_X            = BIG_X + 330;
-    static final double SMALL_Y            = BIG_Y - 330;
-    static final double SMALL_OUTER_RADIUS = 200;
-    static final double SMALL_INNER_RADIUS = 100;
-    static final int    SMALL_COGS         = 6;
-    static final double SMALL_SHAFT_RADIUS = 50;
-    static final double SMALL_GEAR_ANGLE   = -12.5;
-    static final double SMALL_OUTER_WIDTH_PERCENT  = 0.15;
-    static final double SMALL_INNER_WIDTH_PERCENT  = 0.90;
-    static final String SMALL_STROKE       = "#f27b2b";
-    static final String SMALL_GRADIENT_ID  = "smallGearGid";
-    static final double SMALL_GRADIENT_INITIAL_STOP  = 0.3;
-    static final double SMALL_GRADIENT_STOP  = 1;
-    static final String SMALL_GRADIENT_STOP_COLOR  = "#eccb1e";
-    static final String SMALL_GRADIENT_INNER_COLOR  = "white";
+    static double SERVER_HEIGHT          = 180;
+    static double SERVER_POWER_ON        = 32;
 
     StringBuilder svg;
 
@@ -101,40 +60,7 @@ public class VerifierIcon {
     Coordinates center;
     Coordinates current;
 
-    Coordinates getCoordinates(double gearAngle, double radius) {
-        return new Coordinates(Math.sin(gearAngle) * radius + center.x,
-                              Math.cos(gearAngle) * radius + center.y);
-    }
-
-    void writePair(Coordinates next) {
-        svg.append(next.x)
-           .append(',')
-           .append(next.y)
-           .append(' '); 
-    }
-
-    void radialGradient(String gradientId,
-                        double initialStop,
-                        double stop,
-                        String stopColor,
-                        String innerColor) {
-        svg.append("    <radialGradient cx='0.5' cy='0.5' id='")
-            .append(gradientId)
-            .append("' r='0.5' spreadMethod='pad'>\n" +
-                    "      <stop offset='")
-            .append(initialStop)
-            .append("' stop-color='")
-            .append(innerColor)
-            .append("'/>\n" +
-                    "      <stop offset='")
-            .append(stop)
-            .append("' stop-color='")
-            .append(stopColor)
-            .append("'/>\n" +
-                    "    </radialGradient>\n"); 
-    }
-
-    void shackle(String color, double strokeWidth, String additional) {
+     void shackle(String color, double strokeWidth, String additional) {
         Coordinates xLowerLeft = new Coordinates(SHACKLE_X - SHACKLE_WIDTH / 2,
                                                  SHACKLE_Y + SHACKLE_HEIGHT / 2);
         svg.append("  <path fill='none' stroke='")
@@ -170,13 +96,43 @@ public class VerifierIcon {
        .append("'/>\n");
     }
 
-    void ventilation(double x) {
-         svg.append("  <rect fill='#dae3f3' height='302' stroke='#7f7f7f' stroke-width='10' " +
-                    "width='20' x='")
-            .append(PSPIcon.truncateBig(x))
-            .append("' y='184'/>\n");
+    void ventilation(double x, double y) {
+         srv.append("  <rect fill='#dae3f3' height='")
+            .append(PSPIcon.truncateBig(SERVER_HEIGHT * 0.7))
+            .append("' stroke='#7f7f7f' stroke-width='10' width='20' x='")
+            .append(PSPIcon.truncateBig(x + SERVER_POWER_ON * 5))
+            .append("' y='")
+            .append(PSPIcon.truncateBig(y + SERVER_HEIGHT * 0.15))
+            .append("'/>\n");
     }
  
+    StringBuilder srv = new StringBuilder();
+
+    void server(double y) {
+        double x = (WIDTH - SERVER_WIDTH) / 2;
+        srv.append("  <rect fill='url(#serverGloss)' x='")
+           .append(PSPIcon.truncateBig(x))
+           .append("' y='")
+           .append(PSPIcon.truncateBig(y))
+           .append("' width='")
+           .append(PSPIcon.truncateBig(SERVER_WIDTH))
+           .append("' height='")
+           .append(PSPIcon.truncateBig(SERVER_HEIGHT))
+           .append("' " +
+                   "rx='40' " + 
+                   "stroke='#7f7f7f' stroke-width='10'/>\n" +
+                   "  <circle cx='")
+           .append(PSPIcon.truncateBig(x + SERVER_POWER_ON * 2))
+           .append("' cy='")
+           .append(PSPIcon.truncateBig(y + SERVER_POWER_ON * 2))
+           .append("' fill='url(#powerOn)' r='")
+           .append(PSPIcon.truncateBig(SERVER_POWER_ON))
+           .append("' stroke='#333333' stroke-width='5'/>\n");
+         for (int i = 0; i < 3 ; i++) {
+            ventilation(x, y);
+            x += 70;
+        }
+    }
 
     void padLock() {
         shackle("#808080", 60, "");
@@ -192,6 +148,18 @@ public class VerifierIcon {
            .append("' height='")
            .append(PSPIcon.truncateBig(LOCK_HEIGHT))
            .append("' rx='25' stroke='#7f7f7f' stroke-width='10'/>\n");
+    }
+
+    void rack(double x, double y) {
+        svg.append("   <line stroke='#4ca7e0' x1='")
+           .append(PSPIcon.truncateBig(x))
+           .append("' y1='")
+           .append(PSPIcon.truncateBig(SERVER_Y))
+           .append("' x2='")
+           .append(PSPIcon.truncateBig(x))
+           .append("' y2='")
+           .append(PSPIcon.truncateBig(y))
+           .append("' stroke-width='25'/>\n");
     }
   
     VerifierIcon(String fileName) throws Exception {
@@ -218,21 +186,7 @@ public class VerifierIcon {
             "      <stop offset='0' stop-color='#eaebef'/>\n" +
             "      <stop offset='1' stop-color='#ff5656'/>\n" +
             "    </radialGradient>\n");
-        radialGradient(BIG_GRADIENT_ID,
-                       BIG_GRADIENT_INITIAL_STOP,
-                       BIG_GRADIENT_STOP,
-                       BIG_GRADIENT_STOP_COLOR,
-                       BIG_GRADIENT_INNER_COLOR);
-        radialGradient(SMALL_GRADIENT_ID,
-                       SMALL_GRADIENT_INITIAL_STOP,
-                       SMALL_GRADIENT_STOP,
-                       SMALL_GRADIENT_STOP_COLOR,
-                       SMALL_GRADIENT_INNER_COLOR);
-        radialGradient(SHAFT_GRADIENT_ID,
-                       SHAFT_GRADIENT_INITIAL_STOP,
-                       SHAFT_GRADIENT_STOP,
-                       SHAFT_GRADIENT_STOP_COLOR,
-                       SHAFT_GRADIENT_INNER_COLOR);
+
         svg.append(
             "  </defs>\n  <rect x='" +
             PSPIcon.truncateBig(STROKE_WIDTH / 2) + 
@@ -245,21 +199,14 @@ public class VerifierIcon {
             PSPIcon.truncateBig(STROKE_WIDTH) +
             "'/>\n");
 
-       svg.append("  <rect fill='url(#serverGloss)' x='")
-           .append(PSPIcon.truncateBig((WIDTH - SERVER_WIDTH) / 2))
-           .append("' y='")
-           .append(PSPIcon.truncateBig(SERVER_Y))
-           .append("' width='")
-           .append(PSPIcon.truncateBig(SERVER_WIDTH))
-           .append("' height='")
-           .append(PSPIcon.truncateBig(SERVER_HEIGHT))
-           .append("' rx='45' stroke='#7f7f7f' stroke-width='10'/>\n" +
-                   "  <circle cx='160' cy='215' fill='url(#powerOn)' r='32' stroke='#333333' stroke-width='5'/>\n");
-        double x = 240;
-        for (int i = 0; i < 3 ; i++) {
-            ventilation(x);
-            x += 70;
+        double y = SERVER_Y;
+        for (int i = 0; i < 4; i++) {
+            server(y);
+            y += SERVER_HEIGHT * 1.2;
         }
+        rack(SERVER_POWER_ON * 5, y);
+        rack(WIDTH - SERVER_POWER_ON * 5, y);
+        svg.append(srv);
 
         padLock();
 
