@@ -322,7 +322,7 @@ public class SequenceDiagram   {
         seqY -= PROC_HEIGHT * 0.5;
         StringBuilder preludium = new StringBuilder("<?xml version='1.0' encoding='utf-8'?>\n" +
                                                     "<svg viewBox='0 0 ")
-            .append(convert(center(4) + PROC_WIDTH / 2 + 20))
+            .append(convert(center(actorPos - 1) + PROC_WIDTH / 2 + 20))
             .append(" ")
             .append(convert(seqY + 10))
             .append("' xmlns='http://www.w3.org/2000/svg'>\n" +
