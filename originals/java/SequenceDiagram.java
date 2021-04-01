@@ -250,7 +250,7 @@ public class SequenceDiagram   {
         actor("merchant.svg", "Merchant");
         actor("psp.svg",      "PSP");
         if (!standardSequenceDiagram) {
-            actor("verifier.svg", "Verifier");
+            actor("validator.svg", "Validator");
         }
         actor("issuer.svg",   "Issuer");
 
@@ -310,9 +310,9 @@ public class SequenceDiagram   {
             currNum = 1;
             delegatedPart = true;
             processing(1);
-            arrow(1, 2, "VerifyRequest");
+            arrow(1, 2, "ValidateRequest");
             processing(2);
-            returnArrow(2, 1, "Return Data");
+            returnArrow(2, 1, "Validated Data");
             processing(1);
             arrow(1, 3, "&quot;Payment Rails&quot;");
             processing(3);

@@ -6,7 +6,7 @@
   <property name="originals.dir" location="."/>
 
     <target name="help">
-    <echo message="Targets: sequencediagram delegateddiagram pspicon verifiericon publish draft"/>
+    <echo message="Targets: sequencediagram delegateddiagram pspicon validatoricon publish draft"/>
   </target>
 	
   <target name="_compile">
@@ -79,9 +79,9 @@
     <delete dir="${temp.dir}"/>
   </target>
 
-  <target name="verifiericon" depends="_compile">
+  <target name="validatoricon" depends="_compile">
     <java fork="yes"
-          classname="VerifierIcon"
+          classname="ValidatorIcon"
             dir="${temp.dir}"
           failonerror="true">
       <classpath>

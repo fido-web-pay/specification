@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 
-public class VerifierIcon {
+public class ValidatorIcon {
     static double WIDTH                  = 1000;
     static double HEIGHT                 = 1000;
     static double RADIUS                 = 70;
@@ -162,11 +162,11 @@ public class VerifierIcon {
            .append("' stroke-width='25'/>\n");
     }
   
-    VerifierIcon(String fileName) throws Exception {
+    ValidatorIcon(String fileName) throws Exception {
         svg = new StringBuilder(
             "<svg width='1000' height='1000' " +
             "xmlns='http://www.w3.org/2000/svg'>\n" +
-            "  <title>Verifier Symbol</title>\n" +
+            "  <title>Validator Symbol</title>\n" +
             "  <!-- Anders Rundgren 2021 -->\n" +
             "  <defs>\n" +
             "    <filter id='shackleGlow'>\n" +
@@ -215,7 +215,7 @@ public class VerifierIcon {
 
     public static void main(String[] argc) {
         try {
-            new VerifierIcon(argc[0] + File.separator + "verifier.svg");
+            new ValidatorIcon(argc[0] + File.separator + "validator.svg");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

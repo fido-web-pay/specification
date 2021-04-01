@@ -12,9 +12,12 @@ public class CreateDocument  {
     CreateDocument (String originalBase) throws Exception {
         this.originalBase = originalBase;
         String template = readOriginal("template.html");
-        String statediagram = readOriginal(SequenceDiagram.FILE_NAME);
+        String statediagram = readOriginal(SequenceDiagram.STANDARD_SEQUENCE_FILE);
         statediagram = "<svg style='display:block;width:500pt' class='box' " + statediagram.substring(statediagram.indexOf("<svg ") + 5);
         template = template.replace("@sequencediagram@", statediagram);
+        statediagram = readOriginal(SequenceDiagram.DELEGATED_SEQUENCE_FILE);
+        statediagram = "<svg style='display:block;width:400pt' class='box' " + statediagram.substring(statediagram.indexOf("<svg ") + 5);
+        template = template.replace("@delegateddiagram@", statediagram);
         new FileOutputStream(originalBase + ".." + File.separator + "draft.html").write(template.getBytes("utf-8"));
      }
 

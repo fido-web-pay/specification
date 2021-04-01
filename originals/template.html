@@ -911,14 +911,79 @@ current request.
     seems though like a possible path.
   </div>
   <div class="para">
-    Open Banking may also become a factor because there is work under way making non-OAuth2
-    requests a part of Open Banking APIs.  There are good reasons for that since current Open Banking
-    payment APIs presume that the <b class="actor">User</b> in some OOB way informs the
-    <b class="actor">Merchant</b> who their <b class="actor">Issuer</b> is, which becomes
-    quite impractical when the number of issuers grow.  In an Open Banking scenario powered by FWP,
-    a Payment Initiation Service Provider (PISP) would effectively perform the same tasks as a
-    traditional <b class="actor">PSP</b>, albeit regulated.  That is, there would unlikely
-    be any <b class="actor">User</b> interactions with such a PISP.
+    Delegated authorization as discussed in the next section, represents
+    yet another way addressing integration.
+  </div>
+
+  <div id="delegatedauthorization" class="header">
+    Delegated Authorization
+  </div>
+<div>
+Using delegated authorization the verification
+of <b class="actor">User</b> authorizations is separated 
+from payment initiations. The purpose with such arrangements include:
+</div>
+<ul>
+  <li>Potentially ease the integration of FWP in existing payment systems.</li>
+  <li>Open the possibility <i>outsourcing</i> the authorization process to a TPP.</li>
+</ul>
+<div class="para">
+  Note that delegated authorization is <i>transparent</i> for the
+  <b class="actor">User</b> as well as for the <b class="actor">Merchant</b>.
+</div>
+ <div class="para">
+  The delegated authorization mode is illustrated by the following sequence diagram:
+</div>
+  <div style="overflow-x:auto;padding:8pt 0">
+    @delegateddiagram@
+  </div>
+  <div>
+    Note that step 1-7 are <i>identical</i> to the &quot;standard&quot; mode. 
+    &quot;Payment Rails&quot; refer to existing payment systems.
+  </div>
+ <div class="step"><div id="seq-D1" class="numbox">D1</div>Process PSPRequest and Create ValidateRequest Object</div>
+ <div>
+   This step should involve the same verifications as in <a href="#seq-8">step 8</a>
+   in the standard mode.
+   A suitable <span class="msg">ValidateRequest</span> object would typically follow the 
+   <span class="msg">IssuerRequest</span> sample in step 8.
+</div>
+ <div class="comment box">
+   Using delegated authorization may be decided by each <b class="actor">Issuer</b>
+   <i>individually</i> and is preferably indicated directly or indirectly
+   by the <code>issuerId</code> attribute
+ </div>
+ <div class="step"><div id="seq-D2" class="numbox">D2</div>Send ValidateRequest Object</div>
+ <div>
+   At this point the <b class="actor">PSP</b> sends the completed <span class="msg">ValidateRequest</span>
+   object to the designated <b class="actor">Validator</b>.
+   Note that the method used for locating the proper <b class="actor">Validator</b> depends on
+   the <code>paymentMethod</code> and <code>issuerId</code> attributes.
+ </div>
+ <div class="step"><div id="seq-D3" class="numbox">D3</div>Process ValidateRequest</div>
+ <div>
+   This step should involve the same verifications as in <a href="#seq-10">step 10</a>
+   in the standard mode.
+ </div>
+  <div class="step"><div id="seq-D4" class="numbox">D4</div>Return Validated Data</div>
+  <div>
+    If validation is successful, <span class="msg">ValidateRequest</span> 
+    should return the <b class="actor">User</b> account number.
+</div>
+ <div class="step"><div id="seq-D5" class="numbox">D5</div>Create Payment Instruction</div>
+ <div>
+   After receiving the <b class="actor">User</b> account number a 
+   <span class="msg">payment instruction</span> object is created.
+   The elements of such objects are payment network specific and
+   are therefore not described here.
+</div>
+ <div class="step"><div id="seq-D6" class="numbox">D6</div>Invoke &quot;Payment Rails&quot;</div>
+  <div>
+    Perform a <span class="msg">payment instruction</span> request in a payment network specific way.
+  </div>
+  <div class="step"><div id="seq-D7" class="numbox">D7</div>Process Payment Instruction</div>
+  <div>
+    Process the <span class="msg">payment instruction</span> request in a payment network specific way.
   </div>
   <div id="extensions" class="header">
     Extensions
@@ -989,6 +1054,7 @@ https://commons.wikimedia.org/wiki/File:Crystal_Clear_kdm_user_female.svg<img sr
     <tr><td>2020-03-12</td><td>0.1</td><td>Initial publishing</td></tr>
     <tr><td>2020-03-15</td><td>0.11</td><td>External token comment added</td></tr>
     <tr><td>2020-03-29</td><td>0.12</td><td>Improved replay handling + Changed &quot;Acquirer&quot; to &quot;PSP&quot;</td></tr>
+    <tr><td>2020-04-02</td><td>0.13</td><td>Delegated authorization added</td></tr>
   </table>
   <div id="authors" class="header">
     Authors
