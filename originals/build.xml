@@ -6,7 +6,7 @@
   <property name="originals.dir" location="."/>
 
     <target name="help">
-    <echo message="Targets: sequencediagram pspicon verifiericon publish draft"/>
+    <echo message="Targets: sequencediagram delegateddiagram pspicon verifiericon publish draft"/>
   </target>
 	
   <target name="_compile">
@@ -30,25 +30,41 @@
     	    dir="${temp.dir}"
           failonerror="true">
     	<classpath>
-            <pathelement path="${temp.dir}"/>
+        <pathelement path="${temp.dir}"/>
      	</classpath>
         <arg value="${originals.dir}"/>
+        <arg value="true"/>
     </java>
     <delete dir="${temp.dir}"/>
   </target>
 
-    <target name="draft" depends="_compile">
-        <java fork="yes"
-              classname="CreateDocument"
-                dir="${temp.dir}"
-              failonerror="true">
-            <classpath>
-                <pathelement path="${temp.dir}"/>
-            </classpath>
-            <arg value="${originals.dir}"/>
-        </java>
-        <delete dir="${temp.dir}"/>
-    </target>
+  <target name="delegateddiagram" depends="_compile">
+    <property name="file" value=""/>
+    <java fork="yes"
+          classname="SequenceDiagram"
+    	    dir="${temp.dir}"
+          failonerror="true">
+      <classpath>
+        <pathelement path="${temp.dir}"/>
+      </classpath>
+      <arg value="${originals.dir}"/>
+      <arg value="false"/>
+    </java>
+    <delete dir="${temp.dir}"/>
+  </target>
+
+  <target name="draft" depends="_compile">
+    <java fork="yes"
+          classname="CreateDocument"
+            dir="${temp.dir}"
+          failonerror="true">
+      <classpath>
+        <pathelement path="${temp.dir}"/>
+      </classpath>
+      <arg value="${originals.dir}"/>
+    </java>
+    <delete dir="${temp.dir}"/>
+  </target>
 
   <target name="pspicon" depends="_compile">
     <java fork="yes"

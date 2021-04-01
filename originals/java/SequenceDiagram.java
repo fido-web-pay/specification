@@ -7,7 +7,8 @@ import java.io.FileOutputStream;
 
 public class SequenceDiagram   {
 
-    static final String FILE_NAME = "sequencediagram.svg";
+    static final String STANDARD_SEQUENCE_FILE = "sequencediagram.svg";
+    static final String DELEGATED_SEQUENCE_FILE = "delegateddiagram.svg";
 
     static final double ACTOR_TOP_Y = 32;
     static final double ACTOR_HEIGHT = 40;
@@ -33,6 +34,7 @@ public class SequenceDiagram   {
     static final double ARROW_HEAD_LENGTH = 7;
     static final double ARROW_HEAD_GUTTER = 0.5;
     static final String ARROW_COLOR = "#cc2020";
+    static final String ARROW_RETURN_COLOR = "#009a00";
 
     static final double DROP_OFFSET = 2;
 
@@ -56,19 +58,14 @@ public class SequenceDiagram   {
 
     double seqY = 100;
 
+    int actorPos = 0;
+
     StringBuilder svg = new StringBuilder ();
 
-/*
-    <filter id='dropArbitrary'>
-      <feOffset result='offOut' in='SourceAlpha' dx='3' dy='3'/>
-      <feFlood flood-color='black' result='color' flood-opacity='0.4'/>
-      <feComposite in='color' in2='offOut' operator='in' result='sombra'/>
-      <feGaussianBlur result='blurOut' in='sombra' stdDeviation='1'/>
-      <feBlend in='SourceGraphic' in2='blurOut' mode='normal'/>
-    </filter>
-*/
-
     int currNum = 1;
+
+    boolean delegatedPart = false;  // For reference generation
+
     void number(double centerX, double centerY) {
         int n = currNum++;
         double width = NUMB_WIDTH;
@@ -79,8 +76,13 @@ public class SequenceDiagram   {
         if (n > 9 && n != 11 &&  n < 20) {
             fontX -= FONT_SIZE / 15.0;
         }
+        String numText = String.valueOf(n);
+        if (delegatedPart) {
+            numText = "D" + numText;
+            width += NUMB_WIDTH *.5;
+        }
         svg.append("  <a href='#seq-")
-           .append(n)
+           .append(numText)
            .append("'>\n  <rect x='")
            .append(convert(centerX - width / 2))
            .append("' y='")
@@ -92,7 +94,7 @@ public class SequenceDiagram   {
            .append("' rx='3' fill='white' stroke='" + PROC_STROKE + "' stroke-width='")
            .append(convert(STROKE_WIDTH))
            .append("'/>\n");
-        _text(fontX, centerY, String.valueOf(n), FONT_SIZE, CLICKABLE_COLOR);
+        _text(fontX, centerY, numText, FONT_SIZE, CLICKABLE_COLOR);
         svg.append("  </a>\n");
     }
 
@@ -152,18 +154,25 @@ public class SequenceDiagram   {
     }
 
     void dashedArrow(int from, int to, String label) {
-        _arrow(from, to, label, " stroke-dasharray='4'");
+        _arrow(from, to, label, " stroke-dasharray='4'", false);
+    }
+
+    void returnArrow(int from, int to, String label) {
+        _arrow(from, to, label, "", true);
     }
 
     void arrow(int from, int to, String label) {
-        _arrow(from, to, label, "");
+        _arrow(from, to, label, "", false);
     }
 
-    void _arrow(int from, int to, String label, String additional) {
+    void _arrow(int from, int to, String label, String additional, boolean returnData) {
         double startX = (to > from ? VBAR_WIDTH : -VBAR_WIDTH) / 2;
         double endX = to > from ? -ARROW_HEAD_LENGTH - ARROW_HEAD_GUTTER : ARROW_HEAD_LENGTH + ARROW_HEAD_GUTTER;
         String arrowY = convert(seqY);
         double textX = (center(to) + center(from)) / 2;
+        if (Math.abs(to - from) > 1) {
+            textX = (center(from + 1) + center(from)) / 2;
+        }
         svg.append("  <line x1='")
            .append(convert(center(from) + startX))
            .append("' y1='")
@@ -174,7 +183,11 @@ public class SequenceDiagram   {
            .append(arrowY)
            .append("' stroke-width='")
            .append(convert(ARROW_WIDTH))
-           .append("' stroke='" + ARROW_COLOR + "' marker-end='url(#arrowHead)'")
+           .append("' stroke='")
+           .append(returnData ? ARROW_RETURN_COLOR : ARROW_COLOR)
+           .append("' marker-end='url(#")
+           .append(returnData ? "arrowReturnHead" : "arrowHead")
+           .append(")'")
            .append(additional)
            .append("/>\n");
         text(textX, seqY - FONT_SIZE * 0.8, label);
@@ -204,7 +217,8 @@ public class SequenceDiagram   {
         embedded = embedded.substring(0, start) + "\u0000" + embedded.substring(valueStop + 1);
         return argument;
     }
-    void actor(String fileName, String label, int vbar) throws Exception {
+    void actor(String fileName, String label) throws Exception {
+        int vbar = actorPos++;
         embedded = readOriginal(fileName).replace('"', '\'');
         double width = findArgument("width");
         double height = findArgument("height");
@@ -227,63 +241,82 @@ public class SequenceDiagram   {
 
      }
 
-    SequenceDiagram  (String originalBase) throws Exception {
+    SequenceDiagram  (String originalBase, boolean standardSequenceDiagram) throws Exception {
         this.originalBase = originalBase;
+        if (standardSequenceDiagram) {
+            actor("user.svg",     "User");
+            actor("browser.svg",  "Browser");
+        }
+        actor("merchant.svg", "Merchant");
+        actor("psp.svg",      "PSP");
+        if (!standardSequenceDiagram) {
+            actor("verifier.svg", "Verifier");
+        }
+        actor("issuer.svg",   "Issuer");
 
-        actor("user.svg",     "User",     0);
-        actor("browser.svg",  "Browser",  1);
-        actor("merchant.svg", "Merchant", 2);
-        actor("psp.svg",      "PSP",      3);
-        actor("issuer.svg",   "Issuer",   4);
+        if (standardSequenceDiagram) {
 
-        arrow(2, 1, "PaymentRequest");
+            arrow(2, 1, "PaymentRequest");
 
-        seqY -= SEQ_Y_SLACK_AFTER_UI;
-        double uiY = seqY + (UI_HEIGHT - PROC_HEIGHT) / 2;
-        double uiTop = uiY - (UI_HEIGHT + STROKE_WIDTH) / 2;
-        double uiX = center(1) - (UI_WIDTH + STROKE_WIDTH) / 2;
-        svg.append("  <rect x='")
-           .append(convert(uiX + DROP_OFFSET))
-           .append("' y='")
-           .append(convert(uiTop + DROP_OFFSET))
-           .append("' width='")
-           .append(convert(UI_WIDTH))
-           .append("' height='")
-           .append(convert(UI_HEIGHT))
-           .append("' fill='black' opacity='0.4' filter='url(#dropShaddow)'/>\n")
-           .append("  <rect x='")
-           .append(convert(uiX))
-           .append("' y='")
-           .append(convert(uiTop))
-           .append("' width='")
-           .append(convert(UI_WIDTH))
-           .append("' height='")
-           .append(convert(UI_HEIGHT))
-           .append("' fill='white' stroke-width='")
-           .append(convert(STROKE_WIDTH))
-           .append("' stroke='black'/>\n")
-           .append("  <rect x='")
-           .append(convert(uiX))
-           .append("' y='")
-           .append(convert(uiTop))
-           .append("' width='")
-           .append(convert(UI_WIDTH))
-           .append("' height='")
-           .append(convert(UI_BORDER))
-           .append("' fill='#deeafc' stroke-width='")
-           .append(convert(STROKE_WIDTH))
-           .append("' stroke='black'/>\n");  
-        text(center(1), uiY, "Payment UI");
-        number(uiX, uiTop + UI_BORDER / 2);
-        seqY += SEQ_Y_DISTANCE + SEQ_Y_SLACK_AFTER_UI + UI_HEIGHT - PROC_HEIGHT;
-        dashedArrow(0, 1, "Authorization");
-        processing(1);
-        arrow(1, 2, "FWP Assertion");
-        processing(2);
-        arrow(2, 3, "PSPRequest");
-        processing(3);
-        arrow(3, 4, "IssuerRequest");
-        processing(4);
+            seqY -= SEQ_Y_SLACK_AFTER_UI;
+            double uiY = seqY + (UI_HEIGHT - PROC_HEIGHT) / 2;
+            double uiTop = uiY - (UI_HEIGHT + STROKE_WIDTH) / 2;
+            double uiX = center(1) - (UI_WIDTH + STROKE_WIDTH) / 2;
+            svg.append("  <rect x='")
+               .append(convert(uiX + DROP_OFFSET))
+               .append("' y='")
+               .append(convert(uiTop + DROP_OFFSET))
+               .append("' width='")
+               .append(convert(UI_WIDTH))
+               .append("' height='")
+               .append(convert(UI_HEIGHT))
+               .append("' fill='black' opacity='0.4' filter='url(#dropShaddow)'/>\n")
+               .append("  <rect x='")
+               .append(convert(uiX))
+               .append("' y='")
+               .append(convert(uiTop))
+               .append("' width='")
+               .append(convert(UI_WIDTH))
+               .append("' height='")
+               .append(convert(UI_HEIGHT))
+               .append("' fill='white' stroke-width='")
+               .append(convert(STROKE_WIDTH))
+               .append("' stroke='black'/>\n")
+               .append("  <rect x='")
+               .append(convert(uiX))
+               .append("' y='")
+               .append(convert(uiTop))
+               .append("' width='")
+               .append(convert(UI_WIDTH))
+               .append("' height='")
+               .append(convert(UI_BORDER))
+               .append("' fill='#deeafc' stroke-width='")
+               .append(convert(STROKE_WIDTH))
+               .append("' stroke='black'/>\n");  
+            text(center(1), uiY, "Payment UI");
+            number(uiX, uiTop + UI_BORDER / 2);
+            seqY += SEQ_Y_DISTANCE + SEQ_Y_SLACK_AFTER_UI + UI_HEIGHT - PROC_HEIGHT;
+            dashedArrow(0, 1, "Authorization");
+            processing(1);
+            arrow(1, 2, "FWP Assertion");
+            processing(2);
+            arrow(2, 3, "PSPRequest");
+            processing(3);
+            arrow(3, 4, "IssuerRequest");
+            processing(4);
+        } else {
+            currNum = 7;
+            arrow(0, 1, "PSPRequest");
+            currNum = 1;
+            delegatedPart = true;
+            processing(1);
+            arrow(1, 2, "VerifyRequest");
+            processing(2);
+            returnArrow(2, 1, "Return Data");
+            processing(1);
+            arrow(1, 3, "&quot;Payment Rails&quot;");
+            processing(3);
+      }
   //      dashedArrow(4, 3, "Out of Scope", "#outofscope");
  
         seqY -= PROC_HEIGHT * 0.5;
@@ -313,9 +346,24 @@ public class SequenceDiagram   {
             .append(", 0 ")
             .append(convert(ARROW_HEAD_WIDTH))
             .append("' fill='" + ARROW_COLOR + "'/>\n" +
+                    "    </marker>\n" +
+                    "    <marker id='arrowReturnHead' markerWidth='")
+            .append(convert(ARROW_HEAD_LENGTH))
+            .append("' markerHeight='")
+            .append(convert(ARROW_HEAD_WIDTH))
+            .append("' refX='0' refY='")
+            .append(convert(ARROW_HEAD_WIDTH / 2))
+            .append("' orient='auto' markerUnits='userSpaceOnUse'>\n" +
+            "      <polygon points='0 0, ")
+            .append(convert(ARROW_HEAD_LENGTH))
+            .append(" ")
+            .append(convert(ARROW_HEAD_WIDTH / 2))
+            .append(", 0 ")
+            .append(convert(ARROW_HEAD_WIDTH))
+            .append("' fill='" + ARROW_RETURN_COLOR + "'/>\n" +
                "    </marker>\n" +
                "  </defs>\n");
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < actorPos; i++) {
             String x = convert(i * VBAR_X_DISTANCE + VBAR_START_X);
             preludium.append("  <line x1='")
                  .append(x)
@@ -331,7 +379,10 @@ public class SequenceDiagram   {
         }
         svg.insert(0, preludium);
 
-        new FileOutputStream(originalBase + FILE_NAME).write(svg.append("</svg>").toString().getBytes("utf-8"));
+        new FileOutputStream(originalBase + 
+            (standardSequenceDiagram ?
+              STANDARD_SEQUENCE_FILE : DELEGATED_SEQUENCE_FILE)).write(svg.append("</svg>")
+                .toString().getBytes("utf-8"));
      }
 
     static byte[] getByteArrayFromInputStream(InputStream is) throws Exception {
@@ -356,7 +407,7 @@ public class SequenceDiagram   {
 
     public static void main(String[] argc) {
         try {
-            new SequenceDiagram(argc[0] + File.separator);
+            new SequenceDiagram(argc[0] + File.separator, Boolean.valueOf(argc[1]));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

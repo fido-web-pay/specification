@@ -1,0 +1,50 @@
+<svg width='1000' height='1000' xmlns='http://www.w3.org/2000/svg'>
+  <title>Verifier Symbol</title>
+  <!-- Anders Rundgren 2021 -->
+  <defs>
+    <filter id='shackleGlow'>
+      <feGaussianBlur stdDeviation='2'/>
+    </filter>
+    <linearGradient id='goldenLock' x1='0' x2='1' y1='0.3' y2='0.6'>
+      <stop offset='0.1' stop-color='#f0d100'/>
+      <stop offset='0.5' stop-color='#f7f5dc'/>
+      <stop offset='0.9' stop-color='#f0d100'/>
+    </linearGradient>
+    <linearGradient id='serverGloss' x1='0' x2='1' y1='0.3' y2='0.7'>
+      <stop offset='0' stop-color='#d2ddef'/>
+      <stop offset='0.5' stop-color='#edf2ff'/>
+      <stop offset='1' stop-color='#d2ddef'/>
+    </linearGradient>
+    <radialGradient cx='0.5' cy='0.5' id='powerOn' r='0.5'>
+      <stop offset='0' stop-color='#eaebef'/>
+      <stop offset='1' stop-color='#ff5656'/>
+    </radialGradient>
+  </defs>
+  <rect x='7.5' y='7.5' width='985' height='985' rx='70' fill='white' stroke='grey' stroke-width='15'/>
+   <line stroke='#4ca7e0' x1='160' y1='86' x2='160' y2='950' stroke-width='25'/>
+   <line stroke='#4ca7e0' x1='840' y1='86' x2='840' y2='950' stroke-width='25'/>
+  <rect fill='url(#serverGloss)' x='85' y='86' width='830' height='180' rx='40' stroke='#7f7f7f' stroke-width='10'/>
+  <circle cx='149' cy='150' fill='url(#powerOn)' r='32' stroke='#333333' stroke-width='5'/>
+  <rect fill='#dae3f3' height='126' stroke='#7f7f7f' stroke-width='10' width='20' x='245' y='113'/>
+  <rect fill='#dae3f3' height='126' stroke='#7f7f7f' stroke-width='10' width='20' x='315' y='113'/>
+  <rect fill='#dae3f3' height='126' stroke='#7f7f7f' stroke-width='10' width='20' x='385' y='113'/>
+  <rect fill='url(#serverGloss)' x='85' y='302' width='830' height='180' rx='40' stroke='#7f7f7f' stroke-width='10'/>
+  <circle cx='149' cy='366' fill='url(#powerOn)' r='32' stroke='#333333' stroke-width='5'/>
+  <rect fill='#dae3f3' height='126' stroke='#7f7f7f' stroke-width='10' width='20' x='245' y='329'/>
+  <rect fill='#dae3f3' height='126' stroke='#7f7f7f' stroke-width='10' width='20' x='315' y='329'/>
+  <rect fill='#dae3f3' height='126' stroke='#7f7f7f' stroke-width='10' width='20' x='385' y='329'/>
+  <rect fill='url(#serverGloss)' x='85' y='518' width='830' height='180' rx='40' stroke='#7f7f7f' stroke-width='10'/>
+  <circle cx='149' cy='582' fill='url(#powerOn)' r='32' stroke='#333333' stroke-width='5'/>
+  <rect fill='#dae3f3' height='126' stroke='#7f7f7f' stroke-width='10' width='20' x='245' y='545'/>
+  <rect fill='#dae3f3' height='126' stroke='#7f7f7f' stroke-width='10' width='20' x='315' y='545'/>
+  <rect fill='#dae3f3' height='126' stroke='#7f7f7f' stroke-width='10' width='20' x='385' y='545'/>
+  <rect fill='url(#serverGloss)' x='85' y='734' width='830' height='180' rx='40' stroke='#7f7f7f' stroke-width='10'/>
+  <circle cx='149' cy='798' fill='url(#powerOn)' r='32' stroke='#333333' stroke-width='5'/>
+  <rect fill='#dae3f3' height='126' stroke='#7f7f7f' stroke-width='10' width='20' x='245' y='761'/>
+  <rect fill='#dae3f3' height='126' stroke='#7f7f7f' stroke-width='10' width='20' x='315' y='761'/>
+  <rect fill='#dae3f3' height='126' stroke='#7f7f7f' stroke-width='10' width='20' x='385' y='761'/>
+  <path fill='none' stroke='#808080' stroke-width='60' d='M580,786 L580,676 C580,651 605,626 630,626 L670,626 C695,626 720,651 720,676 L720,786'/>
+  <path fill='none' stroke='#b0b0b0' stroke-width='40' d='M580,786 L580,676 C580,651 605,626 630,626 L670,626 C695,626 720,651 720,676 L720,786'/>
+  <path fill='none' stroke='white' stroke-width='14' filter='url(#shackleGlow)' d='M580,786 L580,676 C580,651 605,626 630,626 L670,626 C695,626 720,651 720,676 L720,786'/>
+  <rect fill='url(#goldenLock)' x='520' y='786' width='260' height='160' rx='25' stroke='#7f7f7f' stroke-width='10'/>
+</svg>
