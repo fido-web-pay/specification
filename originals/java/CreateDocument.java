@@ -9,15 +9,33 @@ public class CreateDocument  {
 
     String originalBase;
 
+    String sequenceDiagram;
+
+    void removeDuplicate(String what) throws Exception {
+        int i = sequenceDiagram.lastIndexOf("<title>" + what);
+        if (i < 0) {
+            throw new IOException("SVG err");
+        }
+        int start = sequenceDiagram.indexOf("<defs", i);
+        int stop = sequenceDiagram.indexOf("</defs>", i);
+        sequenceDiagram = sequenceDiagram.substring(0, start) + sequenceDiagram.substring(stop + 7);
+    }
+
     CreateDocument (String originalBase) throws Exception {
         this.originalBase = originalBase;
         String template = readOriginal("template.html");
-        String statediagram = readOriginal(SequenceDiagram.STANDARD_SEQUENCE_FILE);
-        statediagram = "<svg style='display:block;width:500pt' class='box' " + statediagram.substring(statediagram.indexOf("<svg ") + 5);
-        template = template.replace("@sequencediagram@", statediagram);
-        statediagram = readOriginal(SequenceDiagram.DELEGATED_SEQUENCE_FILE);
-        statediagram = "<svg style='display:block;width:400pt' class='box' " + statediagram.substring(statediagram.indexOf("<svg ") + 5);
-        template = template.replace("@delegateddiagram@", statediagram);
+        sequenceDiagram = readOriginal(SequenceDiagram.STANDARD_SEQUENCE_FILE);
+        sequenceDiagram = "<svg style='display:block;width:500pt' class='box' " + 
+                          sequenceDiagram.substring(sequenceDiagram.indexOf("<svg ") + 5);
+        template = template.replace("@sequencediagram@", sequenceDiagram);
+        sequenceDiagram = readOriginal(SequenceDiagram.DELEGATED_SEQUENCE_FILE);
+        sequenceDiagram = "<svg style='display:block;width:400pt' class='box' " + 
+                          sequenceDiagram.substring(sequenceDiagram.indexOf("<svg ") + 5);
+        removeDuplicate("Merchant");
+        removeDuplicate("PSP");
+        removeDuplicate("Issuer");
+        removeDuplicate("FIDO Web Pay - Sequence Diagram");
+        template = template.replace("@delegateddiagram@", sequenceDiagram);
         new FileOutputStream(originalBase + ".." + File.separator + "draft.html").write(template.getBytes("utf-8"));
      }
 

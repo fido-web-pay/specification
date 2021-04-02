@@ -911,15 +911,15 @@ current request.
     seems though like a possible path.
   </div>
   <div class="para">
-    Delegated authorization as discussed in the next section, represents
-    yet another way addressing integration.
+    <a href="#delegatedauthorization">Delegated authorization</a> as discussed in the next section, 
+    represents yet another way addressing payment system integration.
   </div>
 
   <div id="delegatedauthorization" class="header">
     Delegated Authorization
   </div>
 <div>
-Using delegated authorization the verification
+Using delegated authorization the validation
 of <b class="actor">User</b> authorizations is separated 
 from payment initiations. The purpose with such arrangements include:
 </div>
@@ -928,8 +928,17 @@ from payment initiations. The purpose with such arrangements include:
   <li>Open the possibility <i>outsourcing</i> the authorization process to a TPP.</li>
 </ul>
 <div class="para">
-  Note that delegated authorization is <i>transparent</i> for the
-  <b class="actor">User</b> as well as for the <b class="actor">Merchant</b>.
+  Note that FWP makes the use of delegated authorization <i>transparent</i>
+  for both the <b class="actor">User</b> and the <b class="actor">Merchant</b>.
+</div>
+<div class="para">
+  Delegated authorization differs from
+  <a href="https://www.emvco.com/emv-technologies/3d-secure/"
+     title="3DS Site">3D Secure<img src="images/xtl.svg" alt="link"></a>
+   since the &quot;ACS&quot;
+  (<b class="actor">Validator</b>) is a part of the core payment network
+  and therefore can validate <i>potentially untrusted</i> <b class="actor">Merchant</b>
+  data as well.
 </div>
  <div class="para">
   The delegated authorization mode is illustrated by the following sequence diagram:

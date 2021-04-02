@@ -3,12 +3,10 @@
    xmlns='http://www.w3.org/2000/svg'
    width='68'
    height='48'
-   version='1.1'
-   id='svg158'>
+   version='1.1'>
   <title>Merchant Symbol</title>
   <!-- Anders Ruyndgren 2021-->
-  <defs
-     id='defs52'>
+  <defs>
     <filter
        id='fx0'
        x='-128'
@@ -81,8 +79,7 @@
          x='0'
          y='0'
          width='1280'
-         height='720'
-         id='rect28' />
+         height='720' />
     </clipPath>
     <clipPath
        id='clip3'>
@@ -90,8 +87,7 @@
          x='-2'
          y='-2'
          width='73'
-         height='46'
-         id='rect31' />
+         height='46' />
     </clipPath>
     <clipPath
        id='clip4'>
@@ -99,8 +95,7 @@
          x='0'
          y='0'
          width='69'
-         height='44'
-         id='rect34' />
+         height='44' />
     </clipPath>
     <linearGradient
        x1='291'
@@ -134,8 +129,7 @@
          x='-2'
          y='-2'
          width='77'
-         height='38'
-         id='rect46' />
+         height='38' />
     </clipPath>
     <clipPath
        id='clip7'>
@@ -143,18 +137,15 @@
          x='0'
          y='0'
          width='74'
-         height='34'
-         id='rect49' />
+         height='34' />
     </clipPath>
   </defs>
   <g
      clip-path='url(#clip3)'
      filter='url(#fx0)'
-     transform='translate(1,12)'
-     id='g68'>
+     transform='translate(1,12)'>
     <g
-       clip-path='url(#clip4)'
-       id='g66'>
+       clip-path='url(#clip4)'>
       <rect
          x='12.3285'
          y='7.3284798'
@@ -163,8 +154,7 @@
          stroke='#7f7f7f'
          stroke-linejoin='round'
          stroke-miterlimit='10'
-         fill='#ff0000'
-         id='rect56' />
+         fill='#ff0000'/>
       <rect
          x='16.328501'
          y='15.3285'
@@ -173,8 +163,7 @@
          stroke='#7f7f7f'
          stroke-linejoin='round'
          stroke-miterlimit='10'
-         fill='#ebf1de'
-         id='rect58' />
+         fill='#ebf1de'/>
       <rect
          x='0'
          y='0'
@@ -185,16 +174,14 @@
          stroke-linejoin='round'
          stroke-miterlimit='10'
          fill='#dce6f2'
-         transform='matrix(0,-1,-1,0,51.8284,28.8284)'
-         id='rect60' />
+         transform='matrix(0,-1,-1,0,51.8284,28.8284)'/>
       <path
          d='m 25.3285,25.3285 1e-4,1e-4'
          stroke='#4a7ebb'
          stroke-linejoin='round'
          stroke-miterlimit='10'
          fill='none'
-         fill-rule='evenodd'
-         id='path62' />
+         fill-rule='evenodd'/>
       <rect
          x='7.3284898'
          y='34.328499'
@@ -203,8 +190,7 @@
          stroke='#7f7f7f'
          stroke-linejoin='round'
          stroke-miterlimit='10'
-         fill='#fdfac7'
-         id='rect64' />
+         fill='#fdfac7'/>
     </g>
   </g>
   <rect
@@ -217,7 +203,6 @@
      stroke-linejoin='round'
      stroke-miterlimit='10'
      fill='url(#fill5)'
-     id='rect70'
      style='fill:url(#fill5)' />
   <rect
      x='16.5'
@@ -227,8 +212,7 @@
      stroke='#7f7f7f'
      stroke-linejoin='round'
      stroke-miterlimit='10'
-     fill='#ebf1de'
-     id='rect72' />
+     fill='#ebf1de'/>
   <rect
      x='-40'
      y='-52'
@@ -239,96 +223,83 @@
      stroke-linejoin='round'
      stroke-miterlimit='10'
      fill='#dce6f2'
-     transform='matrix(0,-1,-1,0,0,0)'
-     id='rect74' />
+     transform='matrix(0,-1,-1,0,0,0)' />
   <path
      d='m 25.5,36.5001 v 10e-5'
      stroke='#4a7ebb'
      stroke-linejoin='round'
      stroke-miterlimit='10'
      fill='none'
-     fill-rule='evenodd'
-     id='path76' />
+     fill-rule='evenodd' />
   <g
      clip-path='url(#clip6)'
      filter='url(#fx1)'
-     transform='translate(0,-4)'
-     id='g118'>
+     transform='translate(0,-4)'>
     <g
-       clip-path='url(#clip7)'
-       id='g116'>
+       clip-path='url(#clip7)'>
       <path
          d='m 7.32849,24.8285 c 0,-0.8285 1.567,-1.5 3.50001,-1.5 1.933,0 3.5,0.6715 3.5,1.5 0,0.8284 -1.567,1.5 -3.5,1.5 -1.93301,0 -3.50001,-0.6716 -3.50001,-1.5 z'
          stroke='#7f7f7f'
          stroke-linejoin='round'
          stroke-miterlimit='10'
          fill='#ff0000'
-         fill-rule='evenodd'
-         id='path80' />
+         fill-rule='evenodd' />
       <path
          d='m 20.3285,24.8285 c 0,-0.8285 1.567,-1.5 3.5,-1.5 1.933,0 3.5,0.6715 3.5,1.5 0,0.8284 -1.567,1.5 -3.5,1.5 -1.933,0 -3.5,-0.6716 -3.5,-1.5 z'
          stroke='#7f7f7f'
          stroke-linejoin='round'
          stroke-miterlimit='10'
          fill='#ff0000'
-         fill-rule='evenodd'
-         id='path82' />
+         fill-rule='evenodd' />
       <path
          d='m 33.3285,24.8285 c 0,-0.8285 1.567,-1.5 3.5,-1.5 1.933,0 3.5,0.6715 3.5,1.5 0,0.8284 -1.567,1.5 -3.5,1.5 -1.933,0 -3.5,-0.6716 -3.5,-1.5 z'
          stroke='#7f7f7f'
          stroke-linejoin='round'
          stroke-miterlimit='10'
          fill='#ff0000'
-         fill-rule='evenodd'
-         id='path84' />
+         fill-rule='evenodd' />
       <path
          d='m 46.3285,24.8285 c 0,-0.8285 1.567,-1.5 3.5,-1.5 1.933,0 3.5,0.6715 3.5,1.5 0,0.8284 -1.567,1.5 -3.5,1.5 -1.933,0 -3.5,-0.6716 -3.5,-1.5 z'
          stroke='#7f7f7f'
          stroke-linejoin='round'
          stroke-miterlimit='10'
          fill='#ff0000'
-         fill-rule='evenodd'
-         id='path86' />
+         fill-rule='evenodd' />
       <path
          d='m 59.3285,24.8285 c 0,-0.8285 1.567,-1.5 3.5,-1.5 1.933,0 3.5,0.6715 3.5,1.5 0,0.8284 -1.567,1.5 -3.5,1.5 -1.933,0 -3.5,-0.6716 -3.5,-1.5 z'
          stroke='#7f7f7f'
          stroke-linejoin='round'
          stroke-miterlimit='10'
          fill='#ff0000'
-         fill-rule='evenodd'
-         id='path88' />
+         fill-rule='evenodd' />
       <path
          d='m 14.3285,24.8285 c 0,-0.8285 1.3431,-1.5 3,-1.5 1.6568,0 3,0.6715 3,1.5 0,0.8284 -1.3432,1.5 -3,1.5 -1.6569,0 -3,-0.6716 -3,-1.5 z'
          stroke='#7f7f7f'
          stroke-linejoin='round'
          stroke-miterlimit='10'
          fill='#ffffff'
-         fill-rule='evenodd'
-         id='path90' />
+         fill-rule='evenodd' />
       <path
          d='m 27.3285,24.8285 c 0,-0.8285 1.3431,-1.5 3,-1.5 1.6568,0 3,0.6715 3,1.5 0,0.8284 -1.3432,1.5 -3,1.5 -1.6569,0 -3,-0.6716 -3,-1.5 z'
          stroke='#7f7f7f'
          stroke-linejoin='round'
          stroke-miterlimit='10'
          fill='#ffffff'
-         fill-rule='evenodd'
-         id='path92' />
+         fill-rule='evenodd' />
       <path
          d='m 40.3285,24.8285 c 0,-0.8285 1.3431,-1.5 3,-1.5 1.6568,0 3,0.6715 3,1.5 0,0.8284 -1.3432,1.5 -3,1.5 -1.6569,0 -3,-0.6716 -3,-1.5 z'
          stroke='#7f7f7f'
          stroke-linejoin='round'
          stroke-miterlimit='10'
          fill='#ffffff'
-         fill-rule='evenodd'
-         id='path94' />
+         fill-rule='evenodd' />
       <path
          d='m 53.3285,24.8285 c 0,-0.8285 1.3431,-1.5 3,-1.5 1.6568,0 3,0.6715 3,1.5 0,0.8284 -1.3432,1.5 -3,1.5 -1.6569,0 -3,-0.6716 -3,-1.5 z'
          stroke='#7f7f7f'
          stroke-linejoin='round'
          stroke-miterlimit='10'
          fill='#ffffff'
-         fill-rule='evenodd'
-         id='path96' />
+         fill-rule='evenodd' />
       <path
          d='M 0,17 V 0 l 7,17 z'
          stroke='#7f7f7f'
@@ -336,8 +307,7 @@
          stroke-miterlimit='10'
          fill='#ff0000'
          fill-rule='evenodd'
-         transform='matrix(-1,0,0,1,14.3285,7.32848)'
-         id='path98' />
+         transform='matrix(-1,0,0,1,14.3285,7.32848)' />
       <rect
          x='20.328501'
          y='7.3284798'
@@ -346,8 +316,7 @@
          stroke='#7f7f7f'
          stroke-linejoin='round'
          stroke-miterlimit='10'
-         fill='#ff0000'
-         id='rect100' />
+         fill='#ff0000' />
       <rect
          x='33.328499'
          y='7.3284798'
@@ -356,8 +325,7 @@
          stroke='#7f7f7f'
          stroke-linejoin='round'
          stroke-miterlimit='10'
-         fill='#ff0000'
-         id='rect102' />
+         fill='#ff0000' />
       <rect
          x='46.328499'
          y='7.3284798'
@@ -366,16 +334,14 @@
          stroke='#7f7f7f'
          stroke-linejoin='round'
          stroke-miterlimit='10'
-         fill='#ff0000'
-         id='rect104' />
+         fill='#ff0000' />
       <path
          d='M 59.3285,24.3285 V 7.32848 l 7,17.00002 z'
          stroke='#7f7f7f'
          stroke-linejoin='round'
          stroke-miterlimit='10'
          fill='#ff0000'
-         fill-rule='evenodd'
-         id='path106' />
+         fill-rule='evenodd' />
       <rect
          x='14.3285'
          y='7.3284798'
@@ -384,8 +350,7 @@
          stroke='#7f7f7f'
          stroke-linejoin='round'
          stroke-miterlimit='10'
-         fill='#ffffff'
-         id='rect108' />
+         fill='#ffffff' />
       <rect
          x='27.328501'
          y='7.3284798'
@@ -394,8 +359,7 @@
          stroke='#7f7f7f'
          stroke-linejoin='round'
          stroke-miterlimit='10'
-         fill='#ffffff'
-         id='rect110' />
+         fill='#ffffff' />
       <rect
          x='40.328499'
          y='7.3284798'
@@ -404,8 +368,7 @@
          stroke='#7f7f7f'
          stroke-linejoin='round'
          stroke-miterlimit='10'
-         fill='#ffffff'
-         id='rect112' />
+         fill='#ffffff' />
       <rect
          x='53.328499'
          y='7.3284798'
@@ -414,8 +377,7 @@
          stroke='#7f7f7f'
          stroke-linejoin='round'
          stroke-miterlimit='10'
-         fill='#ffffff'
-         id='rect114' />
+         fill='#ffffff' />
     </g>
   </g>
   <path
@@ -425,8 +387,7 @@
      stroke-linejoin='round'
      stroke-miterlimit='10'
      fill='#ff0000'
-     fill-rule='evenodd'
-     id='path120' />
+     fill-rule='evenodd' />
   <path
      d='m 17.5,18.0001 c 0,-0.8285 1.567,-1.5 3.5,-1.5 1.933,0 3.5,0.6715 3.5,1.5 0,0.8284 -1.567,1.5 -3.5,1.5 -1.933,0 -3.5,-0.6716 -3.5,-1.5 z'
      stroke='#7f7f7f'
@@ -434,8 +395,7 @@
      stroke-linejoin='round'
      stroke-miterlimit='10'
      fill='#ff0000'
-     fill-rule='evenodd'
-     id='path122' />
+     fill-rule='evenodd' />
   <path
      d='m 30.5,18.0001 c 0,-0.8285 1.567,-1.5 3.5,-1.5 1.933,0 3.5,0.6715 3.5,1.5 0,0.8284 -1.567,1.5 -3.5,1.5 -1.933,0 -3.5,-0.6716 -3.5,-1.5 z'
      stroke='#7f7f7f'
@@ -443,8 +403,7 @@
      stroke-linejoin='round'
      stroke-miterlimit='10'
      fill='#ff0000'
-     fill-rule='evenodd'
-     id='path124' />
+     fill-rule='evenodd' />
   <path
      d='m 43.5,18.0001 c 0,-0.8285 1.567,-1.5 3.5,-1.5 1.933,0 3.5,0.6715 3.5,1.5 0,0.8284 -1.567,1.5 -3.5,1.5 -1.933,0 -3.5,-0.6716 -3.5,-1.5 z'
      stroke='#7f7f7f'
@@ -452,8 +411,7 @@
      stroke-linejoin='round'
      stroke-miterlimit='10'
      fill='#ff0000'
-     fill-rule='evenodd'
-     id='path126' />
+     fill-rule='evenodd' />
   <path
      d='m 56.5,18.0001 c 0,-0.8285 1.567,-1.5 3.5,-1.5 1.933,0 3.5,0.6715 3.5,1.5 0,0.8284 -1.567,1.5 -3.5,1.5 -1.933,0 -3.5,-0.6716 -3.5,-1.5 z'
      stroke='#7f7f7f'
@@ -461,8 +419,7 @@
      stroke-linejoin='round'
      stroke-miterlimit='10'
      fill='#ff0000'
-     fill-rule='evenodd'
-     id='path128' />
+     fill-rule='evenodd' />
   <path
      d='m 11.5,18.0001 c 0,-0.8285 1.343,-1.5 3,-1.5 1.657,0 3,0.6715 3,1.5 0,0.8284 -1.343,1.5 -3,1.5 -1.657,0 -3,-0.6716 -3,-1.5 z'
      stroke='#7f7f7f'
@@ -470,8 +427,7 @@
      stroke-linejoin='round'
      stroke-miterlimit='10'
      fill='#ffffff'
-     fill-rule='evenodd'
-     id='path130' />
+     fill-rule='evenodd' />
   <path
      d='m 24.5,18.0001 c 0,-0.8285 1.343,-1.5 3,-1.5 1.657,0 3,0.6715 3,1.5 0,0.8284 -1.343,1.5 -3,1.5 -1.657,0 -3,-0.6716 -3,-1.5 z'
      stroke='#7f7f7f'
@@ -479,8 +435,7 @@
      stroke-linejoin='round'
      stroke-miterlimit='10'
      fill='#ffffff'
-     fill-rule='evenodd'
-     id='path132' />
+     fill-rule='evenodd' />
   <path
      d='m 37.5,18.0001 c 0,-0.8285 1.343,-1.5 3,-1.5 1.657,0 3,0.6715 3,1.5 0,0.8284 -1.343,1.5 -3,1.5 -1.657,0 -3,-0.6716 -3,-1.5 z'
      stroke='#7f7f7f'
@@ -488,8 +443,7 @@
      stroke-linejoin='round'
      stroke-miterlimit='10'
      fill='#ffffff'
-     fill-rule='evenodd'
-     id='path134' />
+     fill-rule='evenodd' />
   <path
      d='m 50.5,18.0001 c 0,-0.8285 1.343,-1.5 3,-1.5 1.657,0 3,0.6715 3,1.5 0,0.8284 -1.343,1.5 -3,1.5 -1.657,0 -3,-0.6716 -3,-1.5 z'
      stroke='#7f7f7f'
@@ -497,8 +451,7 @@
      stroke-linejoin='round'
      stroke-miterlimit='10'
      fill='#ffffff'
-     fill-rule='evenodd'
-     id='path136' />
+     fill-rule='evenodd' />
   <path
      d='m 11.5,17.5001 v -17 l -7,17 z'
      stroke='#7f7f7f'
@@ -506,8 +459,7 @@
      stroke-linejoin='round'
      stroke-miterlimit='10'
      fill='#ff0000'
-     fill-rule='evenodd'
-     id='path138' />
+     fill-rule='evenodd' />
   <rect
      x='17.5'
      y='0.50009918'
@@ -517,8 +469,7 @@
      stroke-width='0.666667'
      stroke-linejoin='round'
      stroke-miterlimit='10'
-     fill='#ff0000'
-     id='rect140' />
+     fill='#ff0000' />
   <rect
      x='30.5'
      y='0.50009918'
@@ -528,8 +479,7 @@
      stroke-width='0.666667'
      stroke-linejoin='round'
      stroke-miterlimit='10'
-     fill='#ff0000'
-     id='rect142' />
+     fill='#ff0000' />
   <rect
      x='43.5'
      y='0.50009918'
@@ -539,8 +489,7 @@
      stroke-width='0.666667'
      stroke-linejoin='round'
      stroke-miterlimit='10'
-     fill='#ff0000'
-     id='rect144' />
+     fill='#ff0000' />
   <path
      d='m 56.5,17.5001 v -17 l 7,17 z'
      stroke='#7f7f7f'
@@ -548,8 +497,7 @@
      stroke-linejoin='round'
      stroke-miterlimit='10'
      fill='#ff0000'
-     fill-rule='evenodd'
-     id='path146' />
+     fill-rule='evenodd' />
   <rect
      x='11.5'
      y='0.50009918'
@@ -559,8 +507,7 @@
      stroke-width='0.666667'
      stroke-linejoin='round'
      stroke-miterlimit='10'
-     fill='#ffffff'
-     id='rect148' />
+     fill='#ffffff' />
   <rect
      x='24.5'
      y='0.50009918'
@@ -570,8 +517,7 @@
      stroke-width='0.666667'
      stroke-linejoin='round'
      stroke-miterlimit='10'
-     fill='#ffffff'
-     id='rect150' />
+     fill='#ffffff' />
   <rect
      x='37.5'
      y='0.50009918'
@@ -581,8 +527,7 @@
      stroke-width='0.666667'
      stroke-linejoin='round'
      stroke-miterlimit='10'
-     fill='#ffffff'
-     id='rect152' />
+     fill='#ffffff' />
   <rect
      x='50.5'
      y='0.50009918'
@@ -592,8 +537,7 @@
      stroke-width='0.666667'
      stroke-linejoin='round'
      stroke-miterlimit='10'
-     fill='#ffffff'
-     id='rect154' />
+     fill='#ffffff' />
   <rect
      x='7.5'
      y='45.5'
@@ -603,6 +547,5 @@
      stroke-width='0.666667'
      stroke-linejoin='round'
      stroke-miterlimit='10'
-     fill='#fdfac7'
-     id='rect78' />
+     fill='#fdfac7' />
 </svg>
