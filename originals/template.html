@@ -7,7 +7,7 @@
 .para {margin-top: 0.8em}
 .actor {color:darkgreen;font-weight:500}
 .msg {font-weight:500}
-.comment {padding:0.5em 1em;margin-top:1.5em;display:inline-block;background-color:floralwhite}
+.comment {padding:0.5em 1em;margin-top:1.5em;display:inline-block;background-color:mintcream}
 .box {box-shadow: 0.2em 0.2em 0.2em #d0d0d0;border-width:1px;border-style:solid;border-color:black}
 .numbox {border-width:1pt;border-style:solid;border-color:black;border-radius:0.3em;display:inline-block;margin-right:0.6em;padding:0 3pt}
 .tftable {border-collapse:collapse;box-shadow:0.2em 0.2em 0.2em #d0d0d0;margin:0.6em 0 1em 0}
@@ -911,7 +911,7 @@ current request.
     seems though like a possible path.
   </div>
   <div class="para">
-    <a href="#delegatedauthorization">Delegated authorization</a> as discussed in the next section, 
+    <a href="#delegatedauthorization">Delegated Authorization</a> 
     represents yet another way addressing payment system integration.
   </div>
 
@@ -925,7 +925,7 @@ from payment initiations. The purpose with such arrangements include:
 </div>
 <ul>
   <li>Potentially ease the integration of FWP in existing payment systems.</li>
-  <li>Open the possibility <i>outsourcing</i> the authorization process to a TPP.</li>
+  <li>Open the possibility <i>outsourcing</i> the authorization process to TPPs.</li>
 </ul>
 <div class="para">
   Note that FWP makes the use of delegated authorization <i>transparent</i>
@@ -977,7 +977,7 @@ from payment initiations. The purpose with such arrangements include:
   <div class="step"><div id="seq-D4" class="numbox">D4</div>Return Validated Data</div>
   <div>
     If validation is successful, <span class="msg">ValidateRequest</span> 
-    should return the <b class="actor">User</b> account number.
+    should return the decrypted <b class="actor">User</b> account number.
 </div>
  <div class="step"><div id="seq-D5" class="numbox">D5</div>Create Payment Instruction</div>
  <div>
