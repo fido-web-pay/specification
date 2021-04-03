@@ -1072,7 +1072,7 @@
   <rect fill='url(#bankPillar)' height='35.5' width='11' x='38.66' y='27'/>
   <rect fill='url(#bankPillar)' height='35.5' width='11' x='60.33' y='27'/>
   <rect fill='url(#bankPillar)' height='35.5' width='11' x='82' y='27'/>
-  <path d='m10,16l45,-15l45,15' fill='#f9fce3' stroke='grey' stroke-linecap='round'/>
+  <path d='m10,16l45,-15l45,15' fill='#eeefdc' stroke='grey' stroke-linecap='round'/>
   <rect fill='#fffbed' height='10' stroke='grey' width='90' x='10' y='16.5'/>
   <rect fill='#fffbed' height='4' stroke='grey' width='100' x='5' y='67'/>
   <rect fill='#fffbed' height='4' stroke='grey' width='90' x='10' y='63'/>
