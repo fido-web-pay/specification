@@ -937,8 +937,16 @@ from payment initiations. The purpose with such arrangements include:
      title="3DS Site">3D Secure<img src="images/xtl.svg" alt="link"></a>
    since the &quot;ACS&quot;
   (<b class="actor">Validator</b>) is a part of the core payment network
-  and therefore can validate <i>potentially untrusted</i> <b class="actor">Merchant</b>
+  and therefore can validate potentially <i>untrusted</i> <b class="actor">Merchant</b>
   data as well.
+</div>
+<div class="para">
+  Delegated authorization builds on the assumption that the <b class="actor">PSP</b> is trusted
+  for carrying out payment initiations on behalf of a <b class="actor">User</b>
+  (based on a preceding <b class="actor">User</b> authorization step),
+  which is an established concept in most payment networks.
+  (In the FWP standard mode the <b class="actor">PSP</b> only acts as a proxy
+  for the <b class="actor">Merchant</b>).
 </div>
  <div class="para">
   The delegated authorization mode is illustrated by the following sequence diagram:
@@ -947,7 +955,7 @@ from payment initiations. The purpose with such arrangements include:
     @delegateddiagram@
   </div>
   <div>
-    Note that step 1-7 are <i>identical</i> to the &quot;standard&quot; mode. 
+    Note that step 1-7 are <i>identical</i> to the FWP &quot;standard&quot; mode. 
     &quot;Payment Rails&quot; refer to existing payment systems.
   </div>
  <div class="step"><div id="seq-D1" class="numbox">D1</div>Process PSPRequest and Create ValidateRequest Object</div>
