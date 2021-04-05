@@ -32,7 +32,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     in the physical world.
   </div>
   <div class="para">
-    This document describes FIDO&reg; Web Pay (FWP), which is a Web-adapted version of EMV,
+    This document describes FIDO&reg; Web Pay (FWP), which is a <a href="#pospayments">Web-adapted</a> version of EMV,
     combining the technology underpinning <a href="https://fidoalliance.org/fido2/"
                              title="FIDO2 Technology">FIDO2<img src="images/xtl.svg" alt="link"></a>
     with the W3C
@@ -1031,7 +1031,7 @@ from payment initiations. The purpose with such arrangements include:
     </ul>
     Note that <i>some</i> of the features above could impact the PaymentRequest API.
   </div>
-  <div class="para">
+  <div id="pospayments" class="para">
     A radical change would be moving the FWP implementation 
     (including the credential database), down into the client platform layer.
     This would open FWP to other scenarios like:
