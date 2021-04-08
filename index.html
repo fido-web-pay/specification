@@ -1345,7 +1345,7 @@ const methodData = [{
   }
 }];
 
-const request = new PaymentRequest(methodData,{
+const request = new PaymentRequest(methodData, {
   id: "7040566321",   // Mandatory for FWP
   total: {label: null, amount: {currency: "EUR", value: "435.00"}}
 });
@@ -1493,7 +1493,7 @@ creates an FWP assertion which requires the following steps to be performed:
 {
   "version": "1",
   "requestHash": {
-    "alg": "S256",
+    "algorithm": "S256",
     "value": "-5AfYJfNayqcxJs2nqkUm7EKKLS1oPumgWNWc1BCPuQ"
   },
   "payeeHost": "spaceshop.com",
@@ -1585,7 +1585,7 @@ creates an FWP assertion which requires the following steps to be performed:
 {
   "version": "1",
   "requestHash": {
-    "alg": "S256",
+    "algorithm": "S256",
     "value": "-5AfYJfNayqcxJs2nqkUm7EKKLS1oPumgWNWc1BCPuQ"
   },
   "payeeHost": "spaceshop.com",
