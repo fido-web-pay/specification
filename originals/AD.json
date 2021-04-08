@@ -1,7 +1,7 @@
 {
   "version":  "1",
   "requestHash": {
-    "algorithm": "S256",
+    "alg": "S256",
     "value": "-5AfYJfNayqcxJs2nqkUm7EKKLS1oPumgWNWc1BCPuQ"
   },
   "payeeHost": "spaceshop.com",
