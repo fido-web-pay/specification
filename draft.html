@@ -79,7 +79,7 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
     That is, the backend infrastructure and associated APIs are out of scope for this specification
     and are therefore only described at a &quot;conceptual&quot; level.
     Note though that regardless of the backend design, FWP assertions
-    must (due to the EMV <i>end-2-end security model</i>),
+    must (due to the EMV <i>end-to-end security model</i>),
     always be routed back to the designated issuer &quot;verbatim&quot;
     (together with other required data) in order to initiate a payment transaction.
   </div>
@@ -1673,7 +1673,7 @@ dvTiFvSkQ
   Note that the JWE header MUST include the <code>encryptionKey</code> as well.
 </div>
 <div class="para box comment">
-  Note that due to the end-2-end encryption scheme, the domain 
+  Note that due to the end-to-end encryption scheme, the domain 
 constraints associated with Web Authentication do not apply.
 </div> 
 
@@ -2688,7 +2688,13 @@ from payment initiations. The purpose with such arrangements include:
   <div>
     If validation is successful, <span class="msg">ValidateRequest</span> 
     should return the decrypted <b class="actor">User</b> account number.
-</div>
+  </div>
+  <div class="comment box">
+    A more sophisticated approach would be to return signed data for maintaining the
+    end-to-end security model.  For card payments this would preferably be in the
+   form of EMV compliant objects that can be passed on to existing payment systems
+    &quot;as&nbsp;is&quot;.
+  </div>
  <div class="step"><div id="seq-D5" class="numbox">D5</div>Create Payment Instruction</div>
  <div>
    After receiving the <b class="actor">User</b> account number a 
