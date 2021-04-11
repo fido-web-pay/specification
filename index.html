@@ -76,8 +76,11 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
   <div>
     Note that FWP is not a payment system, it is a <i>payment authorization</i> scheme,
     exclusively dealing with the <i>user's</i> part of the payment process.
-    That is, the backend infrastructure and associated APIs are out of scope for this specification
-    and are therefore only described at a &quot;conceptual&quot; level.
+    That is, <i>the backend infrastructure and associated APIs are out of scope for this specification</i>.
+   </div>
+  <div class="para">
+    However, to guide implementers, this document outlines
+    a sample infrastructure at a &quot;conceptual&quot; level.
     Note though that regardless of the backend design, FWP assertions
     must (due to the EMV <i>end-to-end security model</i>),
     always be routed back to the designated issuer &quot;verbatim&quot;
@@ -101,42 +104,87 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
     a <span class="actor">Merchant</span> and an <span class="actor">Issuer</span>.
     In FWP objects, <span class="actor">Merchant</span> is referred to as &quot;payee&quot;.
   </div>
-  <div id="prerequisites" class="header">
-    Prerequisites
+  <div id="credentials" class="header">
+    Credential Database
   </div>
   <div>
     The steps outlined in <a href="#operation">Detailed Operation</a>
     depend on that the <span class="actor">User</span> already have received
-    one or more <i>payment credentials</i>
+    one or more FWP credentials
     (&quot;Virtual Cards&quot;) in an <a href="#enrollment">Enrollment</a> process.
-    A payment credential is supposed to at least contain the following elements:
-    <ul>
-      <li>An identifier to a <span class="actor">User</span> specific (<i>unique</i>) FIDO key for <i>signing</i> payment authorization data.</li>
-      <li>A JOSE-compliant <code class="reserved">signatureAlgorithm</code> for FWP <a href="#seq-4.4">Signatures</a>.</li>
-      <li>
-        An <code class="reserved">encryptionKey</code> holding an
+    FWP credentials are stored in a local database, where each entry is
+    supposed to contain the following elements:
+</div>
+  <table class="tftable">
+    <tr>
+      <th>Element</th>
+      <th>Comment</th>
+    </tr>
+    <tr>
+      <td><code>keyHandle</code></td>
+      <td>
+        <i>Locally created</i> identifier to a
+        <span class="actor">User</span> specific (<i>unique</i>) FIDO key for
+        <a href="#seq-4.4">signing</a> payment authorization data
+      </td>
+    </tr>
+    <tr>
+      <td><code>publicKey</code></td>
+      <td>
+        <i>Locally created</i> public key in JWK
+        (<a href="https://tools.ietf.org/html/rfc7517"
+            title="JWK/RFC7517">RFC7517<img src="images/xtl.svg" alt="link"></a>)
+        format matching the private key associated with <code>keyHandle</code>
+      </td>
+    </tr>
+    <tr>
+      <td><code>credentialId</code></td>
+      <td>Unique credential identifier, typically a serial number</td>
+    </tr>
+    <tr>
+      <td><code>signatureAlgorithm</code></td>
+      <td>Signature algorithm for FWP <a href="#seq-4.4">signatures</a></td>
+    </tr>
+    <tr>
+      <td><code>encryptionKey</code></td>
+      <td>
         <span class="actor">Issuer</span> specific (<i>shared</i>) public key in JWK
         (<a href="https://tools.ietf.org/html/rfc7517"
             title="JWK/RFC7517">RFC7517<img src="images/xtl.svg" alt="link"></a>)
-        format for FWP <a href="#seq-4.5">Encryption</a>.
-      </li>
-      <li>A JOSE-compliant <code class="reserved">contentEncryptionAlgorithm</code> for FWP <a href="#seq-4.5">Encryption</a>.</li>
-      <li>A JOSE-compliant <code class="reserved">keyEncryptionAlgorithm</code> for FWP <a href="#seq-4.5">Encryption</a>.</li>
-      <li>An <code class="reserved">accountId</code> associated with the FIDO signature key.</li>
-      <li>A <code class="reserved">paymentMethod</code> URL identifying the FWP method for a particular payment network.</li>
-      <li>
-        An <code class="reserved">issuerId</code> in the form of a
-        Bank Identification Number (BIN) or URL associated with the <span class="actor">Issuer</span>.
-      </li>
-      <li>An icon identifying the payment credential for the <span class="actor">User</span>.</li>
-    </ul>
-  </div>
-  <div class="para box comment">
-    Note that FWP effectively forms a browser &quot;Wallet&quot;,
+        format for FWP <a href="#seq-4.5">encryption</a>
+      </td>
+    </tr>
+    <tr>
+      <td><code>contentEncryptionAlgorithm</code></td>
+      <td>JOSE-compliant content encryption algorithm for FWP <a href="#seq-4.5">encryption</a></td>
+    </tr>
+    <tr>
+      <td><code>keyEncryptionAlgorithm</code></td>
+      <td>JOSE-compliant key encryption algorithm for FWP <a href="#seq-4.5">encryption</a></td>
+    </tr>
+    <tr>
+      <td><code>accountId</code></td>
+      <td>Account identifier associated with the credential</td>
+    </tr>
+    <tr>
+      <td><code>paymentMethod</code></td>
+      <td>URL holding the FWP method for a particular payment network</td>
+    </tr>
+    <tr>
+      <td><code>issuerId</code></td>
+      <td>Bank Identification Number (BIN) or URL associated with the <span class="actor">Issuer</span></td>
+    </tr>
+    <tr>
+      <td><code>image</code></td>
+      <td>SVG image identifying the payment credential for the <span class="actor">User</span></td>
+    </tr>
+  </table>
+  <div id="wallet" class="para box comment">
+    FWP effectively forms a browser &quot;Wallet&quot;,
     holding an arbitrary number of payment credentials, each representing a
     specific <span class="actor">Issuer</span>,
     <span class="actor">User</span> account,
-    and <code class="reserved">paymentMethod</code>.
+    and <code>paymentMethod</code>.
   </div>
   <div id="enrollment" class="header">
     Enrollment
@@ -154,7 +202,7 @@ to securely distinguish between &quot;ordinary&quot; FIDO keys,
   <div class="para">
     It would be great if the enrollment system could handle
   <i>multiple credentials in a single operation</i>, because an <span class="actor">Issuer</span> may want to
-    support an International card network as well as a national or regional payment network 
+    support international card networks as well as national or regional payment networks 
     <span style="font-family:Roboto,sans-serif,Segoe UI">&#x1f60e;</span>
   </div>
   <div class="para">
@@ -162,7 +210,13 @@ to securely distinguish between &quot;ordinary&quot; FIDO keys,
 for Web Authentication as well, but this would be a deployment decision
 by the <span class="actor">Issuer</span>.
   </div>
- <div id="operation" class="header">
+  <div id="#keyprotection" class="comment box">
+    Through the use of a dedicated credential database,
+    FIDO keys can be freely accessed by the FWP implementation,
+    while remaining <i>invisible</i> and <i>protected</i> from
+    direct access by all parties but their respective <span class="actor">Issuer</span>.
+  </div> 
+  <div id="operation" class="header">
     Detailed Operation
   </div>
   <div>This section describes the different steps needed to authorize a payment operation using FWP.
@@ -1398,7 +1452,7 @@ async function doPaymentRequest() {
 <div class="para">Any deviations MUST throw an exception.</div>
 <div class="para">Note that the <code>name</code> properties in the <code>networks</code>
 array denote the actual payment methods, corresponding to the <code>paymentMethod</code>
-attribute in <a href="#prerequisites">FWP credentials</a>.</div>
+attribute in <a href="#credentials">FWP credentials</a>.</div>
 <div class="para">
   Note that the <code>PaymentRequest.canMakePayment()</code> method MUST return <kbd>true</kbd>
 if the <span class="actor">User</span> have one or more FWP credentials,
@@ -1500,6 +1554,7 @@ creates an FWP assertion which requires the following steps to be performed:
   "accountId": "FR7630002111110020050014382",
   "paymentMethod": "https://europeanpaymentsinitiative.eu/fwp",
   "networkData": "additional stuff...",
+  "credentialId": "62932",
   "userAuthorizationMethod": "FINGERPRINT",
   "platformData": {
     "operatingSystem": {
@@ -1535,12 +1590,15 @@ creates an FWP assertion which requires the following steps to be performed:
   </tr>
   <tr>
     <td><code>accountId</code></td>
-    <td><b class="actor">User</b> account number associated with the selected credential</td>
+    <td>
+      <b class="actor">User</b> account number associated
+      with the selected <a href="#credentials">FWP credential</a>
+    </td>
   </tr>
   <tr>
     <td><code>paymentMethod</code></td>
     <td>
-      Payment method associated with the selected credential.
+      Payment method associated with the selected <a href="#credentials">FWP credential</a>.
       Included for &quot;completeness&quot;
     </td>
   </tr>
@@ -1550,6 +1608,12 @@ creates an FWP assertion which requires the following steps to be performed:
       <i>Optional</i>.  This attribute MUST be included if
       specified in the <code>PaymentRequest</code> constructor
       for the particular <code>paymentMethod</code>, otherwise it MUST NOT be defined
+    </td>
+  </tr>
+  <tr>
+    <td><code>credentialId</code></td>
+    <td>
+      Credential identifier associated with the selected <a href="#credentials">FWP credential</a>
     </td>
   </tr>
   <tr>
@@ -1575,10 +1639,10 @@ creates an FWP assertion which requires the following steps to be performed:
 
 <div id="seq-4.4" class="step">4.4 Create Signed Authorization Data (SAD)</div>
 <div class="para">
-  Using the FIDO signature key associated with the selected
-  payment credential, sign AD using the
+  Using the FIDO signature key (<code>keyHandle</code>) associated with the selected
+  <a href="#credentials">FWP credential</a>, sign AD using the
   <a href="https://tools.ietf.org/html/draft-jordan-jws-ct-02"
-      title="JWS/CT">JWS/CT<img src="images/xtl.svg" alt="link"></a> method.
+     title="JWS/CT">JWS/CT<img src="images/xtl.svg" alt="link"></a> method.
   For the sample code this should result in the following object:
 </div>
 <pre class="box">
@@ -1592,6 +1656,7 @@ creates an FWP assertion which requires the following steps to be performed:
   "accountId": "FR7630002111110020050014382",
   "paymentMethod": "https://europeanpaymentsinitiative.eu/fwp",
   "networkData": "additional stuff...",
+  "credentialId": "62932",
   "userAuthorizationMethod": "FINGERPRINT",
   "platformData": {
     "operatingSystem": {
@@ -1622,8 +1687,8 @@ creates an FWP assertion which requires the following steps to be performed:
 </div>
 
 <div class="para">
-  To simplify backend processing, the public key associated with the FIDO key of
-  the selected payment credential MUST be included in the JWS header.
+  To simplify backend processing, the <code>publicKey</code> associated with
+  the selected <a href="#credentials">FWP credential</a> MUST be included in the JWS header.
   In the sample the following key was used:
 </div>
 <pre class="box">
@@ -1638,7 +1703,8 @@ creates an FWP assertion which requires the following steps to be performed:
 <div class="para">
   For privacy and security reasons, Signed Authorization Data (SAD) objects
   MUST be encrypted by a public key provided by the <b class="actor">Issuer</b>
-  through the <code>encryptionKey</code> attribute of the selected payment credential.
+  through the <code>encryptionKey</code> attribute of the selected 
+  <a href="#credentials">FWP credential</a>.
   This specification mandates using JWE
   (<a href="https://tools.ietf.org/html/rfc7516"
       title="JWE">RFC7516<img src="images/xtl.svg" alt="link"></a>),
@@ -1648,7 +1714,8 @@ creates an FWP assertion which requires the following steps to be performed:
 <div class="para">
   The actual JWE algorithms to use are defined by the
   <code>contentEncryptionAlgorithm</code> and 
-  <code>keyEncryptionAlgorithm</code> attributes of the selected payment credential.
+  <code>keyEncryptionAlgorithm</code> attributes 
+  of the selected <a href="#credentials">FWP credential</a>.
 </div>
 <div class="para">
   SAD objects MUST be JSON-serialized to UTF-8 before being encrypted.
@@ -1672,9 +1739,10 @@ dvTiFvSkQ
 <div class="para">
   Note that the JWE header MUST include the <code>encryptionKey</code> as well.
 </div>
-<div class="para box comment">
-  Note that due to the end-to-end encryption scheme, the domain 
-constraints associated with Web Authentication do not apply.
+<div id="domainconstraints" class="para box comment">
+  Due to the end-to-end encryption scheme, the domain 
+constraints associated with Web Authentication
+assertions do not apply.
 </div> 
 
 <div id="seq-4.6" class="step">4.6 Assemble FWP Assertion</div>
@@ -1691,13 +1759,23 @@ constraints associated with Web Authentication do not apply.
 </pre>
 <div>Description:</div>
 <table class="tftable">
-<tr><th>Element</th><th>Comment</th></tr>
-<tr><td><code>encryptedAuthorization</code></td><td>
-  Encrypted Signed Authorization Data.
-  Here shown as a placeholder only since
-  an ESAD string can be quite long</td></tr>
-<tr><td><code>paymentMethod</code></td><td>Payment method associated with the selected credential</td></tr>
-<tr><td><code>issuerId</code></td><td>Issuer Id associated with the selected credential</td></tr>
+  <tr><th>Element</th><th>Comment</th></tr>
+  <tr>
+    <td><code>encryptedAuthorization</code></td>
+    <td>
+      Encrypted Signed Authorization Data.
+      Here shown as a placeholder only since
+      an ESAD string can be quite long
+    </td>
+  </tr>
+  <tr>
+    <td><code>paymentMethod</code></td>
+    <td>Payment method associated with the selected <a href="#credentials">FWP credential</a></td>
+  </tr>
+  <tr>
+    <td><code>issuerId</code></td>
+    <td>Issuer identifier associated with the selected <a href="#credentials">FWP credential</a></td>
+  </tr>
 </table>
 <div>
   The <span class="msg">FWP Assertion</span> is made available
@@ -1736,7 +1814,7 @@ or <code>fetch()</code> operation.
   "paymentMethod": "https://europeanpaymentsinitiative.eu/fwp",
   "issuerId": "https://mybank.fr/payment"
   "networkData": "additional stuff...",
-  "receiveAccount": "123456789",
+  "receiveAccount": "DE89370400440532013000",
   "clientIp": "220.13.198.144",
   "timeStamp": "2021-03-09T10:32:36+01:00"
 }
@@ -1792,7 +1870,7 @@ or <code>fetch()</code> operation.
     Note that authentication of the <b class="actor">Merchant</b> is out of scope
     for this specification.
   </div>
-  <div class="comment box">
+  <div id="pspselection" class="comment box">
     Since FWP supports <i>multiple</i> and <i>independent</i> payment systems,
     a <b class="actor">Merchant</b> may use different <b class="actor">PSP</b>s
     depending on received <code>paymentMethod</code>.
@@ -1853,7 +1931,7 @@ or <code>fetch()</code> operation.
     "paymentMethod": "https://europeanpaymentsinitiative.eu/fwp",
     "issuerId": "https://mybank.fr/payment"
     "networkData": "additional stuff...",
-    "receiveAccount": "123456789",
+    "receiveAccount": "DE89370400440532013000",
     "clientIp": "220.13.198.144",
     "timeStamp": "2021-03-09T10:32:36+01:00"
   },
@@ -2043,7 +2121,7 @@ current request.
     For card based payments FWP implementations can build on the existing
     EMV foundation since essentially only the formats differ.
     Although the lack of a PAN (card number) in FWP may appear as a major obstacle,
-    the <code class="reserved">issuerId</code> would in this case hold a &quot;neutered&quot; PAN where
+    the <code>issuerId</code> would in this case hold a &quot;neutered&quot; PAN where
     the BIN (Bank Identification Number) is set, while the rest are set to zeroes + Luhn check digit.
     E.g. VISA: 4972039000000004.  However, using <b class="actor">Issuer</b> URLs
     is also a viable alternative for card payments because payment processors
@@ -2670,7 +2748,7 @@ from payment initiations. The purpose with such arrangements include:
  <div class="comment box">
    Using delegated authorization may be decided by each <b class="actor">Issuer</b>
    <i>individually</i>.  The actual configuration is preferably resolved by making
-   the <code>issuerId</code> attribute play the role of a <i>service discovery URL</i>
+   the <code>issuerId</code> attribute play the role of a <i>service discovery URL</i>.
  </div>
  <div class="step"><div id="seq-D2" class="numbox">D2</div>Send ValidateRequest Object</div>
  <div>
@@ -2689,7 +2767,7 @@ from payment initiations. The purpose with such arrangements include:
     If validation is successful, <span class="msg">ValidateRequest</span> 
     should return the decrypted <b class="actor">User</b> account number.
   </div>
-  <div class="comment box">
+  <div id="delegatedemv" class="comment box">
     A more sophisticated approach would be to return signed data for maintaining the
     end-to-end security model.  For card payments this would preferably be in the
    form of EMV compliant objects that can be passed on to existing payment systems
@@ -2778,9 +2856,10 @@ https://commons.wikimedia.org/wiki/File:Crystal_Clear_kdm_user_female.svg<img sr
   <table class="tftable">
     <tr><th>Date</th><th>Version</th><th>Comment</th></tr>
     <tr><td>2021-03-12</td><td>0.1</td><td>Initial publishing</td></tr>
-    <tr><td>2021-03-15</td><td>0.11</td><td>External token comment added</td></tr>
+    <tr><td>2021-03-15</td><td>0.11</td><td>Added external token comment</td></tr>
     <tr><td>2021-03-29</td><td>0.12</td><td>Improved replay handling + Changed &quot;Acquirer&quot; to &quot;PSP&quot;</td></tr>
-    <tr><td>2021-04-02</td><td>0.13</td><td>Delegated authorization added</td></tr>
+    <tr><td>2021-04-02</td><td>0.13</td><td>Added delegated authorization</td></tr>
+    <tr><td>2021-04-11</td><td>0.14</td><td>Added credentialId + more text on the credential database</td></tr>
   </table>
   <div id="authors" class="header">
     Authors
