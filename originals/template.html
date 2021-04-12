@@ -220,8 +220,11 @@ by the <span class="actor">Issuer</span>.
     Detailed Operation
   </div>
   <div>This section describes the different steps needed to authorize a payment operation using FWP.
-The foundation for the description is the following sequence diagram where each step
-is linked to a <i>clickable</i> number in a box:
+   To improve readability, JSON data is pretty-printed.
+</div>
+<div class="para">
+  The foundation for the description is the following sequence diagram where each step
+  is linked to a <i>clickable</i> number in a box:
 </div>
   <div style="overflow-x:auto;padding:8pt 0">
     @sequencediagram@
@@ -596,14 +599,15 @@ dvTiFvSkQ
 </div>
 <div id="domainconstraints" class="para box comment">
   Due to the end-to-end encryption scheme, the domain 
-constraints associated with Web Authentication
-assertions do not apply.
+  constraints associated with Web Authentication
+  assertions do not apply.
 </div> 
 
 <div id="seq-4.6" class="step">4.6 Assemble FWP Assertion</div>
 <div class="para">
-  Create a JSON object representing an <span class="msg">FWP Assertion</span>.
-  For the sample code this should result in the following object:
+  Create a JSON-serializable JavaScript object representing an <span class="msg">FWP Assertion</span>.
+  For the sample code this should result in the following object,
+  here shown in its serialized form:
 </div>
 <pre class="box">
 {
