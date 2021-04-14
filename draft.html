@@ -125,16 +125,14 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
       <td>
         <i>Locally created</i> identifier to a
         <span class="actor">User</span> specific (<i>unique</i>) FIDO key for
-        <a href="#seq-4.4">signing</a> payment authorization data
+        FWP <a href="#seq-4.4">signatures</a>
       </td>
     </tr>
     <tr>
       <td><code>publicKey</code></td>
       <td>
-        <i>Locally created</i> public key in JWK
-        (<a href="https://tools.ietf.org/html/rfc7517"
-            title="JWK/RFC7517">RFC7517<img src="images/xtl.svg" alt="link"></a>)
-        format matching the private key associated with <code>keyHandle</code>
+        <i>Locally created</i> public key matching the private key
+        associated with <code>keyHandle</code>
       </td>
     </tr>
     <tr>
@@ -148,19 +146,23 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
     <tr>
       <td><code>encryptionKey</code></td>
       <td>
-        <span class="actor">Issuer</span> specific (<i>shared</i>) public key in JWK
-        (<a href="https://tools.ietf.org/html/rfc7517"
-            title="JWK/RFC7517">RFC7517<img src="images/xtl.svg" alt="link"></a>)
-        format for FWP <a href="#seq-4.5">encryption</a>
+        <span class="actor">Issuer</span> specific (<i>shared</i>) public key
+        for FWP <a href="#seq-4.5">encryption</a>
       </td>
     </tr>
     <tr>
       <td><code>contentEncryptionAlgorithm</code></td>
-      <td>JOSE-compliant content encryption algorithm for FWP <a href="#seq-4.5">encryption</a></td>
+      <td>
+        JOSE-compliant content encryption algorithm for
+        FWP <a href="#seq-4.5">encryption</a>
+      </td>
     </tr>
     <tr>
       <td><code>keyEncryptionAlgorithm</code></td>
-      <td>JOSE-compliant key encryption algorithm for FWP <a href="#seq-4.5">encryption</a></td>
+      <td>
+        JOSE-compliant key encryption algorithm for
+        FWP <a href="#seq-4.5">encryption</a>
+      </td>
     </tr>
     <tr>
       <td><code>accountId</code></td>
@@ -172,13 +174,21 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
     </tr>
     <tr>
       <td><code>issuerId</code></td>
-      <td>Bank Identification Number (BIN) or URL associated with the <span class="actor">Issuer</span></td>
+      <td>
+        Bank Identification Number (BIN) or URL associated with
+        the <span class="actor">Issuer</span>
+      </td>
     </tr>
     <tr>
       <td><code>image</code></td>
-      <td>SVG image identifying the payment credential for the <span class="actor">User</span></td>
+      <td>
+        SVG image identifying the payment credential for
+        the <span class="actor">User</span>
+      </td>
     </tr>
   </table>
+  <div>Note: data types are not defined here because this is implementation specific.
+ That is, public keys may be stored in X.509, JWK, or COSE formats.</div>
   <div id="wallet" class="para box comment">
     FWP effectively forms a browser &quot;Wallet&quot;,
     holding an arbitrary number of payment credentials, each representing a
@@ -222,6 +232,9 @@ by the <span class="actor">Issuer</span>.
   <div>This section describes the different steps needed to authorize a payment operation using FWP.
    To improve readability, JSON data is pretty-printed.
 </div>
+  <div class="para">
+    Note that JSON data types are only provided <i>implicitly</i> (through example objects).
+  </div>
 <div class="para">
   The foundation for the description is the following sequence diagram where each step
   is linked to a <i>clickable</i> number in a box:
