@@ -303,7 +303,7 @@ public class SequenceDiagram   {
             seqY += SEQ_Y_DISTANCE + SEQ_Y_SLACK_AFTER_UI + UI_HEIGHT - PROC_HEIGHT;
             dashedArrow(0, 1, "Authorization");
             processing(1);
-            seqY += SCOPE_Y_MARGIN;
+            seqY += SCOPE_Y_MARGIN + SEQ_Y_SLACK_AFTER_UI;
             double scopeRectHeight = seqY - scopeRectY - SEQ_Y_DISTANCE + SEQ_Y_SLACK_AFTER_UI;
             arrow(1, 2, "FWP Assertion");
             processing(2);
