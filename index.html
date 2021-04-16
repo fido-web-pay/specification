@@ -191,13 +191,12 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
     Note: how elements are represented in the credential database is <i>implementation specific</i>.
     Public keys may for example be stored in the X.509, JWK, or COSE format.
   </div>
-  <div id="wallet" class="para box comment">
-    FWP effectively forms a browser &quot;Wallet&quot;,
-    holding an arbitrary number of payment credentials, each representing a
-    specific <span class="actor">Issuer</span>,
-    <span class="actor">User</span> account,
-    and <code>paymentMethod</code>.
-  </div>
+  <div id="keyprotection" class="comment box">
+    Through the use of a dedicated credential database,
+    associated FIDO keys can be freely accessed by the FWP implementation,
+    while remaining <i>invisible</i> and <i>protected</i> from
+    direct access by all parties but their respective <span class="actor">Issuer</span>.
+  </div> 
   <div id="enrollment" class="header">
     Enrollment
   </div>
@@ -222,12 +221,13 @@ to securely distinguish between &quot;ordinary&quot; FIDO keys,
 for Web Authentication as well, but this would be a deployment decision
 by the <span class="actor">Issuer</span>.
   </div>
-  <div id="keyprotection" class="comment box">
-    Through the use of a dedicated credential database,
-    FIDO keys can be freely accessed by the FWP implementation,
-    while remaining <i>invisible</i> and <i>protected</i> from
-    direct access by all parties but their respective <span class="actor">Issuer</span>.
-  </div> 
+  <div id="wallet" class="para box comment">
+    FWP effectively forms a browser &quot;Wallet&quot;,
+    holding an arbitrary number of payment credentials, each representing a
+    specific <span class="actor">Issuer</span>,
+    <span class="actor">User</span> account,
+    and <code>paymentMethod</code>.
+  </div>
   <div id="operation" class="header">
     Detailed Operation
   </div>
