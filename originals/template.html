@@ -238,15 +238,17 @@ by the <span class="actor">Issuer</span>.
     Note that JSON data types are <i>implicitly</i> provided only (through sample objects).
   </div>
 <div class="para">
-  The foundation for the description is the following sequence diagram where each step
-  is linked to a <i>clickable</i> number in a box:
+  The foundation for the description is the following sequence diagram <i>sample</i>
+  where each step is linked to a <i>clickable</i> number in a box:
 </div>
   <div style="overflow-x:auto;padding:8pt 0">
     @sequencediagram@
   </div>
-<div>Note that this specification does not elaborate on the return data from
-the <b class="actor">PSP</b> and <b class="actor">Issuer</b>,
- because this is payment network specific.</div>
+<div>Note that the <i>normative</i> part of this specification only covers the 
+    steps within the dotted rectangle. That is, how FWP implements
+   the <a href="https://www.w3.org/TR/payment-request/"
+   title="PaymentRequest">PaymentRequest<img src="images/xtl.svg" alt="link"></a>
+   interface.</div>
 <div class="step"><div id="seq-1" class="numbox">1</div>Initiate PaymentRequest</div>
 <div>
   At this point the <b class="actor">User</b> is assumed to have clicked on
@@ -1195,6 +1197,7 @@ https://commons.wikimedia.org/wiki/File:Crystal_Clear_kdm_user_female.svg<img sr
     <tr><td>2021-04-02</td><td>0.13</td><td>Added section Delegated Authorization</td></tr>
     <tr><td>2021-04-11</td><td>0.14</td><td>Added credentialId + more text on the credential database</td></tr>
     <tr><td>2021-04-14</td><td>0.15</td><td>Added section Implementation Options</td></tr>
+    <tr><td>2021-04-16</td><td>0.16</td><td>Added sequence diagram &quot;scope&quot; recatangle</td></tr>
   </table>
   <div id="authors" class="header">
     Authors

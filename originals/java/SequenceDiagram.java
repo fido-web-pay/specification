@@ -51,7 +51,10 @@ public class SequenceDiagram   {
 
     static final double SEQ_Y_DISTANCE = 32;
     static final double SEQ_Y_SLACK_AFTER_UI = 4;
- 
+
+    static final double SCOPE_Y_MARGIN = 15;
+    static final double SCOPE_X_MARGIN = 25;
+
     static final String FONT_FAMILY = "Roboto,sans-serif";
 
     String originalBase;
@@ -256,6 +259,8 @@ public class SequenceDiagram   {
 
         if (standardSequenceDiagram) {
 
+            double scopeRectY = seqY - SEQ_Y_DISTANCE + SCOPE_Y_MARGIN + SEQ_Y_SLACK_AFTER_UI;
+            seqY += SCOPE_Y_MARGIN;
             arrow(2, 1, "PaymentRequest");
 
             seqY -= SEQ_Y_SLACK_AFTER_UI;
@@ -298,12 +303,23 @@ public class SequenceDiagram   {
             seqY += SEQ_Y_DISTANCE + SEQ_Y_SLACK_AFTER_UI + UI_HEIGHT - PROC_HEIGHT;
             dashedArrow(0, 1, "Authorization");
             processing(1);
+            seqY += SCOPE_Y_MARGIN;
+            double scopeRectHeight = seqY - scopeRectY - SEQ_Y_DISTANCE + SEQ_Y_SLACK_AFTER_UI;
             arrow(1, 2, "FWP Assertion");
             processing(2);
             arrow(2, 3, "PSPRequest");
             processing(3);
             arrow(3, 4, "IssuerRequest");
             processing(4);
+            svg.append("  <rect x='")
+               .append(convert(center(0) - SCOPE_X_MARGIN))
+               .append("' y='")
+               .append(convert(scopeRectY))
+               .append("' width='")
+               .append(convert(center(2) - center(0) + 2 * SCOPE_X_MARGIN))
+               .append("' height='")
+               .append(convert(scopeRectHeight))
+               .append("' rx='5' fill='none' stroke-width='0.5' stroke='black' stroke-dasharray='1'/>\n");
         } else {
             currNum = 7;
             arrow(0, 1, "PSPRequest");
@@ -326,7 +342,7 @@ public class SequenceDiagram   {
             .append(" ")
             .append(convert(seqY + 10))
             .append("' xmlns='http://www.w3.org/2000/svg'>\n" +
-  "    <title>FIDO Web Pay - Sequence Diagram</title>\n" +
+  "    <title>FIDO Web Pay - Sample Sequence Diagram</title>\n" +
   "    <!-- Anders Rundgren 2021 -->\n" +
   "    <defs>\n" +
   "    <filter id='dropShaddow'>\n" +

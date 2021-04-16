@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<project name="create statediagram" default="help" basedir=".">
+<project name="Create FWP Specification" default="help" basedir=".">
 
   <property name="src.dir" location="java"/>
   <property name="temp.dir" location=".tmp"/>

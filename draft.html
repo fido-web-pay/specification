@@ -1387,11 +1387,14 @@ by the <span class="actor">Issuer</span>.
   <rect x='490.65' y='434.75' width='18.2' height='14' rx='3' fill='white' stroke='#404040' stroke-width='0.5'/>
   <text x='498.95' y='446.05' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>10</text>
   </a>
-  <rect x='38' y='87' width='290' height='171' fill='none' stroke-width='0.5' stroke='black' stroke-dasharray='1'/>
+  <rect x='38' y='87' width='290' height='171' rx='5' fill='none' stroke-width='0.5' stroke='black' stroke-dasharray='1'/>
 </svg>
   </div>
 <div>Note that the <i>normative</i> part of this specification only covers the 
-    steps within the dotted rectangle. That is, the inner workings of <code>PaymentRequest</code>.</div>
+    steps within the dotted rectangle. That is, how FWP implements
+   the <a href="https://www.w3.org/TR/payment-request/"
+   title="PaymentRequest">PaymentRequest<img src="images/xtl.svg" alt="link"></a>
+   interface.</div>
 <div class="step"><div id="seq-1" class="numbox">1</div>Initiate PaymentRequest</div>
 <div>
   At this point the <b class="actor">User</b> is assumed to have clicked on
