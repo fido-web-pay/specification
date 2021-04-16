@@ -16,7 +16,7 @@ public class SequenceDiagram   {
     static final double PROC_WIDTH = 86;
     static final double PROC_SLANT = 8;
     static final double PROC_HEIGHT = 22;
-    static final String PROC_COLOR = "#fff2dc";
+    static final String PROC_COLOR = "#faf2dd";
     static final String PROC_STROKE = "#404040";
 
     static final double VBAR_WIDTH = 1.2;
@@ -33,8 +33,8 @@ public class SequenceDiagram   {
     static final double ARROW_HEAD_WIDTH = 5;
     static final double ARROW_HEAD_LENGTH = 7;
     static final double ARROW_HEAD_GUTTER = 0.5;
-    static final String ARROW_COLOR = "#cc2020";
-    static final String ARROW_RETURN_COLOR = "#009a00";
+    static final String ARROW_COLOR = "#cc1010";
+    static final String ARROW_RETURN_COLOR = "#009000";
 
     static final double DROP_OFFSET = 2;
 
