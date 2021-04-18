@@ -972,7 +972,7 @@ public key first is converted into a <i>canonical format</i> like JWK &quot;thum
   has not already been used. This can be accomplished by maintaining a lookup cache
   holding SHA256 hashes of canonicalized (<a href="https://tools.ietf.org/html/rfc8785"
    title="JCS/RFC8785">RFC8785<img src="images/xtl.svg" alt="link"></a>) <a href="#seq-4.4">SAD</a> objects,
-  associated with already processed requests.
+  associated with <i>successfully</i> processed requests.
   Cached items would be removed based on their <code>SAD.timeStamp</code> value.
 </div>
 <div class="para">
