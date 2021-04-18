@@ -66,7 +66,8 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
     </li>
     <li>
       Separate account numbers from issuer (bank branch) identifiers.
-      The latter should preferably be expressed as URLs, potentially eliminating 
+      The latter should preferably be expressed as <a href="#servicediscovery">service URLs</a>,
+      potentially eliminating 
       <i>externally managed databases</i> holding issuer payment processor end-points.
     </li>
   </ul>
@@ -1804,7 +1805,12 @@ dvTiFvSkQ
   to the <code>PaymentRequest</code> invocation code via the
 <code>PaymentResponse.details</code> attribute.
 </div>
-
+  <div id="servicediscovery" class="comment box">
+    An alternative to using <code>issuerId</code> attributes for service
+    end-points, is populating these attributes with <i>service discovery URLs</i>,
+    which in turn provide the actual service end-points (as well as other information
+    that may be required to have <i>before</i> service invocation).
+  </div> 
 <div class="step"><div id="seq-5" class="numbox">5</div>Send FWP Assertion</div>
 <div>
   At this point the checkout Web code would normally
@@ -2772,7 +2778,7 @@ from payment initiations. The purpose with such arrangements include:
  <div class="comment box">
    Using delegated authorization may be decided by each <b class="actor">Issuer</b>
    <i>individually</i>.  The actual configuration is preferably resolved by making
-   the <code>issuerId</code> attribute play the role of a <i>service discovery URL</i>.
+   the <code>issuerId</code> attribute play the role of a <a href="#servicediscovery">service discovery URL</a>.
  </div>
  <div class="step"><div id="seq-D2" class="numbox">D2</div>Send ValidateRequest Object</div>
  <div>
