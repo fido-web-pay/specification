@@ -177,7 +177,9 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
       <td><code>issuerId</code></td>
       <td>
         Bank Identification Number (BIN) or URL associated with
-        the <span class="actor">Issuer</span>
+        the <span class="actor">Issuer</span>.
+        The exact definition is specific for each <code>paymentMethod</code>.
+        See also <a href="#servicediscovery">Service Discovery</a>
       </td>
     </tr>
     <tr>
@@ -661,7 +663,7 @@ dvTiFvSkQ
 </div>
   <div id="servicediscovery" class="comment box">
     An alternative to using <code>issuerId</code> attributes for service
-    end-points, is populating <code>issuerId</code> with a <i>service discovery URL</i>,
+    end-points, is populating <code>issuerId</code> with <i>Service Discovery URLs</i>,
     which in turn provide the actual service end-points (as well as other information
     that may be required to have <i>before</i> service invocation).
   </div> 
@@ -1075,7 +1077,7 @@ from payment initiations. The purpose with such arrangements include:
  <div class="comment box">
    Using delegated authorization may be decided by each <b class="actor">Issuer</b>
    <i>individually</i>.  The actual configuration is preferably resolved by making
-   the <code>issuerId</code> attribute play the role of a <a href="#servicediscovery">service discovery URL</a>.
+   the <code>issuerId</code> attribute play the role of a <a href="#servicediscovery">Service Discovery URL</a>.
  </div>
  <div class="step"><div id="seq-D2" class="numbox">D2</div>Send ValidateRequest Object</div>
  <div>
