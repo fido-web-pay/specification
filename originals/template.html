@@ -956,7 +956,9 @@ does not require database lookups.
 </li>
 <li>
 Verify that the aforementioned public key is linked to a <b class="actor">User</b>
-account equal to <code>SAD.accountId</code>. Note that this check requires that the received
+account matching the <code>SAD.accountId</code> and <code>SAD.credentialId</code> attributes
+(<code>SAD.credentialId</code> would typically serve as the primary key in a credential database table). 
+Note that this check requires that the
 public key first is converted into a <i>canonical format</i> like JWK &quot;thumbprint&quot;
 (<a href="https://tools.ietf.org/html/rfc7638"
    title="JWK thumbprint">RFC7638<img src="images/xtl.svg" alt="link"></a>).
@@ -969,7 +971,7 @@ public key first is converted into a <i>canonical format</i> like JWK &quot;thum
   To cope with possible replays, verify that the received <b class="actor">User</b> authorization
   has not already been used. This can be accomplished by maintaining a lookup cache
   holding SHA256 hashes of canonicalized (<a href="https://tools.ietf.org/html/rfc8785"
-   title="JCS/RFC8785">RFC8785<img src="images/xtl.svg" alt="link"></a>) SAD objects,
+   title="JCS/RFC8785">RFC8785<img src="images/xtl.svg" alt="link"></a>) <a href="#seq-4.4">SAD</a> objects,
   associated with already processed requests.
   Cached items would be removed based on their <code>SAD.timeStamp</code> value.
 </div>
