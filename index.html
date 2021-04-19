@@ -119,59 +119,67 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
   <table class="tftable">
     <tr>
       <th>Element</th>
-      <th>Comment</th>
+      <th>Function</th>
     </tr>
     <tr>
       <td><code>keyHandle</code></td>
       <td>
         <i>Locally created</i> identifier to a
         <span class="actor">User</span> specific (<i>unique</i>) FIDO key for
-        FWP <a href="#seq-4.4">signatures</a>
+        FWP <a href="#seq-4.4">signatures</a>.
       </td>
     </tr>
     <tr>
       <td><code>publicKey</code></td>
       <td>
         <i>Locally created</i> public key matching the private key
-        associated with <code>keyHandle</code>
+        associated with <code>keyHandle</code>.
       </td>
     </tr>
     <tr>
       <td><code>credentialId</code></td>
-      <td>Unique credential identifier, typically a serial number</td>
+      <td>
+        Unique credential identifier, typically a serial number.
+      </td>
     </tr>
     <tr>
       <td><code>signatureAlgorithm</code></td>
-      <td>Signature algorithm for FWP <a href="#seq-4.4">signatures</a></td>
+      <td>
+        Signature algorithm for FWP <a href="#seq-4.4">signatures</a>.
+      </td>
     </tr>
     <tr>
       <td><code>encryptionKey</code></td>
       <td>
         <span class="actor">Issuer</span> specific (<i>shared</i>) public key
-        for FWP <a href="#seq-4.5">encryption</a>
+        for FWP <a href="#seq-4.5">encryption</a>.
       </td>
     </tr>
     <tr>
       <td><code>contentEncryptionAlgorithm</code></td>
       <td>
         JOSE-compliant content encryption algorithm for
-        FWP <a href="#seq-4.5">encryption</a>
+        FWP <a href="#seq-4.5">encryption</a>.
       </td>
     </tr>
     <tr>
       <td><code>keyEncryptionAlgorithm</code></td>
       <td>
         JOSE-compliant key encryption algorithm for
-        FWP <a href="#seq-4.5">encryption</a>
+        FWP <a href="#seq-4.5">encryption</a>.
       </td>
     </tr>
     <tr>
       <td><code>accountId</code></td>
-      <td>Account identifier associated with the credential</td>
+      <td>
+        Account identifier associated with the credential.
+      </td>
     </tr>
     <tr>
       <td><code>paymentMethod</code></td>
-      <td>URL holding the FWP method for a particular payment network</td>
+      <td>
+        URL holding the FWP method for a particular payment network.
+      </td>
     </tr>
     <tr>
       <td><code>issuerId</code></td>
@@ -179,14 +187,14 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
         Bank Identification Number (BIN) or URL associated with
         the <span class="actor">Issuer</span>.
         The exact definition is specific for each <code>paymentMethod</code>.
-        See also <a href="#servicediscovery">Service Discovery</a>
+        See also <a href="#servicediscovery">Service Discovery</a>.
       </td>
     </tr>
     <tr>
       <td><code>image</code></td>
       <td>
         SVG image identifying the payment credential for
-        the <span class="actor">User</span>
+        the <span class="actor">User</span>.
       </td>
     </tr>
   </table>
@@ -1539,10 +1547,25 @@ creates an FWP assertion which requires the following steps to be performed:
 </pre>
 <div>Description:</div>
 <table class="tftable">
-<tr><th>Element</th><th>Comment</th></tr>
-<tr><td><code>id</code></td><td><b class="actor">Merchant</b> transaction ID. Copy of <code>details.id</code></td></tr>
-<tr><td><code>payee</code></td><td><b class="actor">Merchant</b> common name</td></tr>
-<tr><td><code>amount</code></td><td>Amount of money requested by the <b class="actor">Merchant</b></td></tr>
+  <tr><th>Element</th><th>Function</th></tr>
+  <tr>
+    <td><code>id</code></td>
+    <td>
+      <b class="actor">Merchant</b> transaction ID. Copy of <code>details.id</code>.
+    </td>
+  </tr>
+  <tr>
+    <td><code>payee</code></td>
+    <td>
+      <b class="actor">Merchant</b> common name.
+    </td>
+  </tr>
+  <tr>
+    <td><code>amount</code></td>
+    <td>
+      Amount of money requested by the <b class="actor">Merchant</b>.
+    </td>
+  </tr>
 </table>
 <div>
   This object is subsequently referred to as PaymentRequest Core Data (PRCD).
@@ -1595,35 +1618,39 @@ creates an FWP assertion which requires the following steps to be performed:
 </pre>
 <div>Description:</div>
 <table class="tftable">
-  <tr><th>Element</th><th>Comment</th></tr>
+  <tr><th>Element</th><th>Function</th></tr>
   <tr>
     <td><code>version</code></td>
-    <td>FWP assertion data version.  This specification covers version &quot;1&quot;</td>
+    <td>
+      FWP assertion data version.  This specification covers version &quot;1&quot;.
+    </td>
   </tr>
   <tr>
     <td><code>requestHash</code></td>
-    <td>PRCDHASH and associated hash algorithm</td>
+    <td>
+      PRCDHASH and associated hash algorithm.
+    </td>
   </tr>
   <tr>
     <td><code>payeeHost</code></td>
     <td>
       Host name as interpreted by the <b class="actor">Browser</b>.
       Included for optional validation by the <b class="actor">Issuer</b>,
-      aided by the <b class="actor">PSP</b>
+      aided by the <b class="actor">PSP</b>.
     </td>
   </tr>
   <tr>
     <td><code>accountId</code></td>
     <td>
       <b class="actor">User</b> account number associated
-      with the selected <a href="#credentials">FWP credential</a>
+      with the selected <a href="#credentials">FWP credential</a>.
     </td>
   </tr>
   <tr>
     <td><code>paymentMethod</code></td>
     <td>
       Payment method associated with the selected <a href="#credentials">FWP credential</a>.
-      Included for &quot;completeness&quot;
+      Included for &quot;completeness&quot;.
     </td>
   </tr>
   <tr>
@@ -1631,20 +1658,20 @@ creates an FWP assertion which requires the following steps to be performed:
     <td>
       <i>Optional</i>.  This attribute MUST be included if
       specified in the <code>PaymentRequest</code> constructor
-      for the particular <code>paymentMethod</code>, otherwise it MUST NOT be defined
+      for the particular <code>paymentMethod</code>, otherwise it MUST NOT be defined.
     </td>
   </tr>
   <tr>
     <td><code>credentialId</code></td>
     <td>
-      Credential identifier associated with the selected <a href="#credentials">FWP credential</a>
+      Credential identifier associated with the selected <a href="#credentials">FWP credential</a>.
     </td>
   </tr>
   <tr>
     <td><code>userAuthorizationMethod</code></td>
     <td>
       Currently FINGERPRINT, FACERECOGNITION, and PIN are supported.
-      Included for <i>security and logging</i> purposes
+      Included for <i>security and logging</i> purposes.
     </td>
   </tr>
   <tr>
@@ -1652,10 +1679,18 @@ creates an FWP assertion which requires the following steps to be performed:
     <td>
       Up-to-date information about the core <i>software</i> components.
       <i>Device data</i> is assumed to be established during credential enrollment.
-      Included for <i>security and logging</i> purposes
+      Included for <i>security and logging</i> purposes.
     </td>
   </tr>
-  <tr><td><code>timeStamp</code></td><td>ISO time stamp generated by the <b class="actor">Browser</b></td></tr>
+  <tr>
+    <td><code>timeStamp</code></td>
+    <td>
+      ISO (<a href="https://tools.ietf.org/html/rfc3339"
+              title="RFC3399">RFC3399<img src="images/xtl.svg" alt="link"></a>)
+      time stamp generated by the FWP implementation.
+      If the local time zone is known, it SHOULD be included.
+    </td>
+  </tr>
 </table>
 <div>
   This object is subsequently referred to as Authorization Data (AD).
@@ -1784,22 +1819,26 @@ dvTiFvSkQ
 </pre>
 <div>Description:</div>
 <table class="tftable">
-  <tr><th>Element</th><th>Comment</th></tr>
+  <tr><th>Element</th><th>Function</th></tr>
   <tr>
     <td><code>encryptedAuthorization</code></td>
     <td>
       Encrypted Signed Authorization Data.
       Here shown as a placeholder only since
-      an ESAD string can be quite long
+      an ESAD string can be quite long.
     </td>
   </tr>
   <tr>
     <td><code>paymentMethod</code></td>
-    <td>Payment method associated with the selected <a href="#credentials">FWP credential</a></td>
+    <td>
+      Payment method associated with the selected <a href="#credentials">FWP credential</a>.
+    </td>
   </tr>
   <tr>
     <td><code>issuerId</code></td>
-    <td>Issuer identifier associated with the selected <a href="#credentials">FWP credential</a></td>
+    <td>
+      Issuer identifier associated with the selected <a href="#credentials">FWP credential</a>.
+    </td>
   </tr>
 </table>
 <div>
@@ -1851,43 +1890,56 @@ or <code>fetch()</code> operation.
 </pre>
   <div>Description:</div>
   <table class="tftable">
-    <tr><th>Element</th><th>Comment</th></tr>
+    <tr><th>Element</th><th>Function</th></tr>
     <tr>
       <td><code>paymentRequest</code></td>
-      <td>Copy of <a href="#seq-4.1">PRCD</a>, <i>recreated</i> by the <b class="actor">Merchant</b></td>
+      <td>
+        Copy of <a href="#seq-4.1">PRCD</a>, <i>recreated</i> by the <b class="actor">Merchant</b>.
+      </td>
     </tr>
     <tr>
       <td><code>encryptedAuthorization</code></td>
-      <td>Copy of the same attribute in the <a href="#seq-4.6">FWP Assertion</a></td>
+      <td>
+        Copy of the same attribute in the <a href="#seq-4.6">FWP Assertion</a>.
+      </td>
     </tr>
     <tr>
       <td><code>paymentMethod</code></td>
-      <td>Copy of the same attribute in the <a href="#seq-4.6">FWP Assertion</a></td>
+      <td>
+        Copy of the same attribute in the <a href="#seq-4.6">FWP Assertion</a>.
+      </td>
     </tr>
     <tr>
       <td><code>issuerId</code></td>
-      <td>Copy of the same attribute in the <a href="#seq-4.6">FWP Assertion</a></td>
+      <td>
+        Copy of the same attribute in the <a href="#seq-4.6">FWP Assertion</a>.
+      </td>
     </tr>
     <tr>
       <td><code>networkData</code></td>
       <td>
-        <i>Optional</i>.  See <a href="#seq-4.3">Authorization Data</a>
+        <i>Optional</i>.  See <a href="#seq-4.3">Authorization Data</a>.
       </td>
     </tr>
     <tr>
       <td><code>receiveAccount</code></td>
       <td>
-        <b class="actor">Merchant</b> account to be credited
+        <b class="actor">Merchant</b> account to be credited.
       </td>
     </tr>
     <tr>
       <td><code>clientIp</code></td>
       <td>
         Request IP address (in V4 or V6 format) of the <b class="actor">User</b> device.
-        Included for <i>security and logging</i> purposes
+        Included for <i>security and logging</i> purposes.
       </td>
     </tr>
-    <tr><td><code>timeStamp</code></td><td>ISO time stamp generated by the <b class="actor">Merchant</b></td></tr>
+    <tr>
+      <td><code>timeStamp</code></td>
+      <td>
+        ISO time stamp generated by the <b class="actor">Merchant</b>.
+      </td>
+    </tr>
   </table>
   <div class="step">
     <div id="seq-7" class="numbox">7</div>Send PSPRequest Object
@@ -1972,23 +2024,25 @@ or <code>fetch()</code> operation.
 
   <div>Description:</div>
   <table class="tftable">
-    <tr><th>Element</th><th>Comment</th></tr>
+    <tr><th>Element</th><th>Function</th></tr>
     <tr>
       <td><code>pspRequest</code></td>
       <td>
         Copy of the <a href="#seq-6">PSPRequest</a> object
-        received from the <b class="actor">Merchant</b>
+        received from the <b class="actor">Merchant</b>.
       </td>
     </tr>
     <tr>
       <td><code>payeeHost</code></td>
       <td>
-        The <b class="actor">Merchant</b> host name registered by the <b class="actor">PSP</b>
+        The <b class="actor">Merchant</b> host name registered by the <b class="actor">PSP</b>.
       </td>
     </tr>
     <tr>
       <td><code>timeStamp</code></td>
-      <td>ISO time stamp generated by the <b class="actor">PSP</b></td>
+      <td>
+        ISO time stamp generated by the <b class="actor">PSP</b>.
+      </td>
     </tr>
   </table>
   <div class="step">
@@ -2904,13 +2958,13 @@ https://commons.wikimedia.org/wiki/File:Crystal_Clear_kdm_user_female.svg<img sr
   </div>
   <table class="tftable">
     <tr><th>Date</th><th>Version</th><th>Comment</th></tr>
-    <tr><td>2021-03-12</td><td>0.1</td><td>Initial publishing</td></tr>
-    <tr><td>2021-03-15</td><td>0.11</td><td>Added external token comment</td></tr>
-    <tr><td>2021-03-29</td><td>0.12</td><td>Improved replay handling + Changed &quot;Acquirer&quot; to &quot;PSP&quot;</td></tr>
-    <tr><td>2021-04-02</td><td>0.13</td><td>Added section Delegated Authorization</td></tr>
-    <tr><td>2021-04-11</td><td>0.14</td><td>Added credentialId + more text on the credential database</td></tr>
-    <tr><td>2021-04-14</td><td>0.15</td><td>Added section Implementation Options</td></tr>
-    <tr><td>2021-04-16</td><td>0.16</td><td>Added sequence diagram &quot;scope&quot; rectangle</td></tr>
+    <tr><td>2021-03-12</td><td>0.1</td><td>Initial publishing.</td></tr>
+    <tr><td>2021-03-15</td><td>0.11</td><td>Added external token comment.</td></tr>
+    <tr><td>2021-03-29</td><td>0.12</td><td>Improved replay handling + Changed &quot;Acquirer&quot; to &quot;PSP&quot;.</td></tr>
+    <tr><td>2021-04-02</td><td>0.13</td><td>Added section Delegated Authorization.</td></tr>
+    <tr><td>2021-04-11</td><td>0.14</td><td>Added credentialId + more text on the credential database.</td></tr>
+    <tr><td>2021-04-14</td><td>0.15</td><td>Added section Implementation Options.</td></tr>
+    <tr><td>2021-04-16</td><td>0.16</td><td>Added sequence diagram &quot;scope&quot; rectangle.</td></tr>
   </table>
   <div id="authors" class="header">
     Authors
