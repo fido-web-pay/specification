@@ -114,12 +114,12 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
     one or more FWP credentials
     (&quot;Virtual Cards&quot;) in an <a href="#enrollment">Enrollment</a> process.
     FWP credentials are stored in a local database, where each entry is
-    supposed to contain the following elements:
+    supposed to contain the following attributes:
 </div>
   <table class="tftable">
     <tr>
-      <th>Element</th>
-      <th>Function</th>
+      <th>Attribute</th>
+      <th>Data</th>
     </tr>
     <tr>
       <td><code>keyHandle</code></td>
@@ -199,7 +199,7 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
     </tr>
   </table>
   <div>
-    Note: how elements are represented in the credential database is <i>implementation specific</i>.
+    Note: how attributes are represented in the credential database is <i>implementation specific</i>.
     Public keys may for example be stored in the X.509, JWK, or COSE format.
   </div>
   <div id="keyprotection" class="comment box">
@@ -1547,7 +1547,7 @@ creates an FWP assertion which requires the following steps to be performed:
 </pre>
 <div>Description:</div>
 <table class="tftable">
-  <tr><th>Element</th><th>Function</th></tr>
+  <tr><th>Attribute</th><th>Data</th></tr>
   <tr>
     <td><code>id</code></td>
     <td>
@@ -1618,7 +1618,7 @@ creates an FWP assertion which requires the following steps to be performed:
 </pre>
 <div>Description:</div>
 <table class="tftable">
-  <tr><th>Element</th><th>Function</th></tr>
+  <tr><th>Attribute</th><th>Data</th></tr>
   <tr>
     <td><code>version</code></td>
     <td>
@@ -1819,7 +1819,7 @@ dvTiFvSkQ
 </pre>
 <div>Description:</div>
 <table class="tftable">
-  <tr><th>Element</th><th>Function</th></tr>
+  <tr><th>Attribute</th><th>Data</th></tr>
   <tr>
     <td><code>encryptedAuthorization</code></td>
     <td>
@@ -1890,7 +1890,7 @@ or <code>fetch()</code> operation.
 </pre>
   <div>Description:</div>
   <table class="tftable">
-    <tr><th>Element</th><th>Function</th></tr>
+    <tr><th>Attribute</th><th>Data</th></tr>
     <tr>
       <td><code>paymentRequest</code></td>
       <td>
@@ -1985,7 +1985,7 @@ or <code>fetch()</code> operation.
       That the <code>timeStamp</code> is within &quot;reasonable limits&quot;.
     </li>
     <li>
-      That the rest of the expected parameters are available as well that there are no unknown elements.
+      That the rest of the expected parameters are available as well that there are no unknown attributes.
     </li>
   </ul>
   <div class="para">
@@ -2024,7 +2024,7 @@ or <code>fetch()</code> operation.
 
   <div>Description:</div>
   <table class="tftable">
-    <tr><th>Element</th><th>Function</th></tr>
+    <tr><th>Attribute</th><th>Data</th></tr>
     <tr>
       <td><code>pspRequest</code></td>
       <td>
@@ -2863,7 +2863,7 @@ from payment initiations. The purpose with such arrangements include:
  <div>
    After receiving the <b class="actor">User</b> account number a 
    <span class="msg">payment instruction</span> object is created.
-   The elements of such objects are payment network specific and
+   The format and contents of such objects are payment network specific and
    are therefore not described here.
 </div>
  <div class="step"><div id="seq-D6" class="numbox">D6</div>Invoke &quot;Payment Rails&quot;</div>
