@@ -2244,7 +2244,7 @@ from payment initiations. The purpose with such arrangements include:
   Delegated authorization differs from
   <a href="https://www.emvco.com/emv-technologies/3d-secure/"
      title="3DS Site">3D&nbsp;Secure<img src="images/xtl.svg" alt="link"></a>
-  by keeping the validation process inside of the core payment network.
+  by keeping the authorization process inside of the core payment network.
   This enables validation of potentially <i>untrusted</i> <b class="actor">Merchant</b>
   data as well as eliminating dependencies on certified <b class="actor">Merchant</b>
   3D&nbsp;Secure SDKs.
@@ -2697,7 +2697,7 @@ from payment initiations. The purpose with such arrangements include:
   <circle stroke='grey' stroke-width='15' fill='url(#shaftGid)' r='50' cx='720' cy='280'/>
 </svg>  <text x='183' y='24.3' fill='black' font-family='Roboto,sans-serif' font-size='14.399999999999999' text-anchor='middle'>PSP</text>
 <svg x='283' y='32.0' width='40' height='40.0' viewBox='0 0 1000 1000' xmlns='http://www.w3.org/2000/svg'>
-  <title>Validator Symbol</title>
+  <title>Authorizer Symbol</title>
   <!-- Anders Rundgren 2021 -->
   <defs>
     <filter id='shackleGlow'>
@@ -2745,7 +2745,7 @@ from payment initiations. The purpose with such arrangements include:
   <path fill='none' stroke='#b0b0b0' stroke-width='40' d='M580,786 L580,676 C580,651 605,626 630,626 L670,626 C695,626 720,651 720,676 L720,786'/>
   <path fill='none' stroke='white' stroke-width='14' filter='url(#shackleGlow)' d='M580,786 L580,676 C580,651 605,626 630,626 L670,626 C695,626 720,651 720,676 L720,786'/>
   <rect fill='url(#goldenLock)' x='520' y='786' width='260' height='160' rx='25' stroke='#7f7f7f' stroke-width='10'/>
-</svg>  <text x='303' y='24.3' fill='black' font-family='Roboto,sans-serif' font-size='14.399999999999999' text-anchor='middle'>Validator</text>
+</svg>  <text x='303' y='24.3' fill='black' font-family='Roboto,sans-serif' font-size='14.399999999999999' text-anchor='middle'>Authorizer</text>
 <svg x='392.44444444444446' y='32.0' width='61.111111111111114' height='40.0' viewBox='0 0 110 72' xmlns='http://www.w3.org/2000/svg'>
   <title>Issuer Symbol</title>
   <!-- Anders Rundgren 2021-->
@@ -2780,7 +2780,7 @@ from payment initiations. The purpose with such arrangements include:
   <text x='139.75' y='132.05' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>D1</text>
   </a>
   <line x1='183.6' y1='164' x2='294.9' y2='164' stroke-width='0.8' stroke='#cc1010' marker-end='url(#arrowHead)'/>
-  <text x='243' y='158.70000000000002' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>ValidateRequest</text>
+  <text x='243' y='158.70000000000002' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>&nbsp;&nbsp;AuthorizeRequest</text>
   <a href='#seq-D2'>
   <rect x='172.5' y='157' width='21' height='14' rx='3' fill='white' stroke='#404040' stroke-width='0.5'/>
   <text x='183' y='168.3' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>D2</text>
@@ -2793,7 +2793,7 @@ from payment initiations. The purpose with such arrangements include:
   <text x='259.75' y='196.05' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>D3</text>
   </a>
   <line x1='302.4' y1='228' x2='191.1' y2='228' stroke-width='0.8' stroke='#009000' marker-end='url(#arrowReturnHead)'/>
-  <text x='243' y='222.70000000000002' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>Validated Data</text>
+  <text x='243' y='222.70000000000002' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>Authorization</text>
   <a href='#seq-D4'>
   <rect x='292.5' y='221' width='21' height='14' rx='3' fill='white' stroke='#404040' stroke-width='0.5'/>
   <text x='303' y='232.3' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>D4</text>
@@ -2824,11 +2824,11 @@ from payment initiations. The purpose with such arrangements include:
     Note that step 1-7 are <i>identical</i> to the FWP &quot;standard&quot; mode. 
     &quot;Payment Rails&quot; refer to existing payment systems.
   </div>
- <div class="step"><div id="seq-D1" class="numbox">D1</div>Process PSPRequest and Create ValidateRequest Object</div>
+ <div class="step"><div id="seq-D1" class="numbox">D1</div>Process PSPRequest and Create AuthorizeRequest Object</div>
  <div>
    This step should involve the same verifications as in <a href="#seq-8">step 8</a>
    in the standard mode.
-   A suitable <span class="msg">ValidateRequest</span> object would typically follow the 
+   A suitable <span class="msg">AuthorizeRequest</span> object would typically follow the 
    <span class="msg">IssuerRequest</span> sample in step 8.
 </div>
  <div class="comment box">
@@ -2836,21 +2836,21 @@ from payment initiations. The purpose with such arrangements include:
    <i>individually</i>.  The actual configuration is preferably resolved by making
    the <code>issuerId</code> attribute play the role of a <a href="#servicediscovery">Service Discovery URL</a>.
  </div>
- <div class="step"><div id="seq-D2" class="numbox">D2</div>Send ValidateRequest Object</div>
+ <div class="step"><div id="seq-D2" class="numbox">D2</div>Send AuthorizeRequest Object</div>
  <div>
-   At this point the <b class="actor">PSP</b> sends the completed <span class="msg">ValidateRequest</span>
-   object to the designated <b class="actor">Validator</b>.
-   Note that the method used for locating the proper <b class="actor">Validator</b> depends on
+   At this point the <b class="actor">PSP</b> sends the completed <span class="msg">AuthorizeRequest</span>
+   object to the designated <b class="actor">Authorizer</b>.
+   Note that the method used for locating the proper <b class="actor">Authorizer</b> depends on
    the <code>paymentMethod</code> and <code>issuerId</code> attributes.
  </div>
- <div class="step"><div id="seq-D3" class="numbox">D3</div>Process ValidateRequest</div>
+ <div class="step"><div id="seq-D3" class="numbox">D3</div>Process AuthorizeRequest</div>
  <div>
    This step should involve the same verifications as in <a href="#seq-10">step 10</a>
    in the standard mode.
  </div>
   <div class="step"><div id="seq-D4" class="numbox">D4</div>Return Validated Data</div>
   <div>
-    If validation is successful, <span class="msg">ValidateRequest</span> 
+    If validation is successful, <span class="msg">AuthorizeRequest</span> 
     should return the decrypted <b class="actor">User</b> account number.
   </div>
   <div id="delegatedemv" class="comment box">

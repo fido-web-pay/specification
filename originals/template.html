@@ -1098,7 +1098,7 @@ from payment initiations. The purpose with such arrangements include:
   Delegated authorization differs from
   <a href="https://www.emvco.com/emv-technologies/3d-secure/"
      title="3DS Site">3D&nbsp;Secure<img src="images/xtl.svg" alt="link"></a>
-  by keeping the validation process inside of the core payment network.
+  by keeping the authorization process inside of the core payment network.
   This enables validation of potentially <i>untrusted</i> <b class="actor">Merchant</b>
   data as well as eliminating dependencies on certified <b class="actor">Merchant</b>
   3D&nbsp;Secure SDKs.
@@ -1121,11 +1121,11 @@ from payment initiations. The purpose with such arrangements include:
     Note that step 1-7 are <i>identical</i> to the FWP &quot;standard&quot; mode. 
     &quot;Payment Rails&quot; refer to existing payment systems.
   </div>
- <div class="step"><div id="seq-D1" class="numbox">D1</div>Process PSPRequest and Create ValidateRequest Object</div>
+ <div class="step"><div id="seq-D1" class="numbox">D1</div>Process PSPRequest and Create AuthorizeRequest Object</div>
  <div>
    This step should involve the same verifications as in <a href="#seq-8">step 8</a>
    in the standard mode.
-   A suitable <span class="msg">ValidateRequest</span> object would typically follow the 
+   A suitable <span class="msg">AuthorizeRequest</span> object would typically follow the 
    <span class="msg">IssuerRequest</span> sample in step 8.
 </div>
  <div class="comment box">
@@ -1133,21 +1133,21 @@ from payment initiations. The purpose with such arrangements include:
    <i>individually</i>.  The actual configuration is preferably resolved by making
    the <code>issuerId</code> attribute play the role of a <a href="#servicediscovery">Service Discovery URL</a>.
  </div>
- <div class="step"><div id="seq-D2" class="numbox">D2</div>Send ValidateRequest Object</div>
+ <div class="step"><div id="seq-D2" class="numbox">D2</div>Send AuthorizeRequest Object</div>
  <div>
-   At this point the <b class="actor">PSP</b> sends the completed <span class="msg">ValidateRequest</span>
-   object to the designated <b class="actor">Validator</b>.
-   Note that the method used for locating the proper <b class="actor">Validator</b> depends on
+   At this point the <b class="actor">PSP</b> sends the completed <span class="msg">AuthorizeRequest</span>
+   object to the designated <b class="actor">Authorizer</b>.
+   Note that the method used for locating the proper <b class="actor">Authorizer</b> depends on
    the <code>paymentMethod</code> and <code>issuerId</code> attributes.
  </div>
- <div class="step"><div id="seq-D3" class="numbox">D3</div>Process ValidateRequest</div>
+ <div class="step"><div id="seq-D3" class="numbox">D3</div>Process AuthorizeRequest</div>
  <div>
    This step should involve the same verifications as in <a href="#seq-10">step 10</a>
    in the standard mode.
  </div>
   <div class="step"><div id="seq-D4" class="numbox">D4</div>Return Validated Data</div>
   <div>
-    If validation is successful, <span class="msg">ValidateRequest</span> 
+    If validation is successful, <span class="msg">AuthorizeRequest</span> 
     should return the decrypted <b class="actor">User</b> account number.
   </div>
   <div id="delegatedemv" class="comment box">

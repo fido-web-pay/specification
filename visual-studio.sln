@@ -6,6 +6,8 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8D6B5546-576F-4DBF-B343-C4F890778917}"
 	ProjectSection(SolutionItems) = preProject
 		originals\AD.json = originals\AD.json
+		originals\authorizer.svg = originals\authorizer.svg
+		originals\java\AuthorizerIcon.java = originals\java\AuthorizerIcon.java
 		originals\browser.svg = originals\browser.svg
 		originals\build.xml = originals\build.xml
 		originals\card.svg = originals\card.svg
@@ -26,8 +28,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		originals\template.html = originals\template.html
 		images\ui.svg = images\ui.svg
 		originals\user.svg = originals\user.svg
-		originals\validator.svg = originals\validator.svg
-		originals\java\ValidatorIcon.java = originals\java\ValidatorIcon.java
 		images\xtl.svg = images\xtl.svg
 	EndProjectSection
 EndProject
