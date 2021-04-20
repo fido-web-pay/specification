@@ -1150,10 +1150,10 @@ from payment initiations. The purpose with such arrangements include:
    This step should involve the same verifications as in <a href="#seq-10">step 10</a>
    in the standard mode.
  </div>
-  <div class="step"><div id="seq-D4" class="numbox">D4</div>Return Validated Data</div>
+  <div class="step"><div id="seq-D4" class="numbox">D4</div>Return Authorized Data</div>
   <div>
-    If validation is successful, <span class="msg">AuthorizeRequest</span> 
-    should return the decrypted <b class="actor">User</b> account number.
+    If the preceding step is successful, <span class="msg">AuthorizeRequest</span> 
+    would typically return the (now decrypted) <b class="actor">User</b> account number.
   </div>
   <div id="delegatedreturnoptions" class="comment box">
     A more sophisticated approach would be to return signed data for maintaining the
