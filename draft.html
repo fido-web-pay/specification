@@ -2858,13 +2858,17 @@ from payment initiations. The purpose with such arrangements include:
     If validation is successful, <span class="msg">AuthorizeRequest</span> 
     should return the decrypted <b class="actor">User</b> account number.
   </div>
-  <div id="delegatedemv" class="comment box">
+  <div id="delegatedreturnoptions" class="comment box">
     A more sophisticated approach would be to return signed data for maintaining the
     end-to-end security model.  For card payments this would preferably be in the
    form of EMV compliant objects that can be passed on to existing payment systems
     &quot;as&nbsp;is&quot;.
   </div>
- <div class="step"><div id="seq-D5" class="numbox">D5</div>Create Payment Instruction</div>
+  <div>
+    &nbsp;<br/>In an Open Banking implementation based on OAuth2 concepts,
+    the return data would contain access tokens and consent information.
+  </div> 
+<div class="step"><div id="seq-D5" class="numbox">D5</div>Create Payment Instruction</div>
  <div>
    After receiving the <b class="actor">User</b> account number a 
    <span class="msg">payment instruction</span> object is created.
