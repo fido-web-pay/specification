@@ -1089,7 +1089,8 @@ from payment initiations. The purpose with such arrangements include:
 <ul>
   <li>Ease the integration of FWP in existing payment systems.</li>
   <li>Open the possibility <i>outsourcing</i> the authorization process to TPPs.</li>
-  <li>Provide an <a href="#seq-2">enhanced UX</a> to payment systems based on Open Banking APIs.</li>
+  <li>Provide an <a href="#seq-2">enhanced UX</a> to payment systems based on 
+      <a href="#openbanking">Open Banking</a> APIs.</li>
 </ul>
 <div class="para">
   Note that FWP makes the use of delegated authorization <i>transparent</i>
@@ -1123,7 +1124,7 @@ from payment initiations. The purpose with such arrangements include:
     &quot;Payment Rails&quot; refer to existing payment systems.
   </div>
   <div class="para">
-    In an Open Banking context the <b class="actor">PSP</b> would be equivalent to a PISP while
+    In an <a href="#openbanking">Open Banking</a> context the <b class="actor">PSP</b> would be equivalent to a PISP while
     the <b class="actor">Authorizer</b> would be a specialized AS.
   </div>
  <div class="step"><div id="seq-D1" class="numbox">D1</div>Process PSPRequest and Create AuthorizeRequest Object</div>
@@ -1161,7 +1162,7 @@ from payment initiations. The purpose with such arrangements include:
    form of EMV compliant objects that can be passed on to existing payment systems
     &quot;as&nbsp;is&quot;.
   </div>
-  <div>
+  <div id="openbanking">
     &nbsp;<br/>In an Open Banking implementation based on OAuth2 concepts,
     the return data would contain access tokens and consent information.
   </div> 
