@@ -105,7 +105,7 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
     a <span class="actor">Merchant</span> and an <span class="actor">Issuer</span>.
     In FWP objects, <span class="actor">Merchant</span> is referred to as &quot;payee&quot;.
   </div>
-  <div id="credentials" class="header">
+  <div id="credentialdatabase" class="header">
     Credential Database
   </div>
   <div>
@@ -345,7 +345,7 @@ async function doPaymentRequest() {
 <div class="para">Any deviations MUST throw an exception.</div>
 <div class="para">Note that the <code>name</code> properties in the <code>networks</code>
 array denote the actual payment methods, corresponding to the <code>paymentMethod</code>
-attribute in <a href="#credentials">FWP credentials</a>.</div>
+attribute in <a href="#credentialdatabase">FWP credentials</a>.</div>
 <div class="para">
   Note that the <code>PaymentRequest.canMakePayment()</code> method MUST return <kbd>true</kbd>
 if the <span class="actor">User</span> have one or more FWP credentials,
@@ -504,13 +504,13 @@ creates an FWP assertion which requires the following steps to be performed:
     <td><code>accountId</code></td>
     <td>
       <b class="actor">User</b> account number associated
-      with the selected <a href="#credentials">FWP credential</a>.
+      with the selected <a href="#credentialdatabase">FWP credential</a>.
     </td>
   </tr>
   <tr>
     <td><code>paymentMethod</code></td>
     <td>
-      Payment method associated with the selected <a href="#credentials">FWP credential</a>.
+      Payment method associated with the selected <a href="#credentialdatabase">FWP credential</a>.
       Included for &quot;completeness&quot;.
     </td>
   </tr>
@@ -525,7 +525,7 @@ creates an FWP assertion which requires the following steps to be performed:
   <tr>
     <td><code>credentialId</code></td>
     <td>
-      Credential identifier associated with the selected <a href="#credentials">FWP credential</a>.
+      Credential identifier associated with the selected <a href="#credentialdatabase">FWP credential</a>.
     </td>
   </tr>
   <tr>
@@ -560,7 +560,7 @@ creates an FWP assertion which requires the following steps to be performed:
 <div id="seq-4.4" class="step">4.4 Create Signed Authorization Data (SAD)</div>
 <div class="para">
   Using the FIDO signature key (<code>keyHandle</code>) associated with the selected
-  <a href="#credentials">FWP credential</a>, sign AD using the
+  <a href="#credentialdatabase">FWP credential</a>, sign AD using the
   <a href="https://tools.ietf.org/html/draft-jordan-jws-ct-02"
      title="JWS/CT">JWS/CT<img src="images/xtl.svg" alt="link"></a> method.
   For the sample code this should result in the following object:
@@ -608,7 +608,7 @@ creates an FWP assertion which requires the following steps to be performed:
 
 <div class="para">
   To simplify backend processing, the <code>publicKey</code> associated with
-  the selected <a href="#credentials">FWP credential</a> MUST be included in the JWS header.
+  the selected <a href="#credentialdatabase">FWP credential</a> MUST be included in the JWS header.
   In the sample the following key was used:
 </div>
 <pre class="box">
@@ -624,7 +624,7 @@ creates an FWP assertion which requires the following steps to be performed:
   For privacy and security reasons, Signed Authorization Data (SAD) objects
   MUST be encrypted by a public key provided by the <b class="actor">Issuer</b>
   through the <code>encryptionKey</code> attribute of the selected 
-  <a href="#credentials">FWP credential</a>.
+  <a href="#credentialdatabase">FWP credential</a>.
   This specification mandates using JWE
   (<a href="https://tools.ietf.org/html/rfc7516"
       title="JWE">RFC7516<img src="images/xtl.svg" alt="link"></a>),
@@ -635,7 +635,7 @@ creates an FWP assertion which requires the following steps to be performed:
   The actual JWE algorithms to use are defined by the
   <code>contentEncryptionAlgorithm</code> and 
   <code>keyEncryptionAlgorithm</code> attributes 
-  of the selected <a href="#credentials">FWP credential</a>.
+  of the selected <a href="#credentialdatabase">FWP credential</a>.
 </div>
 <div class="para">
   SAD objects MUST be JSON-serialized to UTF-8 before being encrypted.
@@ -692,13 +692,13 @@ dvTiFvSkQ
   <tr>
     <td><code>paymentMethod</code></td>
     <td>
-      Payment method associated with the selected <a href="#credentials">FWP credential</a>.
+      Payment method associated with the selected <a href="#credentialdatabase">FWP credential</a>.
     </td>
   </tr>
   <tr>
     <td><code>issuerId</code></td>
     <td>
-      Issuer identifier associated with the selected <a href="#credentials">FWP credential</a>.
+      Issuer identifier associated with the selected <a href="#credentialdatabase">FWP credential</a>.
     </td>
   </tr>
 </table>
@@ -1224,7 +1224,7 @@ from payment initiations. The purpose with such arrangements include:
   </div>
   <div>
     An alternative to building FWP support into browsers, is moving the FWP implementation 
-    (including the <a href="#credentials">credential database</a>), down into the client platform layer.
+    (including the <a href="#credentialdatabase">credential database</a>), down into the client platform layer.
     This would open FWP to other scenarios like:
   </div>
 <ul style="margin-bottom:0.3em">
