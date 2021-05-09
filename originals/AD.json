@@ -1,8 +1,12 @@
 {
-  "version": "1",
-  "requestHash": {
-    "algorithm": "S256",
-    "value": "-5AfYJfNayqcxJs2nqkUm7EKKLS1oPumgWNWc1BCPuQ"
+  "version":  "1",
+  "paymentRequest": {
+    "id": "7040566321",
+    "payee": "Space Shop",
+    "amount": {
+      "currency": "EUR",
+      "value": "435.00"
+    }
   },
   "payeeHost": "spaceshop.com",
   "accountId": "FR7630002111110020050014382",
@@ -20,5 +24,5 @@
       "version": "95"
     }
   },
-  "timeStamp": "2021-03-09T10:32:35+01:00"
+  "timeStamp": "2021-05-09T10:32:35+01:00"
 }

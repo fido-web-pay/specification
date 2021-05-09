@@ -431,21 +431,8 @@ creates an FWP assertion which requires the following steps to be performed:
 <div>
   This object is subsequently referred to as PaymentRequest Core Data (PRCD).
 </div>
-<div id="seq-4.2" class="step">4.2 Create a Hash of PaymentRequest Core Data (PRCDHASH)</div>
-<div class="para">
-  Calculate a Base64Url-encoded SHA256 hash of PRCD, canonicalized according to
-  <a href="https://tools.ietf.org/html/rfc8785"
-      title="JCS/RFC8785">RFC8785<img src="images/xtl.svg" alt="link"></a>.
-  The resulting string is subsequently referred to as PRCDHASH.
-</div>
-<div class="para">
-  Expressed as a formula: PRCDHASH = BASE64URL(SHA256(RFC8785(PRCD))).
-</div>
-<div class="para">
-  Applied to the sample data, this operation should return "-5AfYJfNayqcxJs2nqkUm7EKKLS1oPumgWNWc1BCPuQ".
-</div>
-<div id="seq-4.3" class="step">
-  4.3 Create Authorization Data (AD)
+<div id="seq-4.2" class="step">
+  4.2 Create Authorization Data (AD)
 </div>
 <div class="para">
   Create a JSON object representing the data to authorize.
@@ -453,10 +440,14 @@ creates an FWP assertion which requires the following steps to be performed:
 </div>
 <pre class="box">
 {
-  "version": "1",
-  "requestHash": {
-    "algorithm": "S256",
-    "value": "-5AfYJfNayqcxJs2nqkUm7EKKLS1oPumgWNWc1BCPuQ"
+  "version":  "1",
+  "paymentRequest": {
+    "id": "7040566321",
+    "payee": "Space Shop",
+    "amount": {
+      "currency": "EUR",
+      "value": "435.00"
+    }
   },
   "payeeHost": "spaceshop.com",
   "accountId": "FR7630002111110020050014382",
@@ -474,7 +465,7 @@ creates an FWP assertion which requires the following steps to be performed:
       "version": "95"
     }
   },
-  "timeStamp": "2021-03-09T10:32:35+01:00"
+  "timeStamp": "2021-05-09T10:32:35+01:00"
 }
 </pre>
 <div>Description:</div>
@@ -487,9 +478,9 @@ creates an FWP assertion which requires the following steps to be performed:
     </td>
   </tr>
   <tr>
-    <td><code>requestHash</code></td>
+    <td><code>paymentRequest</code></td>
     <td>
-      PRCDHASH and associated hash algorithm.
+      PaymentRequest Core Data (PRCD).
     </td>
   </tr>
   <tr>
@@ -558,7 +549,7 @@ creates an FWP assertion which requires the following steps to be performed:
   This object is subsequently referred to as Authorization Data (AD).
 </div>
 
-<div id="seq-4.4" class="step">4.4 Create Signed Authorization Data (SAD)</div>
+<div id="seq-4.3" class="step">4.3 Create Signed Authorization Data (SAD)</div>
 <div class="para">
   Using the FIDO signature key (<code>keyHandle</code>) associated with the selected
   <a href="#credentialdatabase">FWP credential</a>, sign AD using the
@@ -569,9 +560,13 @@ creates an FWP assertion which requires the following steps to be performed:
 <pre class="box">
 {
   "version": "1",
-  "requestHash": {
-    "algorithm": "S256",
-    "value": "-5AfYJfNayqcxJs2nqkUm7EKKLS1oPumgWNWc1BCPuQ"
+  "paymentRequest": {
+    "id": "7040566321",
+    "payee": "Space Shop",
+    "amount": {
+      "currency": "EUR",
+      "value": "435.00"
+    }
   },
   "payeeHost": "spaceshop.com",
   "accountId": "FR7630002111110020050014382",
@@ -589,7 +584,7 @@ creates an FWP assertion which requires the following steps to be performed:
       "version": "95"
     }
   },
-  "timeStamp": "2021-03-09T10:32:35+01:00",
+  "timeStamp": "2021-05-09T10:32:35+01:00",
   "signature": "eyJhbGciOiJFUzI1NiJ9..5WaPL_S0zLIAzkptti7CxdAqXtgosdG2lUWoELuy3ONSWUGJC5vxnkcdA0jYsebcomHpfpsmO5Y6IcZ8bBdvQA"
 }
 </pre>
@@ -620,7 +615,7 @@ creates an FWP assertion which requires the following steps to be performed:
   "y": "mCbcvUzm44j3Lt2b5BPyQloQ91tf2D2V-gzeUxWaUdg"
 }
 </pre>
-<div id="seq-4.5" class="step">4.5 Create Encrypted Signed Authorization Data (ESAD)</div>
+<div id="seq-4.4" class="step">4.4 Create Encrypted Signed Authorization Data (ESAD)</div>
 <div class="para">
   For privacy and security reasons, Signed Authorization Data (SAD) objects
   MUST be encrypted by a public key provided by the <b class="actor">Issuer</b>
@@ -666,7 +661,7 @@ dvTiFvSkQ
   assertions do not apply.
 </div> 
 
-<div id="seq-4.6" class="step">4.6 Assemble FWP Assertion</div>
+<div id="seq-4.5" class="step">4.5 Assemble FWP Assertion</div>
 <div class="para">
   Create a JSON-serializable JavaScript object representing an <span class="msg">FWP Assertion</span>.
   For the sample code this should result in the following object,
@@ -747,7 +742,7 @@ or <code>fetch()</code> operation.
   "networkData": "additional stuff...",
   "receiveAccount": "DE89370400440532013000",
   "clientIp": "220.13.198.144",
-  "timeStamp": "2021-03-09T10:32:36+01:00"
+  "timeStamp": "2021-05-09T10:32:36+01:00"
 }
 </pre>
   <div>Description:</div>
@@ -877,10 +872,10 @@ or <code>fetch()</code> operation.
     "networkData": "additional stuff...",
     "receiveAccount": "DE89370400440532013000",
     "clientIp": "220.13.198.144",
-    "timeStamp": "2021-03-09T10:32:36+01:00"
+    "timeStamp": "2021-05-09T10:32:36+01:00"
   },
   "payeeHost": "spaceshop.com",
-  "timeStamp": "2021-03-09T10:32:37+01:00"
+  "timeStamp": "2021-05-09T10:32:37+01:00"
 }
 </pre>
 
@@ -950,23 +945,13 @@ is compatible with the <code>pspRequest.paymentMethod</code>.
 is compatible with the <code>pspRequest.paymentMethod</code>
      as well as matching the <b class="actor">Issuer</b>.
    </li>
+   <li>
+     Verify that <code>pspRequest.paymentRequest</code>
+     represents a valid <a href="#seq-4.1">PRCD</a> object.
+   </li>
  </ul>
-
 <div id="seq-10.2" class="step">
-10.2 Decode and Verify PaymentRequest Core Data (PRCD)
-</div>
-<ul>
-<li>
-  Verify that <code>pspRequest.paymentRequest</code> 
-represents a valid <a href="#seq-4.1">PRCD</a> object.
-</li>
-<li>
-  Calculate a <a href="#seq-4.2">PRCDHASH</a> string of the 
-<code>pspRequest.paymentRequest</code> data.
-</li>
-</ul>
-<div id="seq-10.3" class="step">
-  10.3 Extract Signed Authorization Data (SAD)
+  10.2 Extract Signed Authorization Data (SAD)
 </div>
 <ul>
 <li>
@@ -987,15 +972,15 @@ Parse the result of the previous operation as JSON and set result as <a href="#s
 Verify that the SAD object schema-wise has the proper format.
 </li>
 </ul>
-<div id="seq-10.4" class="step">
-  10.4 Validate Request Data
+<div id="seq-10.3" class="step">
+  10.3 Validate Request Data
 </div>
 <ul>
 <li>
 Verify that <code>SAD.version</code> is supported.
 </li>
 <li>
-Verify that the previously calculated PRCDHASH is equivalent to <code>SAD.requestHash.value</code>.
+Verify that <code>pspRequest.paymentRequest</code> is equivalent to <code>SAD.paymentRequest</code>.
 That is, verifying that the <b class="actor">Merchant</b> payment claim corresponds to what the
 <b class="actor">User</b> have actually <i>seen and authorized</i>.
 </li>
@@ -1015,8 +1000,8 @@ with the <b class="actor">Issuer</b> specific requirements.
 </li>
 </ul>
 
-<div id="seq-10.5" class="step">
-  10.5 Validate Authorization Signature
+<div id="seq-10.4" class="step">
+  10.4 Validate Authorization Signature
 </div>
 <ul>
 <li>
@@ -1034,8 +1019,8 @@ public key first is converted into a <i>canonical format</i> like JWK &quot;thum
    title="JWK thumbprint">RFC7638<img src="images/xtl.svg" alt="link"></a>).
 </li>
 </ul>
-<div id="seq-10.6" class="step">
-  10.6 Replay Handling
+<div id="seq-10.5" class="step">
+  10.5 Replay Handling
 </div>
 <div>
   To cope with possible replays, verify that the received <b class="actor">User</b> authorization
@@ -1108,7 +1093,8 @@ from payment initiations. The purpose with such arrangements include:
   Delegated authorization differs from
   <a href="https://www.emvco.com/emv-technologies/3d-secure/"
      title="3DS Site">3D&nbsp;Secure<img src="images/xtl.svg" alt="link"></a>
-  by keeping the authorization process inside of the core payment network.
+  by keeping the authorization process and associated <b class="actor">User</b>
+  account information, inside of the core payment network.
   This enables validation of potentially <i>untrusted</i> <b class="actor">Merchant</b>
   data as well as eliminating dependencies on certified <b class="actor">Merchant</b>
   3D&nbsp;Secure SDKs.
@@ -1280,6 +1266,7 @@ https://commons.wikimedia.org/wiki/File:Crystal_Clear_kdm_user_female.svg<img sr
     <tr><td>2021-04-11</td><td>0.14</td><td>Added credentialId + more text on the credential database.</td></tr>
     <tr><td>2021-04-14</td><td>0.15</td><td>Added section Implementation Options.</td></tr>
     <tr><td>2021-04-16</td><td>0.16</td><td>Added sequence diagram &quot;scope&quot; rectangle.</td></tr>
+    <tr><td>2021-05-09</td><td>0.17</td><td>Simplification: Removed hashing of PRCD.</td></tr>
   </table>
   <div id="authors" class="header">
     Authors
