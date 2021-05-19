@@ -122,31 +122,28 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
       <th>Data</th>
     </tr>
     <tr>
-      <td><code>keyHandle</code></td>
+      <td><code>credentialId</code></td>
       <td>
-        <i>Locally created</i> identifier to a
-        <span class="actor">User</span> specific (<i>unique</i>) FIDO key for
-        FWP <a href="#seq-4.4">signatures</a>.
-      </td>
-    </tr>
-    <tr>
-      <td><code>rpId</code></td>
-      <td>
-        FIDO relying party identifier needed for creating
-        FWP <a href="#seq-4.4">signatures</a>.
+        FIDO key identifier for creating FWP <a href="#seq-4.4">signatures</a>.
       </td>
     </tr>
     <tr>
       <td><code>publicKey</code></td>
       <td>
-        <i>Locally created</i> public key matching the private key
-        associated with <code>keyHandle</code>.
+        FIDO public key matching the private key associated with <code>credentialId</code>.
       </td>
     </tr>
     <tr>
-      <td><code>credentialId</code></td>
+      <td><code>rpId</code></td>
       <td>
-        Unique credential identifier, typically a serial number.
+        FIDO relying party identifier for creating FWP <a href="#seq-4.4">signatures</a>.
+      </td>
+    </tr>
+    <tr>
+      <td><code>serialNumber</code></td>
+      <td>
+        Text string that (with respect to the <span class="actor">Issuer</span>),
+        uniquely identifies the payment credential.
       </td>
     </tr>
     <tr>
@@ -453,7 +450,7 @@ creates an FWP assertion which requires the following steps to be performed:
   "accountId": "FR7630002111110020050014382",
   "paymentMethod": "https://bankdirect.com",
   "networkData": "additional stuff...",
-  "credentialId": "62932",
+  "serialNumber": "62932",
   "userAuthorizationMethod": "FINGERPRINT",
   "platformData": {
     "operatingSystem": {
@@ -514,9 +511,9 @@ creates an FWP assertion which requires the following steps to be performed:
     </td>
   </tr>
   <tr>
-    <td><code>credentialId</code></td>
+    <td><code>serialNumber</code></td>
     <td>
-      Credential identifier associated with the selected <a href="#credentialdatabase">FWP credential</a>.
+      Unique identifier associated with the selected <a href="#credentialdatabase">FWP credential</a>.
     </td>
   </tr>
   <tr>
@@ -551,7 +548,7 @@ creates an FWP assertion which requires the following steps to be performed:
 
 <div id="seq-4.3" class="step">4.3 Create Signed Authorization Data (SAD)</div>
 <div class="para">
-  Using the FIDO signature key (<code>keyHandle</code>) associated with the selected
+  Using the FIDO signature key (<code>credentialId</code>) associated with the selected
   <a href="#credentialdatabase">FWP credential</a>, sign AD using the
   <a href="https://tools.ietf.org/html/draft-jordan-jws-ct-02"
      title="JWS/CT">JWS/CT<img src="images/xtl.svg" alt="link"></a> method.
@@ -572,7 +569,7 @@ creates an FWP assertion which requires the following steps to be performed:
   "accountId": "FR7630002111110020050014382",
   "paymentMethod": "https://bankdirect.com",
   "networkData": "additional stuff...",
-  "credentialId": "62932",
+  "serialNumber": "62932",
   "userAuthorizationMethod": "FINGERPRINT",
   "platformData": {
     "operatingSystem": {
@@ -1011,8 +1008,8 @@ does not require database lookups.
 </li>
 <li>
 Verify that the aforementioned public key is linked to a <b class="actor">User</b>
-account matching the <code>SAD.accountId</code> and <code>SAD.credentialId</code> attributes
-(where <code>SAD.credentialId</code> would typically serve as the primary key in a credential database table). 
+account matching the <code>SAD.accountId</code> and <code>SAD.serialNumber</code> attributes
+(where <code>SAD.serialNumber</code> would typically serve as the primary key in a credential database table). 
 Note that this check requires that the
 public key first is converted into a <i>canonical format</i> like JWK &quot;thumbprint&quot;
 (<a href="https://tools.ietf.org/html/rfc7638"
@@ -1268,6 +1265,7 @@ https://commons.wikimedia.org/wiki/File:Crystal_Clear_kdm_user_female.svg<img sr
     <tr><td>2021-04-14</td><td>0.15</td><td>Added section Implementation Options.</td></tr>
     <tr><td>2021-04-16</td><td>0.16</td><td>Added sequence diagram &quot;scope&quot; rectangle.</td></tr>
     <tr><td>2021-05-09</td><td>0.17</td><td>Simplification: Removed hashing of PRCD.</td></tr>
+    <tr><td>2021-05-19</td><td>0.18</td><td>Aligned wallet database with FIDO names.</td></tr>
   </table>
   <div id="authors" class="header">
     Authors
@@ -1281,6 +1279,7 @@ https://commons.wikimedia.org/wiki/File:Crystal_Clear_kdm_user_female.svg<img sr
   <div id="trademarks">
     FIDO is a registered trademark of the FIDO alliance.<br />
     EMV is a registered trademark of EMVCo.<br />&nbsp;<br />
-    This specification represents an <i>independent effort</i>, not associated with the FIDO alliance or EMVCo.
+    This specification represents an <i>independent effort</i>, 
+    not associated with the FIDO alliance or EMVCo.
   </div>
 </body></html>
