@@ -140,13 +140,6 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
       </td>
     </tr>
     <tr>
-      <td><code>serialNumber</code></td>
-      <td>
-        Text string that (with respect to the <span class="actor">Issuer</span>),
-        uniquely identifies the payment credential.
-      </td>
-    </tr>
-    <tr>
       <td><code>signatureAlgorithm</code></td>
       <td>
         Signature algorithm for FWP <a href="#seq-4.4">signatures</a>.
@@ -177,6 +170,13 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
       <td><code>accountId</code></td>
       <td>
         Account identifier associated with the credential.
+      </td>
+    </tr>
+    <tr>
+      <td><code>serialNumber</code></td>
+      <td>
+        Text string that (with respect to the <span class="actor">Issuer</span>),
+        uniquely identifies the payment credential.
       </td>
     </tr>
     <tr>
@@ -1594,9 +1594,9 @@ creates an FWP assertion which requires the following steps to be performed:
   },
   "payeeHost": "spaceshop.com",
   "accountId": "FR7630002111110020050014382",
+  "serialNumber": "62932",
   "paymentMethod": "https://bankdirect.com",
   "networkData": "additional stuff...",
-  "serialNumber": "62932",
   "userAuthorizationMethod": "FINGERPRINT",
   "platformData": {
     "operatingSystem": {
@@ -1608,7 +1608,7 @@ creates an FWP assertion which requires the following steps to be performed:
       "version": "95"
     }
   },
-  "timeStamp": "2021-05-09T10:32:35+01:00"
+  "timeStamp": "2021-05-19T10:32:35+01:00"
 }
 </pre>
 <div>Description:</div>
@@ -1642,6 +1642,12 @@ creates an FWP assertion which requires the following steps to be performed:
     </td>
   </tr>
   <tr>
+    <td><code>serialNumber</code></td>
+    <td>
+      Unique identifier associated with the selected <a href="#credentialdatabase">FWP credential</a>.
+    </td>
+  </tr>
+  <tr>
     <td><code>paymentMethod</code></td>
     <td>
       Payment method associated with the selected <a href="#credentialdatabase">FWP credential</a>.
@@ -1654,12 +1660,6 @@ creates an FWP assertion which requires the following steps to be performed:
       <i>Optional</i>.  This attribute MUST be included if
       specified in the <code>PaymentRequest</code> constructor
       for the particular <code>paymentMethod</code>, otherwise it MUST NOT be defined.
-    </td>
-  </tr>
-  <tr>
-    <td><code>serialNumber</code></td>
-    <td>
-      Unique identifier associated with the selected <a href="#credentialdatabase">FWP credential</a>.
     </td>
   </tr>
   <tr>
@@ -1713,9 +1713,9 @@ creates an FWP assertion which requires the following steps to be performed:
   },
   "payeeHost": "spaceshop.com",
   "accountId": "FR7630002111110020050014382",
+  "serialNumber": "62932",
   "paymentMethod": "https://bankdirect.com",
   "networkData": "additional stuff...",
-  "serialNumber": "62932",
   "userAuthorizationMethod": "FINGERPRINT",
   "platformData": {
     "operatingSystem": {
@@ -1727,7 +1727,7 @@ creates an FWP assertion which requires the following steps to be performed:
       "version": "95"
     }
   },
-  "timeStamp": "2021-05-09T10:32:35+01:00",
+  "timeStamp": "2021-05-19T10:32:35+01:00",
   "signature": "eyJhbGciOiJFUzI1NiJ9..5WaPL_S0zLIAzkptti7CxdAqXtgosdG2lUWoELuy3ONSWUGJC5vxnkcdA0jYsebcomHpfpsmO5Y6IcZ8bBdvQA"
 }
 </pre>
@@ -1885,7 +1885,7 @@ or <code>fetch()</code> operation.
   "networkData": "additional stuff...",
   "receiveAccount": "DE89370400440532013000",
   "clientIp": "220.13.198.144",
-  "timeStamp": "2021-05-09T10:32:36+01:00"
+  "timeStamp": "2021-05-19T10:32:36+01:00"
 }
 </pre>
   <div>Description:</div>
@@ -2015,10 +2015,10 @@ or <code>fetch()</code> operation.
     "networkData": "additional stuff...",
     "receiveAccount": "DE89370400440532013000",
     "clientIp": "220.13.198.144",
-    "timeStamp": "2021-05-09T10:32:36+01:00"
+    "timeStamp": "2021-05-19T10:32:36+01:00"
   },
   "payeeHost": "spaceshop.com",
-  "timeStamp": "2021-05-09T10:32:37+01:00"
+  "timeStamp": "2021-05-19T10:32:37+01:00"
 }
 </pre>
 
