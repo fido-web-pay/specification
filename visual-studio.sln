@@ -16,6 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		draft.html = draft.html
 		images\fwp.svg = images\fwp.svg
 		index.html = index.html
+		images\ipr.svg = images\ipr.svg
 		originals\issuer.svg = originals\issuer.svg
 		originals\merchant.svg = originals\merchant.svg
 		originals\PRCD.json = originals\PRCD.json
