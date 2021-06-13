@@ -1,8 +1,6 @@
 {
-  "id": "7040566321",
   "payee": "Space Shop",
-  "amount": {
-    "currency": "EUR",
-    "value": "435.00"
-  }
+  "id": "7040566321",
+  "amount": "435.00"
+  "currency": "EUR"
 }

@@ -7,6 +7,19 @@
 .para {margin-top: 0.8em}
 .actor {color:darkgreen;font-weight:500}
 .msg {font-weight:500}
+.staticbox {
+  font-family: "Noto Mono",monospace;
+  margin: 0.8em 0 1em 0;
+  box-sizing: border-box;
+  width: 100%;
+  word-break: break-all;
+  border-width: 1px;
+  border-style: solid;
+  border-color: grey;
+  padding: 10pt;
+  box-shadow: 0.2em 0.2em 0.2em #d0d0d0;
+  background-color: #f8f8f8;
+}
 .comment {padding:0.5em 1em;margin-top:1.5em;display:inline-block;background-color:#fafffa}
 .box {box-shadow: 0.2em 0.2em 0.2em #d0d0d0;border-width:1px;border-style:solid;border-color:black}
 .numbox {border-width:1pt;border-style:solid;border-color:black;border-radius:0.3em;display:inline-block;margin-right:0.6em;padding:0 3pt}
@@ -17,7 +30,7 @@
 body {margin:1em;font-size:10pt;font-family:Roboto,sans-serif;background-color:white}
 code {font-family:"Noto Mono",monospace;color:maroon;font-weight:bolder}
 kbd {font-family: "Noto Mono",monospace;font-weight:bolder}
-pre {font-family:"Noto Mono",monospace;margin: 0.8em 0 1em 0;padding:0.6em 1em;overflow-x:auto;background-color: #f8f8f8}
+pre {font-family:"Noto Mono",monospace;margin: 0.8em 0 1em 0;padding:0.6em 1em;background-color: #f8f8f8}
 ul {margin: 0;padding-left:2em}
 li {margin-top:0.3em}
 a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
@@ -48,7 +61,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
        title="European Payments Council">SEPA Instant<img src="images/xtl.svg" alt="link"></a>.
   </div>
   <div class="para">
-     Apart from obvious data format differences (JSON/JavaScript versus ISO7816),
+     Apart from obvious data format differences (CBOR/JSON/JavaScript versus ISO7816),
      the primary technical enhancement to EMV, is that the FWP client
      <i>encrypts user-authorizations</i>, enabling the following subgoals:
   </div>
@@ -58,7 +71,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     </li>
     <li>
       Limit the amount of personally identifiable information (PII) shared
-      with <i>third parties</i>, to the name of the user's bank.
+      with <i>third parties</i>, to the name of the user's bank and payment method.
       This is presumably compliant with
       <a href="https://www.pcisecuritystandards.org"
          title="PCI Site">PCI<img src="images/xtl.svg" alt="link"></a>
@@ -204,8 +217,8 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
     </tr>
   </table>
   <div>
-    Note: how attributes are represented in the credential database is <i>implementation specific</i>.
-    Public keys may for example be stored in the X.509, JWK, or COSE format.
+    Note: how attributes are represented in the credential database is <i>implementation specific</i>,
+    whereas the FWP assertion is normative.
   </div>
   <div id="keyprotection" class="comment box">
     Through the use of a dedicated credential database,
@@ -248,7 +261,8 @@ by the <span class="actor">Issuer</span>.
     Detailed Operation
   </div>
   <div>This section describes the different steps needed to authorize a payment operation using FWP.
-   To improve readability, JSON data is pretty-printed.
+   To improve readability, JSON data is pretty-printed,
+   while CBOR data is provided in &quot;diagnostic notation&quot;.
 </div>
   <div class="para">
     Note that JSON data types are <i>implicitly</i> provided only (through sample objects).
@@ -1475,7 +1489,8 @@ async function doPaymentRequest() {
   <li>
     That none of the objects in the <code>networks</code> array contain other
     attributes, with the exception of an <i>optional</i> <code>networkData</code>
-    attribute holding arbitrary JavaScript data.
+    attribute holding JavaScript/JSON data where the <kbd>Number</kbd> type
+    is limited to <i>integers</i> in the range of -2^53 to +2^53.
   </li>
   <li>
     There is only <i>one</i> <code>PaymentItem</code> and it has a
@@ -1536,39 +1551,42 @@ creates an FWP assertion which requires the following steps to be performed:
 </div>
 <div id="seq-4.1" class="step">4.1 Extract PaymentRequest Core Data (PRCD)</div>
 <div class="para">
-  Create a JSON object representing the core payment request data supplied
+  Create a CBOR object representing the core payment request data supplied
   by the <b class="actor">Merchant</b>.  For the sample code this should
   result in the following object:
 </div>
-<pre class="box">
-{
-  "id": "7040566321",
-  "payee": "Space Shop",
-  "amount": {
-    "currency": "EUR",
-    "value": "435.00"
-  }
-}
-</pre>
+<div class="staticbox">
+{<br>&nbsp;&nbsp;1:&nbsp;&#034;Space&nbsp;Shop&#034;,<br>&nbsp;&nbsp;2:&nbsp;&#034;7040566321&#034;,<br>&nbsp;&nbsp;3:&nbsp;&#034;435.00&#034;<br>&nbsp;&nbsp;4:&nbsp;&#034;EUR&#034;<br>}<br>
+</div>
 <div>Description:</div>
 <table class="tftable">
-  <tr><th>Attribute</th><th>Data</th></tr>
+  <tr><th>Label</th><th>Name</th><th>Data</th></tr>
   <tr>
-    <td><code>id</code></td>
-    <td>
-      <b class="actor">Merchant</b> transaction ID. Copy of <code>details.id</code>.
-    </td>
-  </tr>
-  <tr>
+    <td style='text-align:center'><kbd>1</kbd></td>
     <td><code>payee</code></td>
     <td>
       <b class="actor">Merchant</b> common name.
     </td>
   </tr>
   <tr>
+    <td style='text-align:center'><kbd>2</kbd></td>
+    <td><code>id</code></td>
+    <td>
+      <b class="actor">Merchant</b> transaction ID. Copy of <code>details.id</code>.
+    </td>
+  </tr>
+  <tr>
+    <td style='text-align:center'><kbd>3</kbd></td>
     <td><code>amount</code></td>
     <td>
       Amount of money requested by the <b class="actor">Merchant</b>.
+    </td>
+  </tr>
+  <tr>
+    <td style='text-align:center'><kbd>4</kbd></td>
+    <td><code>currency</code></td>
+    <td>
+      The type of currency requested by the <b class="actor">Merchant</b>.
     </td>
   </tr>
 </table>
@@ -1579,55 +1597,32 @@ creates an FWP assertion which requires the following steps to be performed:
   4.2 Create Authorization Data (AD)
 </div>
 <div class="para">
-  Create a JSON object representing the data to authorize.
+  Create a CBOR object representing the data to authorize.
   For the sample code this should result in the following object:
 </div>
-<pre class="box">
-{
-  "version":  "1",
-  "paymentRequest": {
-    "id": "7040566321",
-    "payee": "Space Shop",
-    "amount": {
-      "currency": "EUR",
-      "value": "435.00"
-    }
-  },
-  "payeeHost": "spaceshop.com",
-  "accountId": "FR7630002111110020050014382",
-  "serialNumber": "62932",
-  "paymentMethod": "https://bankdirect.com",
-  "networkData": "additional stuff...",
-  "userAuthorizationMethod": "FINGERPRINT",
-  "platformData": {
-    "operatingSystem": {
-      "name": "Android",
-      "version": "10"
-    },
-    "userAgent": {
-      "name": "Chrome",
-      "version": "95"
-    }
-  },
-  "timeStamp": "2021-05-19T10:32:35+01:00"
-}
-</pre>
+
+<div class="staticbox">
+{<br>&nbsp;&nbsp;1:&nbsp;&#034;1.00&#034;,<br>&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;&#034;Space&nbsp;Shop&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;&#034;7040566321&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&#034;435.00&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&#034;EUR&#034;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;3:&nbsp;&#034;spaceshop.com&#034;,<br>&nbsp;&nbsp;4:&nbsp;&#034;FR7630002111110020050014382&#034;,<br>&nbsp;&nbsp;5:&nbsp;&#034;0057162932&#034;,<br>&nbsp;&nbsp;6:&nbsp;&#034;https://bankdirect.com&#034;,<br>&nbsp;&nbsp;7:&nbsp;&#034;additional&nbsp;stuff...&#034;,<br>&nbsp;&nbsp;8:&nbsp;1,<br>&nbsp;&nbsp;9:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;&#034;Android&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;&#034;10.0&#034;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;&#034;Chrome&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;&#034;103&#034;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;10:&nbsp;0(&#034;2021-06-10T08:34:21+02:00&#034;),<br>&nbsp;&nbsp;11:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;-7,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;2,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1:&nbsp;1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2:&nbsp;h&#039;e812b1a6dcbc708f9ec43cc2921fa0a14e9d5eadcc6dc63471dd4b680c6236b5&#039;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-3:&nbsp;h&#039;9826dcbd4ce6e388f72edd9be413f2425a10f75b5fd83d95fa0cde53159a51d8&#039;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;}<br>}
+</div>
 <div>Description:</div>
 <table class="tftable">
-  <tr><th>Attribute</th><th>Data</th></tr>
+  <tr><th>Label</th><th>Name</th><th>Data</th></tr>
   <tr>
+    <td style='text-align:center'><kbd>1</kbd></td>
     <td><code>version</code></td>
     <td>
-      FWP assertion data version.  This specification covers version &quot;1&quot;.
+      FWP assertion data version.  This specification covers version &quot;1.00&quot;.
     </td>
   </tr>
   <tr>
+    <td style='text-align:center'><kbd>2</kbd></td>
     <td><code>paymentRequest</code></td>
     <td>
       PaymentRequest Core Data (PRCD).
     </td>
   </tr>
   <tr>
+    <td style='text-align:center'><kbd>3</kbd></td>
     <td><code>payeeHost</code></td>
     <td>
       Host name as interpreted by the <b class="actor">Browser</b>.
@@ -1636,6 +1631,7 @@ creates an FWP assertion which requires the following steps to be performed:
     </td>
   </tr>
   <tr>
+    <td style='text-align:center'><kbd>4</kbd></td>
     <td><code>accountId</code></td>
     <td>
       <b class="actor">User</b> account number associated
@@ -1643,12 +1639,14 @@ creates an FWP assertion which requires the following steps to be performed:
     </td>
   </tr>
   <tr>
+    <td style='text-align:center'><kbd>5</kbd></td>
     <td><code>serialNumber</code></td>
     <td>
       Unique identifier associated with the selected <a href="#credentialdatabase">FWP credential</a>.
     </td>
   </tr>
   <tr>
+    <td style='text-align:center'><kbd>6</kbd></td>
     <td><code>paymentMethod</code></td>
     <td>
       Payment method associated with the selected <a href="#credentialdatabase">FWP credential</a>.
@@ -1656,6 +1654,7 @@ creates an FWP assertion which requires the following steps to be performed:
     </td>
   </tr>
   <tr>
+    <td style='text-align:center'><kbd>7</kbd></td>
     <td><code>networkData</code></td>
     <td>
       <i>Optional</i>.  This attribute MUST be included if
@@ -1664,21 +1663,30 @@ creates an FWP assertion which requires the following steps to be performed:
     </td>
   </tr>
   <tr>
+    <td style='text-align:center'><kbd>8</kbd></td>
     <td><code>userAuthorizationMethod</code></td>
     <td>
-      Currently FINGERPRINT, FACERECOGNITION, and PIN are supported.
+      Currently UNSPECIFIED(<kbd>0</kbd>), FINGERPRINT(<kbd>1</kbd>), 
+      FACERECOGNITION(<kbd>2</kbd>), and PIN(<kbd>3</kbd>) are supported.
       Included for <i>security and logging</i> purposes.
     </td>
   </tr>
   <tr>
+    <td style='text-align:center'><kbd>9</kbd></td>
     <td><code>platformData</code></td>
     <td>
       Up-to-date information about the core <i>software</i> components.
       <i>Device data</i> is assumed to be established during credential enrollment.
       Included for <i>security and logging</i> purposes.
+      <div style="margin-top:0.4em">
+        The outer CBOR map contains two entries, <kbd>1</kbd> for the operating system,
+        and <kbd>2</kbd> for the &quot;user-agent&quot; (browser), 
+        while the sub-maps hold name (<kbd>1</kbd>) and version (<kbd>2</kbd>) respectively.
+      </div>
     </td>
   </tr>
   <tr>
+    <td style='text-align:center'><kbd>10</kbd></td>
     <td><code>timeStamp</code></td>
     <td>
       ISO (<a href="https://tools.ietf.org/html/rfc3339"
@@ -1686,6 +1694,15 @@ creates an FWP assertion which requires the following steps to be performed:
       time stamp generated by the FWP implementation.
       If the local time zone is known, it SHOULD be included,
       else the UTC notation (&quot;Z&quot;) MUST be used.
+    </td>
+  </tr>
+  <tr>
+    <td style='text-align:center'><kbd>11</kbd></td>
+    <td><code>authorization</code></td>
+    <td>
+      Since the authorization signature is intended to also cover the the FIDO
+      <a href="#credentialdatabase">public key</a> and signature algorithm,
+      these elements MUST also be included in the data used to calculate the FIDO 'challenge'.
     </td>
   </tr>
 </table>
@@ -1701,41 +1718,13 @@ creates an FWP assertion which requires the following steps to be performed:
      title="JWS/CT">JWS/CT<img src="images/xtl.svg" alt="link"></a> method.
   For the sample code this should result in the following object:
 </div>
-<pre class="box">
-{
-  "version": "1",
-  "paymentRequest": {
-    "id": "7040566321",
-    "payee": "Space Shop",
-    "amount": {
-      "currency": "EUR",
-      "value": "435.00"
-    }
-  },
-  "payeeHost": "spaceshop.com",
-  "accountId": "FR7630002111110020050014382",
-  "serialNumber": "62932",
-  "paymentMethod": "https://bankdirect.com",
-  "networkData": "additional stuff...",
-  "userAuthorizationMethod": "FINGERPRINT",
-  "platformData": {
-    "operatingSystem": {
-      "name": "Android",
-      "version": "10"
-    },
-    "userAgent": {
-      "name": "Chrome",
-      "version": "95"
-    }
-  },
-  "timeStamp": "2021-05-19T10:32:35+01:00",
-  "signature": "eyJhbGciOiJFUzI1NiJ9..5WaPL_S0zLIAzkptti7CxdAqXtgosdG2lUWoELuy3ONSWUGJC5vxnkcdA0jYsebcomHpfpsmO5Y6IcZ8bBdvQA"
-}
-</pre>
-<div>
-  This operation adds a single attribute (<code>signature</code>) to AD.
+<div class="staticbox">
+  {<br>&nbsp;&nbsp;1:&nbsp;&#034;1.00&#034;,<br>&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;&#034;Space&nbsp;Shop&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;&#034;7040566321&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&#034;435.00&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&#034;EUR&#034;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;3:&nbsp;&#034;spaceshop.com&#034;,<br>&nbsp;&nbsp;4:&nbsp;&#034;FR7630002111110020050014382&#034;,<br>&nbsp;&nbsp;5:&nbsp;&#034;0057162932&#034;,<br>&nbsp;&nbsp;6:&nbsp;&#034;https://bankdirect.com&#034;,<br>&nbsp;&nbsp;7:&nbsp;&#034;additional&nbsp;stuff...&#034;,<br>&nbsp;&nbsp;8:&nbsp;1,<br>&nbsp;&nbsp;9:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;&#034;Android&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;&#034;10.0&#034;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;&#034;Chrome&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;&#034;103&#034;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;10:&nbsp;0(&#034;2021-06-10T08:34:21+02:00&#034;),<br>&nbsp;&nbsp;11:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;-7,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;2,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1:&nbsp;1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2:&nbsp;h&#039;e812b1a6dcbc708f9ec43cc2921fa0a14e9d5eadcc6dc63471dd4b680c6236b5&#039;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-3:&nbsp;h&#039;9826dcbd4ce6e388f72edd9be413f2425a10f75b5fd83d95fa0cde53159a51d8&#039;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;h&#039;8197e28ff200c8fa383ad36a79ce483c2f5688ddbb2d51502f22c23f60d8e5420100000000&#039;,<br>&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;h&#039;7b2274797065223a22776562617574686e2e676574222c226f726967696e223a2268747470733a2f2f6677702e6d7962616e6b2e636f6d222c226368616c6c656e6765223a2245463431525f494f7536496d6f313472694d437036456e35345a50507a557071614f744c787242435a5963227d&#039;,<br>&nbsp;&nbsp;&nbsp;&nbsp;5:&nbsp;h&#039;30450220693d10f97a4e3b3fe34254a75c295b4bd20737843597eb8f752398948e572fe8022100c66c76ab37e0de3de30200d5a4cdabbe50aa0befc8447d654585738347dc9efc&#039;<br>&nbsp;&nbsp;}<br>}
 </div>
-<div class="para">  The resulting object is subsequently referred to as Signed Authorization Data (SAD).</div>
+<div>
+  This operation updates the <code>authorization</code> (<kbd>11</kbd>) element of AD.
+</div>
+<div class="para">The resulting object is subsequently referred to as Signed Authorization Data (SAD).</div>
 <div class="para">
   <span style="color:red">
     NOTE: The current FIDO authenticator API (CTAP2)
@@ -1782,17 +1771,9 @@ creates an FWP assertion which requires the following steps to be performed:
   The resulting JWE string would look something like this
   (with line breaks for display purposes only):
 </div>
-<pre class="box">
-eyJhbGciOiJSU0EtT0FFUCIsImVuYyI6IkEyNTZHQ00ifQ.OKOawDo13gRp2oja
-HV7LFpZcgV7T6DVZKTyKOMTYUmKoTCVJRgckCL9kiMT03JGeipsEdY3mx_etLbb
-WSrFr05kLzcSr4qKAq7YN7e9jwQRb23nfa6c9d-StnImGyFDbSv04uVuxIp5Zms
-1gNxKKK2Da14B8S4rzVRltdYwam_lDp5XnZAYpQdb76FdIKLaVmqgfwX7XWRxv2
-322i-vDxRfqNzo_tETKzpVLzfiwQyeyPGLBIO56YJ7eObdv0je8860ppamavo35
-UgoRdbYaBcoh9QcfylQr66oc6vFWXRcZ_ZT2LawVCWTIy3brGPi6UklfCpIMfIj
-f7iGdXKHzg.48V1_ALb6US04U3b.5eym8TW_c8SuK0ltJ3rpYIzOeDQz7TALvtu
-6UG9oMo4vpzs9tX_EFShS8iB7j6jiSdiwkIr3ajwQzaBtQD_A.XFBoMYUZodetZ
-dvTiFvSkQ
-</pre>
+<div class="staticbox">
+{<br>&nbsp;&nbsp;1:&nbsp;3,<br>&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;-31,<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&#034;x25519:2021:3&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;5:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1:&nbsp;4,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2:&nbsp;h&#039;e0ae21b6bcd3a032eb73c4309ffe617cd4ca2a1a37f42e1429e1c56b1644643a&#039;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;9:&nbsp;h&#039;23980b7a45121222ff78c57a9ff0773533c54154c2bbd0be1d4e067176c627a5978f87fbe376f2a2&#039;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;7:&nbsp;h&#039;22399a8f7dc2a4f2557dd8dda714be82&#039;,<br>&nbsp;&nbsp;8:&nbsp;h&#039;345e2590a94fe59978669969&#039;,<br>&nbsp;&nbsp;9:&nbsp;h&#039;98c9210ea29a5fc2c60acd9bf11e149dab51858e063e099cf346e1639f5dffbb422d89dd81786f1960cf5bb4cc2ef9800d2be5671ee3798b191fdfab7e35caf8962a89ebc43899694e4cdc2279c665cabfcb82dfd6bebf24b4fbb22df34e68ae4617f9046695b91ff9afa66bd1fefb2febe4316cafa4b796dba6c086cb0af05c407deaff374c547a4dd87be2cd84a1a389519bb2bed2b7da444bd4716b3c224fee6526712b36d7738915b9be065f494b34ed09f14668b00a45fc97f4f2ca6b8a156a653dea7076fd612978ec16946e564507f355e7710a85327a3b0cbb009d432df5aee2e3cc25fd007cf78cc72b57f00b6965739db6e5728a044f7262c656e5554c4608585e29d89dd5464b2149a1d511ed1546a65f3bbb08c612456b2881757fd05472ab3f14590d5b6da0bf4ec5bac439756058914e61ba4598b1958d4c516a65c4c5bd4e228f581c109ec6f2677aeb8419d0ab4a0a1a4733add89dc7b1f62f1dfa4acb0f12b0d58595f893da9eb4c65e00bb9055ceb2dac7fd02a200e6e735e337300c155aeb8fbf1f3883acfc95f9c192e88473a4748c41e7cc905c880f6948e0883cabc39a80ac0c7263c834623fe21df03a3f815b91bbacbe11878abb9155f9eac73682d2e85d264ae7d1cb6a3ae509c3390fcd77d99e2ecded48e9b5389c9915eafe81fda69f7cb8e4deb8f887b069ff268e57a01b3c3dc9ac51f3094dfc0189373d11ffbbcf1c15db&#039;<br>}
+</div>
 <div>
   This object is subsequently referred to as Encrypted Signed Authorization Data (ESAD).
 </div>

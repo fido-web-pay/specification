@@ -21,6 +21,39 @@ public class CreateDocument  {
         sequenceDiagram = sequenceDiagram.substring(0, start) + sequenceDiagram.substring(stop + 7);
     }
 
+    String processCborTxt(String fileName) throws Exception {
+        StringBuilder buf = new StringBuilder();
+        for (char c : readOriginal(fileName).toCharArray()) {
+            switch (c) {
+            case '\n':
+                buf.append("<br>");
+                break;
+            case '<':
+                buf.append("&lt;");
+                break;
+            case '>':
+                buf.append("&gt;");
+                break;
+            case '&':
+                buf.append("&amp;");
+                break;
+            case '\"':
+                buf.append("&#034;");
+                break;
+            case '\'':
+                buf.append("&#039;");
+                break;
+            case ' ':
+                buf.append("&nbsp;");
+                break;
+            default:
+                buf.append(c);
+                break;
+            }
+        }
+        return buf.toString();
+    }
+
     CreateDocument (String originalBase) throws Exception {
         this.originalBase = originalBase;
         String template = readOriginal("template.html");
@@ -36,7 +69,11 @@ public class CreateDocument  {
         removeDuplicate("Issuer");
         removeDuplicate("FIDO Web Pay - Sample Sequence Diagram");
         template = template.replace("@delegateddiagram@", sequenceDiagram);
-        new FileOutputStream(originalBase + ".." + File.separator + "draft.html").write(template.getBytes("utf-8"));
+        template = template.replace("@AD.txt@", processCborTxt("AD.txt"));
+        template = template.replace("@SAD.txt@", processCborTxt("SAD.txt"));
+        template = template.replace("@ESAD.txt@", processCborTxt("ESAD.txt"));
+        template = template.replace("@PRCD.txt@", processCborTxt("PRCD.txt"));
+      new FileOutputStream(originalBase + ".." + File.separator + "draft.html").write(template.getBytes("utf-8"));
      }
 
     static byte[] getByteArrayFromInputStream(InputStream is) throws Exception {
