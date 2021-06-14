@@ -21,7 +21,7 @@ public class CreateDocument  {
         sequenceDiagram = sequenceDiagram.substring(0, start) + sequenceDiagram.substring(stop + 7);
     }
 
-    String processCborTxt(String fileName) throws Exception {
+    String processCodeTxt(String fileName) throws Exception {
         StringBuilder buf = new StringBuilder();
         for (char c : readOriginal(fileName).toCharArray()) {
             switch (c) {
@@ -69,11 +69,12 @@ public class CreateDocument  {
         removeDuplicate("Issuer");
         removeDuplicate("FIDO Web Pay - Sample Sequence Diagram");
         template = template.replace("@delegateddiagram@", sequenceDiagram);
-        template = template.replace("@AD.txt@", processCborTxt("AD.txt"));
-        template = template.replace("@SAD.txt@", processCborTxt("SAD.txt"));
-        template = template.replace("@ESAD.txt@", processCborTxt("ESAD.txt"));
-        template = template.replace("@PRCD.txt@", processCborTxt("PRCD.txt"));
-      new FileOutputStream(originalBase + ".." + File.separator + "draft.html").write(template.getBytes("utf-8"));
+        template = template.replace("@AD.txt@", processCodeTxt("AD.txt"));
+        template = template.replace("@SAD.txt@", processCodeTxt("SAD.txt"));
+        template = template.replace("@ESAD.txt@", processCodeTxt("ESAD.txt"));
+        template = template.replace("@PRCD.txt@", processCodeTxt("PRCD.txt"));
+        template = template.replace("@FWP-assertion.json@", processCodeTxt("FWP-assertion.json"));
+     new FileOutputStream(originalBase + ".." + File.separator + "draft.html").write(template.getBytes("utf-8"));
      }
 
     static byte[] getByteArrayFromInputStream(InputStream is) throws Exception {
