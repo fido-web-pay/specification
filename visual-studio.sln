@@ -21,6 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		originals\issuer.svg = originals\issuer.svg
 		originals\merchant.svg = originals\merchant.svg
 		originals\PRCD.json = originals\PRCD.json
+		originals\PRCD.txt = originals\PRCD.txt
 		originals\psp.svg = originals\psp.svg
 		originals\java\PSPIcon.java = originals\java\PSPIcon.java
 		README.md = README.md

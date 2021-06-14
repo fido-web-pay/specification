@@ -343,7 +343,7 @@ async function doPaymentRequest() {
   <li>
     That none of the objects in the <code>networks</code> array contain other
     attributes, with the exception of an <i>optional</i> <code>networkData</code>
-    attribute holding JavaScript/JSON data where the <kbd>Number</kbd> type
+    attribute holding JavaScript/JSON compatible data where the <kbd>Number</kbd> type
     is limited to <i>integers</i> in the range of -2^53 to +2^53.
   </li>
   <li>
@@ -465,7 +465,7 @@ creates an FWP assertion which requires the following steps to be performed:
     <td style='text-align:center'><kbd>1</kbd></td>
     <td><code>version</code></td>
     <td>
-      FWP assertion data version.  This specification covers version &quot;1.00&quot;.
+      FWP assertion data version.  This specification covers version &quot;1.0&quot;.
     </td>
   </tr>
   <tr>
@@ -535,7 +535,7 @@ creates an FWP assertion which requires the following steps to be performed:
       <div style="margin-top:0.4em">
         The outer CBOR map contains two entries, <kbd>1</kbd> for the operating system,
         and <kbd>2</kbd> for the &quot;user-agent&quot; (browser), 
-        while the sub-maps hold name (<kbd>1</kbd>) and version (<kbd>2</kbd>) respectively.
+        while the sub-maps hold name (<kbd>3</kbd>) and version (<kbd>4</kbd>) respectively.
       </div>
     </td>
   </tr>
@@ -580,59 +580,36 @@ creates an FWP assertion which requires the following steps to be performed:
 </div>
 <div class="para">The resulting object is subsequently referred to as Signed Authorization Data (SAD).</div>
 <div class="para">
-  <span style="color:red">
-    NOTE: The current FIDO authenticator API (CTAP2)
-    <i>is not compatible with JWS</i>,
-    which may require a slightly modified way dealing with the inner part of JWS/CT:
-  </span>
-  <a href="https://github.com/w3c/webauthn/issues/1581"
-     title="GitHub Issue">https://github.com/w3c/webauthn/issues/1581<img src="images/xtl.svg" alt="link"></a>.
+  For more details on the signature processing turn to the <i>preliminary</i> document 
+  <a href="https://fido-web-pay.github.io/specification/vectors.txt"
+    title="Vectors">https://fido-web-pay.github.io/specification/vectors.txt<img src="images/xtl.svg" alt="link"></a>.
 </div>
-
-<div class="para">
-  To simplify backend processing, the <code>publicKey</code> associated with
-  the selected <a href="#credentialdatabase">FWP credential</a> MUST be included in the JWS header.
-  In the sample the following key was used:
-</div>
-<pre class="box">
-{
-  "kty": "EC",
-  "crv": "P-256",
-  "x": "6BKxpty8cI-exDzCkh-goU6dXq3MbcY0cd1LaAxiNrU",
-  "y": "mCbcvUzm44j3Lt2b5BPyQloQ91tf2D2V-gzeUxWaUdg"
-}
-</pre>
 <div id="seq-4.4" class="step">4.4 Create Encrypted Signed Authorization Data (ESAD)</div>
 <div class="para">
   For privacy and security reasons, Signed Authorization Data (SAD) objects
   MUST be encrypted by a public key provided by the <b class="actor">Issuer</b>
   through the <code>encryptionKey</code> attribute of the selected 
   <a href="#credentialdatabase">FWP credential</a>.
-  This specification mandates using JWE
-  (<a href="https://tools.ietf.org/html/rfc7516"
-      title="JWE">RFC7516<img src="images/xtl.svg" alt="link"></a>),
-  in the compact serialization mode. The selection between
-  RSA or ECDH encryption schemes is at the discretion of the <b class="actor">Issuer</b>.
+  This specification mandates using the encryption scheme <i>preliminary outlined</i> in
+   <a href="https://cyberphone.github.io/javaapi/org/webpki/cbor/package-summary.html#cef"
+   title="CEF">CBOR Encryption Format (CEF)<img src="images/xtl.svg" alt="link"></a>.
+  The selection between RSA or ECDH encryption schemes is at the
+  discretion of the <b class="actor">Issuer</b>.
 </div>
 <div class="para">
-  The actual JWE algorithms to use are defined by the
+  The actual CEF algorithms to use are defined by the
   <code>contentEncryptionAlgorithm</code> and 
   <code>keyEncryptionAlgorithm</code> attributes 
   of the selected <a href="#credentialdatabase">FWP credential</a>.
 </div>
 <div class="para">
-  SAD objects MUST be JSON-serialized to UTF-8 before being encrypted.
-  The resulting JWE string would look something like this
-  (with line breaks for display purposes only):
+  Encryption sample object:
 </div>
 <div class="staticbox">
 @ESAD.txt@
 </div>
 <div>
   This object is subsequently referred to as Encrypted Signed Authorization Data (ESAD).
-</div>
-<div class="para">
-  Note that the JWE header MUST include the <code>encryptionKey</code> as well.
 </div>
 <div id="domainconstraints" class="para box comment">
   Due to the end-to-end encryption scheme, the domain 
@@ -659,9 +636,8 @@ creates an FWP assertion which requires the following steps to be performed:
   <tr>
     <td><code>encryptedAuthorization</code></td>
     <td>
-      Encrypted Signed Authorization Data.
-      Here shown as a placeholder only since
-      an ESAD string can be quite long.
+      Encrypted Signed Authorization Data (ESAD) supplied in a Base64Url string
+      (in subsequent examples shown as a placeholder only).
     </td>
   </tr>
   <tr>
@@ -1249,6 +1225,7 @@ https://commons.wikimedia.org/wiki/File:Crystal_Clear_kdm_user_female.svg<img sr
     <tr><td>2021-05-09</td><td>0.17</td><td>Simplification: Removed hashing of PRCD.</td></tr>
     <tr><td>2021-05-19</td><td>0.18</td><td>Aligned wallet database with FIDO names.</td></tr>
     <tr><td>2021-06-03</td><td>0.19</td><td>Added IPR declaration.</td></tr>
+    <tr><td>2021-06-17</td><td>0.20</td><td>Converted the FWP core to CBOR (was JSON).</td></tr>
   </table>
   <div id="authors" class="header">
     Authors

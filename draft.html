@@ -1489,7 +1489,7 @@ async function doPaymentRequest() {
   <li>
     That none of the objects in the <code>networks</code> array contain other
     attributes, with the exception of an <i>optional</i> <code>networkData</code>
-    attribute holding JavaScript/JSON data where the <kbd>Number</kbd> type
+    attribute holding JavaScript/JSON compatible data where the <kbd>Number</kbd> type
     is limited to <i>integers</i> in the range of -2^53 to +2^53.
   </li>
   <li>
@@ -1602,7 +1602,7 @@ creates an FWP assertion which requires the following steps to be performed:
 </div>
 
 <div class="staticbox">
-{<br>&nbsp;&nbsp;1:&nbsp;&#034;1.00&#034;,<br>&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;&#034;Space&nbsp;Shop&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;&#034;7040566321&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&#034;435.00&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&#034;EUR&#034;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;3:&nbsp;&#034;spaceshop.com&#034;,<br>&nbsp;&nbsp;4:&nbsp;&#034;FR7630002111110020050014382&#034;,<br>&nbsp;&nbsp;5:&nbsp;&#034;0057162932&#034;,<br>&nbsp;&nbsp;6:&nbsp;&#034;https://bankdirect.com&#034;,<br>&nbsp;&nbsp;7:&nbsp;&#034;additional&nbsp;stuff...&#034;,<br>&nbsp;&nbsp;8:&nbsp;1,<br>&nbsp;&nbsp;9:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;&#034;Android&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;&#034;10.0&#034;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;&#034;Chrome&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;&#034;103&#034;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;10:&nbsp;0(&#034;2021-06-10T08:34:21+02:00&#034;),<br>&nbsp;&nbsp;11:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;-7,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;2,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1:&nbsp;1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2:&nbsp;h&#039;e812b1a6dcbc708f9ec43cc2921fa0a14e9d5eadcc6dc63471dd4b680c6236b5&#039;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-3:&nbsp;h&#039;9826dcbd4ce6e388f72edd9be413f2425a10f75b5fd83d95fa0cde53159a51d8&#039;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;}<br>}
+{<br>&nbsp;&nbsp;1:&nbsp;&#034;1.0&#034;,<br>&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;&#034;Space&nbsp;Shop&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;&#034;7040566321&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&#034;435.00&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&#034;EUR&#034;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;3:&nbsp;&#034;spaceshop.com&#034;,<br>&nbsp;&nbsp;4:&nbsp;&#034;FR7630002111110020050014382&#034;,<br>&nbsp;&nbsp;5:&nbsp;&#034;0057162932&#034;,<br>&nbsp;&nbsp;6:&nbsp;&#034;https://bankdirect.com&#034;,<br>&nbsp;&nbsp;7:&nbsp;&#034;additional&nbsp;stuff...&#034;,<br>&nbsp;&nbsp;8:&nbsp;1,<br>&nbsp;&nbsp;9:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&#034;Android&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&#034;10.0&#034;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&#034;Chrome&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&#034;103&#034;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;10:&nbsp;0(&#034;2021-06-10T08:34:21+02:00&#034;),<br>&nbsp;&nbsp;11:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;-7,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;2,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1:&nbsp;1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2:&nbsp;h&#039;e812b1a6dcbc708f9ec43cc2921fa0a14e9d5eadcc6dc63471dd4b680c6236b5&#039;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-3:&nbsp;h&#039;9826dcbd4ce6e388f72edd9be413f2425a10f75b5fd83d95fa0cde53159a51d8&#039;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;}<br>}
 </div>
 <div>Description:</div>
 <table class="tftable">
@@ -1611,7 +1611,7 @@ creates an FWP assertion which requires the following steps to be performed:
     <td style='text-align:center'><kbd>1</kbd></td>
     <td><code>version</code></td>
     <td>
-      FWP assertion data version.  This specification covers version &quot;1.00&quot;.
+      FWP assertion data version.  This specification covers version &quot;1.0&quot;.
     </td>
   </tr>
   <tr>
@@ -1681,7 +1681,7 @@ creates an FWP assertion which requires the following steps to be performed:
       <div style="margin-top:0.4em">
         The outer CBOR map contains two entries, <kbd>1</kbd> for the operating system,
         and <kbd>2</kbd> for the &quot;user-agent&quot; (browser), 
-        while the sub-maps hold name (<kbd>1</kbd>) and version (<kbd>2</kbd>) respectively.
+        while the sub-maps hold name (<kbd>3</kbd>) and version (<kbd>4</kbd>) respectively.
       </div>
     </td>
   </tr>
@@ -1719,66 +1719,43 @@ creates an FWP assertion which requires the following steps to be performed:
   For the sample code this should result in the following object:
 </div>
 <div class="staticbox">
-  {<br>&nbsp;&nbsp;1:&nbsp;&#034;1.00&#034;,<br>&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;&#034;Space&nbsp;Shop&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;&#034;7040566321&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&#034;435.00&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&#034;EUR&#034;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;3:&nbsp;&#034;spaceshop.com&#034;,<br>&nbsp;&nbsp;4:&nbsp;&#034;FR7630002111110020050014382&#034;,<br>&nbsp;&nbsp;5:&nbsp;&#034;0057162932&#034;,<br>&nbsp;&nbsp;6:&nbsp;&#034;https://bankdirect.com&#034;,<br>&nbsp;&nbsp;7:&nbsp;&#034;additional&nbsp;stuff...&#034;,<br>&nbsp;&nbsp;8:&nbsp;1,<br>&nbsp;&nbsp;9:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;&#034;Android&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;&#034;10.0&#034;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;&#034;Chrome&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;&#034;103&#034;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;10:&nbsp;0(&#034;2021-06-10T08:34:21+02:00&#034;),<br>&nbsp;&nbsp;11:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;-7,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;2,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1:&nbsp;1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2:&nbsp;h&#039;e812b1a6dcbc708f9ec43cc2921fa0a14e9d5eadcc6dc63471dd4b680c6236b5&#039;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-3:&nbsp;h&#039;9826dcbd4ce6e388f72edd9be413f2425a10f75b5fd83d95fa0cde53159a51d8&#039;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;h&#039;8197e28ff200c8fa383ad36a79ce483c2f5688ddbb2d51502f22c23f60d8e5420100000000&#039;,<br>&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;h&#039;7b2274797065223a22776562617574686e2e676574222c226f726967696e223a2268747470733a2f2f6677702e6d7962616e6b2e636f6d222c226368616c6c656e6765223a2245463431525f494f7536496d6f313472694d437036456e35345a50507a557071614f744c787242435a5963227d&#039;,<br>&nbsp;&nbsp;&nbsp;&nbsp;5:&nbsp;h&#039;30450220693d10f97a4e3b3fe34254a75c295b4bd20737843597eb8f752398948e572fe8022100c66c76ab37e0de3de30200d5a4cdabbe50aa0befc8447d654585738347dc9efc&#039;<br>&nbsp;&nbsp;}<br>}
+  {<br>&nbsp;&nbsp;1:&nbsp;&#034;1.0&#034;,<br>&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;&#034;Space&nbsp;Shop&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;&#034;7040566321&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&#034;435.00&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&#034;EUR&#034;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;3:&nbsp;&#034;spaceshop.com&#034;,<br>&nbsp;&nbsp;4:&nbsp;&#034;FR7630002111110020050014382&#034;,<br>&nbsp;&nbsp;5:&nbsp;&#034;0057162932&#034;,<br>&nbsp;&nbsp;6:&nbsp;&#034;https://bankdirect.com&#034;,<br>&nbsp;&nbsp;7:&nbsp;&#034;additional&nbsp;stuff...&#034;,<br>&nbsp;&nbsp;8:&nbsp;1,<br>&nbsp;&nbsp;9:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&#034;Android&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&#034;10.0&#034;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&#034;Chrome&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&#034;103&#034;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;10:&nbsp;0(&#034;2021-06-10T08:34:21+02:00&#034;),<br>&nbsp;&nbsp;11:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;-7,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;2,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1:&nbsp;1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2:&nbsp;h&#039;e812b1a6dcbc708f9ec43cc2921fa0a14e9d5eadcc6dc63471dd4b680c6236b5&#039;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-3:&nbsp;h&#039;9826dcbd4ce6e388f72edd9be413f2425a10f75b5fd83d95fa0cde53159a51d8&#039;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;h&#039;8197e28ff200c8fa383ad36a79ce483c2f5688ddbb2d51502f22c23f60d8e5420100000000&#039;,<br>&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;h&#039;7b2274797065223a22776562617574686e2e676574222c226f726967696e223a2268747470733a2f2f6677702e6d7962616e6b2e636f6d222c226368616c6c656e6765223a227765783656773746754e554d6f6e666b77764f4d4e61484f4438775946415a657346674d55562d34326545227d&#039;,<br>&nbsp;&nbsp;&nbsp;&nbsp;5:&nbsp;h&#039;3045022100da1ae8dff8b0d331d18658ea115e4bf9519ba3150da723d55d529d05e1bf855902205b7472773d48b4d25670850274df59adf62cdf077e14c7146f33ba8e7f90d2d8&#039;<br>&nbsp;&nbsp;}<br>}
 </div>
 <div>
   This operation updates the <code>authorization</code> (<kbd>11</kbd>) element of AD.
 </div>
 <div class="para">The resulting object is subsequently referred to as Signed Authorization Data (SAD).</div>
 <div class="para">
-  <span style="color:red">
-    NOTE: The current FIDO authenticator API (CTAP2)
-    <i>is not compatible with JWS</i>,
-    which may require a slightly modified way dealing with the inner part of JWS/CT:
-  </span>
-  <a href="https://github.com/w3c/webauthn/issues/1581"
-     title="GitHub Issue">https://github.com/w3c/webauthn/issues/1581<img src="images/xtl.svg" alt="link"></a>.
+  For more details on the signature processing turn to the <i>preliminary</i> document 
+  <a href="https://fido-web-pay.github.io/specification/vectors.txt"
+    title="Vectors">https://fido-web-pay.github.io/specification/vectors.txt<img src="images/xtl.svg" alt="link"></a>.
 </div>
-
-<div class="para">
-  To simplify backend processing, the <code>publicKey</code> associated with
-  the selected <a href="#credentialdatabase">FWP credential</a> MUST be included in the JWS header.
-  In the sample the following key was used:
-</div>
-<pre class="box">
-{
-  "kty": "EC",
-  "crv": "P-256",
-  "x": "6BKxpty8cI-exDzCkh-goU6dXq3MbcY0cd1LaAxiNrU",
-  "y": "mCbcvUzm44j3Lt2b5BPyQloQ91tf2D2V-gzeUxWaUdg"
-}
-</pre>
 <div id="seq-4.4" class="step">4.4 Create Encrypted Signed Authorization Data (ESAD)</div>
 <div class="para">
   For privacy and security reasons, Signed Authorization Data (SAD) objects
   MUST be encrypted by a public key provided by the <b class="actor">Issuer</b>
   through the <code>encryptionKey</code> attribute of the selected 
   <a href="#credentialdatabase">FWP credential</a>.
-  This specification mandates using JWE
-  (<a href="https://tools.ietf.org/html/rfc7516"
-      title="JWE">RFC7516<img src="images/xtl.svg" alt="link"></a>),
-  in the compact serialization mode. The selection between
-  RSA or ECDH encryption schemes is at the discretion of the <b class="actor">Issuer</b>.
+  This specification mandates using the encryption scheme <i>preliminary outlined</i> in
+   <a href="https://cyberphone.github.io/javaapi/org/webpki/cbor/package-summary.html#cef"
+   title="CEF">CBOR Encryption Format (CEF)<img src="images/xtl.svg" alt="link"></a>.
+  The selection between RSA or ECDH encryption schemes is at the
+  discretion of the <b class="actor">Issuer</b>.
 </div>
 <div class="para">
-  The actual JWE algorithms to use are defined by the
+  The actual CEF algorithms to use are defined by the
   <code>contentEncryptionAlgorithm</code> and 
   <code>keyEncryptionAlgorithm</code> attributes 
   of the selected <a href="#credentialdatabase">FWP credential</a>.
 </div>
 <div class="para">
-  SAD objects MUST be JSON-serialized to UTF-8 before being encrypted.
-  The resulting JWE string would look something like this
-  (with line breaks for display purposes only):
+  Encryption sample object:
 </div>
 <div class="staticbox">
-{<br>&nbsp;&nbsp;1:&nbsp;3,<br>&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;-31,<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&#034;x25519:2021:3&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;5:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1:&nbsp;4,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2:&nbsp;h&#039;e0ae21b6bcd3a032eb73c4309ffe617cd4ca2a1a37f42e1429e1c56b1644643a&#039;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;9:&nbsp;h&#039;23980b7a45121222ff78c57a9ff0773533c54154c2bbd0be1d4e067176c627a5978f87fbe376f2a2&#039;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;7:&nbsp;h&#039;22399a8f7dc2a4f2557dd8dda714be82&#039;,<br>&nbsp;&nbsp;8:&nbsp;h&#039;345e2590a94fe59978669969&#039;,<br>&nbsp;&nbsp;9:&nbsp;h&#039;98c9210ea29a5fc2c60acd9bf11e149dab51858e063e099cf346e1639f5dffbb422d89dd81786f1960cf5bb4cc2ef9800d2be5671ee3798b191fdfab7e35caf8962a89ebc43899694e4cdc2279c665cabfcb82dfd6bebf24b4fbb22df34e68ae4617f9046695b91ff9afa66bd1fefb2febe4316cafa4b796dba6c086cb0af05c407deaff374c547a4dd87be2cd84a1a389519bb2bed2b7da444bd4716b3c224fee6526712b36d7738915b9be065f494b34ed09f14668b00a45fc97f4f2ca6b8a156a653dea7076fd612978ec16946e564507f355e7710a85327a3b0cbb009d432df5aee2e3cc25fd007cf78cc72b57f00b6965739db6e5728a044f7262c656e5554c4608585e29d89dd5464b2149a1d511ed1546a65f3bbb08c612456b2881757fd05472ab3f14590d5b6da0bf4ec5bac439756058914e61ba4598b1958d4c516a65c4c5bd4e228f581c109ec6f2677aeb8419d0ab4a0a1a4733add89dc7b1f62f1dfa4acb0f12b0d58595f893da9eb4c65e00bb9055ceb2dac7fd02a200e6e735e337300c155aeb8fbf1f3883acfc95f9c192e88473a4748c41e7cc905c880f6948e0883cabc39a80ac0c7263c834623fe21df03a3f815b91bbacbe11878abb9155f9eac73682d2e85d264ae7d1cb6a3ae509c3390fcd77d99e2ecded48e9b5389c9915eafe81fda69f7cb8e4deb8f887b069ff268e57a01b3c3dc9ac51f3094dfc0189373d11ffbbcf1c15db&#039;<br>}
+{<br>&nbsp;&nbsp;1:&nbsp;3,<br>&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;-31,<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&#034;x25519:2021:3&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;5:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1:&nbsp;4,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2:&nbsp;h&#039;29a53a712ed2bfcce7e2148b12e530f497aa049ad654ae04c4e9fee28f4a137f&#039;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;9:&nbsp;h&#039;e6308568c03ef7a371b61f8a4986a95d32dad3fbb266163a8084dad8c493f179e9a87a09cf916e6d&#039;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;7:&nbsp;h&#039;44da1497757e5f717aaaf560c56957bf&#039;,<br>&nbsp;&nbsp;8:&nbsp;h&#039;6ec8090a0518f32a9be67b61&#039;,<br>&nbsp;&nbsp;9:&nbsp;h&#039;cc7a7759962275661ec4b956a473e6756c80af9fe3cf09854600adec2ff59bd68b47fe793c93898badd109b51c1cae10f1b3b2b0d74b9aad492f1b37753db121b550455626b7fd77f45ca4e5c9bb6ba29855323c99218b7475aea634cf86d9854c2d939ded2ec822eac0782e7c7e08ef3d3b9a4ca88d1626613375d4a2a5369aa1a8a560ff560b076992cc9764cbb35a24474a2cb42750f5fcf8d88156d825b8575b023f652591cb2b19c77b229aa8db2ecfaaac440705fd7edc5282c19b1186b0d6248812d0afa3faea004285937a57e9b8e2c169cec7211f3bc233c9a22465ce7bedcc0e69777fe13fc726913751ab0131e89942396b1ed43323dda1dc2a0256fc357dcc006f717a5552a3541a7b88088fbbb2c181203dd880f16fe431e241d2401c611f075b5941bdbb217c9d8feaded496d7deba93e594adbb7cdfe054005e591b934bd4ff97adb31a95da850e51c9d61fa2ec6179834642f9732dd8026d7ffdd10578c1c2f4cf0c46a8bcf625b36879feb70d37bc54f3d8940208cf28f1660ddd7a3372cde7e21a191630612297ddfafd021c45d385f97ee4888e5b5416c6bf8c661a6d8a554f834292fa0345b8aa88d814fc6694d00d350b37f380b4137d0b94b3d30b5a4aceb9099bac4dec1aa7a5af37a13de4f3444b8df6292e13fcc53aeb2d162272fd7b61d12cc0c1f00a71d4c7f0400977e1a99b513a4d08657a13ad03aa8312a9812ce2fedb&#039;<br>}
 </div>
 <div>
   This object is subsequently referred to as Encrypted Signed Authorization Data (ESAD).
-</div>
-<div class="para">
-  Note that the JWE header MUST include the <code>encryptionKey</code> as well.
 </div>
 <div id="domainconstraints" class="para box comment">
   Due to the end-to-end encryption scheme, the domain 
@@ -1805,9 +1782,8 @@ creates an FWP assertion which requires the following steps to be performed:
   <tr>
     <td><code>encryptedAuthorization</code></td>
     <td>
-      Encrypted Signed Authorization Data.
-      Here shown as a placeholder only since
-      an ESAD string can be quite long.
+      Encrypted Signed Authorization Data (ESAD) supplied in a Base64Url string
+      (in subsequent examples shown as a placeholder only).
     </td>
   </tr>
   <tr>
@@ -2952,6 +2928,7 @@ https://commons.wikimedia.org/wiki/File:Crystal_Clear_kdm_user_female.svg<img sr
     <tr><td>2021-05-09</td><td>0.17</td><td>Simplification: Removed hashing of PRCD.</td></tr>
     <tr><td>2021-05-19</td><td>0.18</td><td>Aligned wallet database with FIDO names.</td></tr>
     <tr><td>2021-06-03</td><td>0.19</td><td>Added IPR declaration.</td></tr>
+    <tr><td>2021-06-17</td><td>0.20</td><td>Converted the FWP core to CBOR (was JSON).</td></tr>
   </table>
   <div id="authors" class="header">
     Authors
