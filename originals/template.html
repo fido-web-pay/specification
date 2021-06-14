@@ -11,7 +11,6 @@
   font-family: "Noto Mono",monospace;
   margin: 0.8em 0 1em 0;
   box-sizing: border-box;
-  width: 100%;
   word-break: break-all;
   border-width: 1px;
   border-style: solid;
@@ -455,10 +454,13 @@ creates an FWP assertion which requires the following steps to be performed:
   For the sample code this should result in the following object:
 </div>
 
-<div class="staticbox">
+<div style='overflow-x:auto;padding-right:0.2em'>
+  <div class="staticbox" style="min-width:60em">
 @AD.txt@
+ </div>
 </div>
 <div>Description:</div>
+<div style='overflow-x:auto;padding-right:0.2em'>
 <table class="tftable">
   <tr><th>Label</th><th>Name</th><th>Data</th></tr>
   <tr>
@@ -560,6 +562,7 @@ creates an FWP assertion which requires the following steps to be performed:
     </td>
   </tr>
 </table>
+</div>
 <div>
   This object is subsequently referred to as Authorization Data (AD).
 </div>
@@ -572,8 +575,10 @@ creates an FWP assertion which requires the following steps to be performed:
      title="JWS/CT">JWS/CT<img src="images/xtl.svg" alt="link"></a> method.
   For the sample code this should result in the following object:
 </div>
-<div class="staticbox">
-  @SAD.txt@
+<div style='overflow-x:auto;padding-right:0.2em'>
+  <div class="staticbox" style="min-width:60em">
+    @SAD.txt@
+  </div>
 </div>
 <div>
   This operation updates the <code>authorization</code> (<kbd>11</kbd>) element of AD.
@@ -605,8 +610,10 @@ creates an FWP assertion which requires the following steps to be performed:
 <div class="para">
   Encryption sample object:
 </div>
-<div class="staticbox">
-@ESAD.txt@
+<div style='overflow-x:auto;padding-right:0.2em'>
+  <div class="staticbox" style="min-width:60em">
+    @ESAD.txt@
+  </div>
 </div>
 <div>
   This object is subsequently referred to as Encrypted Signed Authorization Data (ESAD).
@@ -1213,33 +1220,35 @@ https://commons.wikimedia.org/wiki/File:Crystal_Clear_kdm_user_female.svg<img sr
   <div id="documenthistory" class="header">
     Document History
   </div>
-  <table class="tftable">
-    <tr><th>Date</th><th>Version</th><th>Comment</th></tr>
-    <tr><td>2021-03-12</td><td>0.1</td><td>Initial publishing.</td></tr>
-    <tr><td>2021-03-15</td><td>0.11</td><td>Added external token comment.</td></tr>
-    <tr><td>2021-03-29</td><td>0.12</td><td>Improved replay handling + Changed &quot;Acquirer&quot; to &quot;PSP&quot;.</td></tr>
-    <tr><td>2021-04-02</td><td>0.13</td><td>Added section Delegated Authorization.</td></tr>
-    <tr><td>2021-04-11</td><td>0.14</td><td>Added credentialId + more text on the credential database.</td></tr>
-    <tr><td>2021-04-14</td><td>0.15</td><td>Added section Implementation Options.</td></tr>
-    <tr><td>2021-04-16</td><td>0.16</td><td>Added sequence diagram &quot;scope&quot; rectangle.</td></tr>
-    <tr><td>2021-05-09</td><td>0.17</td><td>Simplification: Removed hashing of PRCD.</td></tr>
-    <tr><td>2021-05-19</td><td>0.18</td><td>Aligned wallet database with FIDO names.</td></tr>
-    <tr><td>2021-06-03</td><td>0.19</td><td>Added IPR declaration.</td></tr>
-    <tr><td>2021-06-17</td><td>0.20</td><td>Converted the FWP core to CBOR (was JSON).</td></tr>
-  </table>
-  <div id="authors" class="header">
-    Authors
-  </div>
-  <div>
-    The FWP specification is currently authored by Anders Rundgren (anders.rundgren.net@gmail.com).<br />
-  </div>
-  <div class="header">
-    Trademarks
-  </div>
-  <div id="trademarks">
-    FIDO is a registered trademark of the FIDO alliance.<br />
-    EMV is a registered trademark of EMVCo.<br />&nbsp;<br />
-    This specification represents an <i>independent effort</i>, 
-    not associated with the FIDO alliance or EMVCo.
-  </div>
+<div style='overflow-x:auto;padding-right:0.2em'>
+<table class="tftable">
+  <tr><th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th><th>Version</th><th style="min-width:30em">Comment</th></tr>
+  <tr><td style="text-align:center">2021-03-12</td><td style="text-align:center">0.1</td><td>Initial publishing.</td></tr>
+  <tr><td style="text-align:center">2021-03-15</td><td style="text-align:center">0.11</td><td>Added external token comment.</td></tr>
+  <tr><td style="text-align:center">2021-03-29</td><td style="text-align:center">0.12</td><td>Improved replay handling + Changed &quot;Acquirer&quot; to &quot;PSP&quot;.</td></tr>
+  <tr><td style="text-align:center">2021-04-02</td><td style="text-align:center">0.13</td><td>Added section Delegated Authorization.</td></tr>
+  <tr><td style="text-align:center">2021-04-11</td><td style="text-align:center">0.14</td><td>Added credentialId + more text on the credential database.</td></tr>
+  <tr><td style="text-align:center">2021-04-14</td><td style="text-align:center">0.15</td><td>Added section Implementation Options.</td></tr>
+  <tr><td style="text-align:center">2021-04-16</td><td style="text-align:center">0.16</td><td>Added sequence diagram &quot;scope&quot; rectangle.</td></tr>
+  <tr><td style="text-align:center">2021-05-09</td><td style="text-align:center">0.17</td><td>Simplification: Removed hashing of PRCD.</td></tr>
+  <tr><td style="text-align:center">2021-05-19</td><td style="text-align:center">0.18</td><td>Aligned wallet database with FIDO names.</td></tr>
+  <tr><td style="text-align:center">2021-06-03</td><td style="text-align:center">0.19</td><td>Added IPR declaration.</td></tr>
+  <tr><td style="text-align:center">2021-06-17</td><td style="text-align:center">0.20</td><td>Converted the FWP core to CBOR (was JSON).</td></tr>
+</table>
+</div>
+    <div id="authors" class="header">
+      Authors
+    </div>
+    <div>
+      The FWP specification is currently authored by Anders Rundgren (anders.rundgren.net@gmail.com).<br />
+    </div>
+    <div class="header">
+      Trademarks
+    </div>
+    <div id="trademarks">
+      FIDO is a registered trademark of the FIDO alliance.<br />
+      EMV is a registered trademark of EMVCo.<br />&nbsp;<br />
+      This specification represents an <i>independent effort</i>,
+      not associated with the FIDO alliance or EMVCo.
+    </div>
 </body></html>
