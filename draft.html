@@ -1601,14 +1601,14 @@ creates an FWP assertion which requires the following steps to be performed:
 </div>
 
 <div style='overflow-x:auto;padding-right:0.2em'>
-  <div class="staticbox" style="min-width:50em">
+  <div class="staticbox" style="min-width:60em">
     {<br>&nbsp;&nbsp;1:&nbsp;&#034;1.0&#034;,<br>&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;&#034;Space&nbsp;Shop&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;&#034;7040566321&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&#034;435.00&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&#034;EUR&#034;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;3:&nbsp;&#034;spaceshop.com&#034;,<br>&nbsp;&nbsp;4:&nbsp;&#034;FR7630002111110020050014382&#034;,<br>&nbsp;&nbsp;5:&nbsp;&#034;0057162932&#034;,<br>&nbsp;&nbsp;6:&nbsp;&#034;https://bankdirect.com&#034;,<br>&nbsp;&nbsp;7:&nbsp;&#034;additional&nbsp;stuff...&#034;,<br>&nbsp;&nbsp;8:&nbsp;1,<br>&nbsp;&nbsp;9:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&#034;Android&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&#034;10.0&#034;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&#034;Chrome&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&#034;103&#034;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;10:&nbsp;0(&#034;2021-06-10T08:34:21+02:00&#034;),<br>&nbsp;&nbsp;11:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;-7,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;2,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1:&nbsp;1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2:&nbsp;h&#039;e812b1a6dcbc708f9ec43cc2921fa0a14e9d5eadcc6dc63471dd4b680c6236b5&#039;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-3:&nbsp;h&#039;9826dcbd4ce6e388f72edd9be413f2425a10f75b5fd83d95fa0cde53159a51d8&#039;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;}<br>}
   </div>
 </div>
   <div>Description:</div>
   <div style='overflow-x:auto;padding-right:0.2em'>
     <table class="tftable">
-      <tr><th>Label</th><th>Name</th><th style="min-width:20em">Comment</th></tr>
+      <tr><th>Label</th><th>Name</th><th>Comment</th></tr>
       <tr>
         <td style='text-align:center'><kbd>1</kbd></td>
         <td><code>version</code></td>
@@ -1721,57 +1721,59 @@ creates an FWP assertion which requires the following steps to be performed:
        title="JWS/CT">JWS/CT<img src="images/xtl.svg" alt="link"></a> method.
     For the sample code this should result in the following object:
   </div>
-  <div class="staticbox">
-    {<br>&nbsp;&nbsp;1:&nbsp;&#034;1.0&#034;,<br>&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;&#034;Space&nbsp;Shop&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;&#034;7040566321&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&#034;435.00&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&#034;EUR&#034;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;3:&nbsp;&#034;spaceshop.com&#034;,<br>&nbsp;&nbsp;4:&nbsp;&#034;FR7630002111110020050014382&#034;,<br>&nbsp;&nbsp;5:&nbsp;&#034;0057162932&#034;,<br>&nbsp;&nbsp;6:&nbsp;&#034;https://bankdirect.com&#034;,<br>&nbsp;&nbsp;7:&nbsp;&#034;additional&nbsp;stuff...&#034;,<br>&nbsp;&nbsp;8:&nbsp;1,<br>&nbsp;&nbsp;9:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&#034;Android&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&#034;10.0&#034;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&#034;Chrome&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&#034;103&#034;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;10:&nbsp;0(&#034;2021-06-10T08:34:21+02:00&#034;),<br>&nbsp;&nbsp;11:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;-7,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;2,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1:&nbsp;1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2:&nbsp;h&#039;e812b1a6dcbc708f9ec43cc2921fa0a14e9d5eadcc6dc63471dd4b680c6236b5&#039;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-3:&nbsp;h&#039;9826dcbd4ce6e388f72edd9be413f2425a10f75b5fd83d95fa0cde53159a51d8&#039;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;h&#039;8197e28ff200c8fa383ad36a79ce483c2f5688ddbb2d51502f22c23f60d8e5420100000000&#039;,<br>&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;h&#039;7b2274797065223a22776562617574686e2e676574222c226f726967696e223a2268747470733a2f2f6677702e6d7962616e6b2e636f6d222c226368616c6c656e6765223a227765783656773746754e554d6f6e666b77764f4d4e61484f4438775946415a657346674d55562d34326545227d&#039;,<br>&nbsp;&nbsp;&nbsp;&nbsp;5:&nbsp;h&#039;3045022100da1ae8dff8b0d331d18658ea115e4bf9519ba3150da723d55d529d05e1bf855902205b7472773d48b4d25670850274df59adf62cdf077e14c7146f33ba8e7f90d2d8&#039;<br>&nbsp;&nbsp;}<br>}
-  </div>
-  <div>
-    This operation updates the <code>authorization</code> (<kbd>11</kbd>) element of AD.
-  </div>
-  <div class="para">The resulting object is subsequently referred to as Signed Authorization Data (SAD).</div>
-  <div class="para">
-    For more details on the signature processing turn to the <i>preliminary</i> document
-    <a href="https://fido-web-pay.github.io/specification/vectors.txt"
-       title="Vectors">https://fido-web-pay.github.io/specification/vectors.txt<img src="images/xtl.svg" alt="link"></a>.
-  </div>
-  <div id="seq-4.4" class="step">4.4 Create Encrypted Signed Authorization Data (ESAD)</div>
-  <div class="para">
-    For privacy and security reasons, Signed Authorization Data (SAD) objects
-    MUST be encrypted by a public key provided by the <b class="actor">Issuer</b>
-    through the <code>encryptionKey</code> attribute of the selected
-    <a href="#credentialdatabase">FWP credential</a>.
-    This specification mandates using the encryption scheme <i>preliminary outlined</i> in
-    <a href="https://cyberphone.github.io/javaapi/org/webpki/cbor/package-summary.html#cef"
-       title="CEF">CBOR Encryption Format (CEF)<img src="images/xtl.svg" alt="link"></a>.
-    The selection between RSA or ECDH encryption schemes is at the
-    discretion of the <b class="actor">Issuer</b>.
-  </div>
-  <div class="para">
-    The actual CEF algorithms to use are defined by the
-    <code>contentEncryptionAlgorithm</code> and
-    <code>keyEncryptionAlgorithm</code> attributes
-    of the selected <a href="#credentialdatabase">FWP credential</a>.
-  </div>
-  <div class="para">
-    Encryption sample object:
-  </div>
-  <div class="staticbox">
-    {<br>&nbsp;&nbsp;1:&nbsp;3,<br>&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;-31,<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&#034;x25519:2021:3&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;5:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1:&nbsp;4,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2:&nbsp;h&#039;29a53a712ed2bfcce7e2148b12e530f497aa049ad654ae04c4e9fee28f4a137f&#039;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;9:&nbsp;h&#039;e6308568c03ef7a371b61f8a4986a95d32dad3fbb266163a8084dad8c493f179e9a87a09cf916e6d&#039;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;7:&nbsp;h&#039;44da1497757e5f717aaaf560c56957bf&#039;,<br>&nbsp;&nbsp;8:&nbsp;h&#039;6ec8090a0518f32a9be67b61&#039;,<br>&nbsp;&nbsp;9:&nbsp;h&#039;cc7a7759962275661ec4b956a473e6756c80af9fe3cf09854600adec2ff59bd68b47fe793c93898badd109b51c1cae10f1b3b2b0d74b9aad492f1b37753db121b550455626b7fd77f45ca4e5c9bb6ba29855323c99218b7475aea634cf86d9854c2d939ded2ec822eac0782e7c7e08ef3d3b9a4ca88d1626613375d4a2a5369aa1a8a560ff560b076992cc9764cbb35a24474a2cb42750f5fcf8d88156d825b8575b023f652591cb2b19c77b229aa8db2ecfaaac440705fd7edc5282c19b1186b0d6248812d0afa3faea004285937a57e9b8e2c169cec7211f3bc233c9a22465ce7bedcc0e69777fe13fc726913751ab0131e89942396b1ed43323dda1dc2a0256fc357dcc006f717a5552a3541a7b88088fbbb2c181203dd880f16fe431e241d2401c611f075b5941bdbb217c9d8feaded496d7deba93e594adbb7cdfe054005e591b934bd4ff97adb31a95da850e51c9d61fa2ec6179834642f9732dd8026d7ffdd10578c1c2f4cf0c46a8bcf625b36879feb70d37bc54f3d8940208cf28f1660ddd7a3372cde7e21a191630612297ddfafd021c45d385f97ee4888e5b5416c6bf8c661a6d8a554f834292fa0345b8aa88d814fc6694d00d350b37f380b4137d0b94b3d30b5a4aceb9099bac4dec1aa7a5af37a13de4f3444b8df6292e13fcc53aeb2d162272fd7b61d12cc0c1f00a71d4c7f0400977e1a99b513a4d08657a13ad03aa8312a9812ce2fedb&#039;<br>}
-  </div>
-  <div>
-    This object is subsequently referred to as Encrypted Signed Authorization Data (ESAD).
-  </div>
-  <div id="domainconstraints" class="para box comment">
-    Due to the end-to-end encryption scheme, the domain
-    constraints associated with Web Authentication
-    assertions do not apply.
-  </div>
+  <div style='overflow-x:auto;padding-right:0.2em'>
+    <div class="staticbox" style="min-width:60em">
+      {<br>&nbsp;&nbsp;1:&nbsp;&#034;1.0&#034;,<br>&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;&#034;Space&nbsp;Shop&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;&#034;7040566321&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&#034;435.00&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&#034;EUR&#034;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;3:&nbsp;&#034;spaceshop.com&#034;,<br>&nbsp;&nbsp;4:&nbsp;&#034;FR7630002111110020050014382&#034;,<br>&nbsp;&nbsp;5:&nbsp;&#034;0057162932&#034;,<br>&nbsp;&nbsp;6:&nbsp;&#034;https://bankdirect.com&#034;,<br>&nbsp;&nbsp;7:&nbsp;&#034;additional&nbsp;stuff...&#034;,<br>&nbsp;&nbsp;8:&nbsp;1,<br>&nbsp;&nbsp;9:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&#034;Android&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&#034;10.0&#034;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&#034;Chrome&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&#034;103&#034;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;10:&nbsp;0(&#034;2021-06-10T08:34:21+02:00&#034;),<br>&nbsp;&nbsp;11:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;-7,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;2,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1:&nbsp;1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2:&nbsp;h&#039;e812b1a6dcbc708f9ec43cc2921fa0a14e9d5eadcc6dc63471dd4b680c6236b5&#039;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-3:&nbsp;h&#039;9826dcbd4ce6e388f72edd9be413f2425a10f75b5fd83d95fa0cde53159a51d8&#039;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;h&#039;8197e28ff200c8fa383ad36a79ce483c2f5688ddbb2d51502f22c23f60d8e5420100000000&#039;,<br>&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;h&#039;7b2274797065223a22776562617574686e2e676574222c226f726967696e223a2268747470733a2f2f6677702e6d7962616e6b2e636f6d222c226368616c6c656e6765223a227765783656773746754e554d6f6e666b77764f4d4e61484f4438775946415a657346674d55562d34326545227d&#039;,<br>&nbsp;&nbsp;&nbsp;&nbsp;5:&nbsp;h&#039;3045022100da1ae8dff8b0d331d18658ea115e4bf9519ba3150da723d55d529d05e1bf855902205b7472773d48b4d25670850274df59adf62cdf077e14c7146f33ba8e7f90d2d8&#039;<br>&nbsp;&nbsp;}<br>}
+    </div>
+</div>
+    <div>
+      This operation updates the <code>authorization</code> (<kbd>11</kbd>) element of AD.
+    </div>
+    <div class="para">The resulting object is subsequently referred to as Signed Authorization Data (SAD).</div>
+    <div class="para">
+      For more details on the signature processing turn to the <i>preliminary</i> document
+      <a href="https://fido-web-pay.github.io/specification/vectors.txt"
+         title="Vectors">https://fido-web-pay.github.io/specification/vectors.txt<img src="images/xtl.svg" alt="link"></a>.
+    </div>
+    <div id="seq-4.4" class="step">4.4 Create Encrypted Signed Authorization Data (ESAD)</div>
+    <div class="para">
+      For privacy and security reasons, Signed Authorization Data (SAD) objects
+      MUST be encrypted by a public key provided by the <b class="actor">Issuer</b>
+      through the <code>encryptionKey</code> attribute of the selected
+      <a href="#credentialdatabase">FWP credential</a>.
+      This specification mandates using the encryption scheme <i>preliminary outlined</i> in
+      <a href="https://cyberphone.github.io/javaapi/org/webpki/cbor/package-summary.html#cef"
+         title="CEF">CBOR Encryption Format (CEF)<img src="images/xtl.svg" alt="link"></a>.
+      The selection between RSA or ECDH encryption schemes is at the
+      discretion of the <b class="actor">Issuer</b>.
+    </div>
+    <div class="para">
+      The actual CEF algorithms to use are defined by the
+      <code>contentEncryptionAlgorithm</code> and
+      <code>keyEncryptionAlgorithm</code> attributes
+      of the selected <a href="#credentialdatabase">FWP credential</a>.
+    </div>
+    <div class="para">
+      Encryption sample object:
+    </div>
+    <div class="staticbox">
+      {<br>&nbsp;&nbsp;1:&nbsp;3,<br>&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;-31,<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&#034;x25519:2021:3&#034;,<br>&nbsp;&nbsp;&nbsp;&nbsp;5:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1:&nbsp;4,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2:&nbsp;h&#039;29a53a712ed2bfcce7e2148b12e530f497aa049ad654ae04c4e9fee28f4a137f&#039;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;9:&nbsp;h&#039;e6308568c03ef7a371b61f8a4986a95d32dad3fbb266163a8084dad8c493f179e9a87a09cf916e6d&#039;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;7:&nbsp;h&#039;44da1497757e5f717aaaf560c56957bf&#039;,<br>&nbsp;&nbsp;8:&nbsp;h&#039;6ec8090a0518f32a9be67b61&#039;,<br>&nbsp;&nbsp;9:&nbsp;h&#039;cc7a7759962275661ec4b956a473e6756c80af9fe3cf09854600adec2ff59bd68b47fe793c93898badd109b51c1cae10f1b3b2b0d74b9aad492f1b37753db121b550455626b7fd77f45ca4e5c9bb6ba29855323c99218b7475aea634cf86d9854c2d939ded2ec822eac0782e7c7e08ef3d3b9a4ca88d1626613375d4a2a5369aa1a8a560ff560b076992cc9764cbb35a24474a2cb42750f5fcf8d88156d825b8575b023f652591cb2b19c77b229aa8db2ecfaaac440705fd7edc5282c19b1186b0d6248812d0afa3faea004285937a57e9b8e2c169cec7211f3bc233c9a22465ce7bedcc0e69777fe13fc726913751ab0131e89942396b1ed43323dda1dc2a0256fc357dcc006f717a5552a3541a7b88088fbbb2c181203dd880f16fe431e241d2401c611f075b5941bdbb217c9d8feaded496d7deba93e594adbb7cdfe054005e591b934bd4ff97adb31a95da850e51c9d61fa2ec6179834642f9732dd8026d7ffdd10578c1c2f4cf0c46a8bcf625b36879feb70d37bc54f3d8940208cf28f1660ddd7a3372cde7e21a191630612297ddfafd021c45d385f97ee4888e5b5416c6bf8c661a6d8a554f834292fa0345b8aa88d814fc6694d00d350b37f380b4137d0b94b3d30b5a4aceb9099bac4dec1aa7a5af37a13de4f3444b8df6292e13fcc53aeb2d162272fd7b61d12cc0c1f00a71d4c7f0400977e1a99b513a4d08657a13ad03aa8312a9812ce2fedb&#039;<br>}
+    </div>
+    <div>
+      This object is subsequently referred to as Encrypted Signed Authorization Data (ESAD).
+    </div>
+    <div id="domainconstraints" class="para box comment">
+      Due to the end-to-end encryption scheme, the domain
+      constraints associated with Web Authentication
+      assertions do not apply.
+    </div>
 
-  <div id="seq-4.5" class="step">4.5 Assemble FWP Assertion</div>
-  <div class="para">
-    Create a JSON-serializable JavaScript object representing an <span class="msg">FWP Assertion</span>.
-    For the sample code this should result in the following object,
-    here shown in its serialized form:
-  </div>
+    <div id="seq-4.5" class="step">4.5 Assemble FWP Assertion</div>
+    <div class="para">
+      Create a JSON-serializable JavaScript object representing an <span class="msg">FWP Assertion</span>.
+      For the sample code this should result in the following object,
+      here shown in its serialized form:
+    </div>
 <pre class="box">
 {
   "encryptedAuthorization": <i>"ESAD"</i>,
@@ -1779,57 +1781,57 @@ creates an FWP assertion which requires the following steps to be performed:
   "issuerId": "https://mybank.fr/payment"
 }
 </pre>
-  <div>Description:</div>
-  <table class="tftable">
-    <tr><th>Attribute</th><th>Data</th></tr>
-    <tr>
-      <td><code>encryptedAuthorization</code></td>
-      <td>
-        Encrypted Signed Authorization Data (ESAD) supplied in a Base64Url string
-        (in subsequent examples shown as a placeholder only).
-      </td>
-    </tr>
-    <tr>
-      <td><code>paymentMethod</code></td>
-      <td>
-        Payment method associated with the selected <a href="#credentialdatabase">FWP credential</a>.
-      </td>
-    </tr>
-    <tr>
-      <td><code>issuerId</code></td>
-      <td>
-        Issuer identifier associated with the selected <a href="#credentialdatabase">FWP credential</a>.
-      </td>
-    </tr>
-  </table>
-  <div>
-    The <span class="msg">FWP Assertion</span> is made available
-    to the <code>PaymentRequest</code> invocation code via the
-    <code>PaymentResponse.details</code> attribute.
-  </div>
-  <div id="servicediscovery" class="comment box">
-    An alternative to using <code>issuerId</code> attributes for service
-    end-points, is populating <code>issuerId</code> attributes with <i>Service Discovery URLs</i>,
-    which in turn provide the actual service end-points (as well as other information
-    that may be required to have <i>before</i> service invocation).
-  </div>
-  <div class="step"><div id="seq-5" class="numbox">5</div>Send FWP Assertion</div>
-  <div>
-    At this point the checkout Web code would normally
-    send the completed <span class="msg">FWP Assertion</span> to the
-    <b class="actor">Merchant</b> server through a FORM&nbsp;POST
-    or <code>fetch()</code> operation.
-  </div>
-  <div class="step"><div id="seq-6" class="numbox">6</div>Process FWP Assertion and Create PSPRequest Object</div>
+    <div>Description:</div>
+    <table class="tftable">
+      <tr><th>Attribute</th><th>Data</th></tr>
+      <tr>
+        <td><code>encryptedAuthorization</code></td>
+        <td>
+          Encrypted Signed Authorization Data (ESAD) supplied in a Base64Url string
+          (in subsequent examples shown as a placeholder only).
+        </td>
+      </tr>
+      <tr>
+        <td><code>paymentMethod</code></td>
+        <td>
+          Payment method associated with the selected <a href="#credentialdatabase">FWP credential</a>.
+        </td>
+      </tr>
+      <tr>
+        <td><code>issuerId</code></td>
+        <td>
+          Issuer identifier associated with the selected <a href="#credentialdatabase">FWP credential</a>.
+        </td>
+      </tr>
+    </table>
+    <div>
+      The <span class="msg">FWP Assertion</span> is made available
+      to the <code>PaymentRequest</code> invocation code via the
+      <code>PaymentResponse.details</code> attribute.
+    </div>
+    <div id="servicediscovery" class="comment box">
+      An alternative to using <code>issuerId</code> attributes for service
+      end-points, is populating <code>issuerId</code> attributes with <i>Service Discovery URLs</i>,
+      which in turn provide the actual service end-points (as well as other information
+      that may be required to have <i>before</i> service invocation).
+    </div>
+    <div class="step"><div id="seq-5" class="numbox">5</div>Send FWP Assertion</div>
+    <div>
+      At this point the checkout Web code would normally
+      send the completed <span class="msg">FWP Assertion</span> to the
+      <b class="actor">Merchant</b> server through a FORM&nbsp;POST
+      or <code>fetch()</code> operation.
+    </div>
+    <div class="step"><div id="seq-6" class="numbox">6</div>Process FWP Assertion and Create PSPRequest Object</div>
 
-  <div>
-    After receiving the <span class="msg">FWP Assertion</span>,
-    the <b class="actor">Merchant</b> would usually call a
-    <b class="actor">PSP</b> with a specifically crafted object.
-    The exact definition is likely to be specific for each <b class="actor">PSP</b> network
-    and is therefore out of scope for this specification.
-    The following <i>sample</i> outlines such an object:
-  </div>
+    <div>
+      After receiving the <span class="msg">FWP Assertion</span>,
+      the <b class="actor">Merchant</b> would usually call a
+      <b class="actor">PSP</b> with a specifically crafted object.
+      The exact definition is likely to be specific for each <b class="actor">PSP</b> network
+      and is therefore out of scope for this specification.
+      The following <i>sample</i> outlines such an object:
+    </div>
 <pre class="box">
 {
   "paymentRequest": {
@@ -1849,117 +1851,117 @@ creates an FWP assertion which requires the following steps to be performed:
   "timeStamp": "2021-05-19T10:32:36+01:00"
 }
 </pre>
-  <div>Description:</div>
-  <table class="tftable">
-    <tr><th>Attribute</th><th>Data</th></tr>
-    <tr>
-      <td><code>paymentRequest</code></td>
-      <td>
-        Copy of <a href="#seq-4.1">PRCD</a>, <i>recreated</i> by the <b class="actor">Merchant</b>.
-      </td>
-    </tr>
-    <tr>
-      <td><code>encryptedAuthorization</code></td>
-      <td>
-        Copy of the same attribute in the <a href="#seq-4.6">FWP Assertion</a>.
-      </td>
-    </tr>
-    <tr>
-      <td><code>paymentMethod</code></td>
-      <td>
-        Copy of the same attribute in the <a href="#seq-4.6">FWP Assertion</a>.
-      </td>
-    </tr>
-    <tr>
-      <td><code>issuerId</code></td>
-      <td>
-        Copy of the same attribute in the <a href="#seq-4.6">FWP Assertion</a>.
-      </td>
-    </tr>
-    <tr>
-      <td><code>networkData</code></td>
-      <td>
-        <i>Optional</i>.  See <a href="#seq-4.3">Authorization Data</a>.
-      </td>
-    </tr>
-    <tr>
-      <td><code>receiveAccount</code></td>
-      <td>
-        <b class="actor">Merchant</b> account to be credited.
-      </td>
-    </tr>
-    <tr>
-      <td><code>clientIp</code></td>
-      <td>
-        Request IP address (in V4 or V6 format) of the <b class="actor">User</b> device.
-        Included for <i>security and logging</i> purposes.
-      </td>
-    </tr>
-    <tr>
-      <td><code>timeStamp</code></td>
-      <td>
-        ISO time stamp generated by the <b class="actor">Merchant</b>.
-      </td>
-    </tr>
-  </table>
-  <div class="step">
-    <div id="seq-7" class="numbox">7</div>Send PSPRequest Object
-  </div>
-  <div>
-    At this point the <b class="actor">Merchant</b> sends the completed <span class="msg">PSPRequest</span>
-    object to the appropriate <b class="actor">PSP</b>.
-  </div>
-  <div class="para">
-    Note that authentication of the <b class="actor">Merchant</b> is out of scope
-    for this specification.
-  </div>
-  <div id="pspselection" class="comment box">
-    Since FWP supports <i>multiple</i> and <i>independent</i> payment systems,
-    a <b class="actor">Merchant</b> may use different <b class="actor">PSP</b>s
-    depending on received <code>paymentMethod</code>.
-  </div>
-  <div class="step">
-    <div id="seq-8" class="numbox">8</div>Process PSPRequest and Create IssuerRequest Object
-  </div>
-  <div>
-    After successfully having authenticated the <b class="actor">Merchant</b> request,
-    the <b class="actor">PSP</b> MUST perform a number of checks on the
-    received object including:
-  </div>
-  <ul>
-    <li>
-      That <code>paymentRequest</code> is properly formatted and that
-      the <code>payee</code> attribute
-      matches the <b class="actor">Merchant</b> common name registered with the <b class="actor">PSP</b>.
-    </li>
-    <li>
-      That the <code>paymentMethod</code> is supported.
-    </li>
-    <li>
-      That the format of the <code>issuerId</code> matches <code>paymentMethod</code>.
-    </li>
-    <li>
-      That the <code>receiveAccount</code> matches a <b class="actor">Merchant</b> account
-      registered with the <b class="actor">PSP</b>.
-    </li>
-    <li>
-      That the <code>timeStamp</code> is within &quot;reasonable limits&quot;.
-    </li>
-    <li>
-      That the rest of the expected parameters are available as well that there are no unknown attributes.
-    </li>
-  </ul>
-  <div class="para">
-    Any deviations MUST cause the request to be rejected.
-    Fault handling is out of scope for this specification.
-  </div>
-  <div class="para">
-    The next step is creating a suitable <span class="msg">IssuerRequest</span> object.
-    The exact definition is likely to be specific for each payment network and
-    is therefore out of scope for this specification.
-    The following <i>sample</i> outlines such an object:
-  </div>
-  <pre class="box">
+    <div>Description:</div>
+    <table class="tftable">
+      <tr><th>Attribute</th><th>Data</th></tr>
+      <tr>
+        <td><code>paymentRequest</code></td>
+        <td>
+          Copy of <a href="#seq-4.1">PRCD</a>, <i>recreated</i> by the <b class="actor">Merchant</b>.
+        </td>
+      </tr>
+      <tr>
+        <td><code>encryptedAuthorization</code></td>
+        <td>
+          Copy of the same attribute in the <a href="#seq-4.6">FWP Assertion</a>.
+        </td>
+      </tr>
+      <tr>
+        <td><code>paymentMethod</code></td>
+        <td>
+          Copy of the same attribute in the <a href="#seq-4.6">FWP Assertion</a>.
+        </td>
+      </tr>
+      <tr>
+        <td><code>issuerId</code></td>
+        <td>
+          Copy of the same attribute in the <a href="#seq-4.6">FWP Assertion</a>.
+        </td>
+      </tr>
+      <tr>
+        <td><code>networkData</code></td>
+        <td>
+          <i>Optional</i>.  See <a href="#seq-4.3">Authorization Data</a>.
+        </td>
+      </tr>
+      <tr>
+        <td><code>receiveAccount</code></td>
+        <td>
+          <b class="actor">Merchant</b> account to be credited.
+        </td>
+      </tr>
+      <tr>
+        <td><code>clientIp</code></td>
+        <td>
+          Request IP address (in V4 or V6 format) of the <b class="actor">User</b> device.
+          Included for <i>security and logging</i> purposes.
+        </td>
+      </tr>
+      <tr>
+        <td><code>timeStamp</code></td>
+        <td>
+          ISO time stamp generated by the <b class="actor">Merchant</b>.
+        </td>
+      </tr>
+    </table>
+    <div class="step">
+      <div id="seq-7" class="numbox">7</div>Send PSPRequest Object
+    </div>
+    <div>
+      At this point the <b class="actor">Merchant</b> sends the completed <span class="msg">PSPRequest</span>
+      object to the appropriate <b class="actor">PSP</b>.
+    </div>
+    <div class="para">
+      Note that authentication of the <b class="actor">Merchant</b> is out of scope
+      for this specification.
+    </div>
+    <div id="pspselection" class="comment box">
+      Since FWP supports <i>multiple</i> and <i>independent</i> payment systems,
+      a <b class="actor">Merchant</b> may use different <b class="actor">PSP</b>s
+      depending on received <code>paymentMethod</code>.
+    </div>
+    <div class="step">
+      <div id="seq-8" class="numbox">8</div>Process PSPRequest and Create IssuerRequest Object
+    </div>
+    <div>
+      After successfully having authenticated the <b class="actor">Merchant</b> request,
+      the <b class="actor">PSP</b> MUST perform a number of checks on the
+      received object including:
+    </div>
+    <ul>
+      <li>
+        That <code>paymentRequest</code> is properly formatted and that
+        the <code>payee</code> attribute
+        matches the <b class="actor">Merchant</b> common name registered with the <b class="actor">PSP</b>.
+      </li>
+      <li>
+        That the <code>paymentMethod</code> is supported.
+      </li>
+      <li>
+        That the format of the <code>issuerId</code> matches <code>paymentMethod</code>.
+      </li>
+      <li>
+        That the <code>receiveAccount</code> matches a <b class="actor">Merchant</b> account
+        registered with the <b class="actor">PSP</b>.
+      </li>
+      <li>
+        That the <code>timeStamp</code> is within &quot;reasonable limits&quot;.
+      </li>
+      <li>
+        That the rest of the expected parameters are available as well that there are no unknown attributes.
+      </li>
+    </ul>
+    <div class="para">
+      Any deviations MUST cause the request to be rejected.
+      Fault handling is out of scope for this specification.
+    </div>
+    <div class="para">
+      The next step is creating a suitable <span class="msg">IssuerRequest</span> object.
+      The exact definition is likely to be specific for each payment network and
+      is therefore out of scope for this specification.
+      The following <i>sample</i> outlines such an object:
+    </div>
+    <pre class="box">
 {
   "pspRequest": {
     "paymentRequest": {
@@ -1983,925 +1985,925 @@ creates an FWP assertion which requires the following steps to be performed:
 }
 </pre>
 
-  <div>Description:</div>
-  <table class="tftable">
-    <tr><th>Attribute</th><th>Data</th></tr>
-    <tr>
-      <td><code>pspRequest</code></td>
-      <td>
-        Copy of the <a href="#seq-6">PSPRequest</a> object
-        received from the <b class="actor">Merchant</b>.
-      </td>
-    </tr>
-    <tr>
-      <td><code>payeeHost</code></td>
-      <td>
-        The <b class="actor">Merchant</b> host name registered by the <b class="actor">PSP</b>.
-      </td>
-    </tr>
-    <tr>
-      <td><code>timeStamp</code></td>
-      <td>
-        ISO time stamp generated by the <b class="actor">PSP</b>.
-      </td>
-    </tr>
-  </table>
-  <div class="step">
-    <div id="seq-9" class="numbox">9</div>Send IssuerRequest Object
-  </div>
-  <div>
-    At this point the <b class="actor">PSP</b> sends the completed <span class="msg">IssuerRequest</span>
-    object to the designated <b class="actor">Issuer</b>.
-    Note that the method used for locating the proper <b class="actor">Issuer</b> depends on
-    the <code>paymentMethod</code> and <code>issuerId</code> attributes.
-    In the sample the <span class="msg">IssuerRequest</span> object
-    would presumably be sent to <span class="msg">https://mybank.fr/payment</span>.
-  </div>
-  <div class="step">
-    <div id="seq-10" class="numbox">10</div>Process IssuerRequest
-  </div>
-  <div>
-    Before initiating a payment transaction the <b class="actor">Issuer</b>
-    MUST decode and perform a number of steps to verify the
-    correctness of the received <span class="msg">IssuerRequest</span> object.
-    Any deviation MUST terminate the operation in progress and return an
-    error message to the <b class="actor">PSP</b> in a not here specified manner.
-  </div>
-  <div id="seq-10.1" class="step">
-    10.1 Core Validation.
-  </div>
-  <ul>
-    <li>
-      Verify that <span class="msg">IssuerRequest</span> schema-wise is properly formatted.
-    </li>
-    <li>
-      Verify that the <code>timeStamp</code> is within &quot;reasonable limits&quot;.
-    </li>
-    <li>
-      Verify that the <code>pspRequest.paymentMethod</code> is supported.
-    </li>
-    <li>
-      Verify that the <code>pspRequest.receiveAccount</code>
-      is compatible with the <code>pspRequest.paymentMethod</code>.
-    </li>
-    <li>
-      Verify that the <code>pspRequest.issuerId</code>
-      is compatible with the <code>pspRequest.paymentMethod</code>
-      as well as matching the <b class="actor">Issuer</b>.
-    </li>
-    <li>
-      Verify that <code>pspRequest.paymentRequest</code>
-      represents a valid <a href="#seq-4.1">PRCD</a> object.
-    </li>
-  </ul>
-  <div id="seq-10.2" class="step">
-    10.2 Extract Signed Authorization Data (SAD)
-  </div>
-  <ul>
-    <li>
-      Decode the JWE compatible <a href="#seq-4.5">ESAD</a> string supplied in
-      <code>pspRequest.encryptedAuthorization</code>.
-    </li>
-    <li>
-      Verify that the public key declared in the JWE header matches an
-      existing decryption (private) key of the <b class="actor">Issuer</b>.
-    </li>
-    <li>
-      Decrypt the ESAD string using the private key retrieved in the previous operation.
-    </li>
-    <li>
-      Parse the result of the previous operation as JSON and set result as <a href="#seq-4.4">SAD</a>.
-    </li>
-    <li>
-      Verify that the SAD object schema-wise has the proper format.
-    </li>
-  </ul>
-  <div id="seq-10.3" class="step">
-    10.3 Validate Request Data
-  </div>
-  <ul>
-    <li>
-      Verify that <code>SAD.version</code> is supported.
-    </li>
-    <li>
-      Verify that <code>pspRequest.paymentRequest</code> is equivalent to <code>SAD.paymentRequest</code>.
-      That is, verifying that the <b class="actor">Merchant</b> payment claim corresponds to what the
-      <b class="actor">User</b> have actually <i>seen and authorized</i>.
-    </li>
-    <li>
-      Verify that <code>pspRequest.payeeHost</code> is equivalent to <code>SAD.payeeHost</code>.
-      That is, verifying that the <b class="actor">User</b> was not subject to phishing.
-      Note that phishing attacks against FWP are not useful for stealing money,
-      but for redirecting purchased goods to another address.
-    </li>
-    <li>
-      Verify that the <code>SAD.timeStamp</code> is within &quot;reasonable limits&quot;.
-      <i>Tentative:</i> CurrentTime - 600s &lt; <code>SAD.timeStamp</code> &lt; CurrentTime + 60s.
-    </li>
-    <li>
-      Verify that the <i>optional</i> <code>SAD.networkData</code> attribute complies
-      with the <b class="actor">Issuer</b> specific requirements.
-    </li>
-  </ul>
+    <div>Description:</div>
+    <table class="tftable">
+      <tr><th>Attribute</th><th>Data</th></tr>
+      <tr>
+        <td><code>pspRequest</code></td>
+        <td>
+          Copy of the <a href="#seq-6">PSPRequest</a> object
+          received from the <b class="actor">Merchant</b>.
+        </td>
+      </tr>
+      <tr>
+        <td><code>payeeHost</code></td>
+        <td>
+          The <b class="actor">Merchant</b> host name registered by the <b class="actor">PSP</b>.
+        </td>
+      </tr>
+      <tr>
+        <td><code>timeStamp</code></td>
+        <td>
+          ISO time stamp generated by the <b class="actor">PSP</b>.
+        </td>
+      </tr>
+    </table>
+    <div class="step">
+      <div id="seq-9" class="numbox">9</div>Send IssuerRequest Object
+    </div>
+    <div>
+      At this point the <b class="actor">PSP</b> sends the completed <span class="msg">IssuerRequest</span>
+      object to the designated <b class="actor">Issuer</b>.
+      Note that the method used for locating the proper <b class="actor">Issuer</b> depends on
+      the <code>paymentMethod</code> and <code>issuerId</code> attributes.
+      In the sample the <span class="msg">IssuerRequest</span> object
+      would presumably be sent to <span class="msg">https://mybank.fr/payment</span>.
+    </div>
+    <div class="step">
+      <div id="seq-10" class="numbox">10</div>Process IssuerRequest
+    </div>
+    <div>
+      Before initiating a payment transaction the <b class="actor">Issuer</b>
+      MUST decode and perform a number of steps to verify the
+      correctness of the received <span class="msg">IssuerRequest</span> object.
+      Any deviation MUST terminate the operation in progress and return an
+      error message to the <b class="actor">PSP</b> in a not here specified manner.
+    </div>
+    <div id="seq-10.1" class="step">
+      10.1 Core Validation.
+    </div>
+    <ul>
+      <li>
+        Verify that <span class="msg">IssuerRequest</span> schema-wise is properly formatted.
+      </li>
+      <li>
+        Verify that the <code>timeStamp</code> is within &quot;reasonable limits&quot;.
+      </li>
+      <li>
+        Verify that the <code>pspRequest.paymentMethod</code> is supported.
+      </li>
+      <li>
+        Verify that the <code>pspRequest.receiveAccount</code>
+        is compatible with the <code>pspRequest.paymentMethod</code>.
+      </li>
+      <li>
+        Verify that the <code>pspRequest.issuerId</code>
+        is compatible with the <code>pspRequest.paymentMethod</code>
+        as well as matching the <b class="actor">Issuer</b>.
+      </li>
+      <li>
+        Verify that <code>pspRequest.paymentRequest</code>
+        represents a valid <a href="#seq-4.1">PRCD</a> object.
+      </li>
+    </ul>
+    <div id="seq-10.2" class="step">
+      10.2 Extract Signed Authorization Data (SAD)
+    </div>
+    <ul>
+      <li>
+        Decode the JWE compatible <a href="#seq-4.5">ESAD</a> string supplied in
+        <code>pspRequest.encryptedAuthorization</code>.
+      </li>
+      <li>
+        Verify that the public key declared in the JWE header matches an
+        existing decryption (private) key of the <b class="actor">Issuer</b>.
+      </li>
+      <li>
+        Decrypt the ESAD string using the private key retrieved in the previous operation.
+      </li>
+      <li>
+        Parse the result of the previous operation as JSON and set result as <a href="#seq-4.4">SAD</a>.
+      </li>
+      <li>
+        Verify that the SAD object schema-wise has the proper format.
+      </li>
+    </ul>
+    <div id="seq-10.3" class="step">
+      10.3 Validate Request Data
+    </div>
+    <ul>
+      <li>
+        Verify that <code>SAD.version</code> is supported.
+      </li>
+      <li>
+        Verify that <code>pspRequest.paymentRequest</code> is equivalent to <code>SAD.paymentRequest</code>.
+        That is, verifying that the <b class="actor">Merchant</b> payment claim corresponds to what the
+        <b class="actor">User</b> have actually <i>seen and authorized</i>.
+      </li>
+      <li>
+        Verify that <code>pspRequest.payeeHost</code> is equivalent to <code>SAD.payeeHost</code>.
+        That is, verifying that the <b class="actor">User</b> was not subject to phishing.
+        Note that phishing attacks against FWP are not useful for stealing money,
+        but for redirecting purchased goods to another address.
+      </li>
+      <li>
+        Verify that the <code>SAD.timeStamp</code> is within &quot;reasonable limits&quot;.
+        <i>Tentative:</i> CurrentTime - 600s &lt; <code>SAD.timeStamp</code> &lt; CurrentTime + 60s.
+      </li>
+      <li>
+        Verify that the <i>optional</i> <code>SAD.networkData</code> attribute complies
+        with the <b class="actor">Issuer</b> specific requirements.
+      </li>
+    </ul>
 
-  <div id="seq-10.4" class="step">
-    10.4 Validate Authorization Signature
-  </div>
-  <ul>
-    <li>
-      Verify the JWS/CT signature of the recovered SAD object.
-      Since the public key is included in the JWS header, signature validation
-      does not require database lookups.
-    </li>
-    <li>
-      Verify that the aforementioned public key is linked to a <b class="actor">User</b>
-      account matching the <code>SAD.accountId</code> and <code>SAD.serialNumber</code> attributes
-      (where <code>SAD.serialNumber</code> would typically serve as the primary key in a credential database table).
-      Note that this check requires that the
-      public key first is converted into a <i>canonical format</i> like JWK &quot;thumbprint&quot;
-      (<a href="https://tools.ietf.org/html/rfc7638"
-          title="JWK thumbprint">RFC7638<img src="images/xtl.svg" alt="link"></a>).
-    </li>
-  </ul>
-  <div id="seq-10.5" class="step">
-    10.5 Replay Handling
-  </div>
-  <div>
-    To cope with possible replays, verify that the received <b class="actor">User</b> authorization
-    has not already been used. This can be accomplished by maintaining a lookup cache
-    holding SHA256 hashes of canonicalized (<a href="https://tools.ietf.org/html/rfc8785"
-                                               title="JCS/RFC8785">RFC8785<img src="images/xtl.svg" alt="link"></a>) <a href="#seq-4.4">SAD</a> objects,
-    associated with <i>successfully</i> processed requests.
-    Cached items would be removed based on their <code>SAD.timeStamp</code> value.
-  </div>
-  <div class="para">
-    Ideally, <b class="actor">Issuer</b>s
-    SHOULD support <i>idempotent operation</i> to facilitate transaction retries
-    that may happen due to network glitches or similar.
-  </div>
-  <div class="step">
-    Other Validation Steps
-  </div>
-  <div>
-    Obviously there are other things to verify but these are not directly related to FWP,
-    like checking that the <b class="actor">User</b> has funds available matching the
-    current request.
-  </div>
-  <div id="integration" class="header">
-    Integration
-  </div>
-  <div>
-    It is pretty clear that the integration of systems like FWP in payment networks
-    is crucial for acceptance by the market.
-  </div>
-  <div class="para">
-    For card based payments FWP implementations can build on the existing
-    EMV foundation since essentially only the formats differ.
-    Although the lack of a PAN (card number) in FWP may appear as a major obstacle,
-    the <code>issuerId</code> would in this case hold a &quot;neutered&quot; PAN where
-    the BIN (Bank Identification Number) is set, while the rest are set to zeroes + Luhn check digit.
-    E.g. VISA: 4972039000000004.  However, using <b class="actor">Issuer</b> URLs
-    is also a viable alternative for card payments because payment processors
-    associated with &quot;regular&quot; EMV and FWP payments would probably not
-    share end points.
-  </div>
-  <div class="para">
-    For account-to-account payments there are currently no generally agreed upon standards
-    for consumer payments, but remapping existing card based systems and infrastructures
-    seems though like a possible path.
-  </div>
-  <div class="para">
-    <a href="#delegatedauthorization">Delegated Authorization</a>
-    represents yet another way addressing payment system integration.
-  </div>
+    <div id="seq-10.4" class="step">
+      10.4 Validate Authorization Signature
+    </div>
+    <ul>
+      <li>
+        Verify the JWS/CT signature of the recovered SAD object.
+        Since the public key is included in the JWS header, signature validation
+        does not require database lookups.
+      </li>
+      <li>
+        Verify that the aforementioned public key is linked to a <b class="actor">User</b>
+        account matching the <code>SAD.accountId</code> and <code>SAD.serialNumber</code> attributes
+        (where <code>SAD.serialNumber</code> would typically serve as the primary key in a credential database table).
+        Note that this check requires that the
+        public key first is converted into a <i>canonical format</i> like JWK &quot;thumbprint&quot;
+        (<a href="https://tools.ietf.org/html/rfc7638"
+            title="JWK thumbprint">RFC7638<img src="images/xtl.svg" alt="link"></a>).
+      </li>
+    </ul>
+    <div id="seq-10.5" class="step">
+      10.5 Replay Handling
+    </div>
+    <div>
+      To cope with possible replays, verify that the received <b class="actor">User</b> authorization
+      has not already been used. This can be accomplished by maintaining a lookup cache
+      holding SHA256 hashes of canonicalized (<a href="https://tools.ietf.org/html/rfc8785"
+                                                 title="JCS/RFC8785">RFC8785<img src="images/xtl.svg" alt="link"></a>) <a href="#seq-4.4">SAD</a> objects,
+      associated with <i>successfully</i> processed requests.
+      Cached items would be removed based on their <code>SAD.timeStamp</code> value.
+    </div>
+    <div class="para">
+      Ideally, <b class="actor">Issuer</b>s
+      SHOULD support <i>idempotent operation</i> to facilitate transaction retries
+      that may happen due to network glitches or similar.
+    </div>
+    <div class="step">
+      Other Validation Steps
+    </div>
+    <div>
+      Obviously there are other things to verify but these are not directly related to FWP,
+      like checking that the <b class="actor">User</b> has funds available matching the
+      current request.
+    </div>
+    <div id="integration" class="header">
+      Integration
+    </div>
+    <div>
+      It is pretty clear that the integration of systems like FWP in payment networks
+      is crucial for acceptance by the market.
+    </div>
+    <div class="para">
+      For card based payments FWP implementations can build on the existing
+      EMV foundation since essentially only the formats differ.
+      Although the lack of a PAN (card number) in FWP may appear as a major obstacle,
+      the <code>issuerId</code> would in this case hold a &quot;neutered&quot; PAN where
+      the BIN (Bank Identification Number) is set, while the rest are set to zeroes + Luhn check digit.
+      E.g. VISA: 4972039000000004.  However, using <b class="actor">Issuer</b> URLs
+      is also a viable alternative for card payments because payment processors
+      associated with &quot;regular&quot; EMV and FWP payments would probably not
+      share end points.
+    </div>
+    <div class="para">
+      For account-to-account payments there are currently no generally agreed upon standards
+      for consumer payments, but remapping existing card based systems and infrastructures
+      seems though like a possible path.
+    </div>
+    <div class="para">
+      <a href="#delegatedauthorization">Delegated Authorization</a>
+      represents yet another way addressing payment system integration.
+    </div>
 
-  <div id="delegatedauthorization" class="header">
-    Delegated Authorization
-  </div>
-  <div>
-    Using delegated authorization the validation
-    of <b class="actor">User</b> authorizations is separated
-    from payment initiations. The purpose with such arrangements include:
-  </div>
-  <ul>
-    <li>Ease the integration of FWP in existing payment systems.</li>
-    <li>Open the possibility <i>outsourcing</i> the authorization process to TPPs.</li>
-    <li>
-      Provide an <a href="#seq-2">enhanced UX</a> to payment systems based on
-      <a href="#openbanking">Open Banking</a> APIs.
-    </li>
-  </ul>
-  <div class="para">
-    Note that FWP makes the use of delegated authorization <i>transparent</i>
-    for both the <b class="actor">User</b> and the <b class="actor">Merchant</b>.
-  </div>
-  <div class="para">
-    Delegated authorization differs from
-    <a href="https://www.emvco.com/emv-technologies/3d-secure/"
-       title="3DS Site">3D&nbsp;Secure<img src="images/xtl.svg" alt="link"></a>
-    by keeping the authorization process and associated <b class="actor">User</b>
-    account information, inside of the core payment network.
-    This enables validation of potentially <i>untrusted</i> <b class="actor">Merchant</b>
-    data as well as eliminating dependencies on certified <b class="actor">Merchant</b>
-    3D&nbsp;Secure SDKs.
-  </div>
-  <div class="para">
-    Delegated authorization builds on the assumption that the <b class="actor">PSP</b> is trusted
-    for carrying out payment initiations on behalf of a <b class="actor">User</b>
-    (based on a preceding <b class="actor">User</b> authorization step),
-    which is an established concept in most payment networks.
-    (In the FWP standard mode the <b class="actor">PSP</b> only acts as a proxy
-    for the <b class="actor">Merchant</b>).
-  </div>
-  <div class="para">
-    The delegated authorization mode is illustrated by the following sequence diagram:
-  </div>
-  <div style="overflow-x:auto;padding:8pt 0">
-    <svg style='display:block;width:400pt' class='box' viewBox='0 0 486 355' xmlns='http://www.w3.org/2000/svg'>
-      <title>FIDO Web Pay - Sample Sequence Diagram</title>
-      <!-- Anders Rundgren 2021 -->
-
-      <line x1='63' y1='67' x2='63' y2='345' stroke-width='1.2' stroke='black' />
-      <line x1='183' y1='67' x2='183' y2='345' stroke-width='1.2' stroke='black' />
-      <line x1='303' y1='67' x2='303' y2='345' stroke-width='1.2' stroke='black' />
-      <line x1='423' y1='67' x2='423' y2='345' stroke-width='1.2' stroke='black' />
-      <svg x='34.66666666666667' y='32.0' width='56.666666666666664' height='40.0'
-           xmlns='http://www.w3.org/2000/svg'
-           viewBox='0 0 68 48'
-           version='1.1'>
-        <title>Merchant Symbol</title>
-        <!-- Anders Ruyndgren 2021-->
-
-        <g clip-path='url(#clip3)'
-           filter='url(#fx0)'
-           transform='translate(1,12)'>
-          <g clip-path='url(#clip4)'>
-            <rect x='12.3285'
-                  y='7.3284798'
-                  width='45'
-                  height='27'
-                  stroke='#7f7f7f'
-                  stroke-linejoin='round'
-                  stroke-miterlimit='10'
-                  fill='#ff0000' />
-            <rect x='16.328501'
-                  y='15.3285'
-                  width='9'
-                  height='20'
-                  stroke='#7f7f7f'
-                  stroke-linejoin='round'
-                  stroke-miterlimit='10'
-                  fill='#ebf1de' />
-            <rect x='0'
-                  y='0'
-                  width='14'
-                  height='22'
-                  stroke='#8eb4e3'
-                  stroke-width='2'
-                  stroke-linejoin='round'
-                  stroke-miterlimit='10'
-                  fill='#dce6f2'
-                  transform='matrix(0,-1,-1,0,51.8284,28.8284)' />
-            <path d='m 25.3285,25.3285 1e-4,1e-4'
-                  stroke='#4a7ebb'
-                  stroke-linejoin='round'
-                  stroke-miterlimit='10'
-                  fill='none'
-                  fill-rule='evenodd' />
-            <rect x='7.3284898'
-                  y='34.328499'
-                  width='54'
-                  height='2'
-                  stroke='#7f7f7f'
-                  stroke-linejoin='round'
-                  stroke-miterlimit='10'
-                  fill='#fdfac7' />
-          </g>
-        </g>
-        <rect x='12.5'
-              y='18.500099'
-              width='45'
-              height='27'
-              stroke='#7f7f7f'
-              stroke-width='0.666667'
-              stroke-linejoin='round'
-              stroke-miterlimit='10'
-              fill='url(#fill5)'
-              style='fill:url(#fill5)' />
-        <rect x='16.5'
-              y='26.500099'
-              width='9'
-              height='20'
-              stroke='#7f7f7f'
-              stroke-linejoin='round'
-              stroke-miterlimit='10'
-              fill='#ebf1de' />
-        <rect x='-40'
-              y='-52'
-              width='14'
-              height='22'
-              stroke='#8eb4e3'
-              stroke-width='1.66667'
-              stroke-linejoin='round'
-              stroke-miterlimit='10'
-              fill='#dce6f2'
-              transform='matrix(0,-1,-1,0,0,0)' />
-        <path d='m 25.5,36.5001 v 10e-5'
-              stroke='#4a7ebb'
-              stroke-linejoin='round'
-              stroke-miterlimit='10'
-              fill='none'
-              fill-rule='evenodd' />
-        <g clip-path='url(#clip6)'
-           filter='url(#fx1)'
-           transform='translate(0,-4)'>
-          <g clip-path='url(#clip7)'>
-            <path d='m 7.32849,24.8285 c 0,-0.8285 1.567,-1.5 3.50001,-1.5 1.933,0 3.5,0.6715 3.5,1.5 0,0.8284 -1.567,1.5 -3.5,1.5 -1.93301,0 -3.50001,-0.6716 -3.50001,-1.5 z'
-                  stroke='#7f7f7f'
-                  stroke-linejoin='round'
-                  stroke-miterlimit='10'
-                  fill='#ff0000'
-                  fill-rule='evenodd' />
-            <path d='m 20.3285,24.8285 c 0,-0.8285 1.567,-1.5 3.5,-1.5 1.933,0 3.5,0.6715 3.5,1.5 0,0.8284 -1.567,1.5 -3.5,1.5 -1.933,0 -3.5,-0.6716 -3.5,-1.5 z'
-                  stroke='#7f7f7f'
-                  stroke-linejoin='round'
-                  stroke-miterlimit='10'
-                  fill='#ff0000'
-                  fill-rule='evenodd' />
-            <path d='m 33.3285,24.8285 c 0,-0.8285 1.567,-1.5 3.5,-1.5 1.933,0 3.5,0.6715 3.5,1.5 0,0.8284 -1.567,1.5 -3.5,1.5 -1.933,0 -3.5,-0.6716 -3.5,-1.5 z'
-                  stroke='#7f7f7f'
-                  stroke-linejoin='round'
-                  stroke-miterlimit='10'
-                  fill='#ff0000'
-                  fill-rule='evenodd' />
-            <path d='m 46.3285,24.8285 c 0,-0.8285 1.567,-1.5 3.5,-1.5 1.933,0 3.5,0.6715 3.5,1.5 0,0.8284 -1.567,1.5 -3.5,1.5 -1.933,0 -3.5,-0.6716 -3.5,-1.5 z'
-                  stroke='#7f7f7f'
-                  stroke-linejoin='round'
-                  stroke-miterlimit='10'
-                  fill='#ff0000'
-                  fill-rule='evenodd' />
-            <path d='m 59.3285,24.8285 c 0,-0.8285 1.567,-1.5 3.5,-1.5 1.933,0 3.5,0.6715 3.5,1.5 0,0.8284 -1.567,1.5 -3.5,1.5 -1.933,0 -3.5,-0.6716 -3.5,-1.5 z'
-                  stroke='#7f7f7f'
-                  stroke-linejoin='round'
-                  stroke-miterlimit='10'
-                  fill='#ff0000'
-                  fill-rule='evenodd' />
-            <path d='m 14.3285,24.8285 c 0,-0.8285 1.3431,-1.5 3,-1.5 1.6568,0 3,0.6715 3,1.5 0,0.8284 -1.3432,1.5 -3,1.5 -1.6569,0 -3,-0.6716 -3,-1.5 z'
-                  stroke='#7f7f7f'
-                  stroke-linejoin='round'
-                  stroke-miterlimit='10'
-                  fill='#ffffff'
-                  fill-rule='evenodd' />
-            <path d='m 27.3285,24.8285 c 0,-0.8285 1.3431,-1.5 3,-1.5 1.6568,0 3,0.6715 3,1.5 0,0.8284 -1.3432,1.5 -3,1.5 -1.6569,0 -3,-0.6716 -3,-1.5 z'
-                  stroke='#7f7f7f'
-                  stroke-linejoin='round'
-                  stroke-miterlimit='10'
-                  fill='#ffffff'
-                  fill-rule='evenodd' />
-            <path d='m 40.3285,24.8285 c 0,-0.8285 1.3431,-1.5 3,-1.5 1.6568,0 3,0.6715 3,1.5 0,0.8284 -1.3432,1.5 -3,1.5 -1.6569,0 -3,-0.6716 -3,-1.5 z'
-                  stroke='#7f7f7f'
-                  stroke-linejoin='round'
-                  stroke-miterlimit='10'
-                  fill='#ffffff'
-                  fill-rule='evenodd' />
-            <path d='m 53.3285,24.8285 c 0,-0.8285 1.3431,-1.5 3,-1.5 1.6568,0 3,0.6715 3,1.5 0,0.8284 -1.3432,1.5 -3,1.5 -1.6569,0 -3,-0.6716 -3,-1.5 z'
-                  stroke='#7f7f7f'
-                  stroke-linejoin='round'
-                  stroke-miterlimit='10'
-                  fill='#ffffff'
-                  fill-rule='evenodd' />
-            <path d='M 0,17 V 0 l 7,17 z'
-                  stroke='#7f7f7f'
-                  stroke-linejoin='round'
-                  stroke-miterlimit='10'
-                  fill='#ff0000'
-                  fill-rule='evenodd'
-                  transform='matrix(-1,0,0,1,14.3285,7.32848)' />
-            <rect x='20.328501'
-                  y='7.3284798'
-                  width='7'
-                  height='17'
-                  stroke='#7f7f7f'
-                  stroke-linejoin='round'
-                  stroke-miterlimit='10'
-                  fill='#ff0000' />
-            <rect x='33.328499'
-                  y='7.3284798'
-                  width='7'
-                  height='17'
-                  stroke='#7f7f7f'
-                  stroke-linejoin='round'
-                  stroke-miterlimit='10'
-                  fill='#ff0000' />
-            <rect x='46.328499'
-                  y='7.3284798'
-                  width='7'
-                  height='17'
-                  stroke='#7f7f7f'
-                  stroke-linejoin='round'
-                  stroke-miterlimit='10'
-                  fill='#ff0000' />
-            <path d='M 59.3285,24.3285 V 7.32848 l 7,17.00002 z'
-                  stroke='#7f7f7f'
-                  stroke-linejoin='round'
-                  stroke-miterlimit='10'
-                  fill='#ff0000'
-                  fill-rule='evenodd' />
-            <rect x='14.3285'
-                  y='7.3284798'
-                  width='6'
-                  height='17'
-                  stroke='#7f7f7f'
-                  stroke-linejoin='round'
-                  stroke-miterlimit='10'
-                  fill='#ffffff' />
-            <rect x='27.328501'
-                  y='7.3284798'
-                  width='6'
-                  height='17'
-                  stroke='#7f7f7f'
-                  stroke-linejoin='round'
-                  stroke-miterlimit='10'
-                  fill='#ffffff' />
-            <rect x='40.328499'
-                  y='7.3284798'
-                  width='6'
-                  height='17'
-                  stroke='#7f7f7f'
-                  stroke-linejoin='round'
-                  stroke-miterlimit='10'
-                  fill='#ffffff' />
-            <rect x='53.328499'
-                  y='7.3284798'
-                  width='6'
-                  height='17'
-                  stroke='#7f7f7f'
-                  stroke-linejoin='round'
-                  stroke-miterlimit='10'
-                  fill='#ffffff' />
-          </g>
-        </g>
-        <path d='m 4.5,18.0001 c 0,-0.8285 1.567,-1.5 3.5,-1.5 1.933,0 3.5,0.6715 3.5,1.5 0,0.8284 -1.567,1.5 -3.5,1.5 -1.933,0 -3.5,-0.6716 -3.5,-1.5 z'
-              stroke='#7f7f7f'
-              stroke-width='0.666667'
-              stroke-linejoin='round'
-              stroke-miterlimit='10'
-              fill='#ff0000'
-              fill-rule='evenodd' />
-        <path d='m 17.5,18.0001 c 0,-0.8285 1.567,-1.5 3.5,-1.5 1.933,0 3.5,0.6715 3.5,1.5 0,0.8284 -1.567,1.5 -3.5,1.5 -1.933,0 -3.5,-0.6716 -3.5,-1.5 z'
-              stroke='#7f7f7f'
-              stroke-width='0.666667'
-              stroke-linejoin='round'
-              stroke-miterlimit='10'
-              fill='#ff0000'
-              fill-rule='evenodd' />
-        <path d='m 30.5,18.0001 c 0,-0.8285 1.567,-1.5 3.5,-1.5 1.933,0 3.5,0.6715 3.5,1.5 0,0.8284 -1.567,1.5 -3.5,1.5 -1.933,0 -3.5,-0.6716 -3.5,-1.5 z'
-              stroke='#7f7f7f'
-              stroke-width='0.666667'
-              stroke-linejoin='round'
-              stroke-miterlimit='10'
-              fill='#ff0000'
-              fill-rule='evenodd' />
-        <path d='m 43.5,18.0001 c 0,-0.8285 1.567,-1.5 3.5,-1.5 1.933,0 3.5,0.6715 3.5,1.5 0,0.8284 -1.567,1.5 -3.5,1.5 -1.933,0 -3.5,-0.6716 -3.5,-1.5 z'
-              stroke='#7f7f7f'
-              stroke-width='0.666667'
-              stroke-linejoin='round'
-              stroke-miterlimit='10'
-              fill='#ff0000'
-              fill-rule='evenodd' />
-        <path d='m 56.5,18.0001 c 0,-0.8285 1.567,-1.5 3.5,-1.5 1.933,0 3.5,0.6715 3.5,1.5 0,0.8284 -1.567,1.5 -3.5,1.5 -1.933,0 -3.5,-0.6716 -3.5,-1.5 z'
-              stroke='#7f7f7f'
-              stroke-width='0.666667'
-              stroke-linejoin='round'
-              stroke-miterlimit='10'
-              fill='#ff0000'
-              fill-rule='evenodd' />
-        <path d='m 11.5,18.0001 c 0,-0.8285 1.343,-1.5 3,-1.5 1.657,0 3,0.6715 3,1.5 0,0.8284 -1.343,1.5 -3,1.5 -1.657,0 -3,-0.6716 -3,-1.5 z'
-              stroke='#7f7f7f'
-              stroke-width='0.666667'
-              stroke-linejoin='round'
-              stroke-miterlimit='10'
-              fill='#ffffff'
-              fill-rule='evenodd' />
-        <path d='m 24.5,18.0001 c 0,-0.8285 1.343,-1.5 3,-1.5 1.657,0 3,0.6715 3,1.5 0,0.8284 -1.343,1.5 -3,1.5 -1.657,0 -3,-0.6716 -3,-1.5 z'
-              stroke='#7f7f7f'
-              stroke-width='0.666667'
-              stroke-linejoin='round'
-              stroke-miterlimit='10'
-              fill='#ffffff'
-              fill-rule='evenodd' />
-        <path d='m 37.5,18.0001 c 0,-0.8285 1.343,-1.5 3,-1.5 1.657,0 3,0.6715 3,1.5 0,0.8284 -1.343,1.5 -3,1.5 -1.657,0 -3,-0.6716 -3,-1.5 z'
-              stroke='#7f7f7f'
-              stroke-width='0.666667'
-              stroke-linejoin='round'
-              stroke-miterlimit='10'
-              fill='#ffffff'
-              fill-rule='evenodd' />
-        <path d='m 50.5,18.0001 c 0,-0.8285 1.343,-1.5 3,-1.5 1.657,0 3,0.6715 3,1.5 0,0.8284 -1.343,1.5 -3,1.5 -1.657,0 -3,-0.6716 -3,-1.5 z'
-              stroke='#7f7f7f'
-              stroke-width='0.666667'
-              stroke-linejoin='round'
-              stroke-miterlimit='10'
-              fill='#ffffff'
-              fill-rule='evenodd' />
-        <path d='m 11.5,17.5001 v -17 l -7,17 z'
-              stroke='#7f7f7f'
-              stroke-width='0.666667'
-              stroke-linejoin='round'
-              stroke-miterlimit='10'
-              fill='#ff0000'
-              fill-rule='evenodd' />
-        <rect x='17.5'
-              y='0.50009918'
-              width='7'
-              height='17'
-              stroke='#7f7f7f'
-              stroke-width='0.666667'
-              stroke-linejoin='round'
-              stroke-miterlimit='10'
-              fill='#ff0000' />
-        <rect x='30.5'
-              y='0.50009918'
-              width='7'
-              height='17'
-              stroke='#7f7f7f'
-              stroke-width='0.666667'
-              stroke-linejoin='round'
-              stroke-miterlimit='10'
-              fill='#ff0000' />
-        <rect x='43.5'
-              y='0.50009918'
-              width='7'
-              height='17'
-              stroke='#7f7f7f'
-              stroke-width='0.666667'
-              stroke-linejoin='round'
-              stroke-miterlimit='10'
-              fill='#ff0000' />
-        <path d='m 56.5,17.5001 v -17 l 7,17 z'
-              stroke='#7f7f7f'
-              stroke-width='0.666667'
-              stroke-linejoin='round'
-              stroke-miterlimit='10'
-              fill='#ff0000'
-              fill-rule='evenodd' />
-        <rect x='11.5'
-              y='0.50009918'
-              width='6'
-              height='17'
-              stroke='#7f7f7f'
-              stroke-width='0.666667'
-              stroke-linejoin='round'
-              stroke-miterlimit='10'
-              fill='#ffffff' />
-        <rect x='24.5'
-              y='0.50009918'
-              width='6'
-              height='17'
-              stroke='#7f7f7f'
-              stroke-width='0.666667'
-              stroke-linejoin='round'
-              stroke-miterlimit='10'
-              fill='#ffffff' />
-        <rect x='37.5'
-              y='0.50009918'
-              width='6'
-              height='17'
-              stroke='#7f7f7f'
-              stroke-width='0.666667'
-              stroke-linejoin='round'
-              stroke-miterlimit='10'
-              fill='#ffffff' />
-        <rect x='50.5'
-              y='0.50009918'
-              width='6'
-              height='17'
-              stroke='#7f7f7f'
-              stroke-width='0.666667'
-              stroke-linejoin='round'
-              stroke-miterlimit='10'
-              fill='#ffffff' />
-        <rect x='7.5'
-              y='45.5'
-              width='54'
-              height='2'
-              stroke='#7f7f7f'
-              stroke-width='0.666667'
-              stroke-linejoin='round'
-              stroke-miterlimit='10'
-              fill='#fdfac7' />
-      </svg>
-      <text x='63' y='24.3' fill='black' font-family='Roboto,sans-serif' font-size='14.399999999999999' text-anchor='middle'>Merchant</text>
-      <svg x='163' y='32.0' width='40' height='40.0' viewBox='0 0 1000 1000' xmlns='http://www.w3.org/2000/svg'>
-        <title>PSP Symbol</title>
+    <div id="delegatedauthorization" class="header">
+      Delegated Authorization
+    </div>
+    <div>
+      Using delegated authorization the validation
+      of <b class="actor">User</b> authorizations is separated
+      from payment initiations. The purpose with such arrangements include:
+    </div>
+    <ul>
+      <li>Ease the integration of FWP in existing payment systems.</li>
+      <li>Open the possibility <i>outsourcing</i> the authorization process to TPPs.</li>
+      <li>
+        Provide an <a href="#seq-2">enhanced UX</a> to payment systems based on
+        <a href="#openbanking">Open Banking</a> APIs.
+      </li>
+    </ul>
+    <div class="para">
+      Note that FWP makes the use of delegated authorization <i>transparent</i>
+      for both the <b class="actor">User</b> and the <b class="actor">Merchant</b>.
+    </div>
+    <div class="para">
+      Delegated authorization differs from
+      <a href="https://www.emvco.com/emv-technologies/3d-secure/"
+         title="3DS Site">3D&nbsp;Secure<img src="images/xtl.svg" alt="link"></a>
+      by keeping the authorization process and associated <b class="actor">User</b>
+      account information, inside of the core payment network.
+      This enables validation of potentially <i>untrusted</i> <b class="actor">Merchant</b>
+      data as well as eliminating dependencies on certified <b class="actor">Merchant</b>
+      3D&nbsp;Secure SDKs.
+    </div>
+    <div class="para">
+      Delegated authorization builds on the assumption that the <b class="actor">PSP</b> is trusted
+      for carrying out payment initiations on behalf of a <b class="actor">User</b>
+      (based on a preceding <b class="actor">User</b> authorization step),
+      which is an established concept in most payment networks.
+      (In the FWP standard mode the <b class="actor">PSP</b> only acts as a proxy
+      for the <b class="actor">Merchant</b>).
+    </div>
+    <div class="para">
+      The delegated authorization mode is illustrated by the following sequence diagram:
+    </div>
+    <div style="overflow-x:auto;padding:8pt 0">
+      <svg style='display:block;width:400pt' class='box' viewBox='0 0 486 355' xmlns='http://www.w3.org/2000/svg'>
+        <title>FIDO Web Pay - Sample Sequence Diagram</title>
         <!-- Anders Rundgren 2021 -->
 
-        <rect x='7.5' y='7.5' width='985' height='985' rx='70' fill='white' stroke='grey' stroke-width='15' />
-        <path stroke='#009a00' stroke-width='20' fill='url(#bigGearGid)' d='M399.9,799.7 456.2,902.6 479,896.5 476.3,779.3 493.5,769.3 593.6,830.3 610.3,813.6 549.3,713.5 559.3,696.3 676.5,699 682.6,676.2 579.7,619.9 579.7,600.1 682.6,543.8 676.5,521 559.3,523.7 549.3,506.5 610.3,406.4 593.6,389.7 493.5,450.7 476.3,440.7 479,323.5 456.2,317.4 399.9,420.3 380.1,420.3 323.8,317.4 301,323.5 303.7,440.7 286.5,450.7 186.4,389.7 169.7,406.4 230.7,506.5 220.7,523.7 103.5,521 97.4,543.8 200.3,600.1 200.3,619.9 97.4,676.2 103.5,699 220.7,696.3 230.7,713.5 169.7,813.6 186.4,830.3 286.5,769.3 303.7,779.3 301,896.5 323.8,902.6 380.1,799.7 z' />
-        <circle stroke='grey' stroke-width='15' fill='url(#shaftGid)' r='80' cx='390' cy='610' />
-        <path stroke='#f27b2b' stroke-width='20' fill='url(#smallGearGid)' d='M656.4,357.2 661.5,471.3 692.2,478.1 745,376.8 755,373.7 856.4,426.3 877.6,403.1 816.4,306.7 818.6,296.5 914.9,235 905.4,205.1 791.3,209.9 783.6,202.8 778.5,88.7 747.8,81.9 695,183.2 685,186.3 583.6,133.7 562.4,156.9 623.6,253.3 621.4,263.5 525.1,325 534.6,354.9 648.7,350.1 z' />
-        <circle stroke='grey' stroke-width='15' fill='url(#shaftGid)' r='50' cx='720' cy='280' />
-      </svg>
-      <text x='183' y='24.3' fill='black' font-family='Roboto,sans-serif' font-size='14.399999999999999' text-anchor='middle'>PSP</text>
-      <svg x='283' y='32.0' width='40' height='40.0' viewBox='0 0 1000 1000' xmlns='http://www.w3.org/2000/svg'>
-        <title>Authorizer Symbol</title>
-        <!-- Anders Rundgren 2021 -->
-        <defs>
-          <filter id='shackleGlow'>
-            <feGaussianBlur stdDeviation='2' />
-          </filter>
-          <linearGradient id='goldenLock' x1='0' x2='1' y1='0.3' y2='0.6'>
-            <stop offset='0.1' stop-color='#f0d100' />
-            <stop offset='0.5' stop-color='#f7f5dc' />
-            <stop offset='0.9' stop-color='#f0d100' />
-          </linearGradient>
-          <linearGradient id='serverGloss' x1='0' x2='1' y1='0.3' y2='0.7'>
-            <stop offset='0' stop-color='#d2ddef' />
-            <stop offset='0.5' stop-color='#edf2ff' />
-            <stop offset='1' stop-color='#d2ddef' />
-          </linearGradient>
-          <radialGradient cx='0.5' cy='0.5' id='powerOn' r='0.5'>
-            <stop offset='0' stop-color='#eaebef' />
-            <stop offset='1' stop-color='#ff5656' />
-          </radialGradient>
-        </defs>
-        <rect x='7.5' y='7.5' width='985' height='985' rx='70' fill='white' stroke='grey' stroke-width='15' />
-        <line stroke='#4ca7e0' x1='160' y1='86' x2='160' y2='950' stroke-width='25' />
-        <line stroke='#4ca7e0' x1='840' y1='86' x2='840' y2='950' stroke-width='25' />
-        <rect fill='url(#serverGloss)' x='85' y='86' width='830' height='180' rx='40' stroke='#7f7f7f' stroke-width='10' />
-        <circle cx='149' cy='150' fill='url(#powerOn)' r='32' stroke='#333333' stroke-width='5' />
-        <rect fill='#dae3f3' height='126' stroke='#7f7f7f' stroke-width='10' width='20' x='245' y='113' />
-        <rect fill='#dae3f3' height='126' stroke='#7f7f7f' stroke-width='10' width='20' x='315' y='113' />
-        <rect fill='#dae3f3' height='126' stroke='#7f7f7f' stroke-width='10' width='20' x='385' y='113' />
-        <rect fill='url(#serverGloss)' x='85' y='302' width='830' height='180' rx='40' stroke='#7f7f7f' stroke-width='10' />
-        <circle cx='149' cy='366' fill='url(#powerOn)' r='32' stroke='#333333' stroke-width='5' />
-        <rect fill='#dae3f3' height='126' stroke='#7f7f7f' stroke-width='10' width='20' x='245' y='329' />
-        <rect fill='#dae3f3' height='126' stroke='#7f7f7f' stroke-width='10' width='20' x='315' y='329' />
-        <rect fill='#dae3f3' height='126' stroke='#7f7f7f' stroke-width='10' width='20' x='385' y='329' />
-        <rect fill='url(#serverGloss)' x='85' y='518' width='830' height='180' rx='40' stroke='#7f7f7f' stroke-width='10' />
-        <circle cx='149' cy='582' fill='url(#powerOn)' r='32' stroke='#333333' stroke-width='5' />
-        <rect fill='#dae3f3' height='126' stroke='#7f7f7f' stroke-width='10' width='20' x='245' y='545' />
-        <rect fill='#dae3f3' height='126' stroke='#7f7f7f' stroke-width='10' width='20' x='315' y='545' />
-        <rect fill='#dae3f3' height='126' stroke='#7f7f7f' stroke-width='10' width='20' x='385' y='545' />
-        <rect fill='url(#serverGloss)' x='85' y='734' width='830' height='180' rx='40' stroke='#7f7f7f' stroke-width='10' />
-        <circle cx='149' cy='798' fill='url(#powerOn)' r='32' stroke='#333333' stroke-width='5' />
-        <rect fill='#dae3f3' height='126' stroke='#7f7f7f' stroke-width='10' width='20' x='245' y='761' />
-        <rect fill='#dae3f3' height='126' stroke='#7f7f7f' stroke-width='10' width='20' x='315' y='761' />
-        <rect fill='#dae3f3' height='126' stroke='#7f7f7f' stroke-width='10' width='20' x='385' y='761' />
-        <path fill='none' stroke='#808080' stroke-width='60' d='M580,786 L580,676 C580,651 605,626 630,626 L670,626 C695,626 720,651 720,676 L720,786' />
-        <path fill='none' stroke='#b0b0b0' stroke-width='40' d='M580,786 L580,676 C580,651 605,626 630,626 L670,626 C695,626 720,651 720,676 L720,786' />
-        <path fill='none' stroke='white' stroke-width='14' filter='url(#shackleGlow)' d='M580,786 L580,676 C580,651 605,626 630,626 L670,626 C695,626 720,651 720,676 L720,786' />
-        <rect fill='url(#goldenLock)' x='520' y='786' width='260' height='160' rx='25' stroke='#7f7f7f' stroke-width='10' />
-      </svg>
-      <text x='303' y='24.3' fill='black' font-family='Roboto,sans-serif' font-size='14.399999999999999' text-anchor='middle'>Authorizer</text>
-      <svg x='392.44444444444446' y='32.0' width='61.111111111111114' height='40.0' viewBox='0 0 110 72' xmlns='http://www.w3.org/2000/svg'>
-        <title>Issuer Symbol</title>
-        <!-- Anders Rundgren 2021-->
+        <line x1='63' y1='67' x2='63' y2='345' stroke-width='1.2' stroke='black' />
+        <line x1='183' y1='67' x2='183' y2='345' stroke-width='1.2' stroke='black' />
+        <line x1='303' y1='67' x2='303' y2='345' stroke-width='1.2' stroke='black' />
+        <line x1='423' y1='67' x2='423' y2='345' stroke-width='1.2' stroke='black' />
+        <svg x='34.66666666666667' y='32.0' width='56.666666666666664' height='40.0'
+             xmlns='http://www.w3.org/2000/svg'
+             viewBox='0 0 68 48'
+             version='1.1'>
+          <title>Merchant Symbol</title>
+          <!-- Anders Ruyndgren 2021-->
 
-        <g fill='#b0b0b0' filter='url(#bankShaddow)'>
-          <path d='m19.5,17.5l21.67,0l0,11l-10.67,0l0,35.5l-11,0' />
-          <path d='m41,17.5l21.67,0l0,11l-10.67,0l0,35.5l-11,0' />
-          <path d='m62.5,17.5l21.67,0l0,11l-10.67,0l0,35.5l-11,0' />
-          <path d='m 84,17.5 h 17 v 11 H 95 V 64 H 84' />
-        </g>
-        <rect fill='url(#bankPillar)' height='35.5' width='11' x='17' y='27' />
-        <rect fill='url(#bankPillar)' height='35.5' width='11' x='38.66' y='27' />
-        <rect fill='url(#bankPillar)' height='35.5' width='11' x='60.33' y='27' />
-        <rect fill='url(#bankPillar)' height='35.5' width='11' x='82' y='27' />
-        <path d='m10,16l45,-15l45,15' fill='#eeefdc' stroke='grey' stroke-linecap='round' />
-        <rect fill='#fffbed' height='10' stroke='grey' width='90' x='10' y='16.5' />
-        <rect fill='#fffbed' height='4' stroke='grey' width='100' x='5' y='67' />
-        <rect fill='#fffbed' height='4' stroke='grey' width='90' x='10' y='63' />
+          <g clip-path='url(#clip3)'
+             filter='url(#fx0)'
+             transform='translate(1,12)'>
+            <g clip-path='url(#clip4)'>
+              <rect x='12.3285'
+                    y='7.3284798'
+                    width='45'
+                    height='27'
+                    stroke='#7f7f7f'
+                    stroke-linejoin='round'
+                    stroke-miterlimit='10'
+                    fill='#ff0000' />
+              <rect x='16.328501'
+                    y='15.3285'
+                    width='9'
+                    height='20'
+                    stroke='#7f7f7f'
+                    stroke-linejoin='round'
+                    stroke-miterlimit='10'
+                    fill='#ebf1de' />
+              <rect x='0'
+                    y='0'
+                    width='14'
+                    height='22'
+                    stroke='#8eb4e3'
+                    stroke-width='2'
+                    stroke-linejoin='round'
+                    stroke-miterlimit='10'
+                    fill='#dce6f2'
+                    transform='matrix(0,-1,-1,0,51.8284,28.8284)' />
+              <path d='m 25.3285,25.3285 1e-4,1e-4'
+                    stroke='#4a7ebb'
+                    stroke-linejoin='round'
+                    stroke-miterlimit='10'
+                    fill='none'
+                    fill-rule='evenodd' />
+              <rect x='7.3284898'
+                    y='34.328499'
+                    width='54'
+                    height='2'
+                    stroke='#7f7f7f'
+                    stroke-linejoin='round'
+                    stroke-miterlimit='10'
+                    fill='#fdfac7' />
+            </g>
+          </g>
+          <rect x='12.5'
+                y='18.500099'
+                width='45'
+                height='27'
+                stroke='#7f7f7f'
+                stroke-width='0.666667'
+                stroke-linejoin='round'
+                stroke-miterlimit='10'
+                fill='url(#fill5)'
+                style='fill:url(#fill5)' />
+          <rect x='16.5'
+                y='26.500099'
+                width='9'
+                height='20'
+                stroke='#7f7f7f'
+                stroke-linejoin='round'
+                stroke-miterlimit='10'
+                fill='#ebf1de' />
+          <rect x='-40'
+                y='-52'
+                width='14'
+                height='22'
+                stroke='#8eb4e3'
+                stroke-width='1.66667'
+                stroke-linejoin='round'
+                stroke-miterlimit='10'
+                fill='#dce6f2'
+                transform='matrix(0,-1,-1,0,0,0)' />
+          <path d='m 25.5,36.5001 v 10e-5'
+                stroke='#4a7ebb'
+                stroke-linejoin='round'
+                stroke-miterlimit='10'
+                fill='none'
+                fill-rule='evenodd' />
+          <g clip-path='url(#clip6)'
+             filter='url(#fx1)'
+             transform='translate(0,-4)'>
+            <g clip-path='url(#clip7)'>
+              <path d='m 7.32849,24.8285 c 0,-0.8285 1.567,-1.5 3.50001,-1.5 1.933,0 3.5,0.6715 3.5,1.5 0,0.8284 -1.567,1.5 -3.5,1.5 -1.93301,0 -3.50001,-0.6716 -3.50001,-1.5 z'
+                    stroke='#7f7f7f'
+                    stroke-linejoin='round'
+                    stroke-miterlimit='10'
+                    fill='#ff0000'
+                    fill-rule='evenodd' />
+              <path d='m 20.3285,24.8285 c 0,-0.8285 1.567,-1.5 3.5,-1.5 1.933,0 3.5,0.6715 3.5,1.5 0,0.8284 -1.567,1.5 -3.5,1.5 -1.933,0 -3.5,-0.6716 -3.5,-1.5 z'
+                    stroke='#7f7f7f'
+                    stroke-linejoin='round'
+                    stroke-miterlimit='10'
+                    fill='#ff0000'
+                    fill-rule='evenodd' />
+              <path d='m 33.3285,24.8285 c 0,-0.8285 1.567,-1.5 3.5,-1.5 1.933,0 3.5,0.6715 3.5,1.5 0,0.8284 -1.567,1.5 -3.5,1.5 -1.933,0 -3.5,-0.6716 -3.5,-1.5 z'
+                    stroke='#7f7f7f'
+                    stroke-linejoin='round'
+                    stroke-miterlimit='10'
+                    fill='#ff0000'
+                    fill-rule='evenodd' />
+              <path d='m 46.3285,24.8285 c 0,-0.8285 1.567,-1.5 3.5,-1.5 1.933,0 3.5,0.6715 3.5,1.5 0,0.8284 -1.567,1.5 -3.5,1.5 -1.933,0 -3.5,-0.6716 -3.5,-1.5 z'
+                    stroke='#7f7f7f'
+                    stroke-linejoin='round'
+                    stroke-miterlimit='10'
+                    fill='#ff0000'
+                    fill-rule='evenodd' />
+              <path d='m 59.3285,24.8285 c 0,-0.8285 1.567,-1.5 3.5,-1.5 1.933,0 3.5,0.6715 3.5,1.5 0,0.8284 -1.567,1.5 -3.5,1.5 -1.933,0 -3.5,-0.6716 -3.5,-1.5 z'
+                    stroke='#7f7f7f'
+                    stroke-linejoin='round'
+                    stroke-miterlimit='10'
+                    fill='#ff0000'
+                    fill-rule='evenodd' />
+              <path d='m 14.3285,24.8285 c 0,-0.8285 1.3431,-1.5 3,-1.5 1.6568,0 3,0.6715 3,1.5 0,0.8284 -1.3432,1.5 -3,1.5 -1.6569,0 -3,-0.6716 -3,-1.5 z'
+                    stroke='#7f7f7f'
+                    stroke-linejoin='round'
+                    stroke-miterlimit='10'
+                    fill='#ffffff'
+                    fill-rule='evenodd' />
+              <path d='m 27.3285,24.8285 c 0,-0.8285 1.3431,-1.5 3,-1.5 1.6568,0 3,0.6715 3,1.5 0,0.8284 -1.3432,1.5 -3,1.5 -1.6569,0 -3,-0.6716 -3,-1.5 z'
+                    stroke='#7f7f7f'
+                    stroke-linejoin='round'
+                    stroke-miterlimit='10'
+                    fill='#ffffff'
+                    fill-rule='evenodd' />
+              <path d='m 40.3285,24.8285 c 0,-0.8285 1.3431,-1.5 3,-1.5 1.6568,0 3,0.6715 3,1.5 0,0.8284 -1.3432,1.5 -3,1.5 -1.6569,0 -3,-0.6716 -3,-1.5 z'
+                    stroke='#7f7f7f'
+                    stroke-linejoin='round'
+                    stroke-miterlimit='10'
+                    fill='#ffffff'
+                    fill-rule='evenodd' />
+              <path d='m 53.3285,24.8285 c 0,-0.8285 1.3431,-1.5 3,-1.5 1.6568,0 3,0.6715 3,1.5 0,0.8284 -1.3432,1.5 -3,1.5 -1.6569,0 -3,-0.6716 -3,-1.5 z'
+                    stroke='#7f7f7f'
+                    stroke-linejoin='round'
+                    stroke-miterlimit='10'
+                    fill='#ffffff'
+                    fill-rule='evenodd' />
+              <path d='M 0,17 V 0 l 7,17 z'
+                    stroke='#7f7f7f'
+                    stroke-linejoin='round'
+                    stroke-miterlimit='10'
+                    fill='#ff0000'
+                    fill-rule='evenodd'
+                    transform='matrix(-1,0,0,1,14.3285,7.32848)' />
+              <rect x='20.328501'
+                    y='7.3284798'
+                    width='7'
+                    height='17'
+                    stroke='#7f7f7f'
+                    stroke-linejoin='round'
+                    stroke-miterlimit='10'
+                    fill='#ff0000' />
+              <rect x='33.328499'
+                    y='7.3284798'
+                    width='7'
+                    height='17'
+                    stroke='#7f7f7f'
+                    stroke-linejoin='round'
+                    stroke-miterlimit='10'
+                    fill='#ff0000' />
+              <rect x='46.328499'
+                    y='7.3284798'
+                    width='7'
+                    height='17'
+                    stroke='#7f7f7f'
+                    stroke-linejoin='round'
+                    stroke-miterlimit='10'
+                    fill='#ff0000' />
+              <path d='M 59.3285,24.3285 V 7.32848 l 7,17.00002 z'
+                    stroke='#7f7f7f'
+                    stroke-linejoin='round'
+                    stroke-miterlimit='10'
+                    fill='#ff0000'
+                    fill-rule='evenodd' />
+              <rect x='14.3285'
+                    y='7.3284798'
+                    width='6'
+                    height='17'
+                    stroke='#7f7f7f'
+                    stroke-linejoin='round'
+                    stroke-miterlimit='10'
+                    fill='#ffffff' />
+              <rect x='27.328501'
+                    y='7.3284798'
+                    width='6'
+                    height='17'
+                    stroke='#7f7f7f'
+                    stroke-linejoin='round'
+                    stroke-miterlimit='10'
+                    fill='#ffffff' />
+              <rect x='40.328499'
+                    y='7.3284798'
+                    width='6'
+                    height='17'
+                    stroke='#7f7f7f'
+                    stroke-linejoin='round'
+                    stroke-miterlimit='10'
+                    fill='#ffffff' />
+              <rect x='53.328499'
+                    y='7.3284798'
+                    width='6'
+                    height='17'
+                    stroke='#7f7f7f'
+                    stroke-linejoin='round'
+                    stroke-miterlimit='10'
+                    fill='#ffffff' />
+            </g>
+          </g>
+          <path d='m 4.5,18.0001 c 0,-0.8285 1.567,-1.5 3.5,-1.5 1.933,0 3.5,0.6715 3.5,1.5 0,0.8284 -1.567,1.5 -3.5,1.5 -1.933,0 -3.5,-0.6716 -3.5,-1.5 z'
+                stroke='#7f7f7f'
+                stroke-width='0.666667'
+                stroke-linejoin='round'
+                stroke-miterlimit='10'
+                fill='#ff0000'
+                fill-rule='evenodd' />
+          <path d='m 17.5,18.0001 c 0,-0.8285 1.567,-1.5 3.5,-1.5 1.933,0 3.5,0.6715 3.5,1.5 0,0.8284 -1.567,1.5 -3.5,1.5 -1.933,0 -3.5,-0.6716 -3.5,-1.5 z'
+                stroke='#7f7f7f'
+                stroke-width='0.666667'
+                stroke-linejoin='round'
+                stroke-miterlimit='10'
+                fill='#ff0000'
+                fill-rule='evenodd' />
+          <path d='m 30.5,18.0001 c 0,-0.8285 1.567,-1.5 3.5,-1.5 1.933,0 3.5,0.6715 3.5,1.5 0,0.8284 -1.567,1.5 -3.5,1.5 -1.933,0 -3.5,-0.6716 -3.5,-1.5 z'
+                stroke='#7f7f7f'
+                stroke-width='0.666667'
+                stroke-linejoin='round'
+                stroke-miterlimit='10'
+                fill='#ff0000'
+                fill-rule='evenodd' />
+          <path d='m 43.5,18.0001 c 0,-0.8285 1.567,-1.5 3.5,-1.5 1.933,0 3.5,0.6715 3.5,1.5 0,0.8284 -1.567,1.5 -3.5,1.5 -1.933,0 -3.5,-0.6716 -3.5,-1.5 z'
+                stroke='#7f7f7f'
+                stroke-width='0.666667'
+                stroke-linejoin='round'
+                stroke-miterlimit='10'
+                fill='#ff0000'
+                fill-rule='evenodd' />
+          <path d='m 56.5,18.0001 c 0,-0.8285 1.567,-1.5 3.5,-1.5 1.933,0 3.5,0.6715 3.5,1.5 0,0.8284 -1.567,1.5 -3.5,1.5 -1.933,0 -3.5,-0.6716 -3.5,-1.5 z'
+                stroke='#7f7f7f'
+                stroke-width='0.666667'
+                stroke-linejoin='round'
+                stroke-miterlimit='10'
+                fill='#ff0000'
+                fill-rule='evenodd' />
+          <path d='m 11.5,18.0001 c 0,-0.8285 1.343,-1.5 3,-1.5 1.657,0 3,0.6715 3,1.5 0,0.8284 -1.343,1.5 -3,1.5 -1.657,0 -3,-0.6716 -3,-1.5 z'
+                stroke='#7f7f7f'
+                stroke-width='0.666667'
+                stroke-linejoin='round'
+                stroke-miterlimit='10'
+                fill='#ffffff'
+                fill-rule='evenodd' />
+          <path d='m 24.5,18.0001 c 0,-0.8285 1.343,-1.5 3,-1.5 1.657,0 3,0.6715 3,1.5 0,0.8284 -1.343,1.5 -3,1.5 -1.657,0 -3,-0.6716 -3,-1.5 z'
+                stroke='#7f7f7f'
+                stroke-width='0.666667'
+                stroke-linejoin='round'
+                stroke-miterlimit='10'
+                fill='#ffffff'
+                fill-rule='evenodd' />
+          <path d='m 37.5,18.0001 c 0,-0.8285 1.343,-1.5 3,-1.5 1.657,0 3,0.6715 3,1.5 0,0.8284 -1.343,1.5 -3,1.5 -1.657,0 -3,-0.6716 -3,-1.5 z'
+                stroke='#7f7f7f'
+                stroke-width='0.666667'
+                stroke-linejoin='round'
+                stroke-miterlimit='10'
+                fill='#ffffff'
+                fill-rule='evenodd' />
+          <path d='m 50.5,18.0001 c 0,-0.8285 1.343,-1.5 3,-1.5 1.657,0 3,0.6715 3,1.5 0,0.8284 -1.343,1.5 -3,1.5 -1.657,0 -3,-0.6716 -3,-1.5 z'
+                stroke='#7f7f7f'
+                stroke-width='0.666667'
+                stroke-linejoin='round'
+                stroke-miterlimit='10'
+                fill='#ffffff'
+                fill-rule='evenodd' />
+          <path d='m 11.5,17.5001 v -17 l -7,17 z'
+                stroke='#7f7f7f'
+                stroke-width='0.666667'
+                stroke-linejoin='round'
+                stroke-miterlimit='10'
+                fill='#ff0000'
+                fill-rule='evenodd' />
+          <rect x='17.5'
+                y='0.50009918'
+                width='7'
+                height='17'
+                stroke='#7f7f7f'
+                stroke-width='0.666667'
+                stroke-linejoin='round'
+                stroke-miterlimit='10'
+                fill='#ff0000' />
+          <rect x='30.5'
+                y='0.50009918'
+                width='7'
+                height='17'
+                stroke='#7f7f7f'
+                stroke-width='0.666667'
+                stroke-linejoin='round'
+                stroke-miterlimit='10'
+                fill='#ff0000' />
+          <rect x='43.5'
+                y='0.50009918'
+                width='7'
+                height='17'
+                stroke='#7f7f7f'
+                stroke-width='0.666667'
+                stroke-linejoin='round'
+                stroke-miterlimit='10'
+                fill='#ff0000' />
+          <path d='m 56.5,17.5001 v -17 l 7,17 z'
+                stroke='#7f7f7f'
+                stroke-width='0.666667'
+                stroke-linejoin='round'
+                stroke-miterlimit='10'
+                fill='#ff0000'
+                fill-rule='evenodd' />
+          <rect x='11.5'
+                y='0.50009918'
+                width='6'
+                height='17'
+                stroke='#7f7f7f'
+                stroke-width='0.666667'
+                stroke-linejoin='round'
+                stroke-miterlimit='10'
+                fill='#ffffff' />
+          <rect x='24.5'
+                y='0.50009918'
+                width='6'
+                height='17'
+                stroke='#7f7f7f'
+                stroke-width='0.666667'
+                stroke-linejoin='round'
+                stroke-miterlimit='10'
+                fill='#ffffff' />
+          <rect x='37.5'
+                y='0.50009918'
+                width='6'
+                height='17'
+                stroke='#7f7f7f'
+                stroke-width='0.666667'
+                stroke-linejoin='round'
+                stroke-miterlimit='10'
+                fill='#ffffff' />
+          <rect x='50.5'
+                y='0.50009918'
+                width='6'
+                height='17'
+                stroke='#7f7f7f'
+                stroke-width='0.666667'
+                stroke-linejoin='round'
+                stroke-miterlimit='10'
+                fill='#ffffff' />
+          <rect x='7.5'
+                y='45.5'
+                width='54'
+                height='2'
+                stroke='#7f7f7f'
+                stroke-width='0.666667'
+                stroke-linejoin='round'
+                stroke-miterlimit='10'
+                fill='#fdfac7' />
+        </svg>
+        <text x='63' y='24.3' fill='black' font-family='Roboto,sans-serif' font-size='14.399999999999999' text-anchor='middle'>Merchant</text>
+        <svg x='163' y='32.0' width='40' height='40.0' viewBox='0 0 1000 1000' xmlns='http://www.w3.org/2000/svg'>
+          <title>PSP Symbol</title>
+          <!-- Anders Rundgren 2021 -->
+
+          <rect x='7.5' y='7.5' width='985' height='985' rx='70' fill='white' stroke='grey' stroke-width='15' />
+          <path stroke='#009a00' stroke-width='20' fill='url(#bigGearGid)' d='M399.9,799.7 456.2,902.6 479,896.5 476.3,779.3 493.5,769.3 593.6,830.3 610.3,813.6 549.3,713.5 559.3,696.3 676.5,699 682.6,676.2 579.7,619.9 579.7,600.1 682.6,543.8 676.5,521 559.3,523.7 549.3,506.5 610.3,406.4 593.6,389.7 493.5,450.7 476.3,440.7 479,323.5 456.2,317.4 399.9,420.3 380.1,420.3 323.8,317.4 301,323.5 303.7,440.7 286.5,450.7 186.4,389.7 169.7,406.4 230.7,506.5 220.7,523.7 103.5,521 97.4,543.8 200.3,600.1 200.3,619.9 97.4,676.2 103.5,699 220.7,696.3 230.7,713.5 169.7,813.6 186.4,830.3 286.5,769.3 303.7,779.3 301,896.5 323.8,902.6 380.1,799.7 z' />
+          <circle stroke='grey' stroke-width='15' fill='url(#shaftGid)' r='80' cx='390' cy='610' />
+          <path stroke='#f27b2b' stroke-width='20' fill='url(#smallGearGid)' d='M656.4,357.2 661.5,471.3 692.2,478.1 745,376.8 755,373.7 856.4,426.3 877.6,403.1 816.4,306.7 818.6,296.5 914.9,235 905.4,205.1 791.3,209.9 783.6,202.8 778.5,88.7 747.8,81.9 695,183.2 685,186.3 583.6,133.7 562.4,156.9 623.6,253.3 621.4,263.5 525.1,325 534.6,354.9 648.7,350.1 z' />
+          <circle stroke='grey' stroke-width='15' fill='url(#shaftGid)' r='50' cx='720' cy='280' />
+        </svg>
+        <text x='183' y='24.3' fill='black' font-family='Roboto,sans-serif' font-size='14.399999999999999' text-anchor='middle'>PSP</text>
+        <svg x='283' y='32.0' width='40' height='40.0' viewBox='0 0 1000 1000' xmlns='http://www.w3.org/2000/svg'>
+          <title>Authorizer Symbol</title>
+          <!-- Anders Rundgren 2021 -->
+          <defs>
+            <filter id='shackleGlow'>
+              <feGaussianBlur stdDeviation='2' />
+            </filter>
+            <linearGradient id='goldenLock' x1='0' x2='1' y1='0.3' y2='0.6'>
+              <stop offset='0.1' stop-color='#f0d100' />
+              <stop offset='0.5' stop-color='#f7f5dc' />
+              <stop offset='0.9' stop-color='#f0d100' />
+            </linearGradient>
+            <linearGradient id='serverGloss' x1='0' x2='1' y1='0.3' y2='0.7'>
+              <stop offset='0' stop-color='#d2ddef' />
+              <stop offset='0.5' stop-color='#edf2ff' />
+              <stop offset='1' stop-color='#d2ddef' />
+            </linearGradient>
+            <radialGradient cx='0.5' cy='0.5' id='powerOn' r='0.5'>
+              <stop offset='0' stop-color='#eaebef' />
+              <stop offset='1' stop-color='#ff5656' />
+            </radialGradient>
+          </defs>
+          <rect x='7.5' y='7.5' width='985' height='985' rx='70' fill='white' stroke='grey' stroke-width='15' />
+          <line stroke='#4ca7e0' x1='160' y1='86' x2='160' y2='950' stroke-width='25' />
+          <line stroke='#4ca7e0' x1='840' y1='86' x2='840' y2='950' stroke-width='25' />
+          <rect fill='url(#serverGloss)' x='85' y='86' width='830' height='180' rx='40' stroke='#7f7f7f' stroke-width='10' />
+          <circle cx='149' cy='150' fill='url(#powerOn)' r='32' stroke='#333333' stroke-width='5' />
+          <rect fill='#dae3f3' height='126' stroke='#7f7f7f' stroke-width='10' width='20' x='245' y='113' />
+          <rect fill='#dae3f3' height='126' stroke='#7f7f7f' stroke-width='10' width='20' x='315' y='113' />
+          <rect fill='#dae3f3' height='126' stroke='#7f7f7f' stroke-width='10' width='20' x='385' y='113' />
+          <rect fill='url(#serverGloss)' x='85' y='302' width='830' height='180' rx='40' stroke='#7f7f7f' stroke-width='10' />
+          <circle cx='149' cy='366' fill='url(#powerOn)' r='32' stroke='#333333' stroke-width='5' />
+          <rect fill='#dae3f3' height='126' stroke='#7f7f7f' stroke-width='10' width='20' x='245' y='329' />
+          <rect fill='#dae3f3' height='126' stroke='#7f7f7f' stroke-width='10' width='20' x='315' y='329' />
+          <rect fill='#dae3f3' height='126' stroke='#7f7f7f' stroke-width='10' width='20' x='385' y='329' />
+          <rect fill='url(#serverGloss)' x='85' y='518' width='830' height='180' rx='40' stroke='#7f7f7f' stroke-width='10' />
+          <circle cx='149' cy='582' fill='url(#powerOn)' r='32' stroke='#333333' stroke-width='5' />
+          <rect fill='#dae3f3' height='126' stroke='#7f7f7f' stroke-width='10' width='20' x='245' y='545' />
+          <rect fill='#dae3f3' height='126' stroke='#7f7f7f' stroke-width='10' width='20' x='315' y='545' />
+          <rect fill='#dae3f3' height='126' stroke='#7f7f7f' stroke-width='10' width='20' x='385' y='545' />
+          <rect fill='url(#serverGloss)' x='85' y='734' width='830' height='180' rx='40' stroke='#7f7f7f' stroke-width='10' />
+          <circle cx='149' cy='798' fill='url(#powerOn)' r='32' stroke='#333333' stroke-width='5' />
+          <rect fill='#dae3f3' height='126' stroke='#7f7f7f' stroke-width='10' width='20' x='245' y='761' />
+          <rect fill='#dae3f3' height='126' stroke='#7f7f7f' stroke-width='10' width='20' x='315' y='761' />
+          <rect fill='#dae3f3' height='126' stroke='#7f7f7f' stroke-width='10' width='20' x='385' y='761' />
+          <path fill='none' stroke='#808080' stroke-width='60' d='M580,786 L580,676 C580,651 605,626 630,626 L670,626 C695,626 720,651 720,676 L720,786' />
+          <path fill='none' stroke='#b0b0b0' stroke-width='40' d='M580,786 L580,676 C580,651 605,626 630,626 L670,626 C695,626 720,651 720,676 L720,786' />
+          <path fill='none' stroke='white' stroke-width='14' filter='url(#shackleGlow)' d='M580,786 L580,676 C580,651 605,626 630,626 L670,626 C695,626 720,651 720,676 L720,786' />
+          <rect fill='url(#goldenLock)' x='520' y='786' width='260' height='160' rx='25' stroke='#7f7f7f' stroke-width='10' />
+        </svg>
+        <text x='303' y='24.3' fill='black' font-family='Roboto,sans-serif' font-size='14.399999999999999' text-anchor='middle'>Authorizer</text>
+        <svg x='392.44444444444446' y='32.0' width='61.111111111111114' height='40.0' viewBox='0 0 110 72' xmlns='http://www.w3.org/2000/svg'>
+          <title>Issuer Symbol</title>
+          <!-- Anders Rundgren 2021-->
+
+          <g fill='#b0b0b0' filter='url(#bankShaddow)'>
+            <path d='m19.5,17.5l21.67,0l0,11l-10.67,0l0,35.5l-11,0' />
+            <path d='m41,17.5l21.67,0l0,11l-10.67,0l0,35.5l-11,0' />
+            <path d='m62.5,17.5l21.67,0l0,11l-10.67,0l0,35.5l-11,0' />
+            <path d='m 84,17.5 h 17 v 11 H 95 V 64 H 84' />
+          </g>
+          <rect fill='url(#bankPillar)' height='35.5' width='11' x='17' y='27' />
+          <rect fill='url(#bankPillar)' height='35.5' width='11' x='38.66' y='27' />
+          <rect fill='url(#bankPillar)' height='35.5' width='11' x='60.33' y='27' />
+          <rect fill='url(#bankPillar)' height='35.5' width='11' x='82' y='27' />
+          <path d='m10,16l45,-15l45,15' fill='#eeefdc' stroke='grey' stroke-linecap='round' />
+          <rect fill='#fffbed' height='10' stroke='grey' width='90' x='10' y='16.5' />
+          <rect fill='#fffbed' height='4' stroke='grey' width='100' x='5' y='67' />
+          <rect fill='#fffbed' height='4' stroke='grey' width='90' x='10' y='63' />
+        </svg>
+        <text x='423' y='24.3' fill='black' font-family='Roboto,sans-serif' font-size='14.399999999999999' text-anchor='middle'>Issuer</text>
+        <line x1='63.6' y1='100' x2='174.9' y2='100' stroke-width='0.8' stroke='#cc1010' marker-end='url(#arrowHead)' />
+        <text x='123' y='94.7' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>PSPRequest</text>
+        <a href='#seq-7'>
+          <rect x='56' y='93' width='14' height='14' rx='3' fill='white' stroke='#404040' stroke-width='0.5' />
+          <text x='63' y='104.3' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>7</text>
+        </a>
+        <path fill='black' opacity='0.4' d='M146,118.75 l86,0 l-8,22 l-86,0Z' filter='url(#dropShaddow)' />
+        <path fill='#faf2dd' stroke='#404040' stroke-width='0.5' d='M144,116.75 l86,0 l-8,22 l-86,0Z' />
+        <text x='185.8' y='132.05' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>Processing</text>
+        <a href='#seq-D1'>
+          <rect x='129.25' y='120.75' width='21' height='14' rx='3' fill='white' stroke='#404040' stroke-width='0.5' />
+          <text x='139.75' y='132.05' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>D1</text>
+        </a>
+        <line x1='183.6' y1='164' x2='294.9' y2='164' stroke-width='0.8' stroke='#cc1010' marker-end='url(#arrowHead)' />
+        <text x='243' y='158.70000000000002' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>&nbsp;&nbsp;AuthorizeRequest</text>
+        <a href='#seq-D2'>
+          <rect x='172.5' y='157' width='21' height='14' rx='3' fill='white' stroke='#404040' stroke-width='0.5' />
+          <text x='183' y='168.3' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>D2</text>
+        </a>
+        <path fill='black' opacity='0.4' d='M266,182.75 l86,0 l-8,22 l-86,0Z' filter='url(#dropShaddow)' />
+        <path fill='#faf2dd' stroke='#404040' stroke-width='0.5' d='M264,180.75 l86,0 l-8,22 l-86,0Z' />
+        <text x='305.8' y='196.05' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>Processing</text>
+        <a href='#seq-D3'>
+          <rect x='249.25' y='184.75' width='21' height='14' rx='3' fill='white' stroke='#404040' stroke-width='0.5' />
+          <text x='259.75' y='196.05' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>D3</text>
+        </a>
+        <line x1='302.4' y1='228' x2='191.1' y2='228' stroke-width='0.8' stroke='#009000' marker-end='url(#arrowReturnHead)' />
+        <text x='243' y='222.70000000000002' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>Authorization</text>
+        <a href='#seq-D4'>
+          <rect x='292.5' y='221' width='21' height='14' rx='3' fill='white' stroke='#404040' stroke-width='0.5' />
+          <text x='303' y='232.3' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>D4</text>
+        </a>
+        <path fill='black' opacity='0.4' d='M146,246.75 l86,0 l-8,22 l-86,0Z' filter='url(#dropShaddow)' />
+        <path fill='#faf2dd' stroke='#404040' stroke-width='0.5' d='M144,244.75 l86,0 l-8,22 l-86,0Z' />
+        <text x='185.8' y='260.05' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>Processing</text>
+        <a href='#seq-D5'>
+          <rect x='129.25' y='248.75' width='21' height='14' rx='3' fill='white' stroke='#404040' stroke-width='0.5' />
+          <text x='139.75' y='260.05' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>D5</text>
+        </a>
+        <line x1='183.6' y1='292' x2='414.9' y2='292' stroke-width='0.8' stroke='#cc1010' marker-end='url(#arrowHead)' />
+        <text x='243' y='286.7' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>&quot;Payment Rails&quot;</text>
+        <a href='#seq-D6'>
+          <rect x='172.5' y='285' width='21' height='14' rx='3' fill='white' stroke='#404040' stroke-width='0.5' />
+          <text x='183' y='296.3' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>D6</text>
+        </a>
+        <path fill='black' opacity='0.4' d='M386,310.75 l86,0 l-8,22 l-86,0Z' filter='url(#dropShaddow)' />
+        <path fill='#faf2dd' stroke='#404040' stroke-width='0.5' d='M384,308.75 l86,0 l-8,22 l-86,0Z' />
+        <text x='425.8' y='324.05' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>Processing</text>
+        <a href='#seq-D7'>
+          <rect x='369.25' y='312.75' width='21' height='14' rx='3' fill='white' stroke='#404040' stroke-width='0.5' />
+          <text x='379.75' y='324.05' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>D7</text>
+        </a>
       </svg>
-      <text x='423' y='24.3' fill='black' font-family='Roboto,sans-serif' font-size='14.399999999999999' text-anchor='middle'>Issuer</text>
-      <line x1='63.6' y1='100' x2='174.9' y2='100' stroke-width='0.8' stroke='#cc1010' marker-end='url(#arrowHead)' />
-      <text x='123' y='94.7' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>PSPRequest</text>
-      <a href='#seq-7'>
-        <rect x='56' y='93' width='14' height='14' rx='3' fill='white' stroke='#404040' stroke-width='0.5' />
-        <text x='63' y='104.3' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>7</text>
+    </div>
+    <div>
+      Note that step 1-7 are <i>identical</i> to the FWP &quot;standard&quot; mode.
+      &quot;Payment Rails&quot; refer to existing payment systems.
+    </div>
+    <div class="para">
+      In an <a href="#openbanking">Open Banking</a> context the <b class="actor">PSP</b> would be equivalent to a PISP while
+      the <b class="actor">Authorizer</b> would be a specialized AS.
+    </div>
+    <div class="step"><div id="seq-D1" class="numbox">D1</div>Process PSPRequest and Create AuthorizeRequest Object</div>
+    <div>
+      This step should involve the same verifications as in <a href="#seq-8">step 8</a>
+      in the standard mode.
+      A suitable <span class="msg">AuthorizeRequest</span> object would typically follow the
+      <span class="msg">IssuerRequest</span> sample in step 8.
+    </div>
+    <div class="comment box">
+      Using delegated authorization may be decided by each <b class="actor">Issuer</b>
+      <i>individually</i>.  The actual configuration is preferably resolved by making
+      the <code>issuerId</code> attribute play the role of a <a href="#servicediscovery">Service Discovery URL</a>.
+    </div>
+    <div class="step"><div id="seq-D2" class="numbox">D2</div>Send AuthorizeRequest Object</div>
+    <div>
+      At this point the <b class="actor">PSP</b> sends the completed <span class="msg">AuthorizeRequest</span>
+      object to the designated <b class="actor">Authorizer</b>.
+      Note that the method used for locating the proper <b class="actor">Authorizer</b> depends on
+      the <code>paymentMethod</code> and <code>issuerId</code> attributes.
+    </div>
+    <div class="step"><div id="seq-D3" class="numbox">D3</div>Process AuthorizeRequest</div>
+    <div>
+      This step should involve the same verifications as in <a href="#seq-10">step 10</a>
+      in the standard mode.
+    </div>
+    <div class="step"><div id="seq-D4" class="numbox">D4</div>Return Authorized Data</div>
+    <div>
+      If the preceding step is successful, <span class="msg">AuthorizeRequest</span>
+      would typically return the (now decrypted) <b class="actor">User</b> account number.
+    </div>
+    <div id="delegatedreturnoptions" class="comment box">
+      A more sophisticated approach would be to return signed data for maintaining the
+      end-to-end security model.  For card payments this would preferably be in the
+      form of EMV compliant objects that can be passed on to existing payment systems
+      &quot;as&nbsp;is&quot;.
+    </div>
+    <div id="openbanking">
+      &nbsp;<br />In an Open Banking implementation based on OAuth2 concepts,
+      the return data would contain access tokens and consent information.
+    </div>
+    <div class="step"><div id="seq-D5" class="numbox">D5</div>Create Payment Instruction</div>
+    <div>
+      After receiving the <b class="actor">User</b> account number a
+      <span class="msg">payment instruction</span> object is created.
+      The format and contents of such objects are payment network specific and
+      are therefore not described here.
+    </div>
+    <div class="step"><div id="seq-D6" class="numbox">D6</div>Invoke &quot;Payment Rails&quot;</div>
+    <div>
+      Perform a <span class="msg">payment instruction</span> request in a payment network specific way.
+    </div>
+    <div class="step"><div id="seq-D7" class="numbox">D7</div>Process Payment Instruction</div>
+    <div>
+      Process the <span class="msg">payment instruction</span>
+      request in a payment network specific way.
+    </div>
+    <div id="extensions" class="header">
+      Extensions
+    </div>
+    <div>
+      The FWP <i>client</i> is loosely derived from a proof-of-concept system called
+      <a href="https://cyberphone.github.io/doc/saturn/"
+         title="Saturn">Saturn<img src="images/xtl.svg" alt="link" /></a>.
+      By continuing along this path, features like the following could potentially be added:
+    </div>
+    <ul>
+      <li>
+        Support for <i>non-direct payments</i>,
+        including secure (<i>tokenized</i>) versions of Card-on-File.
+      </li>
+      <li>
+        Support for real-time <i>account balances</i>.
+      </li>
+      <li>
+        Support for <b class="actor">User</b> <i>refunding</i>.
+      </li>
+      <li>
+        Support for universal <i>digital receipts</i>.
+      </li>
+      <li>
+        Support for <i>private messaging</i> and additional authentication information between the
+        <b class="actor">Issuer</b> and <b class="actor">User</b>.
+      </li>
+    </ul>
+    <div class="para">
+      Note that <i>some</i> of the features above could impact the PaymentRequest API.
+    </div>
+    <div id="implementationoptions" class="header">
+      Implementation Options
+    </div>
+    <div>
+      An alternative to building FWP support into browsers, is moving the FWP implementation
+      (including the <a href="#credentialdatabase">credential database</a>), down into the client platform layer.
+      This would open FWP to other scenarios like:
+    </div>
+    <ul style="margin-bottom:0.3em">
+      <li>
+        Point-of-sale (PoS) payments.
+        This would (at least <i>initially</i>) depend on QR-code for invocation.
+      </li>
+      <li>
+        Person-to-person (P2P) payments.
+      </li>
+    </ul>
+    <div class="para">
+      Such an arrangement would also introduce additional features including:
+    </div>
+    <ul>
+      <li>
+        Making it easier for alternative browser vendors adopting the FWP system
+        since they would not have to build a copy of FWP themselves.
+      </li>
+      <li>
+        Relieving users from having to enroll payment credentials
+        for each browser they want to use.
+      </li>
+      <li>
+        Limiting the number of systems to certify in the case certification
+        becomes a requirement.
+      </li>
+    </ul>
+    <div id="acknowledgements" class="header">
+      Acknowledgements
+    </div>
+    <div>
+      The FWP core was heavily influenced by an earlier Microsoft research project
+      called <a href="https://en.wikipedia.org/wiki/Windows_CardSpace"
+                title="CardSpace">Windows CardSpace<img src="images/xtl.svg" alt="link"></a>.
+    </div>
+    <div class="para">
+      The <b class="actor">User</b> icon was derived from
+      <a style="word-break:break-all;white-space:normal"
+         href="https://commons.wikimedia.org/wiki/File:Crystal_Clear_kdm_user_female.svg"
+         title="User Icon">
+        https://commons.wikimedia.org/wiki/File:Crystal_Clear_kdm_user_female.svg<img src="images/xtl.svg" alt="link">
       </a>
-      <path fill='black' opacity='0.4' d='M146,118.75 l86,0 l-8,22 l-86,0Z' filter='url(#dropShaddow)' />
-      <path fill='#faf2dd' stroke='#404040' stroke-width='0.5' d='M144,116.75 l86,0 l-8,22 l-86,0Z' />
-      <text x='185.8' y='132.05' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>Processing</text>
-      <a href='#seq-D1'>
-        <rect x='129.25' y='120.75' width='21' height='14' rx='3' fill='white' stroke='#404040' stroke-width='0.5' />
-        <text x='139.75' y='132.05' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>D1</text>
-      </a>
-      <line x1='183.6' y1='164' x2='294.9' y2='164' stroke-width='0.8' stroke='#cc1010' marker-end='url(#arrowHead)' />
-      <text x='243' y='158.70000000000002' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>&nbsp;&nbsp;AuthorizeRequest</text>
-      <a href='#seq-D2'>
-        <rect x='172.5' y='157' width='21' height='14' rx='3' fill='white' stroke='#404040' stroke-width='0.5' />
-        <text x='183' y='168.3' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>D2</text>
-      </a>
-      <path fill='black' opacity='0.4' d='M266,182.75 l86,0 l-8,22 l-86,0Z' filter='url(#dropShaddow)' />
-      <path fill='#faf2dd' stroke='#404040' stroke-width='0.5' d='M264,180.75 l86,0 l-8,22 l-86,0Z' />
-      <text x='305.8' y='196.05' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>Processing</text>
-      <a href='#seq-D3'>
-        <rect x='249.25' y='184.75' width='21' height='14' rx='3' fill='white' stroke='#404040' stroke-width='0.5' />
-        <text x='259.75' y='196.05' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>D3</text>
-      </a>
-      <line x1='302.4' y1='228' x2='191.1' y2='228' stroke-width='0.8' stroke='#009000' marker-end='url(#arrowReturnHead)' />
-      <text x='243' y='222.70000000000002' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>Authorization</text>
-      <a href='#seq-D4'>
-        <rect x='292.5' y='221' width='21' height='14' rx='3' fill='white' stroke='#404040' stroke-width='0.5' />
-        <text x='303' y='232.3' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>D4</text>
-      </a>
-      <path fill='black' opacity='0.4' d='M146,246.75 l86,0 l-8,22 l-86,0Z' filter='url(#dropShaddow)' />
-      <path fill='#faf2dd' stroke='#404040' stroke-width='0.5' d='M144,244.75 l86,0 l-8,22 l-86,0Z' />
-      <text x='185.8' y='260.05' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>Processing</text>
-      <a href='#seq-D5'>
-        <rect x='129.25' y='248.75' width='21' height='14' rx='3' fill='white' stroke='#404040' stroke-width='0.5' />
-        <text x='139.75' y='260.05' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>D5</text>
-      </a>
-      <line x1='183.6' y1='292' x2='414.9' y2='292' stroke-width='0.8' stroke='#cc1010' marker-end='url(#arrowHead)' />
-      <text x='243' y='286.7' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>&quot;Payment Rails&quot;</text>
-      <a href='#seq-D6'>
-        <rect x='172.5' y='285' width='21' height='14' rx='3' fill='white' stroke='#404040' stroke-width='0.5' />
-        <text x='183' y='296.3' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>D6</text>
-      </a>
-      <path fill='black' opacity='0.4' d='M386,310.75 l86,0 l-8,22 l-86,0Z' filter='url(#dropShaddow)' />
-      <path fill='#faf2dd' stroke='#404040' stroke-width='0.5' d='M384,308.75 l86,0 l-8,22 l-86,0Z' />
-      <text x='425.8' y='324.05' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>Processing</text>
-      <a href='#seq-D7'>
-        <rect x='369.25' y='312.75' width='21' height='14' rx='3' fill='white' stroke='#404040' stroke-width='0.5' />
-        <text x='379.75' y='324.05' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>D7</text>
-      </a>
-    </svg>
-  </div>
-  <div>
-    Note that step 1-7 are <i>identical</i> to the FWP &quot;standard&quot; mode.
-    &quot;Payment Rails&quot; refer to existing payment systems.
-  </div>
-  <div class="para">
-    In an <a href="#openbanking">Open Banking</a> context the <b class="actor">PSP</b> would be equivalent to a PISP while
-    the <b class="actor">Authorizer</b> would be a specialized AS.
-  </div>
-  <div class="step"><div id="seq-D1" class="numbox">D1</div>Process PSPRequest and Create AuthorizeRequest Object</div>
-  <div>
-    This step should involve the same verifications as in <a href="#seq-8">step 8</a>
-    in the standard mode.
-    A suitable <span class="msg">AuthorizeRequest</span> object would typically follow the
-    <span class="msg">IssuerRequest</span> sample in step 8.
-  </div>
-  <div class="comment box">
-    Using delegated authorization may be decided by each <b class="actor">Issuer</b>
-    <i>individually</i>.  The actual configuration is preferably resolved by making
-    the <code>issuerId</code> attribute play the role of a <a href="#servicediscovery">Service Discovery URL</a>.
-  </div>
-  <div class="step"><div id="seq-D2" class="numbox">D2</div>Send AuthorizeRequest Object</div>
-  <div>
-    At this point the <b class="actor">PSP</b> sends the completed <span class="msg">AuthorizeRequest</span>
-    object to the designated <b class="actor">Authorizer</b>.
-    Note that the method used for locating the proper <b class="actor">Authorizer</b> depends on
-    the <code>paymentMethod</code> and <code>issuerId</code> attributes.
-  </div>
-  <div class="step"><div id="seq-D3" class="numbox">D3</div>Process AuthorizeRequest</div>
-  <div>
-    This step should involve the same verifications as in <a href="#seq-10">step 10</a>
-    in the standard mode.
-  </div>
-  <div class="step"><div id="seq-D4" class="numbox">D4</div>Return Authorized Data</div>
-  <div>
-    If the preceding step is successful, <span class="msg">AuthorizeRequest</span>
-    would typically return the (now decrypted) <b class="actor">User</b> account number.
-  </div>
-  <div id="delegatedreturnoptions" class="comment box">
-    A more sophisticated approach would be to return signed data for maintaining the
-    end-to-end security model.  For card payments this would preferably be in the
-    form of EMV compliant objects that can be passed on to existing payment systems
-    &quot;as&nbsp;is&quot;.
-  </div>
-  <div id="openbanking">
-    &nbsp;<br />In an Open Banking implementation based on OAuth2 concepts,
-    the return data would contain access tokens and consent information.
-  </div>
-  <div class="step"><div id="seq-D5" class="numbox">D5</div>Create Payment Instruction</div>
-  <div>
-    After receiving the <b class="actor">User</b> account number a
-    <span class="msg">payment instruction</span> object is created.
-    The format and contents of such objects are payment network specific and
-    are therefore not described here.
-  </div>
-  <div class="step"><div id="seq-D6" class="numbox">D6</div>Invoke &quot;Payment Rails&quot;</div>
-  <div>
-    Perform a <span class="msg">payment instruction</span> request in a payment network specific way.
-  </div>
-  <div class="step"><div id="seq-D7" class="numbox">D7</div>Process Payment Instruction</div>
-  <div>
-    Process the <span class="msg">payment instruction</span>
-    request in a payment network specific way.
-  </div>
-  <div id="extensions" class="header">
-    Extensions
-  </div>
-  <div>
-    The FWP <i>client</i> is loosely derived from a proof-of-concept system called
-    <a href="https://cyberphone.github.io/doc/saturn/"
-       title="Saturn">Saturn<img src="images/xtl.svg" alt="link" /></a>.
-    By continuing along this path, features like the following could potentially be added:
-  </div>
-  <ul>
-    <li>
-      Support for <i>non-direct payments</i>,
-      including secure (<i>tokenized</i>) versions of Card-on-File.
-    </li>
-    <li>
-      Support for real-time <i>account balances</i>.
-    </li>
-    <li>
-      Support for <b class="actor">User</b> <i>refunding</i>.
-    </li>
-    <li>
-      Support for universal <i>digital receipts</i>.
-    </li>
-    <li>
-      Support for <i>private messaging</i> and additional authentication information between the
-      <b class="actor">Issuer</b> and <b class="actor">User</b>.
-    </li>
-  </ul>
-  <div class="para">
-    Note that <i>some</i> of the features above could impact the PaymentRequest API.
-  </div>
-  <div id="implementationoptions" class="header">
-    Implementation Options
-  </div>
-  <div>
-    An alternative to building FWP support into browsers, is moving the FWP implementation
-    (including the <a href="#credentialdatabase">credential database</a>), down into the client platform layer.
-    This would open FWP to other scenarios like:
-  </div>
-  <ul style="margin-bottom:0.3em">
-    <li>
-      Point-of-sale (PoS) payments.
-      This would (at least <i>initially</i>) depend on QR-code for invocation.
-    </li>
-    <li>
-      Person-to-person (P2P) payments.
-    </li>
-  </ul>
-  <div class="para">
-    Such an arrangement would also introduce additional features including:
-  </div>
-  <ul>
-    <li>
-      Making it easier for alternative browser vendors adopting the FWP system
-      since they would not have to build a copy of FWP themselves.
-    </li>
-    <li>
-      Relieving users from having to enroll payment credentials
-      for each browser they want to use.
-    </li>
-    <li>
-      Limiting the number of systems to certify in the case certification
-      becomes a requirement.
-    </li>
-  </ul>
-  <div id="acknowledgements" class="header">
-    Acknowledgements
-  </div>
-  <div>
-    The FWP core was heavily influenced by an earlier Microsoft research project
-    called <a href="https://en.wikipedia.org/wiki/Windows_CardSpace"
-              title="CardSpace">Windows CardSpace<img src="images/xtl.svg" alt="link"></a>.
-  </div>
-  <div class="para">
-    The <b class="actor">User</b> icon was derived from
-    <a style="word-break:break-all;white-space:normal"
-       href="https://commons.wikimedia.org/wiki/File:Crystal_Clear_kdm_user_female.svg"
-       title="User Icon">
-      https://commons.wikimedia.org/wiki/File:Crystal_Clear_kdm_user_female.svg<img src="images/xtl.svg" alt="link">
-    </a>
-  </div>
-  <div id="documenthistory" class="header">
-    Document History
-  </div>
-  <table class="tftable">
-    <tr><th>Date</th><th>Version</th><th>Comment</th></tr>
-    <tr><td>2021-03-12</td><td>0.1</td><td>Initial publishing.</td></tr>
-    <tr><td>2021-03-15</td><td>0.11</td><td>Added external token comment.</td></tr>
-    <tr><td>2021-03-29</td><td>0.12</td><td>Improved replay handling + Changed &quot;Acquirer&quot; to &quot;PSP&quot;.</td></tr>
-    <tr><td>2021-04-02</td><td>0.13</td><td>Added section Delegated Authorization.</td></tr>
-    <tr><td>2021-04-11</td><td>0.14</td><td>Added credentialId + more text on the credential database.</td></tr>
-    <tr><td>2021-04-14</td><td>0.15</td><td>Added section Implementation Options.</td></tr>
-    <tr><td>2021-04-16</td><td>0.16</td><td>Added sequence diagram &quot;scope&quot; rectangle.</td></tr>
-    <tr><td>2021-05-09</td><td>0.17</td><td>Simplification: Removed hashing of PRCD.</td></tr>
-    <tr><td>2021-05-19</td><td>0.18</td><td>Aligned wallet database with FIDO names.</td></tr>
-    <tr><td>2021-06-03</td><td>0.19</td><td>Added IPR declaration.</td></tr>
-    <tr><td>2021-06-17</td><td>0.20</td><td>Converted the FWP core to CBOR (was JSON).</td></tr>
-  </table>
-  <div id="authors" class="header">
-    Authors
-  </div>
-  <div>
-    The FWP specification is currently authored by Anders Rundgren (anders.rundgren.net@gmail.com).<br />
-  </div>
-  <div class="header">
-    Trademarks
-  </div>
-  <div id="trademarks">
-    FIDO is a registered trademark of the FIDO alliance.<br />
-    EMV is a registered trademark of EMVCo.<br />&nbsp;<br />
-    This specification represents an <i>independent effort</i>,
-    not associated with the FIDO alliance or EMVCo.
-  </div>
+    </div>
+    <div id="documenthistory" class="header">
+      Document History
+    </div>
+    <table class="tftable">
+      <tr><th>&nbsp;&nbsp;&nbsp;Date&nbsp;&nbsp;&nbsp;</th><th>Version</th><th>Comment</th></tr>
+      <tr><td>2021-03-12</td><td>0.1</td><td>Initial publishing.</td></tr>
+      <tr><td>2021-03-15</td><td>0.11</td><td>Added external token comment.</td></tr>
+      <tr><td>2021-03-29</td><td>0.12</td><td>Improved replay handling + Changed &quot;Acquirer&quot; to &quot;PSP&quot;.</td></tr>
+      <tr><td>2021-04-02</td><td>0.13</td><td>Added section Delegated Authorization.</td></tr>
+      <tr><td>2021-04-11</td><td>0.14</td><td>Added credentialId + more text on the credential database.</td></tr>
+      <tr><td>2021-04-14</td><td>0.15</td><td>Added section Implementation Options.</td></tr>
+      <tr><td>2021-04-16</td><td>0.16</td><td>Added sequence diagram &quot;scope&quot; rectangle.</td></tr>
+      <tr><td>2021-05-09</td><td>0.17</td><td>Simplification: Removed hashing of PRCD.</td></tr>
+      <tr><td>2021-05-19</td><td>0.18</td><td>Aligned wallet database with FIDO names.</td></tr>
+      <tr><td>2021-06-03</td><td>0.19</td><td>Added IPR declaration.</td></tr>
+      <tr><td>2021-06-17</td><td>0.20</td><td>Converted the FWP core to CBOR (was JSON).</td></tr>
+    </table>
+    <div id="authors" class="header">
+      Authors
+    </div>
+    <div>
+      The FWP specification is currently authored by Anders Rundgren (anders.rundgren.net@gmail.com).<br />
+    </div>
+    <div class="header">
+      Trademarks
+    </div>
+    <div id="trademarks">
+      FIDO is a registered trademark of the FIDO alliance.<br />
+      EMV is a registered trademark of EMVCo.<br />&nbsp;<br />
+      This specification represents an <i>independent effort</i>,
+      not associated with the FIDO alliance or EMVCo.
+    </div>
 </body></html>
