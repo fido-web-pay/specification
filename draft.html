@@ -1715,10 +1715,11 @@ creates an FWP assertion which requires the following steps to be performed:
 
 <div id="seq-4.3" class="step">4.3 Create Signed Authorization Data (SAD)</div>
 <div class="para">
-  Using the FIDO signature key (<code>credentialId</code>) associated with the selected
-  <a href="#credentialdatabase">FWP credential</a>, sign AD using the
-  <a href="https://tools.ietf.org/html/draft-jordan-jws-ct-02"
-     title="JWS/CT">JWS/CT<img src="images/xtl.svg" alt="link"></a> method.
+  Now apply the FIDO signature key (identified by <code>credentialId</code>) associated with the selected
+  <a href="#credentialdatabase">FWP credential</a>, to sign AD using the
+  scheme <i>preliminary</i> described in 
+    <a href="https://fido-web-pay.github.io/specification/vectors.txt"
+       title="Vectors">https://fido-web-pay.github.io/specification/vectors.txt<img src="images/xtl.svg" alt="link"></a>.
   For the sample code this should result in the following object:
 </div>
 <div style='overflow-x:auto;padding-right:0.2em'>
@@ -1730,11 +1731,6 @@ creates an FWP assertion which requires the following steps to be performed:
   This operation updates the <code>authorization</code> (<kbd>11</kbd>) element of AD.
 </div>
 <div class="para">The resulting object is subsequently referred to as Signed Authorization Data (SAD).</div>
-<div class="para">
-  For more details on the signature processing turn to the <i>preliminary</i> document 
-  <a href="https://fido-web-pay.github.io/specification/vectors.txt"
-    title="Vectors">https://fido-web-pay.github.io/specification/vectors.txt<img src="images/xtl.svg" alt="link"></a>.
-</div>
 <div id="seq-4.4" class="step">4.4 Create Encrypted Signed Authorization Data (ESAD)</div>
 <div class="para">
   For privacy and security reasons, Signed Authorization Data (SAD) objects
