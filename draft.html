@@ -5,6 +5,7 @@
 .header {font-size:1.6em;margin:1em 0 0.8em 0}
 .step {font-size:1.2em;margin-top:1.5em;margin-bottom:0.6em}
 .para {margin-top: 0.8em}
+.gutter {margin-top: 0.3em}
 .actor {color:darkgreen;font-weight:500}
 .msg {font-weight:500}
 .staticbox {
@@ -164,13 +165,13 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
       <td>
         <span class="actor">Issuer</span> specific (<i>shared</i>) public encryption key.
         Unless an <code>encryptionKeyId</code> has been specified, the <code>encryptionKey</code>
-        MUST be inserted in FWP <a href="#seq-4.5">encryption</a> objects.
+        MUST be inserted in FWP <a href="#seq-4.4">encryption</a> objects.
       </td>
     </tr>
     <tr>
       <td><code>encryptionKeyId</code></td>
       <td>
-        <i>Optional</i>. If specified, FWP <a href="#seq-4.5">encryption</a> objects
+        <i>Optional</i>. If specified, FWP <a href="#seq-4.4">encryption</a> objects
         MUST contain this identifier.
       </td>
     </tr>
@@ -178,14 +179,14 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
       <td><code>contentEncryptionAlgorithm</code></td>
       <td>
         COSE compliant content encryption algorithm for
-        FWP <a href="#seq-4.5">encryption</a>.
+        FWP <a href="#seq-4.4">encryption</a>.
       </td>
     </tr>
     <tr>
       <td><code>keyEncryptionAlgorithm</code></td>
       <td>
         COSE compliant key encryption algorithm for
-        FWP <a href="#seq-4.5">encryption</a>.
+        FWP <a href="#seq-4.4">encryption</a>.
       </td>
     </tr>
     <tr>
@@ -1752,6 +1753,7 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
     </div>
     <div>
       This object is subsequently referred to as Encrypted Signed Authorization Data (ESAD).
+      Note that the sample uses a <code>encryptionKeyId</code>.
     </div>
     <div id="domainconstraints" class="para box comment">
       Due to the end-to-end encryption scheme, the domain
@@ -2024,18 +2026,23 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
       </div>
       <ul>
         <li>
-          Decode the JWE compatible <a href="#seq-4.5">ESAD</a> string supplied in
-          <code>pspRequest.encryptedAuthorization</code>.
+          Decode the Base64Url supplied in <code>pspRequest.encryptedAuthorization</code>.
         </li>
         <li>
-          Verify that the public key declared in the JWE header matches an
+          Parse the result of the previous operation as CBOR and set result as <a href="#seq-4.4">ESAD</a>.
+        </li>
+        <li>
+          Verify that the resulting object is compatible with the CEF profile specified by FWP.
+        </li>
+        <li>
+          Verify that the public key or key Id declared in the CEF object matches an
           existing decryption (private) key of the <b class="actor">Issuer</b>.
         </li>
         <li>
-          Decrypt the ESAD string using the private key retrieved in the previous operation.
+          Decrypt the ESAD object using the private key retrieved in the previous operation.
         </li>
         <li>
-          Parse the result of the previous operation as JSON and set result as <a href="#seq-4.4">SAD</a>.
+          Parse the result of the previous operation as CBOR and set result as <a href="#seq-4.4">SAD</a>.
         </li>
         <li>
           Verify that the SAD object schema-wise has the proper format.
@@ -2074,18 +2081,19 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
       </div>
       <ul>
         <li>
-          Verify the JWS/CT signature of the recovered SAD object.
-          Since the public key is included in the JWS header, signature validation
+          Verify the signature of the recovered SAD object.
+          Since the public key is included in the signature container, signature validation
           does not require database lookups.
         </li>
         <li>
           Verify that the aforementioned public key is linked to a <b class="actor">User</b>
           account matching the <code>SAD.accountId</code> and <code>SAD.serialNumber</code> attributes
-          (where <code>SAD.serialNumber</code> would typically serve as the primary key in a credential database table).
-          Note that this check requires that the
-          public key first is converted into a <i>canonical format</i> like JWK &quot;thumbprint&quot;
-          (<a href="https://tools.ietf.org/html/rfc7638"
-              title="JWK thumbprint">RFC7638<img src="images/xtl.svg" alt="link"></a>).
+          (where the latter would typically serve as the primary key in a credential database table).
+          Note that this check requires that the public key first is converted into a
+          <i>canonical format</i>.  This is a built-in feature if the COSE format is used.
+          <div class="gutter">
+            Using SHA256 hashes of public keys is a common method for key comparisons.
+          </div>
         </li>
       </ul>
       <div id="seq-10.5" class="step">
@@ -2094,9 +2102,7 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
       <div>
         To cope with possible replays, verify that the received <b class="actor">User</b> authorization
         has not already been used. This can be accomplished by maintaining a lookup cache
-        holding SHA256 hashes of canonicalized (<a href="https://tools.ietf.org/html/rfc8785"
-                                                   title="JCS/RFC8785">RFC8785<img src="images/xtl.svg" alt="link"></a>) <a href="#seq-4.4">SAD</a> objects,
-        associated with <i>successfully</i> processed requests.
+        holding SHA256 hashes of <i>successfully</i> processed requests.
         Cached items would be removed based on their <code>SAD.timeStamp</code> value.
       </div>
       <div class="para">
