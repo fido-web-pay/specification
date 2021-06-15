@@ -75,6 +75,8 @@ public class CreateDocument  {
         template = template.replace("@ESAD.txt@", processCodeTxt("ESAD.txt"));
         template = template.replace("@PRCD.txt@", processCodeTxt("PRCD.txt"));
         template = template.replace("@FWP-assertion.json@", processCodeTxt("FWP-assertion.json"));
+        template = template.replace("@PSP-request.json@", processCodeTxt("PSP-request.json"));
+        template = template.replace("@ISSUER-request.json@", processCodeTxt("ISSUER-request.json"));
      new FileOutputStream(originalBase + ".." + File.separator + "draft.html").write(template.getBytes("utf-8"));
      }
 

@@ -131,7 +131,9 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
 </div>
 <div style='overflow-x:auto;padding-right:0.2em'>
   <table class="tftable">
-    <tr><th>Attribute</th><th style="min-width:30em">Data</th>
+    <tr>
+      <th>Attribute</th>
+      <th style="min-width:30em">Data</th>
     </tr>
     <tr>
       <td><code>credentialId</code></td>
@@ -160,21 +162,29 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
     <tr>
       <td><code>encryptionKey</code></td>
       <td>
-        <span class="actor">Issuer</span> specific (<i>shared</i>) public key
-        for FWP <a href="#seq-4.5">encryption</a>.
+        <span class="actor">Issuer</span> specific (<i>shared</i>) public encryption key.
+        Unless an <code>encryptionKeyId</code> has been specified, the <code>encryptionKey</code>
+        MUST be inserted in FWP <a href="#seq-4.5">encryption</a> objects.
+      </td>
+    </tr>
+    <tr>
+      <td><code>encryptionKeyId</code></td>
+      <td>
+        <i>Optional</i>. If specified, FWP <a href="#seq-4.5">encryption</a> objects
+        MUST contain this identifier.
       </td>
     </tr>
     <tr>
       <td><code>contentEncryptionAlgorithm</code></td>
       <td>
-        JOSE-compliant content encryption algorithm for
+        COSE compliant content encryption algorithm for
         FWP <a href="#seq-4.5">encryption</a>.
       </td>
     </tr>
     <tr>
       <td><code>keyEncryptionAlgorithm</code></td>
       <td>
-        JOSE-compliant key encryption algorithm for
+        COSE compliant key encryption algorithm for
         FWP <a href="#seq-4.5">encryption</a>.
       </td>
     </tr>
@@ -351,8 +361,8 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
       method, the <b class="actor">Browser</b> responds with
       a payment authorization UI like the following:
     </div>
-    <div style="overflow-x:auto;padding-bottom:5pt">
-      <img style="display:block;width:220pt;box-shadow:2pt 2pt 3pt #808080;border-width:1pt;border-style:solid;border-color:darkgrey" alt="Payment UI" src="images/ui.svg">
+    <div style="overflow-x:auto;padding-bottom:0.5em">
+      <img style="display:block;width:22em;box-shadow:2pt 2pt 3pt #808080;border-width:1pt;border-style:solid;border-color:darkgrey" alt="Payment UI" src="images/ui.svg">
     </div>
     <div>Non-normative UI in &quot;dark mode&quot;.</div>
     <div class="para">
@@ -393,8 +403,9 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
       @PRCD.txt@
     </div>
     <div>Description:</div>
-    <table class="tftable">
-      <tr><th>Label</th><th>Name</th><th>Data</th></tr>
+    <div style='overflow-x:auto;padding-right:0.2em'>
+      <table class="tftable">
+      <tr><th>Label</th><th>Name</th><th style="min-width:25em">Data</th></tr>
       <tr>
         <td style='text-align:center'><kbd>1</kbd></td>
         <td><code>payee</code></td>
@@ -424,6 +435,7 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
         </td>
       </tr>
     </table>
+</div>
     <div>
       This object is subsequently referred to as PaymentRequest Core Data (PRCD).
     </div>
@@ -572,11 +584,11 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
       MUST be encrypted by a public key provided by the <b class="actor">Issuer</b>
       through the <code>encryptionKey</code> attribute of the selected
       <a href="#credentialdatabase">FWP credential</a>.
-      This specification mandates using the encryption scheme <i>preliminary outlined</i> in
+      This specification mandates the encryption scheme <i>preliminary outlined</i> in
       <a href="https://cyberphone.github.io/javaapi/org/webpki/cbor/package-summary.html#cef"
          title="CEF">CBOR Encryption Format (CEF)<img src="images/xtl.svg" alt="link"></a>.
-      The selection between RSA or ECDH encryption schemes is at the
-      discretion of the <b class="actor">Issuer</b>.
+      FWP clients MUST as a minimum support ECDH key encryption schemes combined
+      with GCM for content encryption.
     </div>
     <div class="para">
       The actual CEF algorithms to use are defined by the
@@ -664,38 +676,20 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
         and is therefore out of scope for this specification.
         The following <i>sample</i> outlines such an object:
       </div>
-<pre class="box">
-{
-  "paymentRequest": {
-    "id": "7040566321",
-    "payee": "Space Shop",
-    "amount": {
-      "currency": "EUR",
-      "value": "435.00"
-    }
-  },
-  "encryptedAuthorization": <i>"ESAD"</i>,
-  "paymentMethod": "https://bankdirect.com",
-  "issuerId": "https://mybank.fr/payment"
-  "networkData": "additional stuff...",
-  "receiveAccount": "DE89370400440532013000",
-  "clientIp": "220.13.198.144",
-  "timeStamp": "2021-05-19T10:32:36+01:00"
-}
-</pre>
+    <div style='overflow-x:auto;padding-right:0.2em'>
+      <div class="staticbox" style="min-width:50em">
+        @PSP-request.json@
+      </div>
+    </div>
       <div>Description:</div>
+    <div style='overflow-x:auto;padding-right:0.2em'>
       <table class="tftable">
-        <tr><th>Attribute</th><th>Data</th></tr>
+        <tr><th>Attribute</th><th style="min-width:30em">Data</th></tr>
         <tr>
           <td><code>paymentRequest</code></td>
           <td>
-            Copy of <a href="#seq-4.1">PRCD</a>, <i>recreated</i> by the <b class="actor">Merchant</b>.
-          </td>
-        </tr>
-        <tr>
-          <td><code>encryptedAuthorization</code></td>
-          <td>
-            Copy of the same attribute in the <a href="#seq-4.6">FWP Assertion</a>.
+            Copy of <a href="#seq-4.1">PRCD</a>, <i>recreated</i> by the <b class="actor">Merchant</b>,
+            but now in JSON notation using the names from the table showing the CBOR version.
           </td>
         </tr>
         <tr>
@@ -706,6 +700,12 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
         </tr>
         <tr>
           <td><code>issuerId</code></td>
+          <td>
+            Copy of the same attribute in the <a href="#seq-4.6">FWP Assertion</a>.
+          </td>
+        </tr>
+        <tr>
+          <td><code>encryptedAuthorization</code></td>
           <td>
             Copy of the same attribute in the <a href="#seq-4.6">FWP Assertion</a>.
           </td>
@@ -736,6 +736,7 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
           </td>
         </tr>
       </table>
+    </div>
       <div class="step">
         <div id="seq-7" class="numbox">7</div>Send PSPRequest Object
       </div>
@@ -793,33 +794,16 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
         is therefore out of scope for this specification.
         The following <i>sample</i> outlines such an object:
       </div>
-      <pre class="box">
-{
-  "pspRequest": {
-    "paymentRequest": {
-      "id": "7040566321",
-      "payee": "Space Shop",
-      "amount": {
-        "currency": "EUR",
-        "value": "435.00"
-      }
-    },
-    "encryptedAuthorization": <i>"ESAD"</i>,
-    "paymentMethod": "https://bankdirect.com",
-    "issuerId": "https://mybank.fr/payment"
-    "networkData": "additional stuff...",
-    "receiveAccount": "DE89370400440532013000",
-    "clientIp": "220.13.198.144",
-    "timeStamp": "2021-05-19T10:32:36+01:00"
-  },
-  "payeeHost": "spaceshop.com",
-  "timeStamp": "2021-05-19T10:32:37+01:00"
-}
-</pre>
+    <div style='overflow-x:auto;padding-right:0.2em'>
+      <div class="staticbox" style="min-width:50em">
+        @ISSUER-request.json@
+      </div>
+    </div>
 
       <div>Description:</div>
+    <div style='overflow-x:auto;padding-right:0.2em'>
       <table class="tftable">
-        <tr><th>Attribute</th><th>Data</th></tr>
+        <tr><th>Attribute</th><th style="min-width:30em">Data</th></tr>
         <tr>
           <td><code>pspRequest</code></td>
           <td>
@@ -840,6 +824,7 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
           </td>
         </tr>
       </table>
+</div>
       <div class="step">
         <div id="seq-9" class="numbox">9</div>Send IssuerRequest Object
       </div>
