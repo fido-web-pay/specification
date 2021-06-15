@@ -1,0 +1,27 @@
+// FWP sample code
+
+const methodData = [{
+  supportedMethods: "fido-web-pay/v1",
+  data: {
+    payee: "Space Shop",  // Shown in the UI
+    networks: [{
+      name: "https://emvco.com/fwp/mastercard"
+    },{
+      name: "https://emvco.com/fwp/visa"
+    },{
+      name: "https://bankdirect.com",
+      networkData: "additional stuff..."
+    }]
+  }
+}];
+
+const request = new PaymentRequest(methodData, {
+  id: "7040566321",   // Mandatory for FWP
+  total: {label: null, amount: {currency: "EUR", value: "435.00"}}
+});
+
+async function doPaymentRequest() {
+  const response = await request.show();
+  await response.complete("success");
+  return response.details;
+}

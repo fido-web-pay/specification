@@ -288,35 +288,11 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
       causing a <b class="actor">Merchant</b> Web page to invoke
       a custom doPaymentRequest() method, like in the following sample:
     </div>
-<pre class="box">
-// FWP sample code
-
-const methodData = [{
-  supportedMethods: "fido-web-pay/v1",
-  data: {
-    payee: "Space Shop",  // Shown in the UI
-    networks: [{
-      name: "https://emvco.com/fwp/mastercard"
-    },{
-      name: "https://emvco.com/fwp/visa"
-    },{
-      name: "https://bankdirect.com",
-      networkData: "additional stuff..."
-    }]
-  }
-}];
-
-const request = new PaymentRequest(methodData, {
-  id: "7040566321",   // Mandatory for FWP
-  total: {label: null, amount: {currency: "EUR", value: "435.00"}}
-});
-
-async function doPaymentRequest() {
-  const response = await request.show();
-  await response.complete("success");
-  return response.details;
-}
-</pre>
+    <div style='overflow-x:auto;padding-right:0.2em'>
+      <div class="staticbox" style="min-width:45em">
+        @browser-PR.txt@
+      </div>
+    </div>
     <div>
       When the <code>PaymentRequest.show()</code> method is invoked, the <span class="actor">Browser</span>
       (FWP implementation) MUST perform the following checks:
