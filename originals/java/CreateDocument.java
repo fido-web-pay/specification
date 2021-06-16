@@ -21,6 +21,14 @@ public class CreateDocument  {
         sequenceDiagram = sequenceDiagram.substring(0, start) + sequenceDiagram.substring(stop + 7);
     }
 
+    String esadFilter(String json) throws Exception {
+        int i = json.indexOf("&quot;encryptedAuthorization&quot;");
+        if (i < 0) throw new IOException("no keyword");
+        i = json.indexOf("&quot;", i + 32);
+        int j = json.indexOf("&quot;", i + 1);
+        return json.substring(0, i + 10) + "&#x2022;&#x2022;&#x2022;" + json.substring(j - 4);
+    }
+
     String processCodeTxt(String fileName) throws Exception {
         StringBuilder buf = new StringBuilder();
         for (char c : readOriginal(fileName).toCharArray()) {
@@ -38,7 +46,7 @@ public class CreateDocument  {
                 buf.append("&amp;");
                 break;
             case '\"':
-                buf.append("&#034;");
+                buf.append("&quot;");
                 break;
             case '\'':
                 buf.append("&#039;");
@@ -75,8 +83,8 @@ public class CreateDocument  {
         template = template.replace("@ESAD.txt@", processCodeTxt("ESAD.txt"));
         template = template.replace("@PRCD.txt@", processCodeTxt("PRCD.txt"));
         template = template.replace("@FWP-assertion.json@", processCodeTxt("FWP-assertion.json"));
-        template = template.replace("@PSP-request.json@", processCodeTxt("PSP-request.json"));
-        template = template.replace("@ISSUER-request.json@", processCodeTxt("ISSUER-request.json"));
+        template = template.replace("@PSP-request.json@", esadFilter(processCodeTxt("PSP-request.json")));
+        template = template.replace("@ISSUER-request.json@", esadFilter(processCodeTxt("ISSUER-request.json")));
      new FileOutputStream(originalBase + ".." + File.separator + "draft.html").write(template.getBytes("utf-8"));
      }
 

@@ -560,6 +560,10 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
     <div>
       This object is subsequently referred to as Authorization Data (AD).
     </div>
+    <div class="para">
+      Note that throughout this specification, elements are referred to
+      by their symbolic name rather than by their CBOR label.
+    </div>
 
     <div id="seq-4.3" class="step">4.3 Create Signed Authorization Data (SAD)</div>
     <div class="para">
@@ -607,7 +611,7 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
     </div>
     <div>
       This object is subsequently referred to as Encrypted Signed Authorization Data (ESAD).
-      Note that the sample uses a <code>encryptionKeyId</code>.
+      Note that the sample uses an <code>encryptionKeyId</code>.
     </div>
     <div id="domainconstraints" class="para box comment">
       Due to the end-to-end encryption scheme, the domain
@@ -880,7 +884,7 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
       </div>
       <ul>
         <li>
-          Decode the Base64Url supplied in <code>pspRequest.encryptedAuthorization</code>.
+          Decode the Base64Url string supplied in <code>pspRequest.encryptedAuthorization</code>.
         </li>
         <li>
           Parse the result of the previous operation as CBOR and set result as <a href="#seq-4.4">ESAD</a>.
@@ -943,10 +947,11 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
           Verify that the aforementioned public key is linked to a <b class="actor">User</b>
           account matching the <code>SAD.accountId</code> and <code>SAD.serialNumber</code> attributes
           (where the latter would typically serve as the primary key in a credential database table).
-          Note that this check requires that the public key first is converted into a
-          <i>canonical format</i>.  This is a built-in feature if the COSE format is used.
+          Note that this check requires that the public key is in a <i>canonical form</i>.
+          Fortunately, this is a &quot;built-in&quot; feature if public keys are stored in the COSE format.
           <div class="gutter">
-            Using SHA256 hashes of public keys is a common method for key comparisons.
+            Using SHA256 hashes of public keys is a common method for limiting the
+            the need storing and comparing large keys (like required by the RSA algorithm).
           </div>
         </li>
       </ul>
