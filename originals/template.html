@@ -683,7 +683,7 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
         The following <i>sample</i> outlines such an object:
       </div>
     <div style='overflow-x:auto;padding-right:0.2em'>
-      <div class="staticbox" style="min-width:50em">
+      <div class="staticbox" style="min-width:35em">
         @PSP-request.json@
       </div>
     </div>
@@ -699,27 +699,9 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
           </td>
         </tr>
         <tr>
-          <td><code>paymentMethod</code></td>
+          <td><code>fwpAssertion</code></td>
           <td>
-            Copy of the same attribute in the <a href="#seq-4.6">FWP Assertion</a>.
-          </td>
-        </tr>
-        <tr>
-          <td><code>issuerId</code></td>
-          <td>
-            Copy of the same attribute in the <a href="#seq-4.6">FWP Assertion</a>.
-          </td>
-        </tr>
-        <tr>
-          <td><code>encryptedAuthorization</code></td>
-          <td>
-            Copy of the same attribute in the <a href="#seq-4.6">FWP Assertion</a>.
-          </td>
-        </tr>
-        <tr>
-          <td><code>networkData</code></td>
-          <td>
-            <i>Optional</i>.  See <a href="#seq-4.3">Authorization Data</a>.
+            Copy of the <a href="#seq-4.6">FWP Assertion</a>.
           </td>
         </tr>
         <tr>
@@ -774,10 +756,11 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
           matches the <b class="actor">Merchant</b> common name registered with the <b class="actor">PSP</b>.
         </li>
         <li>
-          That the <code>paymentMethod</code> is supported.
+          That the <code>fwpAssertion.paymentMethod</code> is supported.
         </li>
         <li>
-          That the format of the <code>issuerId</code> matches <code>paymentMethod</code>.
+          That the format of the <code>fwpAssertion.issuerId</code> matches 
+          <code>fwpAssertion.paymentMethod</code>.
         </li>
         <li>
           That the <code>receiveAccount</code> matches a <b class="actor">Merchant</b> account
@@ -801,7 +784,7 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
         The following <i>sample</i> outlines such an object:
       </div>
     <div style='overflow-x:auto;padding-right:0.2em'>
-      <div class="staticbox" style="min-width:50em">
+      <div class="staticbox" style="min-width:35em">
         @ISSUER-request.json@
       </div>
     </div>
@@ -863,15 +846,15 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
           Verify that the <code>timeStamp</code> is within &quot;reasonable limits&quot;.
         </li>
         <li>
-          Verify that the <code>pspRequest.paymentMethod</code> is supported.
+          Verify that the <code>pspRequest.fwpAssertion.paymentMethod</code> is supported.
         </li>
         <li>
           Verify that the <code>pspRequest.receiveAccount</code>
-          is compatible with the <code>pspRequest.paymentMethod</code>.
+          is compatible with the <code>pspRequest.fwpAssertion.paymentMethod</code>.
         </li>
         <li>
-          Verify that the <code>pspRequest.issuerId</code>
-          is compatible with the <code>pspRequest.paymentMethod</code>
+          Verify that the <code>pspRequest.fwpAssertion.issuerId</code>
+          is compatible with the <code>pspRequest.fwpAssertion.paymentMethod</code>
           as well as matching the <b class="actor">Issuer</b>.
         </li>
         <li>
@@ -884,7 +867,7 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
       </div>
       <ul>
         <li>
-          Decode the Base64Url string supplied in <code>pspRequest.encryptedAuthorization</code>.
+          Decode the Base64Url string supplied in <code>pspRequest.fwpAssertion.encryptedAuthorization</code>.
         </li>
         <li>
           Parse the result of the previous operation as CBOR and set result as <a href="#seq-4.4">ESAD</a>.
