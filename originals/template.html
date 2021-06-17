@@ -228,7 +228,7 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
 </div>
     <div>
       Note: how attributes are represented in the credential database is <i>implementation specific</i>,
-      whereas the FWP assertion is normative.
+      whereas FWP assertions are <i>normative</i>.
     </div>
     <div id="keyprotection" class="comment box">
       Through the use of a dedicated credential database,
@@ -567,8 +567,8 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
 
     <div id="seq-4.3" class="step">4.3 Create Signed Authorization Data (SAD)</div>
     <div class="para">
-      Now apply the FIDO signature key (identified by <code>credentialId</code>) associated with the selected
-      <a href="#credentialdatabase">FWP credential</a>, to sign AD using the
+      Now apply the FIDO signature key (identified by <a href="#credentialdatabase">credentialId</a>),
+      associated with the selected FWP credential to sign AD using the
       scheme <i>preliminary outlined</i> in
       <a href="https://fido-web-pay.github.io/specification/vectors.txt"
          title="Vectors">https://fido-web-pay.github.io/specification/vectors.txt<img src="images/xtl.svg" alt="link"></a>.
@@ -587,19 +587,25 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
     <div class="para">
       For privacy and security reasons, Signed Authorization Data (SAD) objects
       MUST be encrypted by a public key provided by the <b class="actor">Issuer</b>
-      through the <code>encryptionKey</code> attribute of the selected
-      <a href="#credentialdatabase">FWP credential</a>.
+      through the <a href="#credentialdatabase">encryptionKey</a>
+      attribute of the selected FWP credential.
+    </div>
+     <div class="para">
       This specification mandates the encryption scheme <i>preliminary outlined</i> in
       <a href="https://cyberphone.github.io/javaapi/org/webpki/cbor/package-summary.html#cef"
          title="CEF">CBOR Encryption Format (CEF)<img src="images/xtl.svg" alt="link"></a>.
       FWP clients MUST as a minimum support ECDH key encryption schemes combined
       with GCM for content encryption.
     </div>
-    <div class="para">
+   <div class="para">
       The actual CEF algorithms to use are defined by the
-      <code>contentEncryptionAlgorithm</code> and
-      <code>keyEncryptionAlgorithm</code> attributes
-      of the selected <a href="#credentialdatabase">FWP credential</a>.
+      <a href="#credentialdatabase">contentEncryptionAlgorithm</a> and
+      <a href="#credentialdatabase">keyEncryptionAlgorithm</a> attributes.
+    </div>
+    <div class="para">
+      Note that the public key MUST be <i>shared</i> with
+      other clients of the <b class="actor">Issuer</b>, otherwise it will work
+      as a static identifier to the specific <b class="actor">User</b>!
     </div>
     <div class="para">
       Encryption sample object:
@@ -611,7 +617,7 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
     </div>
     <div>
       This object is subsequently referred to as Encrypted Signed Authorization Data (ESAD).
-      Note that the sample uses an <code>encryptionKeyId</code>.
+      Note that the sample uses an <a href="#credentialdatabase">encryptionKeyId</a>.
     </div>
     <div id="domainconstraints" class="para box comment">
       Due to the end-to-end encryption scheme, the domain
@@ -883,7 +889,7 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
           Decrypt the ESAD object using the private key retrieved in the previous operation.
         </li>
         <li>
-          Parse the result of the previous operation as CBOR and set result as <a href="#seq-4.4">SAD</a>.
+          Parse the result of the previous operation as CBOR and set result as <a href="#seq-4.3">SAD</a>.
         </li>
         <li>
           Verify that the SAD object schema-wise has the proper format.
@@ -944,7 +950,8 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
       <div>
         To cope with possible replays, verify that the received <b class="actor">User</b> authorization
         has not already been used. This can be accomplished by maintaining a lookup cache
-        holding SHA256 hashes of <i>successfully</i> processed requests.
+        holding SHA256 hashes of <a href="#seq-4.4">ESAD</a> objects associated
+        with <i>successfully</i> processed requests.
         Cached items would be removed based on their <code>SAD.timeStamp</code> value.
       </div>
       <div class="para">
