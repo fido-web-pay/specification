@@ -11,7 +11,7 @@
     <filter height='200%' id='bankShaddow' width='200%' x='-50%' y='-50%'>
       <feGaussianBlur stdDeviation='2'/>
     </filter>
-    <linearGradient id="bankTop" x1="0.5" x2="0.5" y1="0" y2="1">
+    <linearGradient id="bankFront" x1="0.5" x2="0.5" y1="0" y2="1">
       <stop offset="0" stop-color="#e0e07b"/>
       <stop offset="0.35" stop-color="#f7f7e1"/>
       <stop offset="0.65" stop-color="#f7f7e1"/>
@@ -33,7 +33,7 @@
   <rect fill='url(#bankPillar)' height='35.5' width='11' x='60.33' y='27'/>
   <rect fill='url(#bankPillar)' height='35.5' width='11' x='82' y='27'/>
   <path d='m10,16l45,-15l45,15' fill='url(#bankRoof)' stroke='grey' stroke-linecap='round'/>
-  <rect fill='url(#bankTop)' height='10' stroke='grey' width='90' x='10' y='16.5'/>
-  <rect fill='#fffbed' height='4' stroke='grey' width='100' x='5' y='67'/>
-  <rect fill='#fffbed' height='4' stroke='grey' width='90' x='10' y='63'/>
+  <rect fill='url(#bankFront)' height='10' stroke='grey' width='90' x='10' y='16.5'/>
+  <rect fill='url(#bankFront)' height='4' stroke='grey' width='100' x='5' y='67'/>
+  <rect fill='url(#bankFront)' height='4' stroke='grey' width='90' x='10' y='63'/>
 </svg>
