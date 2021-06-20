@@ -3,7 +3,7 @@
 const methodData = [{
   supportedMethods: "fido-web-pay/v1",
   data: {
-    payee: "Space Shop",  // Shown in the UI
+    payeeName: "Space Shop",  // Shown in the UI
     networks: [{
       name: "https://emvco.com/fwp/mastercard"
     },{

@@ -1457,7 +1457,7 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
     </div>
     <div style='overflow-x:auto;padding-right:0.2em'>
       <div class="staticbox" style="min-width:45em">
-        //&nbsp;FWP&nbsp;sample&nbsp;code<br><br>const&nbsp;methodData&nbsp;=&nbsp;[{<br>&nbsp;&nbsp;supportedMethods:&nbsp;&quot;fido-web-pay/v1&quot;,<br>&nbsp;&nbsp;data:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;payee:&nbsp;&quot;Space&nbsp;Shop&quot;,&nbsp;&nbsp;//&nbsp;Shown&nbsp;in&nbsp;the&nbsp;UI<br>&nbsp;&nbsp;&nbsp;&nbsp;networks:&nbsp;[{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name:&nbsp;&quot;https://emvco.com/fwp/mastercard&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;},{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name:&nbsp;&quot;https://emvco.com/fwp/visa&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;},{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name:&nbsp;&quot;https://bankdirect.com&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;networkData:&nbsp;&quot;additional&nbsp;stuff...&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;}]<br>&nbsp;&nbsp;}<br>}];<br><br>const&nbsp;request&nbsp;=&nbsp;new&nbsp;PaymentRequest(methodData,&nbsp;{<br>&nbsp;&nbsp;id:&nbsp;&quot;7040566321&quot;,&nbsp;&nbsp;&nbsp;//&nbsp;Mandatory&nbsp;for&nbsp;FWP<br>&nbsp;&nbsp;total:&nbsp;{label:&nbsp;null,&nbsp;amount:&nbsp;{currency:&nbsp;&quot;EUR&quot;,&nbsp;value:&nbsp;&quot;435.00&quot;}}<br>});<br><br>async&nbsp;function&nbsp;doPaymentRequest()&nbsp;{<br>&nbsp;&nbsp;const&nbsp;response&nbsp;=&nbsp;await&nbsp;request.show();<br>&nbsp;&nbsp;await&nbsp;response.complete(&quot;success&quot;);<br>&nbsp;&nbsp;return&nbsp;response.details;<br>}
+        //&nbsp;FWP&nbsp;sample&nbsp;code<br><br>const&nbsp;methodData&nbsp;=&nbsp;[{<br>&nbsp;&nbsp;supportedMethods:&nbsp;&quot;fido-web-pay/v1&quot;,<br>&nbsp;&nbsp;data:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;payeeName:&nbsp;&quot;Space&nbsp;Shop&quot;,&nbsp;&nbsp;//&nbsp;Shown&nbsp;in&nbsp;the&nbsp;UI<br>&nbsp;&nbsp;&nbsp;&nbsp;networks:&nbsp;[{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name:&nbsp;&quot;https://emvco.com/fwp/mastercard&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;},{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name:&nbsp;&quot;https://emvco.com/fwp/visa&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;},{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name:&nbsp;&quot;https://bankdirect.com&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;networkData:&nbsp;&quot;additional&nbsp;stuff...&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;}]<br>&nbsp;&nbsp;}<br>}];<br><br>const&nbsp;request&nbsp;=&nbsp;new&nbsp;PaymentRequest(methodData,&nbsp;{<br>&nbsp;&nbsp;id:&nbsp;&quot;7040566321&quot;,&nbsp;&nbsp;&nbsp;//&nbsp;Mandatory&nbsp;for&nbsp;FWP<br>&nbsp;&nbsp;total:&nbsp;{label:&nbsp;null,&nbsp;amount:&nbsp;{currency:&nbsp;&quot;EUR&quot;,&nbsp;value:&nbsp;&quot;435.00&quot;}}<br>});<br><br>async&nbsp;function&nbsp;doPaymentRequest()&nbsp;{<br>&nbsp;&nbsp;const&nbsp;response&nbsp;=&nbsp;await&nbsp;request.show();<br>&nbsp;&nbsp;await&nbsp;response.complete(&quot;success&quot;);<br>&nbsp;&nbsp;return&nbsp;response.details;<br>}<br>
       </div>
     </div>
     <div>
@@ -1470,7 +1470,7 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
         <i>JSON-serializable</i> JavaScript <kbd>Object</kbd>.
       </li>
       <li>
-        The <code>data</code> object contains a <code>payee</code>
+        The <code>data</code> object contains a <code>payeeName</code>
         attribute holding a <i>non-empty</i> JavaScript <kbd>String</kbd> argument.
       </li>
       <li>
@@ -1565,16 +1565,16 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
       <tr><th>Label</th><th>Name</th><th style="min-width:25em">Data</th></tr>
       <tr>
         <td style='text-align:center'><kbd>1</kbd></td>
-        <td><code>payee</code></td>
+        <td><code>payeeName</code></td>
         <td>
           <b class="actor">Merchant</b> common name.
         </td>
       </tr>
       <tr>
         <td style='text-align:center'><kbd>2</kbd></td>
-        <td><code>id</code></td>
+        <td><code>requestId</code></td>
         <td>
-          <b class="actor">Merchant</b> transaction ID. Copy of <code>details.id</code>.
+          <b class="actor">Merchant</b> request Id. Copy of <code>details.id</code>.
         </td>
       </tr>
       <tr>
@@ -1846,7 +1846,7 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
       </div>
     <div style='overflow-x:auto;padding-right:0.2em'>
       <div class="staticbox" style="min-width:35em">
-        {<br>&nbsp;&nbsp;&quot;paymentRequest&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;payee&quot;:&nbsp;&quot;Space&nbsp;Shop&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;id&quot;:&nbsp;&quot;7040566321&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;amount&quot;:&nbsp;&quot;435.00&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;currency&quot;:&nbsp;&quot;EUR&quot;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;&quot;fwpAssertion&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;paymentMethod&quot;:&nbsp;&quot;https://bankdirect.com&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;issuerId&quot;:&nbsp;&quot;https://mybank.fr/payment&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;encryptedAuthorization&quot;:&nbsp;&quot;pQED&#x2022;&#x2022;&#x2022;PJMQ&quot;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;&quot;receiveAccount&quot;:&nbsp;&quot;DE89370400440532013000&quot;,<br>&nbsp;&nbsp;&quot;clientIp&quot;:&nbsp;&quot;220.13.198.144&quot;,<br>&nbsp;&nbsp;&quot;timeStamp&quot;:&nbsp;&quot;2021-06-17T10:34:22Z&quot;<br>}<br>
+        {<br>&nbsp;&nbsp;&quot;paymentRequest&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;payeeName&quot;:&nbsp;&quot;Space&nbsp;Shop&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;requestId&quot;:&nbsp;&quot;7040566321&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;amount&quot;:&nbsp;&quot;435.00&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;currency&quot;:&nbsp;&quot;EUR&quot;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;&quot;fwpAssertion&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;paymentMethod&quot;:&nbsp;&quot;https://bankdirect.com&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;issuerId&quot;:&nbsp;&quot;https://mybank.fr/payment&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;encryptedAuthorization&quot;:&nbsp;&quot;pQED&#x2022;&#x2022;&#x2022;PJMQ&quot;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;&quot;receiveAccount&quot;:&nbsp;&quot;DE89370400440532013000&quot;,<br>&nbsp;&nbsp;&quot;clientIp&quot;:&nbsp;&quot;220.13.198.144&quot;,<br>&nbsp;&nbsp;&quot;timeStamp&quot;:&nbsp;&quot;2021-06-17T10:34:22Z&quot;<br>}<br>
       </div>
     </div>
       <div>Description:</div>
@@ -1914,7 +1914,7 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
       <ul>
         <li>
           That <code>paymentRequest</code> is properly formatted and that
-          the <code>payee</code> attribute
+          the <code>payeeName</code> attribute
           matches the <b class="actor">Merchant</b> common name registered with the <b class="actor">PSP</b>.
         </li>
         <li>
@@ -1947,7 +1947,7 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
       </div>
     <div style='overflow-x:auto;padding-right:0.2em'>
       <div class="staticbox" style="min-width:35em">
-        {<br>&nbsp;&nbsp;&quot;pspRequest&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;paymentRequest&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;payee&quot;:&nbsp;&quot;Space&nbsp;Shop&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;id&quot;:&nbsp;&quot;7040566321&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;amount&quot;:&nbsp;&quot;435.00&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;currency&quot;:&nbsp;&quot;EUR&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;fwpAssertion&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;paymentMethod&quot;:&nbsp;&quot;https://bankdirect.com&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;issuerId&quot;:&nbsp;&quot;https://mybank.fr/payment&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;encryptedAuthorization&quot;:&nbsp;&quot;pQED&#x2022;&#x2022;&#x2022;PJMQ&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;receiveAccount&quot;:&nbsp;&quot;DE89370400440532013000&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;clientIp&quot;:&nbsp;&quot;220.13.198.144&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;timeStamp&quot;:&nbsp;&quot;2021-06-17T10:34:23Z&quot;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;&quot;payeeHost&quot;:&nbsp;&quot;spaceshop.com&quot;,<br>&nbsp;&nbsp;&quot;timeStamp&quot;:&nbsp;&quot;2021-06-17T10:34:23Z&quot;<br>}<br>
+        {<br>&nbsp;&nbsp;&quot;pspRequest&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;paymentRequest&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;payeeName&quot;:&nbsp;&quot;Space&nbsp;Shop&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;requestId&quot;:&nbsp;&quot;7040566321&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;amount&quot;:&nbsp;&quot;435.00&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;currency&quot;:&nbsp;&quot;EUR&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;fwpAssertion&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;paymentMethod&quot;:&nbsp;&quot;https://bankdirect.com&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;issuerId&quot;:&nbsp;&quot;https://mybank.fr/payment&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;encryptedAuthorization&quot;:&nbsp;&quot;pQED&#x2022;&#x2022;&#x2022;PJMQ&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;receiveAccount&quot;:&nbsp;&quot;DE89370400440532013000&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;clientIp&quot;:&nbsp;&quot;220.13.198.144&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;timeStamp&quot;:&nbsp;&quot;2021-06-17T10:34:23Z&quot;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;&quot;payeeHost&quot;:&nbsp;&quot;spaceshop.com&quot;,<br>&nbsp;&nbsp;&quot;timeStamp&quot;:&nbsp;&quot;2021-06-17T10:34:23Z&quot;<br>}<br>
       </div>
     </div>
 
