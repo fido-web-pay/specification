@@ -457,7 +457,7 @@
   <text x='63' y='24.3' fill='black' font-family='Roboto,sans-serif' font-size='14.399999999999999' text-anchor='middle'>User</text>
 <svg x='163' y='32.0' width='40' height='40.0' viewBox='0 0 68 68' xmlns='http://www.w3.org/2000/svg'>
   <title>Browser Symbol</title>
-  <!-- Anders Ruyndgren 2021-->
+  <!-- Anders Rundgren 2021-->
   <defs>
     <radialGradient id='browserWorld'>
       <stop offset='0.09' stop-color='#afc6e9'/>
@@ -465,13 +465,13 @@
     </radialGradient>
   </defs>
   <circle cx='34' cy='34' r='34' fill='url(#browserWorld)'/>
-  <g fill='none' stroke='white' stroke-width='2'>
-    <circle cx='34' cy='34' r='30'/>
-    <ellipse cx='34' cy='34' rx='13' ry='30'/>
-    <line x1='34' y1='4' x2='34' y2='64'/>
-    <line x1='4' y1='34' x2='64' y2='34'/>
-    <line x1='7.5' y1='19' x2='60.5' y2='19'/>
-    <line x1='7.5' y1='49' x2='60.5' y2='49'/>
+  <g fill='none' stroke='white' stroke-width='1.5'>
+    <circle cx='34' cy='34' r='31'/>
+    <ellipse cx='34' cy='34' rx='13' ry='31'/>
+    <line x1='34' y1='3.5' x2='34' y2='64.5'/>
+    <line x1='3.5' y1='34' x2='64.5' y2='34'/>
+    <line x1='7' y1='19' x2='61' y2='19'/>
+    <line x1='7' y1='49' x2='61' y2='49'/>
   </g>
 </svg>
   <text x='183' y='24.3' fill='black' font-family='Roboto,sans-serif' font-size='14.399999999999999' text-anchor='middle'>Browser</text>
@@ -480,7 +480,7 @@
    viewBox='0 0 68 48'
    version='1.1'>
   <title>Merchant Symbol</title>
-  <!-- Anders Ruyndgren 2021-->
+  <!-- Anders Rundgren 2021-->
   <defs>
     <filter
        id='fx0'
