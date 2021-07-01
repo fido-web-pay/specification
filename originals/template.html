@@ -554,13 +554,17 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
           <td>
             Since the authorization signature is intended to also cover the the FIDO
             <a href="#credentialdatabase">public key</a> and signature algorithm,
-            these elements MUST also be included in the data used to calculate the FIDO 'challenge'.
+            these elements MUST also be included in the data to be signed.
           </td>
         </tr>
       </table>
     </div>
     <div>
       This object is subsequently referred to as Authorization Data (AD).
+      AD is (after SHA256-digesting), used as sole FIDO &quot;challenge&quot;.
+      That is, <i>there is no FIDO authentication server</i> because FWP
+      builds on a &quot;Card Present&quot; authorization concept,
+      similar to EMV&reg; and Apple Pay&reg;.
     </div>
     <div class="para">
       Note that throughout this specification, elements are referred to
