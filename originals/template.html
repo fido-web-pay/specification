@@ -516,15 +516,6 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
         </tr>
         <tr>
           <td style='text-align:center'><kbd>8</kbd></td>
-          <td><code>userAuthorizationMethod</code></td>
-          <td>
-            Currently UNSPECIFIED(<kbd>0</kbd>), FINGERPRINT(<kbd>1</kbd>),
-            FACERECOGNITION(<kbd>2</kbd>), and PIN(<kbd>3</kbd>) are supported.
-            Included for <i>security and logging</i> purposes.
-          </td>
-        </tr>
-        <tr>
-          <td style='text-align:center'><kbd>9</kbd></td>
           <td><code>platformData</code></td>
           <td>
             Up-to-date information about the core <i>software</i> components.
@@ -538,7 +529,7 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
           </td>
         </tr>
         <tr>
-          <td style='text-align:center'><kbd>10</kbd></td>
+          <td style='text-align:center'><kbd>9</kbd></td>
           <td><code>timeStamp</code></td>
           <td>
             ISO (<a href="https://tools.ietf.org/html/rfc3339"
@@ -549,7 +540,7 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
           </td>
         </tr>
         <tr>
-          <td style='text-align:center'><kbd>11</kbd></td>
+          <td style='text-align:center'><kbd>10</kbd></td>
           <td><code>authorization</code></td>
           <td>
             Since the authorization signature is intended to also cover the the FIDO
@@ -585,7 +576,7 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
       </div>
     </div>
     <div>
-      This operation updates the <code>authorization</code> (<kbd>11</kbd>) element of AD.
+      This operation updates the <code>authorization</code> (<kbd>10</kbd>) element of AD.
     </div>
     <div class="para">The resulting object is subsequently referred to as Signed Authorization Data (SAD).</div>
     <div id="seq-4.4" class="step">4.4 Create Encrypted Signed Authorization Data (ESAD)</div>
@@ -1244,6 +1235,7 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
           <tr><td style="text-align:center">2021-05-19</td><td style="text-align:center">0.18</td><td>Aligned wallet database with FIDO names.</td></tr>
           <tr><td style="text-align:center">2021-06-03</td><td style="text-align:center">0.19</td><td>Added IPR declaration.</td></tr>
           <tr><td style="text-align:center">2021-06-21</td><td style="text-align:center">0.20</td><td>Converted the FWP core to CBOR (was JSON).</td></tr>
+          <tr><td style="text-align:center">2021-07-02</td><td style="text-align:center">0.21</td><td>Removed redundant FINGERPRINT item.</td></tr>
         </table>
       </div>
       <div id="authors" class="header">
