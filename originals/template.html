@@ -442,6 +442,11 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
     <div>
       This object is subsequently referred to as PaymentRequest Core Data (PRCD).
     </div>
+    <div class="para">
+      Note that throughout this specification, elements are referred to
+      by their symbolic name rather than by their <a href="#cbor">CBOR</a> label.
+    </div>
+
     <div id="seq-4.2" class="step">
       4.2 Create Authorization Data (AD)
     </div>
@@ -552,13 +557,9 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
     </div>
     <div>
       This object is subsequently referred to as Authorization Data (AD).
-      AD is (after SHA256-digesting), used as sole FIDO &quot;challenge&quot;.
-      That is, <i>there is no FIDO authentication server</i> since FWP
-      builds on the same &quot;Card Present&quot; authorization concept as EMV&reg;.
     </div>
     <div class="para">
-      Note that throughout this specification, elements are referred to
-      by their symbolic name rather than by their <a href="#cbor">CBOR</a> label.
+      AD is (after SHA256-digesting), used as the sole FIDO &quot;challenge&quot; source.
     </div>
 
     <div id="seq-4.3" class="step">4.3 Create Signed Authorization Data (SAD)</div>
@@ -579,6 +580,11 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
       This operation updates the <code>authorization</code> (<kbd>10</kbd>) element of AD.
     </div>
     <div class="para">The resulting object is subsequently referred to as Signed Authorization Data (SAD).</div>
+    <div class="comment box">
+      There is no FIDO authentication server involved in this step since FWP
+      builds on the same &quot;Card Present&quot; authorization concept as EMV.
+    </div>
+
     <div id="seq-4.4" class="step">4.4 Create Encrypted Signed Authorization Data (ESAD)</div>
     <div class="para">
       For privacy and security reasons, Signed Authorization Data (SAD) objects
