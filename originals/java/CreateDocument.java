@@ -75,7 +75,7 @@ public class CreateDocument  {
         removeDuplicate("Merchant");
         removeDuplicate("PSP");
         removeDuplicate("Issuer");
-        removeDuplicate("FIDO Web Pay - Sample Sequence Diagram");
+        removeDuplicate("FIDO Web Pay - Sample ");
         template = template.replace("@delegateddiagram@", sequenceDiagram);
         template = template.replace("@browser-PR.txt@", processCodeTxt("browser-PR.txt"));
         template = template.replace("@AD.txt@", processCodeTxt("AD.txt"));

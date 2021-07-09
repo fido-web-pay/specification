@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <svg viewBox='0 0 486 355' xmlns='http://www.w3.org/2000/svg'>
-    <title>FIDO Web Pay - Sample Sequence Diagram</title>
+    <title>FIDO Web Pay - Sample Delegated Sequence Diagram</title>
     <!-- Anders Rundgren 2021 -->
     <defs>
     <filter id='dropShaddow'>
@@ -700,7 +700,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
   <text x='139.75' y='132.05' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>D1</text>
   </a>
   <line x1='183.6' y1='164' x2='294.9' y2='164' stroke-width='0.8' stroke='#cc1010' marker-end='url(#arrowHead)'/>
-  <text x='243' y='158.70000000000002' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>&nbsp;&nbsp;AuthorizeRequest</text>
+  <text x='243' y='158.70000000000002' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>&#160;&#160;AuthorizeRequest</text>
   <a href='#seq-D2'>
   <rect x='172.5' y='157' width='21' height='14' rx='3' fill='white' stroke='#404040' stroke-width='0.5'/>
   <text x='183' y='168.3' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>D2</text>

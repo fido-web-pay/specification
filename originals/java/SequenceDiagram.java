@@ -326,7 +326,7 @@ public class SequenceDiagram   {
             currNum = 1;
             delegatedPart = true;
             processing(1);
-            arrow(1, 2, "&nbsp;&nbsp;AuthorizeRequest");
+            arrow(1, 2, "&#160;&#160;AuthorizeRequest");
             processing(2);
             returnArrow(2, 1, "Authorization");
             processing(1);
@@ -342,7 +342,9 @@ public class SequenceDiagram   {
             .append(" ")
             .append(convert(seqY + 10))
             .append("' xmlns='http://www.w3.org/2000/svg'>\n" +
-  "    <title>FIDO Web Pay - Sample Sequence Diagram</title>\n" +
+  "    <title>FIDO Web Pay - Sample")
+            .append(standardSequenceDiagram ? "" : " Delegated")
+            .append(" Sequence Diagram</title>\n" +
   "    <!-- Anders Rundgren 2021 -->\n" +
   "    <defs>\n" +
   "    <filter id='dropShaddow'>\n" +
