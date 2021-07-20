@@ -1,0 +1,594 @@
+<!DOCTYPE html><html><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="images/favicon.png" sizes="192x192">
+<title>FIDO Web Pay - Crypto</title><style type="text/css">
+.header {font-size:1.6em;margin:1em 0 0.8em 0}
+.subheader {font-size:1.2em;margin-top:1em;margin-bottom:0.6em}
+.step {font-size:1.2em;margin-top:1.5em;margin-bottom:0.6em}
+.para {margin-top: 0.8em}
+.gutter {margin-top: 0.3em}
+.actor {color:darkgreen;font-weight:500}
+.msg {font-weight:500}
+.staticbox {
+  font-family: "Noto Mono",monospace;
+  margin: 0.8em 0 1em 0;
+  box-sizing: border-box;
+  word-break: break-all;
+  border-width: 1px;
+  border-style: solid;
+  border-color: grey;
+  padding: 10pt;
+  box-shadow: 0.2em 0.2em 0.2em #d0d0d0;
+  background-color: #f8f8f8;
+}
+.comment {padding:0.5em 1em;margin-top:1.5em;display:inline-block;background-color:#fafffa}
+.box {box-shadow: 0.2em 0.2em 0.2em #d0d0d0;border-width:1px;border-style:solid;border-color:black}
+.numbox {border-width:1pt;border-style:solid;border-color:black;border-radius:0.3em;display:inline-block;margin-right:0.6em;padding:0 3pt}
+.tftable {border-collapse:collapse;box-shadow:0.2em 0.2em 0.2em #d0d0d0;margin:0.6em 0 1em 0}
+.tftable td {background-color: #fffdf2;padding: 0.4em 0.5em;border-width: 1px;border-style: solid; border-color: black}
+.tftable th {font-weight: normal;padding: 0.4em 0.5em;background-color: #f8f8f8;text-align: center;border-width: 1px;border-style: solid; border-color: black}
+.json {word-break:break-all;background-color:#f8f8f8;padding:1em;border-width:1px;border-style:solid;border-color:#a9a9a9;box-shadow:0.3em 0.3em 0.3em #d0d0d0}
+body {margin:1em;font-size:10pt;font-family:Roboto,sans-serif;background-color:white}
+code {font-family:"Noto Mono",monospace;color:maroon}
+kbd {font-family: "Noto Mono",monospace}
+pre {font-family:"Noto Mono",monospace;margin: 0.8em 0 1em 0;padding:0.6em 1em;background-color: #f8f8f8}
+ul,ol {margin: 0;padding-left:2em}
+li {margin-top:0.3em}
+a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
+.toc {padding:0 0 0.3em 1em}
+</style>
+</head>
+<body>
+  <img style="max-width:30%" src="images/fwp.svg" alt="logo" title="FWP logotype"/>
+  <img style="max-width:30%;position:absolute;right:1em;top:1em" src="images/ipr.svg" alt="IPR declaration" title="IPR declaration"/>
+  <div style="text-align:center" class="header">FIDO Web Pay - Crypto</div>
+  <div id="toc" class="header">Table of Contents</div>
+   <div class='toc'><a href='#1'>1 Introduction</a></div><div class='toc'><a href='#2'>2 Relationship to Existing Standards</a></div><div class='toc'><a href='#3'>3 Terminology</a></div><div class='toc'><a href='#4'>4 User Authorization</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#4.1'>4.1 Create Authorization Data (AD)</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#4.2'>4.2 Hash Authorization Data (AD)</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#4.3'>4.3 Create Signed Authorization Data (SAD)</a></div><div class='toc'><a href='#5'>5 Encrypted User Authorization (ESAD)</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#5.1'>5.1 Encryption Object</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#5.2'>5.2 Encryption Process</a></div><div class='toc'><a href='#6'>6 User Authorization Decoding and Verification</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#6.1'>6.1 Decrypt Authorization (ESAD)</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#6.2'>6.2 Decode Signed Authorization Data (SAD)</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#6.3'>6.3 Validate FIDO Signature</a></div><div class='toc'><a href='#testvectors'>Test Vectors</a></div><div class='toc'><a href='#documenthistory'>Document History</a></div><div class='toc'><a href='#authors'>Authors</a></div><div class='toc'><a href='#trademarks'>Trademarks</a></div>
+  <div id='1' class='header'>1. Introduction</div>
+  <div>
+    This document describes the cryptographic constructs used in 
+<a href="index.html">FIDO Web Pay</a> (FWP) Assertions.
+  </div>
+  <div class="para">To make the descriptions more accessible,
+  the sample in the core document is used for illustrating the different steps required.
+  The sample depends on the keys provided in the <a href="#testvectors">Test&nbsp;Vectors</a> section.
+</div> 
+<div id='2' class='header'>2. Relationship to Existing Standards</div>
+  <div>
+    Since the user authorization component of <a href='index.html#seq-4.5'>FWP Assertions<img src='images/xtl.svg' alt='link'></a> is based on CBOR
+    [<a href="https://tools.ietf.org/html/rfc8949"
+        title="RFC8949">RFC8949<img src="images/xtl.svg" alt="link"></a>],
+    one might assume that the cryptography would be based on
+    COSE [<a href="https://tools.ietf.org/html/rfc8152"
+             title="RFC8152">RFC8152<img src="images/xtl.svg" alt="link"></a>].
+    However, this is only partially true because FIDO signatures (<a href='https://www.w3.org/TR/webauthn-2/' title='Web Authentication'>Web&nbsp;Authentication<img src='images/xtl.svg' alt='link'></a>) are
+    not compatible with COSE. In similarity to FIDO, the cryptographic
+    solutions used by FWP build on the CTAP2 canonicalization scheme
+    which COSE does not use.
+  </div>
+  <div class="para">
+    Note that the CTAP2 canonicalization scheme is compatible with
+    the deterministic mode of CBOR as featured in existing FIDO
+    compliant products.
+  </div>
+ <div id='3' class='header'>3. Terminology</div>
+  <div>
+    Throughout this document the CBOR types <kbd>unsigned&nbsp;integer</kbd> and
+    <kbd>negative&nbsp;integer</kbd> are denoted as <kbd>integer</kbd> only.
+    That is, it is the value which governs the actual type. 
+  </div>
+<div id='4' class='header'>4. User Authorization</div>
+  <div>
+    Unlike <a href='https://www.w3.org/TR/webauthn-2/' title='Web Authentication'>Web&nbsp;Authentication<img src='images/xtl.svg' alt='link'></a>, FWP builds on an <i>authorization</i> concept derived
+    from EMV&reg;.  That is, there is no FIDO server involved when the user authorizes a
+    payment.  The following sections describe the steps required
+    for creating the user authorization component of <a href='index.html#seq-4.5'>FWP Assertions<img src='images/xtl.svg' alt='link'></a>.
+  </div>
+<div id='4.1' class='subheader'>4.1. Create Authorization Data (AD)</div>
+  <div>Before requesting the user to authorize (&quot;sign&quot;),
+    the FWP client creates data to related to the
+    payment request (aka &quot;dynamic linking&quot;) like in the sample from the
+    main document:
+  </div>
+  <div id="ad" style='overflow-x:auto;padding-right:0.2em'>
+    <div class="staticbox">
+      {<br>&nbsp;&nbsp;1:&nbsp;&quot;1.0&quot;,<br>&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;&quot;Space&nbsp;Shop&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;&quot;7040566321&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;435.00&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;EUR&quot;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;3:&nbsp;&quot;spaceshop.com&quot;,<br>&nbsp;&nbsp;4:&nbsp;&quot;FR7630002111110020050014382&quot;,<br>&nbsp;&nbsp;5:&nbsp;&quot;0057162932&quot;,<br>&nbsp;&nbsp;6:&nbsp;&quot;https://bankdirect.com&quot;,<br>&nbsp;&nbsp;7:&nbsp;&quot;additional&nbsp;stuff...&quot;,<br>&nbsp;&nbsp;8:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;Android&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;10.0&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;Chrome&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;103&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;9:&nbsp;0(&quot;2021-07-02T12:34:07+02:00&quot;),<br><div style='height:0.5em'></div>&nbsp;&nbsp;<span style='color:grey'>// &quot;authorization&quot;</span><br>&nbsp;&nbsp;10:&nbsp;{<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>// &quot;signatureAlgorithm&quot; = ES256</span><br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;-7,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>// &quot;publicKey&quot;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>// &quot;kty&quot; = EC</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;2,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>// &quot;crv&quot; = P-256</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1:&nbsp;1,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>// &quot;x&quot;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2:&nbsp;h&#039;e812b1a6dcbc708f9ec43cc2921fa0a14e9d5eadcc6dc63471dd4b680c6236b5&#039;,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>// &quot;y&quot;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-3:&nbsp;h&#039;9826dcbd4ce6e388f72edd9be413f2425a10f75b5fd83d95fa0cde53159a51d8&#039;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;}<br>}
+    </div>
+   </div>
+   <div>
+    This object is referred to as Authorization Data (AD).
+  </div>
+   <div class="para">
+     Since this document is about cryptographic constructs, this section is focused on the
+     <code>authorization</code> <kbd>map</kbd> (label <kbd>10</kbd>).
+   </div>
+   <div class="para">
+   Definition:
+</div>
+<div id="authorization" style='overflow-x:auto;padding-right:0.2em'>
+  <table class="tftable">
+  <tr><th>Label</th><th>Type</th><th>Name</th><th style="min-width:25em">Description</th></tr>
+  <tr>
+    <td style='text-align:center'><kbd>1</kbd></td>
+    <td><kbd>integer</kbd></td>
+    <td><code>signatureAlgorithm</code></td>
+    <td>
+      FIDO <code>signatureAlgorithm</code> associated with the selected <a href='index.html#credentialdatabase'>Payment Credential<img src='images/xtl.svg' alt='link'></a>.
+      FIDO currently supports the following COSE signature algorithms:
+      <ul>
+        <li><kbd>ES256&nbsp;&nbsp;&nbsp;(-7)</kbd></li>
+        <li><kbd>ED25519&nbsp;(-8)</kbd> *</li>
+        <li><kbd>RS256&nbsp;&nbsp;&nbsp;(-257)</kbd></li>
+      </ul>
+      <div class="para">The item in paranthesis denotes the <kbd>integer</kbd> value to use.</div>
+      <div class="para">* <kbd>ED25519</kbd> is strictly put not COSE compliant.</div>
+    </td>
+  </tr>
+  <tr>
+    <td style='text-align:center'><kbd>2</kbd></td>
+    <td><kbd>map</kbd></td>
+    <td><code>publicKey</code></td>
+    <td>
+      FIDO <code>publicKey</code> descriptor associated with the selected <a href='index.html#credentialdatabase'>Payment Credential<img src='images/xtl.svg' alt='link'></a>.
+      The key descriptor MUST only contain the core public key data.
+      This item MUST be COSE compliant as well as be compatible with the
+      <code>signatureAlgorithm</code>.
+    </td>
+  </tr>
+  <tr>
+    <td style='text-align:center'><kbd>3</kbd></td>
+    <td><kbd>byte&nbsp;string</kbd></td>
+    <td><code>authenticatorData</code></td>
+    <td>
+      FIDO assertion data element.
+      See also <a href='https://www.w3.org/TR/webauthn-2/' title='Web Authentication'>Web&nbsp;Authentication<img src='images/xtl.svg' alt='link'></a>.
+    </td>
+  </tr>
+  <tr>
+    <td style='text-align:center'><kbd>4</kbd></td>
+    <td><kbd>byte&nbsp;string</kbd></td>
+    <td><code>clientDataJSON</code></td>
+    <td>
+      FIDO assertion data element.
+      See also <a href='https://www.w3.org/TR/webauthn-2/' title='Web Authentication'>Web&nbsp;Authentication<img src='images/xtl.svg' alt='link'></a>.
+    </td>
+  </tr>
+    <tr>
+    <td style='text-align:center'><kbd>5</kbd></td>
+    <td><kbd>byte&nbsp;string</kbd></td>
+    <td><code>signature</code></td>
+    <td>
+      FIDO assertion signature.
+      See also <a href='https://www.w3.org/TR/webauthn-2/' title='Web Authentication'>Web&nbsp;Authentication<img src='images/xtl.svg' alt='link'></a>.
+    </td>
+  </tr>
+  </table>
+  </div>
+   <div>
+As can be seen in the listing, only the two first elements are featured in the <a href="#ad">AD</a> 
+<code>authorization</code> <kbd>map</kbd>.
+This is because they are static and can thus be included in the data
+to be signed, potentially making the signature scheme more resistant to tampering.
+</div>
+<div id='4.2' class='subheader'>4.2. Hash Authorization Data (AD)</div>
+   <div>
+     Since FIDO signatures are limited to signing 32 bytes of <kbd>&quot;challenge&quot;</kbd> data, the
+     next step is creating an <kbd>SHA256</kbd> hash of the AD binary.  The sample AD reads as follows
+     when expressed in hexadecimal encoding:
+   </div>
+     <div style='overflow-x:auto;padding-right:0.2em'>
+      <div class="staticbox">
+      aa0163312e3002a4016a53706163652053686f70026a3730343035363633323103663433352e30300463455552036d737061636573686f702e636f6d04781b465237363330303032313131313130303230303530303134333832056a30303537313632393332067668747470733a2f2f62616e6b6469726563742e636f6d07736164646974696f6e616c2073747566662e2e2e08a201a20367416e64726f6964046431302e3002a203664368726f6d65046331303309c07819323032312d30372d30325431323a33343a30372b30323a30300aa2012602a401022001215820e812b1a6dcbc708f9ec43cc2921fa0a14e9d5eadcc6dc63471dd4b680c6236b52258209826dcbd4ce6e388f72edd9be413f2425a10f75b5fd83d95fa0cde53159a51d8
+      </div>
+    </div>
+    <div>Applied to the sample the hashed AD encoded as base64url should read as follows:</div>
+     <div style='overflow-x:auto;padding-right:0.2em'>
+      <div class="staticbox">
+      Cpvf-ME4E0dFJplgzLFWRvg4rswa9w-7R0NE31r4Oa4
+      </div>
+    </div>
+<div id='4.3' class='subheader'>4.3. Create Signed Authorization Data (SAD)</div>
+     <div>
+       Using the result of the previous step (but
+       using binary encoding), as the sole FIDO <kbd>&quot;challenge&quot;</kbd>,
+       the user should at this stage be requested to authorize using the key (authenticator)
+       pointed out by the <code>credentialId</code> of the selected <a href='index.html#credentialdatabase'>Payment Credential<img src='images/xtl.svg' alt='link'></a>.
+       In a Web context this involves calling <kbd>navigator.credentials.get()</kbd>.
+       If the call is successful, the FIDO items <code>authenticatorData</code>,
+       <code>clientDataJSON</code>, and <code>signature</code> should be returned.
+     </div>
+
+   <div class="para">
+    For a detailed description of how FIDO signatures are created,
+    turn to <a href='https://www.w3.org/TR/webauthn-2/' title='Web Authentication'>Web&nbsp;Authentication<img src='images/xtl.svg' alt='link'></a> (FWP is 100% compatible at the API level).
+</div>
+   <div class="para">
+    After adding the received FIDO items above to the <a href="#authorization">authorization</a>
+   <kbd>map</kbd> of AD, the resulting sample should read as follows:
+</div>
+    <div id="sad" style='overflow-x:auto;padding-right:0.2em'>
+      <div class="staticbox">
+      {<br>&nbsp;&nbsp;1:&nbsp;&quot;1.0&quot;,<br>&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;&quot;Space&nbsp;Shop&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;&quot;7040566321&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;435.00&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;EUR&quot;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;3:&nbsp;&quot;spaceshop.com&quot;,<br>&nbsp;&nbsp;4:&nbsp;&quot;FR7630002111110020050014382&quot;,<br>&nbsp;&nbsp;5:&nbsp;&quot;0057162932&quot;,<br>&nbsp;&nbsp;6:&nbsp;&quot;https://bankdirect.com&quot;,<br>&nbsp;&nbsp;7:&nbsp;&quot;additional&nbsp;stuff...&quot;,<br>&nbsp;&nbsp;8:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;Android&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;10.0&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;Chrome&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;103&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;9:&nbsp;0(&quot;2021-07-02T12:34:07+02:00&quot;),<br><div style='height:0.5em'></div>&nbsp;&nbsp;<span style='color:grey'>// &quot;authorization&quot;</span><br>&nbsp;&nbsp;10:&nbsp;{<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>// &quot;signatureAlgorithm&quot; = ES256</span><br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;-7,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>// &quot;publicKey&quot;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>// &quot;kty&quot; = EC</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;2,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>// &quot;crv&quot; = P-256</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1:&nbsp;1,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>// &quot;x&quot;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2:&nbsp;h&#039;e812b1a6dcbc708f9ec43cc2921fa0a14e9d5eadcc6dc63471dd4b680c6236b5&#039;,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>// &quot;y&quot;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-3:&nbsp;h&#039;9826dcbd4ce6e388f72edd9be413f2425a10f75b5fd83d95fa0cde53159a51d8&#039;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>// &quot;authenticatorData&quot;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;h&#039;412e175a0f0bdc06dabf0b1db79b97541c08dbacee7e31c97a553588ee922ea70500000000&#039;,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>// &quot;clientDataJSON&quot;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;h&#039;7b2274797065223a22776562617574686e2e676574222c226f726967696e223a2268747470733a2f2f6d7962616e6b2e6672222c226368616c6c656e6765223a22437076662d4d4534453064464a706c677a4c4657527667347273776139772d3752304e45333172344f6134227d&#039;,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>// &quot;signature&quot;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;5:&nbsp;h&#039;3046022100f62898a14cfb61bcebd98e137313adb914bc942b6f9d37daf0933312ced74f68022100d4ed89843b0975628a4e649cb26214ac64a3080773ee67f0b817eb2e349e013b&#039;<br>&nbsp;&nbsp;}<br>}
+      </div>
+    </div>
+<div>This object is subsequently referred to as Signed Authorization Data (SAD).</div>
+<div class="para">
+    The sample SAD object should read as follows if encoded in hexadecimal:
+  </div>
+  <div style='overflow-x:auto;padding-right:0.2em'>
+    <div class="staticbox">
+    aa0163312e3002a4016a53706163652053686f70026a3730343035363633323103663433352e30300463455552036d737061636573686f702e636f6d04781b465237363330303032313131313130303230303530303134333832056a30303537313632393332067668747470733a2f2f62616e6b6469726563742e636f6d07736164646974696f6e616c2073747566662e2e2e08a201a20367416e64726f6964046431302e3002a203664368726f6d65046331303309c07819323032312d30372d30325431323a33343a30372b30323a30300aa5012602a401022001215820e812b1a6dcbc708f9ec43cc2921fa0a14e9d5eadcc6dc63471dd4b680c6236b52258209826dcbd4ce6e388f72edd9be413f2425a10f75b5fd83d95fa0cde53159a51d8035825412e175a0f0bdc06dabf0b1db79b97541c08dbacee7e31c97a553588ee922ea7050000000004586e7b2274797065223a22776562617574686e2e676574222c226f726967696e223a2268747470733a2f2f6d7962616e6b2e6672222c226368616c6c656e6765223a22437076662d4d4534453064464a706c677a4c4657527667347273776139772d3752304e45333172344f6134227d0558483046022100f62898a14cfb61bcebd98e137313adb914bc942b6f9d37daf0933312ced74f68022100d4ed89843b0975628a4e649cb26214ac64a3080773ee67f0b817eb2e349e013b
+    </div>
+  </div>
+  <div>After the Signed Authorization Data (SAD) has been created,
+it MUST be encrypted as described in the next section.</div>
+<div id='5' class='header'>5. Encrypted User Authorization (ESAD)</div>
+<div id="esad">
+  For privacy and security reasons the user authorization component of <a href='index.html#seq-4.5'>FWP Assertions<img src='images/xtl.svg' alt='link'></a>
+  MUST be encrypted.
+</div>
+<div class="para">The listing below shows how the sample <a href="#sad">SAD</a> object could be encrypted:</div>
+<div style='overflow-x:auto;padding-right:0.2em'>
+  <div class="staticbox" style='min-width:50em'>
+  {<br><div style='height:0.5em'></div>&nbsp;&nbsp;<span style='color:grey'>// &quot;algorithm&quot; = A256GCM</span><br>&nbsp;&nbsp;1:&nbsp;3,<br><div style='height:0.5em'></div>&nbsp;&nbsp;<span style='color:grey'>// &quot;keyEncryption&quot;</span><br>&nbsp;&nbsp;2:&nbsp;{<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>// &quot;algorithm&quot; = ECDH-ES+A256KW</span><br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;-31,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>// &quot;keyId&quot;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;x25519:2021:3&quot;,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>// &quot;ephemeralKey&quot;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;5:&nbsp;{<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>// &quot;kty&quot; = OKP</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;1,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>// &quot;crv&quot; = X25519</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1:&nbsp;4,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>// &quot;x&quot;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2:&nbsp;h&#039;2d8105d3ba99b805dca0a15600e47aaa86661a9d0d943e4a6055be391086f841&#039;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>// &quot;cipherText&quot;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;9:&nbsp;h&#039;51f8475cd3ea7f3462b1ae64e69b22c159720bd9170aedb5793100dc07218e14b2f96587af11feb9&#039;<br>&nbsp;&nbsp;},<br><div style='height:0.5em'></div>&nbsp;&nbsp;<span style='color:grey'>// &quot;tag&quot;</span><br>&nbsp;&nbsp;7:&nbsp;h&#039;978ae0a75c394daab7da559aed28f6cb&#039;,<br><div style='height:0.5em'></div>&nbsp;&nbsp;<span style='color:grey'>// &quot;iv&quot;</span><br>&nbsp;&nbsp;8:&nbsp;h&#039;db9a70778883212674cab800&#039;,<br><div style='height:0.5em'></div>&nbsp;&nbsp;<span style='color:grey'>// &quot;cipherText&quot;</span><br>&nbsp;&nbsp;9:&nbsp;h&#039;9c9763597a3f9f79ab78e5502f07863bc77ef8dccae3e4e53cbf918fad3ed4a87507c02f51154d7be9edb95331ede2473e64eb2d838e1ee82efc924b1b83406a6ea29fc398597887f72601db354b8325372784b4d7c2841a63635050c2261726eec6877ce1dcb214bcec8e8ee25cf50431fa27179062618c666d9a4f327fd0d497e0afc862b0da02bcb75cbe64e16e416cc7a96d1ff73a78f45f84fa7ba43fa8059c15dd1272e9ecc2469d3ecf24248947d5f43578b1895e5a6fd304d06a5e05269f1673129e50da62f96488cb4460ab2704cc415054147a190014962db8cbbcad8c012c7dbe8b70442139b6abfef76ce3b66602e6e53109dddad20f2e87b4d4cf846920a30ab889f2a640ab8824e6b178f733b69da6e0071ba19a61502bcd19f3e439f9a5857aaf57a92264e6c3988229e2c83661b61a8cea9b357ca7d983ba330e00e8d94b736fe2e98d5cfb531c38bc8737ffeee0885ce4943d2fe1516a9f77a32df5807f6772b18f936837d6f6859a90bca617ab4e22548acf423573a82a0f0fdcb7936b04630090ef65d1842c7dccf15de102091f612eec9e731e2bf21a24eb5848313cba03ae669fcd2d59798edf72ad1f365612008b5f0852d63485589536346b41e4103ffde18593e5026d1019765170b889c53ef6a2252eaef43a059fa527aaeb39f1513b7eb826adfaac318fd925cdc188e695fc8249322ccbc6fdb3a373ac60df&#039;<br>}
+  </div>
+</div>
+<div>The resulting object is referred to as Encrypted Signed Authorization Data (ESAD).</div>
+<div class="para">
+  The sample ESAD object should read as follows if encoded in hexadecimal:
+</div>
+<div style='overflow-x:auto;padding-right:0.2em'>
+<div class="staticbox">
+a5010302a401381e036d7832353531393a323032313a3305a3010120042158202d8105d3ba99b805dca0a15600e47aaa86661a9d0d943e4a6055be391086f84109582851f8475cd3ea7f3462b1ae64e69b22c159720bd9170aedb5793100dc07218e14b2f96587af11feb90750978ae0a75c394daab7da559aed28f6cb084cdb9a70778883212674cab800095902069c9763597a3f9f79ab78e5502f07863bc77ef8dccae3e4e53cbf918fad3ed4a87507c02f51154d7be9edb95331ede2473e64eb2d838e1ee82efc924b1b83406a6ea29fc398597887f72601db354b8325372784b4d7c2841a63635050c2261726eec6877ce1dcb214bcec8e8ee25cf50431fa27179062618c666d9a4f327fd0d497e0afc862b0da02bcb75cbe64e16e416cc7a96d1ff73a78f45f84fa7ba43fa8059c15dd1272e9ecc2469d3ecf24248947d5f43578b1895e5a6fd304d06a5e05269f1673129e50da62f96488cb4460ab2704cc415054147a190014962db8cbbcad8c012c7dbe8b70442139b6abfef76ce3b66602e6e53109dddad20f2e87b4d4cf846920a30ab889f2a640ab8824e6b178f733b69da6e0071ba19a61502bcd19f3e439f9a5857aaf57a92264e6c3988229e2c83661b61a8cea9b357ca7d983ba330e00e8d94b736fe2e98d5cfb531c38bc8737ffeee0885ce4943d2fe1516a9f77a32df5807f6772b18f936837d6f6859a90bca617ab4e22548acf423573a82a0f0fdcb7936b04630090ef65d1842c7dccf15de102091f612eec9e731e2bf21a24eb5848313cba03ae669fcd2d59798edf72ad1f365612008b5f0852d63485589536346b41e4103ffde18593e5026d1019765170b889c53ef6a2252eaef43a059fa527aaeb39f1513b7eb826adfaac318fd925cdc188e695fc8249322ccbc6fdb3a373ac60df
+</div>
+</div>
+<div class="para">The following sections describe the encryption scheme in detail.</div>
+<div id='5.1' class='subheader'>5.1. Encryption Object</div>
+  <div class="para">Encryption is accomplished by an ECDH-based scheme
+packaged as follows:</div>
+    <div style="overflow-x:auto;padding:8pt 0">
+      <svg style='display:block;width:27em;padding:1em' class='box' viewBox='0 0 1093 680' xmlns='http://www.w3.org/2000/svg'>
+<title>FWP Encryption Layout</title>
+<!-- Anders Rundgren 2021 -->
+<g stroke='#4366bf' stroke-width='3' fill='none'>
+<rect x='20' y='180' width='464' height='80' rx='8'/>
+<rect x='20' y='280' width='464' height='80' rx='8'/>
+<rect x='20' y='380' width='464' height='80' rx='8'/>
+<rect x='20' y='480' width='464' height='80' rx='8'/>
+<rect x='20' y='580' width='464' height='80' rx='8'/>
+<rect x='609' y='180' width='464' height='80' rx='8'/>
+<rect x='609' y='280' width='464' height='80' stroke-dasharray='8' rx='8'/>
+<rect x='609' y='380' width='464' height='80' stroke-dasharray='8' rx='8'/>
+<rect x='609' y='480' width='464' height='80' rx='8'/>
+<rect x='609' y='580' width='464' height='80' stroke-dasharray='8' rx='8'/>
+</g>
+<g font-size='40' font-family='Roboto,sans-serif'>
+<text x='252' y='70' font-size='50' text-anchor='middle'>Main Map</text>
+<text x='252' y='120' text-anchor='middle'>(Content Encryption)</text>
+<text x='841' y='70' font-size='50' text-anchor='middle'>Sub Map</text>
+<text x='841' y='120' text-anchor='middle'>(Key Encryption)</text>
+</g>
+<g font-size='40' font-family='Noto Mono,monospace' fill='maroon'>
+<text x='44' y='234'>algorithm<tspan fill='black'> (1)</tspan></text>
+<text x='44' y='334'>keyEncryption<tspan fill='black'> (2)</tspan></text>
+<text x='44' y='434'>tag<tspan fill='black'> (7)</tspan></text>
+<text x='44' y='534'>iv<tspan fill='black'> (8)</tspan></text>
+<text x='44' y='634'>cipherText<tspan fill='black'> (9)</tspan></text>
+<text x='633' y='234'>algorithm<tspan fill='black'> (1)</tspan></text>
+<text x='633' y='334'>keyId<tspan fill='black'> (3)</tspan></text>
+<text x='633' y='434'>publicKey<tspan fill='black'> (4)</tspan></text>
+<text x='633' y='534'>ephemeralKey<tspan fill='black'> (5)</tspan></text>
+<text x='633' y='634'>cipherText<tspan fill='black'> (9)</tspan></text>
+</g>
+<path fill='none' stroke='#4366bf' stroke-width='3' stroke-linecap='round' d='M504,180  m 85,0 c -33,0 -35,68 -35,68 0,30 -18,68 -48,72 30,8 48,35 48,80 v 186 c 0,0 0,74 36,74'/>
+</svg>
+
+    </div>
+<div>The number in paranthesis is the CBOR <kbd>map</kbd> key
+associated with the symbolic name.
+The items in dashed boxes are <i>optional</i>, depending on
+key encryption algorithm and encryption key reference method.</div>
+<div id="mainmap" class="para">Main map definition:</div>
+
+<div style='overflow-x:auto;padding-right:0.2em'>
+  <table class="tftable">
+  <tr><th>Label</th><th>Type</th><th>Name</th><th style="min-width:25em">Description</th></tr>
+  <tr>
+    <td style='text-align:center'><kbd>1</kbd></td>
+    <td><kbd>integer</kbd></td>
+    <td><code>algorithm</code></td>
+    <td>
+      Symmetric key algorithm used for encrypting the actual content.
+      FWP currently mandates support for the following COSE compliant algorithms:
+      <ul>
+        <li><kbd>A128GCM&nbsp;(1)</kbd></li>
+        <li><kbd>A192GCM&nbsp;(2)</kbd></li>
+        <li><kbd>A256GCM&nbsp;(3)</kbd></li>
+      </ul>
+      <div class="para">The item in paranthesis denotes the <kbd>integer</kbd> value to use.</div>
+    </td>
+  </tr>
+  <tr>
+    <td style='text-align:center'><kbd>2</kbd></td>
+    <td><kbd>map</kbd></td>
+    <td><code>keyEncryption</code></td>
+    <td>
+      See <a href="#submap">sub map</a>.
+    </td>
+  </tr>
+  <tr>
+    <td style='text-align:center'><kbd>3</kbd></td>
+    <td><kbd>byte&nbsp;string</kbd></td>
+    <td><code>tag</code></td>
+    <td>
+      Algorithm specific authentication element.
+    </td>
+  </tr>
+  <tr>
+    <td style='text-align:center'><kbd>4</kbd></td>
+    <td><kbd>byte&nbsp;string</kbd></td>
+    <td><code>iv</code></td>
+    <td>
+      Algorithm specific initialization vector.
+    </td>
+  </tr>
+    <tr>
+    <td style='text-align:center'><kbd>5</kbd></td>
+    <td><kbd>byte&nbsp;string</kbd></td>
+    <td><code>cipherText</code></td>
+    <td>
+      Encrypted content.
+    </td>
+  </tr>
+  </table>
+</div>
+
+<div id="submap" class="para">Sub map definition:</div>
+
+<div style='overflow-x:auto;padding-right:0.2em'>
+  <table class="tftable">
+    <tr><th>Label</th><th>Type</th><th>Name</th><th style="min-width:25em">Description</th></tr>
+    <tr>
+      <td style='text-align:center'><kbd>1</kbd></td>
+      <td><kbd>integer</kbd></td>
+      <td><code>algorithm</code></td>
+      <td>
+        Key encryption algorithm.
+        A compliant FWP implementation MUST as a
+        minimum support the following COSE compliant algorithms:
+        <ul>
+          <li><kbd>ECDH-ES&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(-25)</kbd></li>
+          <li><kbd>ECDH-ES+A128KW&nbsp;(-29)</kbd> *</li>
+          <li><kbd>ECDH-ES+A192KW&nbsp;(-30)</kbd> *</li>
+          <li><kbd>ECDH-ES+A256KW&nbsp;(-31)</kbd> *</li>
+        </ul>
+        <div class="para">The item in paranthesis denotes the <kbd>integer</kbd> value to use.</div>
+        <div class="para">* These algorithms depend on a <code>cipherText</code> item.</div>
+      </td>
+    </tr>
+    <tr>
+      <td style='text-align:center'><kbd>2</kbd></td>
+      <td><kbd>text&nbsp;string</kbd></td>
+      <td><code>keyId</code></td>
+      <td>
+        <i>Optional</i>: To facilitate a streamlined decryption process, 
+the encryption object MUST include a reference to the
+encryption key.  This reference is either provided through a <code>keyId</code> string
+or through the <code>publicKey</code> itself. That is, both elements MUST NOT
+be present in an FWP complient encryption object.
+<div class="para">Note that the this specification does not define a <code>keyId</code> syntax;
+any for the purpose suitable UTF-8 string will do.</div>
+      </td>
+    </tr>
+    <tr>
+      <td style='text-align:center'><kbd>3</kbd></td>
+      <td><kbd>map</kbd></td>
+      <td><code>publicKey</code></td>
+      <td>
+        <i>Optional</i>: Public key in COSE format.  See <code>keyId</code>.
+<div class="para">Note that a <code>publicKey</code> element MUST only contain the
+core public key data.</div>
+      </td>
+    </tr>
+    <tr>
+      <td style='text-align:center'><kbd>4</kbd></td>
+      <td><kbd>map</kbd></td>
+      <td><code>ephemeralKey</code></td>
+      <td>
+        Ephemeral public key in COSE format.
+        <div class="para">
+          Note that a <code>publicKey</code> element MUST only contain the
+          core public key data.
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td style='text-align:center'><kbd>5</kbd></td>
+      <td><kbd>byte&nbsp;string</kbd></td>
+      <td><code>cipherText</code></td>
+      <td>
+        <i>Optional</i>: Encrypted key.  See <code>algorithm</code>.
+      </td>
+    </tr>
+  </table>
+</div>
+<div>
+A compliant FWP implementation MUST as a
+minimum support <kbd>P-256</kbd> and <kbd>X25519</kbd> keys.
+</div>
+<div class="para">
+  Note that the ECDH algorithms MUST use a Key Derivation Function (KDF) according to HKDF
+  [<a href="https://tools.ietf.org/html/rfc5869"
+      title="RFC5869">RFC5869<img src="images/xtl.svg" alt="link"></a>],
+  profiled as follows:
+</div>
+<ul>
+  <li><kbd>hmac</kbd>: The HKDF implementation MUST use HMAC with SHA256</li>
+  <li><kbd>salt</kbd>: N/A. The default extract mode handling MUST be implemented.</li>
+  <li><kbd>info</kbd>: This parameter MUST consist of the actual COSE key
+encryption algorithm, expressed as a 32-bit (4 byte) signed big-endian integer.</li>
+</ul>
+<div id='5.2' class='subheader'>5.2. Encryption Process</div>
+To encrypt a <a href="#sad">SAD</a> object, the following steps MUST be performed:
+<ol>
+  <li>
+    Retrieve the <code>keyEncryptionAlgorithm</code>,
+    <code>contentEncryptionAlgorithm</code>,
+    and <code>encryptionKey</code> elements of the selected <a href='index.html#credentialdatabase'>Payment Credential<img src='images/xtl.svg' alt='link'></a>.
+    The compatibility of these elements with respect to this specification,
+    as well as with the client implementation, is assumed
+    to have been verified during credential enrollment.
+  </li>
+  <li>Create an empty CBOR <a href="#submap">Sub map</a> object.</li>
+  <li>
+    Copy the <code>keyEncryptionAlgorithm</code> to the <code>algorithm</code> label.
+  </li>
+  <li>
+    If the <code>encryptionKeyId</code> of the selected <a href='index.html#credentialdatabase'>Payment Credential<img src='images/xtl.svg' alt='link'></a>
+    is defined, copy the value to the <code>keyId</code> label,
+    else copy the <code>encryptionKey</code> to the <code>publicKey</code> label.
+</li>
+<li>Creating a key for encrypting the content (SAD) requires the following steps:
+<ul>
+<li>
+Generate a key pair compatible with the <code>encryptionKey</code>.
+</li>
+<li>Copy the public key of the generated key pair to the <code>ephemeralKey</code> label.</li>
+<li>
+  Perform the core ECDH operation (key agreement) including KDF,
+  using the private key of the generated key-pair and
+  the <code>encryptionKey</code>.
+Note that the requested length of the shared secret generated by the KDF,
+is defined by the <code>keyEncryptionAlgorithm</code>.
+</li>
+<li>
+  For the <kbd>ECDH-ES</kbd> (direct mode) <code>keyEncryptionAlgorithm</code>,
+  set a varible <kbd>contentEncryptionKey</kbd> equal
+  to the result of the ECDH operation.  For the other (key wrapping)
+  ECDH variants, perform the following steps:
+  <ul>
+    <li>Define a <kbd>contentEncryptionKey</kbd> variable.</li>
+    <li>Assign a random number to the <kbd>contentEncryptionKey</kbd>.</li>
+    <li>
+      Encrypt the <kbd>contentEncryptionKey</kbd> with the key wrapping method
+      associated with the ECDH algorithm using
+      the previously generated shared secret as encryption key.
+    </li>
+    <li>Copy the result of the previous operation to the <code>cipherText</code> label.</li>
+  </ul>
+  <div class="para" style="padding-bottom:0.5em">
+    Note that the length of the <kbd>contentEncryptionKey</kbd> is defined by the
+    <code>contentEncryptionAlgorithm</code>.
+  </div>
+</li>
+</ul>
+</li>
+<li>Create an empty CBOR <a href="#mainmap">Main map</a> object.</li>
+<li>
+  Assign the previously created CBOR <a href="#submap">Sub map</a> object to
+  the <code>keyEncryption</code> label.
+</li>
+<li>
+  Copy the <code>contentEncryptionAlgorithm</code>
+  to the <code>algorithm</code> label.
+</li>
+<li>Serialize the current <a href="#mainmap">Main map</a> object and assign the result
+to an AAD (Additional Authentication Data) variable.</li>
+<li>Generate an IV (Initialization Vector) complient with the
+<code>contentEncryptionAlgorithm</code>.</li>
+<li>Encrypt the SAD object as follows
+<div style='padding:0.5em 0 0.5em 1em'><kbd>
+  cipherText, tag = encrypt(<code>contentEncryptionAlgorithm</code>,<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contentEncryptionKey,<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SAD,<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AAD,<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IV)
+</kbd>
+</div>
+here using an hypothetical encryption method returning both 
+the resulting <kbd>cipherText</kbd> and a <kbd>tag</kbd> value.
+</li>
+<li>Copy the <kbd>cipherText</kbd>, <kbd>tag</kbd>, and <kbd>IV</kbd> values to the
+<code>cipherText</code>, <code>tag</code>, and <code>iv</code> labels
+respectively.
+</ol>
+<div class="para">The resulting CBOR <a href="#mainmap">Main map</a>
+object represents an <a href="#esad">ESAD</a> object according to this specification.</div>
+<div id='6' class='header'>6. User Authorization Decoding and Verification</div>
+<div>
+  The following sections describe the steps needed for decoding
+  the user authorization part (ESAD) of <a href='index.html#seq-4.5'>FWP Assertions<img src='images/xtl.svg' alt='link'></a>, as well as
+  verifying that it is technically correct from a <i>cryptographic</i> point of view.
+  As outlined in the core document, several other checks MUST also be performed
+  before an associated payment request can be considered as trusted.
+</div>
+<div class="para">
+  Missing, erroneous, or extraneous data MUST cause the the verification
+  process to terminate with an appropriate error indication.
+</div>
+<div id='6.1' class='subheader'>6.1. Decrypt Authorization (ESAD)</div>
+<div id='6.2' class='subheader'>6.2. Decode Signed Authorization Data (SAD)</div>
+<div>Decode the <a href="#sad">SAD</a> binary using a suitable CBOR parser.</div>
+<div class="para">Read and remove the FIDO items <code>authenticatorData</code>,
+<code>clientDataJSON</code>, and <code>signature</code> from the decoded object
+which now effectively is an <a href="#ad">AD</a> object.
+Applied to the sample, the resulting object should after <kbd>SHA256</kbd> hashing and
+base64url-encoding return:
+</div>
+     <div style='overflow-x:auto;padding-right:0.2em'>
+      <div class="staticbox">
+      Cpvf-ME4E0dFJplgzLFWRvg4rswa9w-7R0NE31r4Oa4
+      </div>
+    </div>
+<div>That is, the same <kbd>&quot;challenge&quot;</kbd> as during authorization.</div>
+<div class="para">This data MUST be <i>identical</i> to the corresponding
+attribute in the received <code>clientDataJSON</code> object:</div>
+      <div style='overflow-x:auto;padding-right:0.2em'>
+      <div class="staticbox">
+      {&quot;type&quot;:&quot;webauthn.get&quot;,&quot;origin&quot;:&quot;https://mybank.fr&quot;,&quot;challenge&quot;:&quot;Cpvf-ME4E0dFJplgzLFWRvg4rswa9w-7R0NE31r4Oa4&quot;}
+      </div>
+    </div>
+<div id='6.3' class='subheader'>6.3. Validate FIDO Signature</div>
+<div>
+The signature is validated by applying the items received in the 
+<a href="#authorization">authorization</a> <kbd>map</kbd> to
+a suitable signature validation API like:
+</div>
+<div class="para" style="padding-left:1em">
+        <kbd>
+          <span style="color:grey">// Hypothetical signature validation method</span><br>
+          validate(<code>signatureAlgorithm</code>,<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>publicKey</code>,<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:grey">// Signed data</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>authenticatorData</code> || SHA256(<code>clientDataJSON</code>),<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>signature</code>)
+        </kbd>
+</div>
+<div class="comment box">
+Although the FIDO signature scheme is unique, signatures can be validated by
+any cryptographic API supporting the signature algorithm in question.
+</div>
+ <div id='testvectors' class='header'>Test Vectors</div>
+
+<div id='documenthistory' class='header'>Document History</div>
+      <div style='overflow-x:auto;padding-right:0.2em'>
+        <table class="tftable">
+          <tr><th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th><th>Version</th><th style="min-width:30em">Comment</th></tr>
+          <tr><td style="text-align:center">2021-07-19</td><td style="text-align:center">0.1</td><td>Initial publishing.</td></tr>
+         </table>
+      </div>
+ <div id='authors' class='header'>Authors</div>
+       <div>
+        The FWP specification is currently authored by Anders Rundgren
+        (anders.rundgren.net@gmail.com) on GitHub
+          (<a href="https://github.com/fido-web-pay/specification"
+             title="GitHub">https://github.com/fido-web-pay/specification<img src="images/xtl.svg" alt="link"></a>).
+      </div>
+ <div id='trademarks' class='header'>Trademarks</div>
+      <div>
+        FIDO is a registered trademark of the FIDO alliance.<br />
+        EMV is a registered trademark of EMVCo.<br />&nbsp;<br />
+        This specification represents an <i>independent effort</i>,
+        not associated with the FIDO alliance or EMVCo.
+      </div>
+</body></html>
