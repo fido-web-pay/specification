@@ -9,18 +9,19 @@
 .gutter {margin-top: 0.3em}
 .actor {color:darkgreen;font-weight:500}
 .msg {font-weight:500}
-.staticbox {
-  font-family: "Noto Mono",monospace;
-  margin: 0.8em 0 1em 0;
-  box-sizing: border-box;
-  word-break: break-all;
-  border-width: 1px;
-  border-style: solid;
-  border-color: grey;
-  padding: 10pt;
-  box-shadow: 0.2em 0.2em 0.2em #d0d0d0;
-  background-color: #f8f8f8;
-}
+.formula {overflow-x:auto;padding:0.5em 0 0.5em 1em;white-space:nowrap}
+  .staticbox {
+    font-family: "Noto Mono",monospace;
+    margin: 0.8em 0 1em 0;
+    box-sizing: border-box;
+    word-break: break-all;
+    border-width: 1px;
+    border-style: solid;
+    border-color: grey;
+    padding: 10pt;
+    box-shadow: 0.2em 0.2em 0.2em #d0d0d0;
+    background-color: #f8f8f8;
+  }
 .comment {padding:0.5em 1em;margin-top:1.5em;display:inline-block;background-color:#fafffa}
 .box {box-shadow: 0.2em 0.2em 0.2em #d0d0d0;border-width:1px;border-style:solid;border-color:black}
 .numbox {border-width:1pt;border-style:solid;border-color:black;border-radius:0.3em;display:inline-block;margin-right:0.6em;padding:0 3pt}
@@ -43,7 +44,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
   <img style="max-width:30%;position:absolute;right:1em;top:1em" src="images/ipr.svg" alt="IPR declaration" title="IPR declaration"/>
   <div style="text-align:center" class="header">FIDO Web Pay - Crypto</div>
   <div id="toc" class="header">Table of Contents</div>
-   <div class='toc'><a href='#1'>1 Introduction</a></div><div class='toc'><a href='#2'>2 Relationship to Existing Standards</a></div><div class='toc'><a href='#3'>3 Terminology</a></div><div class='toc'><a href='#4'>4 User Authorization</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#4.1'>4.1 Create Authorization Data (AD)</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#4.2'>4.2 Hash Authorization Data (AD)</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#4.3'>4.3 Create Signed Authorization Data (SAD)</a></div><div class='toc'><a href='#5'>5 Encrypted User Authorization (ESAD)</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#5.1'>5.1 Encryption Object</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#5.2'>5.2 Encryption Process</a></div><div class='toc'><a href='#6'>6 User Authorization Decoding and Verification</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#6.1'>6.1 Decrypt Authorization (ESAD)</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#6.2'>6.2 Decode Signed Authorization Data (SAD)</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#6.3'>6.3 Validate FIDO Signature</a></div><div class='toc'><a href='#testvectors'>Test Vectors</a></div><div class='toc'><a href='#documenthistory'>Document History</a></div><div class='toc'><a href='#authors'>Authors</a></div><div class='toc'><a href='#trademarks'>Trademarks</a></div>
+   <div class='toc'><a href='#1'>1 Introduction</a></div><div class='toc'><a href='#2'>2 Relationship to Existing Standards</a></div><div class='toc'><a href='#3'>3 Terminology</a></div><div class='toc'><a href='#4'>4 User Authorization</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#4.1'>4.1 Create Authorization Data (AD)</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#4.2'>4.2 Hash Authorization Data (AD)</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#4.3'>4.3 Create Signed Authorization Data (SAD)</a></div><div class='toc'><a href='#5'>5 Encrypted User Authorization (ESAD)</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#5.1'>5.1 Encryption Object</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#5.2'>5.2 Encryption Process</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#5.3'>5.3 Content Encryption Algorithms</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#5.4'>5.4 Key Algorithms</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#5.5'>5.5 Key Encryption Algorithms</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#5.6'>5.6 Key Derivation Function</a></div><div class='toc'><a href='#6'>6 User Authorization Decoding and Verification</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#6.1'>6.1 Decrypt Authorization (ESAD)</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#6.2'>6.2 Decode Signed Authorization Data (SAD)</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#6.3'>6.3 Validate FIDO Signature</a></div><div class='toc'><a href='#testvectors'>Test Vectors</a></div><div class='toc'><a href='#documenthistory'>Document History</a></div><div class='toc'><a href='#authors'>Authors</a></div><div class='toc'><a href='#trademarks'>Trademarks</a></div>
   <div id='1' class='header'>1. Introduction</div>
   <div>
     This document describes the cryptographic constructs used in 
@@ -80,8 +81,9 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
 <div id='4' class='header'>4. User Authorization</div>
   <div>
     Unlike <a href='https://www.w3.org/TR/webauthn-2/' title='Web Authentication'>Web&nbsp;Authentication<img src='images/xtl.svg' alt='link'></a>, FWP builds on an <i>authorization</i> concept derived
-    from EMV&reg;.  That is, there is no FIDO server involved when the user authorizes a
-    payment.  The following sections describe the steps required
+    from EMV&reg;.  That is, there is no FIDO server involved; the user
+    authorization is created locally in the FWP client.
+    The following sections describe the steps required
     for creating the user authorization component of <a href='index.html#seq-4.5'>FWP Assertions<img src='images/xtl.svg' alt='link'></a>.
   </div>
 <div id='4.1' class='subheader'>4.1. Create Authorization Data (AD)</div>
@@ -292,50 +294,45 @@ key encryption algorithm and encryption key reference method.</div>
 
 <div style='overflow-x:auto;padding-right:0.2em'>
   <table class="tftable">
-  <tr><th>Label</th><th>Type</th><th>Name</th><th style="min-width:25em">Description</th></tr>
+  <tr><th>Name</th><th>Label</th><th>Type</th><th style="min-width:25em">Description</th></tr>
   <tr>
+    <td><code>algorithm</code></td>
     <td style='text-align:center'><kbd>1</kbd></td>
     <td><kbd>integer</kbd></td>
-    <td><code>algorithm</code></td>
     <td>
       Symmetric key algorithm used for encrypting the actual content.
-      FWP currently mandates support for the following COSE compliant algorithms:
-      <ul>
-        <li><kbd>A128GCM&nbsp;(1)</kbd></li>
-        <li><kbd>A192GCM&nbsp;(2)</kbd></li>
-        <li><kbd>A256GCM&nbsp;(3)</kbd></li>
-      </ul>
-      <div class="para">The item in paranthesis denotes the <kbd>integer</kbd> value to use.</div>
+      The value to use is the &quot;Identifier&quot; specified in the
+      <a href="#contentencryption">Content Encryption Algorithms</a> table.
     </td>
   </tr>
   <tr>
+    <td><code>keyEncryption</code></td>
     <td style='text-align:center'><kbd>2</kbd></td>
     <td><kbd>map</kbd></td>
-    <td><code>keyEncryption</code></td>
     <td>
-      See <a href="#submap">sub map</a>.
+      See <a href="#submap">Sub map</a>.
     </td>
   </tr>
   <tr>
+    <td><code>tag</code></td>
     <td style='text-align:center'><kbd>3</kbd></td>
     <td><kbd>byte&nbsp;string</kbd></td>
-    <td><code>tag</code></td>
     <td>
       Algorithm specific authentication element.
     </td>
   </tr>
   <tr>
+    <td><code>iv</code></td>
     <td style='text-align:center'><kbd>4</kbd></td>
     <td><kbd>byte&nbsp;string</kbd></td>
-    <td><code>iv</code></td>
     <td>
       Algorithm specific initialization vector.
     </td>
   </tr>
-    <tr>
+  <tr>
+    <td><code>cipherText</code></td>
     <td style='text-align:center'><kbd>5</kbd></td>
     <td><kbd>byte&nbsp;string</kbd></td>
-    <td><code>cipherText</code></td>
     <td>
       Encrypted content.
     </td>
@@ -347,53 +344,49 @@ key encryption algorithm and encryption key reference method.</div>
 
 <div style='overflow-x:auto;padding-right:0.2em'>
   <table class="tftable">
-    <tr><th>Label</th><th>Type</th><th>Name</th><th style="min-width:25em">Description</th></tr>
+    <tr><th>Name</th><th>Label</th><th>Type</th><th style="min-width:25em">Description</th></tr>
     <tr>
+      <td><code>algorithm</code></td>
       <td style='text-align:center'><kbd>1</kbd></td>
       <td><kbd>integer</kbd></td>
-      <td><code>algorithm</code></td>
       <td>
         Key encryption algorithm.
-        A compliant FWP implementation MUST as a
-        minimum support the following COSE compliant algorithms:
-        <ul>
-          <li><kbd>ECDH-ES&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(-25)</kbd></li>
-          <li><kbd>ECDH-ES+A128KW&nbsp;(-29)</kbd> *</li>
-          <li><kbd>ECDH-ES+A192KW&nbsp;(-30)</kbd> *</li>
-          <li><kbd>ECDH-ES+A256KW&nbsp;(-31)</kbd> *</li>
-        </ul>
-        <div class="para">The item in paranthesis denotes the <kbd>integer</kbd> value to use.</div>
-        <div class="para">* These algorithms depend on a <code>cipherText</code> item.</div>
+        The value to use is the &quot;Identifier&quot; specified in the
+        <a href="#keyencryption">Key Encryption Algorithms</a> table.
       </td>
     </tr>
     <tr>
-      <td style='text-align:center'><kbd>2</kbd></td>
-      <td><kbd>text&nbsp;string</kbd></td>
       <td><code>keyId</code></td>
+      <td style='text-align:center'><kbd>2</kbd></td>
+      <td><kbd>integer</kbd></td>
       <td>
-        <i>Optional</i>: To facilitate a streamlined decryption process, 
-the encryption object MUST include a reference to the
-encryption key.  This reference is either provided through a <code>keyId</code> string
-or through the <code>publicKey</code> itself. That is, both elements MUST NOT
-be present in an FWP complient encryption object.
-<div class="para">Note that the this specification does not define a <code>keyId</code> syntax;
-any for the purpose suitable UTF-8 string will do.</div>
+        <i>Optional</i>: To facilitate a streamlined decryption process,
+        the encryption object MUST include a reference to the
+        encryption key.  This reference is either provided through a <code>keyId</code> string
+        or through the <code>publicKey</code> itself. That is, both elements MUST NOT
+        be present in an FWP complient encryption object.
+        <div class="para">
+          Note that the this specification does not define a <code>keyId</code> syntax;
+          any for the purpose suitable UTF-8 string will do.
+        </div>
       </td>
     </tr>
     <tr>
+      <td><code>publicKey</code></td>
       <td style='text-align:center'><kbd>3</kbd></td>
       <td><kbd>map</kbd></td>
-      <td><code>publicKey</code></td>
       <td>
         <i>Optional</i>: Public key in COSE format.  See <code>keyId</code>.
-<div class="para">Note that a <code>publicKey</code> element MUST only contain the
-core public key data.</div>
+        <div class="para">
+          Note that a <code>publicKey</code> element MUST only contain the
+          core public key data.
+        </div>
       </td>
     </tr>
     <tr>
+      <td><code>ephemeralKey</code></td>
       <td style='text-align:center'><kbd>4</kbd></td>
       <td><kbd>map</kbd></td>
-      <td><code>ephemeralKey</code></td>
       <td>
         Ephemeral public key in COSE format.
         <div class="para">
@@ -403,31 +396,16 @@ core public key data.</div>
       </td>
     </tr>
     <tr>
+      <td><code>cipherText</code></td>
       <td style='text-align:center'><kbd>5</kbd></td>
       <td><kbd>byte&nbsp;string</kbd></td>
-      <td><code>cipherText</code></td>
       <td>
-        <i>Optional</i>: Encrypted key.  See <code>algorithm</code>.
+        <i>Optional</i>: Encrypted key to be used with ECDH algorithms using key-wrapping.
       </td>
     </tr>
   </table>
 </div>
-<div>
-A compliant FWP implementation MUST as a
-minimum support <kbd>P-256</kbd> and <kbd>X25519</kbd> keys.
-</div>
-<div class="para">
-  Note that the ECDH algorithms MUST use a Key Derivation Function (KDF) according to HKDF
-  [<a href="https://tools.ietf.org/html/rfc5869"
-      title="RFC5869">RFC5869<img src="images/xtl.svg" alt="link"></a>],
-  profiled as follows:
-</div>
-<ul>
-  <li><kbd>hmac</kbd>: The HKDF implementation MUST use HMAC with SHA256</li>
-  <li><kbd>salt</kbd>: N/A. The default extract mode handling MUST be implemented.</li>
-  <li><kbd>info</kbd>: This parameter MUST consist of the actual COSE key
-encryption algorithm, expressed as a 32-bit (4 byte) signed big-endian integer.</li>
-</ul>
+
 <div id='5.2' class='subheader'>5.2. Encryption Process</div>
 To encrypt a <a href="#sad">SAD</a> object, the following steps MUST be performed:
 <ol>
@@ -497,16 +475,17 @@ to an AAD (Additional Authentication Data) variable.</li>
 <li>Generate an IV (Initialization Vector) complient with the
 <code>contentEncryptionAlgorithm</code>.</li>
 <li>Encrypt the SAD object as follows
-<div style='padding:0.5em 0 0.5em 1em'><kbd>
-  cipherText, tag = encrypt(<code>contentEncryptionAlgorithm</code>,<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contentEncryptionKey,<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SAD,<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AAD,<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IV)
+<div class="formula">
+<kbd>
+cipherText, tag = encrypt(<code>contentEncryptionAlgorithm</code>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contentEncryptionKey,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SAD,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AAD,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IV)
 </kbd>
 </div>
-here using an hypothetical encryption method returning both 
-the resulting <kbd>cipherText</kbd> and a <kbd>tag</kbd> value.
+    here using an hypothetical encryption method returning both
+    the resulting <kbd>cipherText</kbd> and a <kbd>tag</kbd> value.
 </li>
 <li>Copy the <kbd>cipherText</kbd>, <kbd>tag</kbd>, and <kbd>IV</kbd> values to the
 <code>cipherText</code>, <code>tag</code>, and <code>iv</code> labels
@@ -514,6 +493,93 @@ respectively.
 </ol>
 <div class="para">The resulting CBOR <a href="#mainmap">Main map</a>
 object represents an <a href="#esad">ESAD</a> object according to this specification.</div>
+<div id='5.3' class='subheader'>5.3. Content Encryption Algorithms</div>
+<div id="contentencryption">Compliant FWP
+implementations MUST as a minimum support the following
+COSE content encryption algorithms:</div>
+
+<div style='overflow-x:auto;padding-right:0.2em'>
+  <table class="tftable">
+    <tr><th>Name</th><th>Identifier</th><th>Key</th><th>Tag</th><th>IV</th></tr>
+    <tr>
+      <td style='text-align:center'><kbd>A128GCM</kbd></td>
+      <td style='text-align:center'><kbd>1</kbd></td>
+      <td style='text-align:center'><kbd>16</kbd></td>
+      <td style='text-align:center'><kbd>16</kbd></td>
+      <td style='text-align:center'><kbd>12</kbd></td>
+    </tr>
+    <tr>
+      <td style='text-align:center'><kbd>A192GCM</kbd></td>
+      <td style='text-align:center'><kbd>2</kbd></td>
+      <td style='text-align:center'><kbd>24</kbd></td>
+      <td style='text-align:center'><kbd>16</kbd></td>
+      <td style='text-align:center'><kbd>12</kbd></td>
+    </tr>
+    <tr>
+      <td style='text-align:center'><kbd>A256GCM</kbd></td>
+      <td style='text-align:center'><kbd>3</kbd></td>
+      <td style='text-align:center'><kbd>32</kbd></td>
+      <td style='text-align:center'><kbd>16</kbd></td>
+      <td style='text-align:center'><kbd>12</kbd></td>
+    </tr>
+  </table>
+</div>
+<div>The length of the &quot;Key&quot;, &quot;Tag&quot;, and &quot;IV&quot;
+elements are in bytes.</div>
+<div id='5.4' class='subheader'>5.4. Key Algorithms</div>
+<div>
+  Compliant FWP implementations MUST as a
+  minimum support <kbd>P-256</kbd> and <kbd>X25519</kbd> keys.
+</div>
+
+<div id='5.5' class='subheader'>5.5. Key Encryption Algorithms</div>
+<div id="keyencryption">Compliant FWP
+implementations MUST as a minimum support the following
+COSE key encryption algorithms:</div>
+<div style='overflow-x:auto;padding-right:0.2em'>
+  <table class="tftable">
+    <tr><th>Name</th>
+    <th>Identifier</th><th>Derived&nbsp;Key</th></tr>
+    <tr>
+      <td style='white-space:nowrap'><kbd>ECDH-ES</kbd></td>
+      <td style='text-align:center'><kbd>-25</kbd></td>
+      <td>Defined by the <a href="#contentencryption">Content Encryption Algorithm</a>.</td>
+    </tr>
+    <tr>
+      <td style='white-space:nowrap'><kbd>ECDH-ES+A128KW</kbd></td>
+      <td style='text-align:center'><kbd>-29</kbd></td>
+      <td style='text-align:center'><kbd>16</kbd></td>
+    </tr>
+    <tr>
+      <td style='white-space:nowrap'><kbd>ECDH-ES+A192KW</kbd></td>
+      <td style='text-align:center'><kbd>-30</kbd></td>
+      <td style='text-align:center'><kbd>24</kbd></td>
+    </tr>
+    <tr>
+      <td style='white-space:nowrap'><kbd>ECDH-ES+A256KW</kbd></td>
+      <td style='text-align:center'><kbd>-30</kbd></td>
+      <td style='text-align:center'><kbd>32</kbd></td>
+    </tr>
+  </table>
+</div>
+<div>
+  The length of the &quot;Derived&nbsp;Key&quot; element is in bytes.
+</div>
+
+<div id='5.6' class='subheader'>5.6. Key Derivation Function</div>
+
+<div>
+  Note that the ECDH algorithms MUST use a Key Derivation Function (KDF) according to HKDF
+  [<a href="https://tools.ietf.org/html/rfc5869"
+      title="RFC5869">RFC5869<img src="images/xtl.svg" alt="link"></a>],
+  profiled as follows:
+</div>
+<ul>
+  <li><kbd>hmac</kbd>: The HKDF implementation MUST use HMAC with SHA256</li>
+  <li><kbd>salt</kbd>: N/A. The default extract mode handling MUST be implemented.</li>
+  <li><kbd>info</kbd>: This parameter MUST consist of the actual COSE key
+encryption algorithm, expressed as a 32-bit (4 byte) signed big-endian integer.</li>
+</ul>
 <div id='6' class='header'>6. User Authorization Decoding and Verification</div>
 <div>
   The following sections describe the steps needed for decoding
@@ -554,15 +620,15 @@ The signature is validated by applying the items received in the
 <a href="#authorization">authorization</a> <kbd>map</kbd> to
 a suitable signature validation API like:
 </div>
-<div class="para" style="padding-left:1em">
-        <kbd>
-          <span style="color:grey">// Hypothetical signature validation method</span><br>
-          validate(<code>signatureAlgorithm</code>,<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>publicKey</code>,<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:grey">// Signed data</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>authenticatorData</code> || SHA256(<code>clientDataJSON</code>),<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>signature</code>)
-        </kbd>
+<div class="formula">
+<kbd>
+<span style="color:grey">// Hypothetical signature validation method</span><br>
+validate(<code>signatureAlgorithm</code>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>publicKey</code>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:grey">// Signed data</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>authenticatorData</code> || SHA256(<code>clientDataJSON</code>),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>signature</code>)
+</kbd>
 </div>
 <div class="comment box">
 Although the FIDO signature scheme is unique, signatures can be validated by
