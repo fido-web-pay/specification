@@ -44,7 +44,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
   <img style="max-width:30%;position:absolute;right:1em;top:1em" src="images/ipr.svg" alt="IPR declaration" title="IPR declaration"/>
   <div style="text-align:center" class="header">FIDO Web Pay - Crypto</div>
   <div id="toc" class="header">Table of Contents</div>
-  <div class='toc'><a href='#1'>1 Introduction</a></div><div class='toc'><a href='#2'>2 Relationship to Existing Standards</a></div><div class='toc'><a href='#3'>3 Terminology</a></div><div class='toc'><a href='#4'>4 User Authorization</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#4.1'>4.1 Create Authorization Data (AD)</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#4.2'>4.2 Hash Authorization Data (AD)</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#4.3'>4.3 Create Signed Authorization Data (SAD)</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#4.4'>4.4 Signature Algorithms</a></div><div class='toc'><a href='#5'>5 Encrypted User Authorization (ESAD)</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#5.1'>5.1 Encryption Object</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#5.2'>5.2 Encryption Process</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#5.3'>5.3 Content Encryption Algorithms</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#5.4'>5.4 Key Algorithms</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#5.5'>5.5 Key Encryption Algorithms</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#5.6'>5.6 Key Derivation Function</a></div><div class='toc'><a href='#6'>6 User Authorization Decoding and Verification</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#6.1'>6.1 Decrypt Authorization (ESAD)</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#6.2'>6.2 Decode Signed Authorization Data (SAD)</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#6.3'>6.3 Validate FIDO Signature</a></div><div class='toc'><a href='#testvectors'>Test Vectors</a></div><div class='toc'><a href='#documenthistory'>Document History</a></div><div class='toc'><a href='#authors'>Authors</a></div><div class='toc'><a href='#trademarks'>Trademarks</a></div>
+  <div class='toc'><a href='#1'>1 Introduction</a></div><div class='toc'><a href='#2'>2 Relationship to Existing Standards</a></div><div class='toc'><a href='#3'>3 Terminology</a></div><div class='toc'><a href='#4'>4 User Authorization</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#4.1'>4.1 Create Authorization Data (AD)</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#4.2'>4.2 Hash Authorization Data (AD)</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#4.3'>4.3 Create Signed Authorization Data (SAD)</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#4.4'>4.4 Signature Algorithms</a></div><div class='toc'><a href='#5'>5 Encrypted User Authorization (ESAD)</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#5.1'>5.1 Encryption Object</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#5.2'>5.2 Encryption Process</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#5.3'>5.3 Content Encryption Algorithms</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#5.4'>5.4 Key Algorithms</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#5.5'>5.5 Key Encryption Algorithms</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#5.6'>5.6 Key Derivation Function</a></div><div class='toc'><a href='#6'>6 User Authorization Decoding and Verification</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#6.1'>6.1 Decrypt Authorization (ESAD)</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#6.2'>6.2 Decode Signed Authorization Data (SAD)</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#6.3'>6.3 Validate FIDO Signature</a></div><div class='toc'><a href='#7'>7 Sample Keys</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#7.1'>7.1 Signature Key</a></div><div class='toc'>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#7.2'>7.2 Encryption Key</a></div><div class='toc'><a href='#documenthistory'>Document History</a></div><div class='toc'><a href='#authors'>Authors</a></div><div class='toc'><a href='#trademarks'>Trademarks</a></div>
   <div id='1' class='header'>1. Introduction</div>
   <div>
     This document describes the cryptographic constructs used in 
@@ -52,7 +52,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
   </div>
   <div class="para">To make the descriptions more accessible,
   the sample in the core document is used for illustrating the different steps required.
-  The sample depends on the keys provided in the <a href="#testvectors">Test&nbsp;Vectors</a> section.
+  The sample depends on the keys provided in the <a href='#7'>Sample Keys</a> section.
 </div> 
 <div id='2' class='header'>2. Relationship to Existing Standards</div>
   <div>
@@ -76,7 +76,10 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
   <div>
     Throughout this document the CBOR types <kbd>unsigned&nbsp;integer</kbd> and
     <kbd>negative&nbsp;integer</kbd> are denoted as <kbd>integer</kbd> only.
-    That is, it is the value which governs the actual type. 
+    That is, it is the value which governs the actual type.
+  </div>
+  <div class="para">
+    Items in <code>red</code> refer to elements associated with the selected <a href='index.html#credentialdatabase'>Payment Credential<img src='images/xtl.svg' alt='link'></a>.
   </div>
 <div id='4' class='header'>4. User Authorization</div>
   <div>
@@ -606,7 +609,7 @@ encryption algorithm, expressed as a 32-bit (4 byte) signed big-endian integer.<
   before an associated payment request can be considered as trusted.
 </div>
 <div class="para">
-  Missing, erroneous, or extraneous data MUST cause the the verification
+  Missing, erroneous, or extraneous data MUST cause the verification
   process to terminate with an appropriate error indication.
 </div>
 <div id='6.1' class='subheader'>6.1. Decrypt Authorization (ESAD)</div>
@@ -622,7 +625,7 @@ Perform the following steps to decrypt the ESAD object:
     since the issuer and relying party usually is the same entity).
   </li>
 <li>
-Fetch the ECDH algorithm to use from <code>algorithm</code> element in the <a href="#submap">Sub map</a>.
+Fetch the ECDH algorithm to use from the <code>algorithm</code> element in the <a href="#submap">Sub map</a>.
 </li>
   <li>
   Perform an ECDH key agreement operation including <a href='#5.6'>KDF</a> with the retrieved private key
@@ -700,7 +703,8 @@ validate(<code>signatureAlgorithm</code>,<br>
 Although the FIDO signature scheme is unique, signatures can be validated by
 any cryptographic API supporting the signature algorithm in question.
 </div>
- <div id='testvectors' class='header'>Test Vectors</div>
+<div id='7' class='header'>7. Sample Keys</div>
+<div id='7.1' class='subheader'>7.1. Signature Key</div>
 <div>
   The following key in the JWK [<a href="https://tools.ietf.org/html/rfc7517"
                                title="RFC7517">RFC7517<img src="images/xtl.svg" alt="link"></a>]
@@ -716,7 +720,8 @@ each signature unique.  Verification should work as expected regardless of
 the signature value, as long as the signature key and data to be signed are
 identical.
 </div>
-<div class="para">
+<div id='7.2' class='subheader'>7.2. Encryption Key</div>
+<div>
   The following key in the JWK [<a href="https://tools.ietf.org/html/rfc7517"
                                    title="RFC7517">RFC7517<img src="images/xtl.svg" alt="link"></a>]
   format was used for the encryption part of the <a href='#5'>ESAD</a> sample:
@@ -726,6 +731,9 @@ identical.
       {<br>&nbsp;&nbsp;&quot;kty&quot;:&nbsp;&quot;OKP&quot;,<br>&nbsp;&nbsp;&quot;crv&quot;:&nbsp;&quot;X25519&quot;,<br>&nbsp;&nbsp;&quot;x&quot;:&nbsp;&quot;o16U773QQYaQB4eegNCldg6huoIZLsOQIYkFWvbZ5lA&quot;,<br>&nbsp;&nbsp;&quot;d&quot;:&nbsp;&quot;8AMLEwmHm83XsNZ-ZfMxqa4mrPzIuIXOZfQshTJrX2g&quot;<br>}<br>
     </div>
    </div>
+<div>
+Note that the ESAD sample uses a <code>keyId</code> for identifying the encryption key.
+</div>
 <div id='documenthistory' class='header'>Document History</div>
       <div style='overflow-x:auto;padding-right:0.2em'>
         <table class="tftable">
