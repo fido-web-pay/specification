@@ -406,35 +406,35 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
     <div>Definition:</div>
     <div style='overflow-x:auto;padding-right:0.2em'>
       <table class="tftable">
-      <tr><th>Label</th><th>Type</th><th>Name</th><th style="min-width:25em">Description</th></tr>
+      <tr><th>Name</th><th>Label</th><th>Type</th><th style="min-width:25em">Description</th></tr>
       <tr>
+        <td><code>payeeName</code></td>
         <td style='text-align:center'><kbd>1</kbd></td>
         <td><kbd>text&nbsp;string</kbd></td>
-        <td><code>payeeName</code></td>
         <td>
           <b class="actor">Merchant</b> common name.
         </td>
       </tr>
       <tr>
+        <td><code>requestId</code></td>
         <td style='text-align:center'><kbd>2</kbd></td>
         <td><kbd>text&nbsp;string</kbd></td>
-        <td><code>requestId</code></td>
         <td>
           <b class="actor">Merchant</b> request Id. Copy of <code>details.id</code>.
         </td>
       </tr>
       <tr>
+        <td><code>amount</code></td>
         <td style='text-align:center'><kbd>3</kbd></td>
         <td><kbd>text&nbsp;string</kbd></td>
-        <td><code>amount</code></td>
         <td>
           Amount of money requested by the <b class="actor">Merchant</b>.
         </td>
       </tr>
       <tr>
+        <td><code>currency</code></td>
         <td style='text-align:center'><kbd>4</kbd></td>
         <td><kbd>text&nbsp;string</kbd></td>
-        <td><code>currency</code></td>
         <td>
           The type of currency requested by the <b class="actor">Merchant</b>.
         </td>
@@ -465,27 +465,27 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
     <div>Definition:</div>
     <div style='overflow-x:auto;padding-right:0.2em'>
       <table class="tftable">
-        <tr><th>Label</th><th>Type</th><th>Name</th><th style="min-width:30em">Description</th></tr>
+        <tr><th>Name</th><th>Label</th><th>Type</th><th style="min-width:30em">Description</th></tr>
         <tr>
+          <td><code>version</code></td>
           <td style='text-align:center'><kbd>1</kbd></td>
           <td><kbd>text&nbsp;string</kbd></td>
-          <td><code>version</code></td>
           <td>
             FWP assertion data version.  This specification covers version &quot;1.0&quot;.
           </td>
         </tr>
         <tr>
+          <td><code>paymentRequest</code></td>
           <td style='text-align:center'><kbd>2</kbd></td>
           <td><kbd>map</kbd></td>
-          <td><code>paymentRequest</code></td>
           <td>
             Copy of PaymentRequest Core Data (<a href="#seq-4.1">PRCD</a>).
           </td>
         </tr>
         <tr>
+          <td><code>payeeHost</code></td>
           <td style='text-align:center'><kbd>3</kbd></td>
           <td><kbd>text&nbsp;string</kbd></td>
-          <td><code>payeeHost</code></td>
           <td>
             Host name as interpreted by the <b class="actor">Browser</b>.
             Included for optional validation by the <b class="actor">Issuer</b>,
@@ -493,35 +493,35 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
           </td>
         </tr>
         <tr>
+          <td><code>accountId</code></td>
           <td style='text-align:center'><kbd>4</kbd></td>
           <td><kbd>text&nbsp;string</kbd></td>
-          <td><code>accountId</code></td>
           <td>
             <b class="actor">User</b> account number associated
             with the selected <a href="#credentialdatabase">FWP credential</a>.
           </td>
         </tr>
         <tr>
+          <td><code>serialNumber</code></td>
           <td style='text-align:center'><kbd>5</kbd></td>
           <td><kbd>text&nbsp;string</kbd></td>
-          <td><code>serialNumber</code></td>
           <td>
             Unique identifier associated with the selected <a href="#credentialdatabase">FWP credential</a>.
           </td>
         </tr>
         <tr>
+          <td><code>paymentMethod</code></td>
           <td style='text-align:center'><kbd>6</kbd></td>
           <td><kbd>text&nbsp;string</kbd></td>
-          <td><code>paymentMethod</code></td>
           <td>
             Payment method associated with the selected <a href="#credentialdatabase">FWP credential</a>.
             Included for &quot;completeness&quot;.
           </td>
         </tr>
         <tr>
+          <td><code>networkData</code></td>
           <td style='text-align:center'><kbd>7</kbd></td>
           <td><i>Arbitrary</i></td>
-          <td><code>networkData</code></td>
           <td>
             <i>Optional</i>.  This attribute MUST be included if
             specified in the <code>PaymentRequest</code> constructor
@@ -529,8 +529,8 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
             <div style="margin-top:0.4em">
               Note that possible <code>networkData</code> data is specified by the calling
               <span class="actor">Merchant</span> as JavaScript, but MUST subsequently
-              be converted to CBOR when included in this object.  Due to an
-              <a href="#jsonlimit">implied restriction</a>
+              be converted to CBOR when included in this object.  Due to a
+              <a href="#jsonlimit">mandated restriction</a>
               on the JavaScript <kbd>Number</kbd> type, this conversion is
               straightforward:
               <ul>
@@ -545,20 +545,20 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
                 <li><kbd>Object</kbd> is converted to <kbd>map</kbd>.</li>
                 <li><kbd>Array</kbd> is converted to <kbd>array</kbd>.</li>
                 <li>
-                  <kbd>null</kbd>, <kbd>true</kbd>, and <kbd>false</kbd> 
+                  <kbd>null</kbd>, <kbd>true</kbd>, and <kbd>false</kbd>
                   are converted to their respective CBOR counterpart.
                 </li>
               </ul>
-             </div>
+            </div>
           </td>
         </tr>
         <tr>
+          <td><code>platformData</code></td>
           <td style='text-align:center'><kbd>8</kbd></td>
           <td><kbd>map</kbd></td>
-          <td><code>platformData</code></td>
           <td>
             Up-to-date information about the core <i>software</i> components.
-             Included for <i>security and logging</i> purposes.
+            Included for <i>security and logging</i> purposes.
             <div style="margin-top:0.4em">
               The outer CBOR map contains two entries, <kbd>1</kbd> for the operating system,
               and <kbd>2</kbd> for the &quot;user-agent&quot; (browser),
@@ -566,14 +566,14 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
             </div>
             <div style="margin-top:0.4em">
               Note that <i>hardware</i> (device) data is assumed to be established during credential
-             <a href="#enrollment">enrollment</a>.
+              <a href="#enrollment">enrollment</a>.
             </div>
           </td>
         </tr>
         <tr>
+          <td><code>timeStamp</code></td>
           <td style='text-align:center'><kbd>9</kbd></td>
           <td><kbd>date&nbsp;string</kbd></td>
-          <td><code>timeStamp</code></td>
           <td>
             ISO (<a href="https://tools.ietf.org/html/rfc3339"
                     title="RFC3399">RFC3399<img src="images/xtl.svg" alt="link"></a>)
@@ -583,9 +583,9 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
           </td>
         </tr>
         <tr>
+          <td><code>authorization</code></td>
           <td style='text-align:center'><kbd>10</kbd></td>
           <td><kbd>map</kbd></td>
-          <td><code>authorization</code></td>
           <td>
             Since the authorization signature is intended to also cover the the FIDO
             <code>publicKey</code> and <code>signatureAlgorithm</code>
