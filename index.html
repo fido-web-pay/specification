@@ -28,8 +28,8 @@
 .tftable th {font-weight: normal;padding: 0.4em 0.5em;background-color: #f8f8f8;text-align: center;border-width: 1px;border-style: solid; border-color: black}
 .json {word-break:break-all;background-color:#f8f8f8;padding:1em;border-width:1px;border-style:solid;border-color:#a9a9a9;box-shadow:0.3em 0.3em 0.3em #d0d0d0}
 body {margin:1em;font-size:10pt;font-family:Roboto,sans-serif;background-color:white}
-code {font-family:"Noto Mono",monospace;color:maroon;font-weight:bolder}
-kbd {font-family: "Noto Mono",monospace;font-weight:bolder}
+code {font-family:"Noto Mono",monospace;color:maroon}
+kbd {font-family: "Noto Mono",monospace}
 pre {font-family:"Noto Mono",monospace;margin: 0.8em 0 1em 0;padding:0.6em 1em;background-color: #f8f8f8}
 ul {margin: 0;padding-left:2em}
 li {margin-top:0.3em}
@@ -133,7 +133,7 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
 <div style='overflow-x:auto;padding-right:0.2em'>
   <table class="tftable">
     <tr>
-      <th>Name</th><th style="min-width:30em">Data</th>
+      <th>Name</th><th style="min-width:30em">Description</th>
     </tr>
     <tr>
       <td><code>credentialId</code></td>
@@ -274,11 +274,8 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
     </div>
     <div>
       This section describes the different steps needed to authorize a payment operation using FWP.
-      To improve readability, JSON data is pretty-printed,
+      To improve readability, JSON data is &quot;pretty-printed&quot;,
       while <a href="#cbor">CBOR</a> data is provided in &quot;diagnostic notation&quot;.
-    </div>
-    <div class="para">
-      Note that JSON and CBOR data types are <i>implicitly</i> provided only (through sample objects).
     </div>
     <div class="para">
       The foundation for the description is the following sequence diagram <i>sample</i>
@@ -1493,10 +1490,11 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
         That each object in the <code>networks</code> array contains a <code>name</code>
         attribute holding a <i>non-empty</i> JavaScript <kbd>String</kbd> argument.
       </li>
-      <li>
+      <li id="jsonlimit">
         That none of the objects in the <code>networks</code> array contain other
         attributes, with the exception of an <i>optional</i> <code>networkData</code>
-        attribute holding JavaScript/JSON compatible data where the <kbd>Number</kbd> type
+        attribute holding an arbitrary JavaScript/JSON-compatible argument, where the
+        <kbd>Number</kbd> type
         is limited to <i>integers</i> in the range of -2^53 to +2^53.
       </li>
       <li>
@@ -1567,12 +1565,13 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
     <div class="staticbox">
       {<br>&nbsp;&nbsp;1:&nbsp;&quot;Space&nbsp;Shop&quot;,<br>&nbsp;&nbsp;2:&nbsp;&quot;7040566321&quot;,<br>&nbsp;&nbsp;3:&nbsp;&quot;435.00&quot;<br>&nbsp;&nbsp;4:&nbsp;&quot;EUR&quot;<br>}<br>
     </div>
-    <div>Description:</div>
+    <div>Definition:</div>
     <div style='overflow-x:auto;padding-right:0.2em'>
       <table class="tftable">
-      <tr><th>Label</th><th>Name</th><th style="min-width:25em">Data</th></tr>
+      <tr><th>Label</th><th>Type</th><th>Name</th><th style="min-width:25em">Description</th></tr>
       <tr>
         <td style='text-align:center'><kbd>1</kbd></td>
+        <td><kbd>text&nbsp;string</kbd></td>
         <td><code>payeeName</code></td>
         <td>
           <b class="actor">Merchant</b> common name.
@@ -1580,6 +1579,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
       </tr>
       <tr>
         <td style='text-align:center'><kbd>2</kbd></td>
+        <td><kbd>text&nbsp;string</kbd></td>
         <td><code>requestId</code></td>
         <td>
           <b class="actor">Merchant</b> request Id. Copy of <code>details.id</code>.
@@ -1587,6 +1587,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
       </tr>
       <tr>
         <td style='text-align:center'><kbd>3</kbd></td>
+        <td><kbd>text&nbsp;string</kbd></td>
         <td><code>amount</code></td>
         <td>
           Amount of money requested by the <b class="actor">Merchant</b>.
@@ -1594,6 +1595,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
       </tr>
       <tr>
         <td style='text-align:center'><kbd>4</kbd></td>
+        <td><kbd>text&nbsp;string</kbd></td>
         <td><code>currency</code></td>
         <td>
           The type of currency requested by the <b class="actor">Merchant</b>.
@@ -1622,12 +1624,13 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
         {<br>&nbsp;&nbsp;1:&nbsp;&quot;1.0&quot;,<br>&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;&quot;Space&nbsp;Shop&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;&quot;7040566321&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;435.00&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;EUR&quot;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;3:&nbsp;&quot;spaceshop.com&quot;,<br>&nbsp;&nbsp;4:&nbsp;&quot;FR7630002111110020050014382&quot;,<br>&nbsp;&nbsp;5:&nbsp;&quot;0057162932&quot;,<br>&nbsp;&nbsp;6:&nbsp;&quot;https://bankdirect.com&quot;,<br>&nbsp;&nbsp;7:&nbsp;&quot;additional&nbsp;stuff...&quot;,<br>&nbsp;&nbsp;8:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;Android&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;10.0&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;Chrome&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;103&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;9:&nbsp;0(&quot;2021-07-02T12:34:07+02:00&quot;),<br>&nbsp;&nbsp;10:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;-7,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;2,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1:&nbsp;1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2:&nbsp;h&#039;e812b1a6dcbc708f9ec43cc2921fa0a14e9d5eadcc6dc63471dd4b680c6236b5&#039;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-3:&nbsp;h&#039;9826dcbd4ce6e388f72edd9be413f2425a10f75b5fd83d95fa0cde53159a51d8&#039;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;}<br>}
       </div>
     </div>
-    <div>Description:</div>
+    <div>Definition:</div>
     <div style='overflow-x:auto;padding-right:0.2em'>
       <table class="tftable">
-        <tr><th>Label</th><th>Name</th><th style="min-width:30em">Data</th></tr>
+        <tr><th>Label</th><th>Type</th><th>Name</th><th style="min-width:30em">Description</th></tr>
         <tr>
           <td style='text-align:center'><kbd>1</kbd></td>
+          <td><kbd>text&nbsp;string</kbd></td>
           <td><code>version</code></td>
           <td>
             FWP assertion data version.  This specification covers version &quot;1.0&quot;.
@@ -1635,13 +1638,15 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
         </tr>
         <tr>
           <td style='text-align:center'><kbd>2</kbd></td>
+          <td><kbd>map</kbd></td>
           <td><code>paymentRequest</code></td>
           <td>
-            PaymentRequest Core Data (PRCD).
+            Copy of PaymentRequest Core Data (<a href="#seq-4.1">PRCD</a>).
           </td>
         </tr>
         <tr>
           <td style='text-align:center'><kbd>3</kbd></td>
+          <td><kbd>text&nbsp;string</kbd></td>
           <td><code>payeeHost</code></td>
           <td>
             Host name as interpreted by the <b class="actor">Browser</b>.
@@ -1651,6 +1656,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
         </tr>
         <tr>
           <td style='text-align:center'><kbd>4</kbd></td>
+          <td><kbd>text&nbsp;string</kbd></td>
           <td><code>accountId</code></td>
           <td>
             <b class="actor">User</b> account number associated
@@ -1659,6 +1665,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
         </tr>
         <tr>
           <td style='text-align:center'><kbd>5</kbd></td>
+          <td><kbd>text&nbsp;string</kbd></td>
           <td><code>serialNumber</code></td>
           <td>
             Unique identifier associated with the selected <a href="#credentialdatabase">FWP credential</a>.
@@ -1666,6 +1673,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
         </tr>
         <tr>
           <td style='text-align:center'><kbd>6</kbd></td>
+          <td><kbd>text&nbsp;string</kbd></td>
           <td><code>paymentMethod</code></td>
           <td>
             Payment method associated with the selected <a href="#credentialdatabase">FWP credential</a>.
@@ -1674,29 +1682,59 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
         </tr>
         <tr>
           <td style='text-align:center'><kbd>7</kbd></td>
+          <td><i>Arbitrary</i></td>
           <td><code>networkData</code></td>
           <td>
             <i>Optional</i>.  This attribute MUST be included if
             specified in the <code>PaymentRequest</code> constructor
             for the particular <code>paymentMethod</code>, otherwise it MUST NOT be defined.
+            <div style="margin-top:0.4em">
+              Note that possible <code>networkData</code> data is specified by the calling
+              <span class="actor">Merchant</span> as JavaScript, but MUST subsequently
+              be converted to CBOR when included in this object.  Due to an
+              <a href="#jsonlimit">implied restriction</a>
+              on the JavaScript <kbd>Number</kbd> type, this conversion is
+              straightforward:
+              <ul>
+                <li>
+                  <kbd>Number</kbd> is converted to <kbd>unsigned</kbd> or
+                  <kbd>negative</kbd> <kbd>integer</kbd> depending on the value.
+                </li>
+                <li>
+                  <kbd>String</kbd> is converted to
+                  <kbd>text&nbsp;string</kbd>.
+                </li>
+                <li><kbd>Object</kbd> is converted to <kbd>map</kbd>.</li>
+                <li><kbd>Array</kbd> is converted to <kbd>array</kbd>.</li>
+                <li>
+                  <kbd>null</kbd>, <kbd>true</kbd>, and <kbd>false</kbd> 
+                  are converted to their respective CBOR counterpart.
+                </li>
+              </ul>
+             </div>
           </td>
         </tr>
         <tr>
           <td style='text-align:center'><kbd>8</kbd></td>
+          <td><kbd>map</kbd></td>
           <td><code>platformData</code></td>
           <td>
             Up-to-date information about the core <i>software</i> components.
-            <i>Device data</i> is assumed to be established during credential enrollment.
-            Included for <i>security and logging</i> purposes.
+             Included for <i>security and logging</i> purposes.
             <div style="margin-top:0.4em">
               The outer CBOR map contains two entries, <kbd>1</kbd> for the operating system,
               and <kbd>2</kbd> for the &quot;user-agent&quot; (browser),
               while the sub-maps hold name (<kbd>3</kbd>) and version (<kbd>4</kbd>) respectively.
             </div>
+            <div style="margin-top:0.4em">
+              Note that <i>hardware</i> (device) data is assumed to be established during credential
+             <a href="#enrollment">enrollment</a>.
+            </div>
           </td>
         </tr>
         <tr>
           <td style='text-align:center'><kbd>9</kbd></td>
+          <td><kbd>date&nbsp;string</kbd></td>
           <td><code>timeStamp</code></td>
           <td>
             ISO (<a href="https://tools.ietf.org/html/rfc3339"
@@ -1708,10 +1746,12 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
         </tr>
         <tr>
           <td style='text-align:center'><kbd>10</kbd></td>
+          <td><kbd>map</kbd></td>
           <td><code>authorization</code></td>
           <td>
             Since the authorization signature is intended to also cover the the FIDO
-            <a href="#credentialdatabase">public key</a> and signature algorithm,
+            <code>publicKey</code> and <code>signatureAlgorithm</code>
+            associated with the selected <a href="#credentialdatabase">FWP credential</a>,
             these elements MUST also be included in the data to be signed.
           </td>
         </tr>
@@ -1728,9 +1768,9 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
     <div class="para">
       Now apply the FIDO signature key (identified by <a href="#credentialdatabase">credentialId</a>),
       associated with the selected FWP credential to sign AD using the
-      scheme <i>preliminary outlined</i> in
-      <a href="https://fido-web-pay.github.io/specification/vectors.txt"
-         title="Vectors">https://fido-web-pay.github.io/specification/vectors.txt<img src="images/xtl.svg" alt="link"></a>.
+      scheme described in
+      <a href="https://fido-web-pay.github.io/specification/crypto.html"
+         title="FIDO Web Pay - Crypto">FIDO Web Pay - Crypto<img src="images/xtl.svg" alt="link"></a>.
       For the sample code this should result in the following object:
     </div>
     <div style='overflow-x:auto;padding-right:0.2em'>
@@ -1755,11 +1795,9 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
       attribute of the selected FWP credential.
     </div>
      <div class="para">
-      This specification mandates the encryption scheme <i>preliminary outlined</i> in
-      <a href="https://cyberphone.github.io/javaapi/org/webpki/cbor/package-summary.html#cef"
-         title="CEF">CBOR Encryption Format (CEF)<img src="images/xtl.svg" alt="link"></a>.
-      FWP clients MUST as a minimum support ECDH key encryption schemes combined
-      with GCM for content encryption.
+      This specification mandates the encryption scheme described in
+       <a href="https://fido-web-pay.github.io/specification/crypto.html"
+          title="FIDO Web Pay - Crypto">FIDO Web Pay - Crypto<img src="images/xtl.svg" alt="link"></a>.
     </div>
    <div class="para">
       The actual CEF algorithms to use are defined by the
@@ -1799,24 +1837,27 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
         {<br>&nbsp;&nbsp;&quot;paymentMethod&quot;:&nbsp;&quot;https://bankdirect.com&quot;,<br>&nbsp;&nbsp;&quot;issuerId&quot;:&nbsp;&quot;https://mybank.fr/payment&quot;,<br>&nbsp;&nbsp;&quot;encryptedAuthorization&quot;:&nbsp;&quot;pQEDAqQBOB4DbXgyNTUxOToyMDIxOjMFowEBIAQhWCAtgQXTupm4BdygoVYA5HqqhmYanQ2UPkpgVb45EIb4QQlYKFH4R1zT6n80YrGuZOabIsFZcgvZFwrttXkxANwHIY4Usvllh68R_rkHUJeK4KdcOU2qt9pVmu0o9ssITNuacHeIgyEmdMq4AAlZAgacl2NZej-feat45VAvB4Y7x3743Mrj5OU8v5GPrT7UqHUHwC9RFU176e25UzHt4kc-ZOstg44e6C78kksbg0BqbqKfw5hZeIf3JgHbNUuDJTcnhLTXwoQaY2NQUMImFybuxod84dyyFLzsjo7iXPUEMfonF5BiYYxmbZpPMn_Q1Jfgr8hisNoCvLdcvmThbkFsx6ltH_c6ePRfhPp7pD-oBZwV3RJy6ezCRp0-zyQkiUfV9DV4sYleWm_TBNBqXgUmnxZzEp5Q2mL5ZIjLRGCrJwTMQVBUFHoZABSWLbjLvK2MASx9votwRCE5tqv-92zjtmYC5uUxCd3a0g8uh7TUz4RpIKMKuInypkCriCTmsXj3M7adpuAHG6GaYVArzRnz5Dn5pYV6r1epImTmw5iCKeLINmG2GozqmzV8p9mDujMOAOjZS3Nv4umNXPtTHDi8hzf_7uCIXOSUPS_hUWqfd6Mt9YB_Z3Kxj5NoN9b2hZqQvKYXq04iVIrPQjVzqCoPD9y3k2sEYwCQ72XRhCx9zPFd4QIJH2Eu7J5zHivyGiTrWEgxPLoDrmafzS1ZeY7fcq0fNlYSAItfCFLWNIVYlTY0a0HkED_94YWT5QJtEBl2UXC4icU-9qIlLq70OgWfpSeq6znxUTt-uCat-qwxj9klzcGI5pX8gkkyLMvG_bOjc6xg3w&quot;<br>}<br>
       </div>
     </div>
-    <div>Description:</div>
+    <div>Definition:</div>
   <div style='overflow-x:auto;padding-right:0.2em'>
     <table class="tftable">
-      <tr><th>Name</th><th style="min-width:30em">Data</th></tr>
+      <tr><th>Name</th><th>Type</th><th style="min-width:30em">Description</th></tr>
       <tr>
         <td><code>paymentMethod</code></td>
+        <td><kbd>String</kbd></td>
         <td>
           Payment method associated with the selected <a href="#credentialdatabase">FWP credential</a>.
         </td>
       </tr>
       <tr>
         <td><code>issuerId</code></td>
+        <td><kbd>String</kbd></td>
         <td>
           Issuer identifier associated with the selected <a href="#credentialdatabase">FWP credential</a>.
         </td>
       </tr>
       <tr>
         <td><code>encryptedAuthorization</code></td>
+        <td><kbd>String</kbd></td>
         <td>
           Encrypted Signed Authorization Data (ESAD) supplied in a Base64Url string
           (in subsequent examples shown as a placeholder only).
@@ -1857,12 +1898,13 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
         {<br>&nbsp;&nbsp;&quot;paymentRequest&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;payeeName&quot;:&nbsp;&quot;Space&nbsp;Shop&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;requestId&quot;:&nbsp;&quot;7040566321&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;amount&quot;:&nbsp;&quot;435.00&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;currency&quot;:&nbsp;&quot;EUR&quot;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;&quot;fwpAssertion&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;paymentMethod&quot;:&nbsp;&quot;https://bankdirect.com&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;issuerId&quot;:&nbsp;&quot;https://mybank.fr/payment&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;encryptedAuthorization&quot;:&nbsp;&quot;pQED&#x2022;&#x2022;&#x2022;xg3w&quot;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;&quot;receiveAccount&quot;:&nbsp;&quot;DE89370400440532013000&quot;,<br>&nbsp;&nbsp;&quot;clientIpAddress&quot;:&nbsp;&quot;220.13.198.144&quot;,<br>&nbsp;&nbsp;&quot;timeStamp&quot;:&nbsp;&quot;2021-07-02T10:34:22Z&quot;<br>}<br>
       </div>
     </div>
-      <div>Description:</div>
+      <div>Definition:</div>
     <div style='overflow-x:auto;padding-right:0.2em'>
       <table class="tftable">
-        <tr><th>Name</th><th style="min-width:30em">Data</th></tr>
+        <tr><th>Name</th><th>Type</th><th style="min-width:30em">Description</th></tr>
         <tr>
           <td><code>paymentRequest</code></td>
+          <td><kbd>Object</kbd></td>
           <td>
             Copy of <a href="#seq-4.1">PRCD</a>, <i>recreated</i> by the <b class="actor">Merchant</b>,
             but now in JSON notation using the names from the table showing the CBOR version.
@@ -1870,18 +1912,21 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
         </tr>
         <tr>
           <td><code>fwpAssertion</code></td>
+          <td><kbd>Object</kbd></td>
           <td>
-            Copy of the <a href="#seq-4.6">FWP Assertion</a>.
+            Copy of the <a href="#seq-4.5">FWP Assertion</a>.
           </td>
         </tr>
         <tr>
           <td><code>receiveAccount</code></td>
+          <td><kbd>String</kbd></td>
           <td>
             <b class="actor">Merchant</b> account to be credited.
           </td>
         </tr>
         <tr>
           <td><code>clientIpAddress</code></td>
+          <td><kbd>String</kbd></td>
           <td>
             Request IP address (in V4 or V6 format) of the <b class="actor">User</b> device.
             Included for <i>security and logging</i> purposes.
@@ -1889,6 +1934,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
         </tr>
         <tr>
           <td><code>timeStamp</code></td>
+          <td><kbd>String</kbd></td>
           <td>
             ISO time stamp generated by the <b class="actor">Merchant</b>.
           </td>
@@ -1959,12 +2005,13 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
       </div>
     </div>
 
-      <div>Description:</div>
+      <div>Definition:</div>
     <div style='overflow-x:auto;padding-right:0.2em'>
       <table class="tftable">
-        <tr><th>Name</th><th style="min-width:30em">Data</th></tr>
+        <tr><th>Name</th><th>Type</th><th style="min-width:30em">Description</th></tr>
         <tr>
           <td><code>pspRequest</code></td>
+          <td><kbd>Object</kbd></td>
           <td>
             Copy of the <a href="#seq-6">PSPRequest</a> object
             received from the <b class="actor">Merchant</b>.
@@ -1972,12 +2019,14 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
         </tr>
         <tr>
           <td><code>payeeHost</code></td>
+          <td><kbd>String</kbd></td>
           <td>
             The <b class="actor">Merchant</b> host name registered by the <b class="actor">PSP</b>.
           </td>
         </tr>
         <tr>
           <td><code>timeStamp</code></td>
+          <td><kbd>String</kbd></td>
           <td>
             ISO time stamp generated by the <b class="actor">PSP</b>.
           </td>
@@ -2954,19 +3003,20 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
       </div>
       <div style='overflow-x:auto;padding-right:0.2em'>
         <table class="tftable">
-          <tr><th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th><th>Version</th><th style="min-width:30em">Comment</th></tr>
-          <tr><td style="text-align:center">2021-03-12</td><td style="text-align:center">0.1</td><td>Initial publishing.</td></tr>
-          <tr><td style="text-align:center">2021-03-15</td><td style="text-align:center">0.11</td><td>Added external token comment.</td></tr>
-          <tr><td style="text-align:center">2021-03-29</td><td style="text-align:center">0.12</td><td>Improved replay handling + Changed &quot;Acquirer&quot; to &quot;PSP&quot;.</td></tr>
-          <tr><td style="text-align:center">2021-04-02</td><td style="text-align:center">0.13</td><td>Added section Delegated Authorization.</td></tr>
-          <tr><td style="text-align:center">2021-04-11</td><td style="text-align:center">0.14</td><td>Added credentialId + more text on the credential database.</td></tr>
-          <tr><td style="text-align:center">2021-04-14</td><td style="text-align:center">0.15</td><td>Added section Implementation Options.</td></tr>
-          <tr><td style="text-align:center">2021-04-16</td><td style="text-align:center">0.16</td><td>Added sequence diagram &quot;scope&quot; rectangle.</td></tr>
-          <tr><td style="text-align:center">2021-05-09</td><td style="text-align:center">0.17</td><td>Simplification: Removed hashing of PRCD.</td></tr>
-          <tr><td style="text-align:center">2021-05-19</td><td style="text-align:center">0.18</td><td>Aligned wallet database with FIDO names.</td></tr>
-          <tr><td style="text-align:center">2021-06-03</td><td style="text-align:center">0.19</td><td>Added IPR declaration.</td></tr>
-          <tr><td style="text-align:center">2021-06-21</td><td style="text-align:center">0.20</td><td>Converted the FWP core to CBOR (was JSON).</td></tr>
-          <tr><td style="text-align:center">2021-07-02</td><td style="text-align:center">0.21</td><td>Removed redundant FINGERPRINT item.</td></tr>
+          <tr><th>Date</th><th>Version</th><th style="min-width:30em">Comment</th></tr>
+          <tr><td style="text-align:center;white-space:nowrap">2021-03-12</td><td style="text-align:center">0.1</td><td>Initial publishing.</td></tr>
+          <tr><td style="text-align:center;white-space:nowrap">2021-03-15</td><td style="text-align:center">0.11</td><td>Added external token comment.</td></tr>
+          <tr><td style="text-align:center;white-space:nowrap">2021-03-29</td><td style="text-align:center">0.12</td><td>Improved replay handling + Changed &quot;Acquirer&quot; to &quot;PSP&quot;.</td></tr>
+          <tr><td style="text-align:center;white-space:nowrap">2021-04-02</td><td style="text-align:center">0.13</td><td>Added section Delegated Authorization.</td></tr>
+          <tr><td style="text-align:center;white-space:nowrap">2021-04-11</td><td style="text-align:center">0.14</td><td>Added credentialId + more text on the credential database.</td></tr>
+          <tr><td style="text-align:center;white-space:nowrap">2021-04-14</td><td style="text-align:center">0.15</td><td>Added section Implementation Options.</td></tr>
+          <tr><td style="text-align:center;white-space:nowrap">2021-04-16</td><td style="text-align:center">0.16</td><td>Added sequence diagram &quot;scope&quot; rectangle.</td></tr>
+          <tr><td style="text-align:center;white-space:nowrap">2021-05-09</td><td style="text-align:center">0.17</td><td>Simplification: Removed hashing of PRCD.</td></tr>
+          <tr><td style="text-align:center;white-space:nowrap">2021-05-19</td><td style="text-align:center">0.18</td><td>Aligned wallet database with FIDO names.</td></tr>
+          <tr><td style="text-align:center;white-space:nowrap">2021-06-03</td><td style="text-align:center">0.19</td><td>Added IPR declaration.</td></tr>
+          <tr><td style="text-align:center;white-space:nowrap">2021-06-21</td><td style="text-align:center">0.20</td><td>Converted the FWP core to CBOR (was JSON).</td></tr>
+          <tr><td style="text-align:center;white-space:nowrap">2021-07-02</td><td style="text-align:center">0.21</td><td>Removed redundant FINGERPRINT item.</td></tr>
+          <tr><td style="text-align:center;white-space:nowrap">2021-07-26</td><td style="text-align:center">0.22</td><td>Added document &quot;FIDO Web Pay - Crypto&quot;.</td></tr>
         </table>
       </div>
       <div id="authors" class="header">
