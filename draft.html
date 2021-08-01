@@ -31,15 +31,62 @@ body {margin:1em;font-size:10pt;font-family:Roboto,sans-serif;background-color:w
 code {font-family:"Noto Mono",monospace;color:maroon}
 kbd {font-family: "Noto Mono",monospace}
 pre {font-family:"Noto Mono",monospace;margin: 0.8em 0 1em 0;padding:0.6em 1em;background-color: #f8f8f8}
-ul {margin: 0;padding-left:2em}
+ul, ol {margin: 0;padding-left:2em}
 li {margin-top:0.3em}
 a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
+.toc {padding: 0 0 0.3em 1em}
+
 </style>
 </head>
 <body>
-  <img style="max-width:30%" src="images/fwp.svg" alt="logo" title="FWP logotype"/>
-  <img style="max-width:30%;position:absolute;right:1em;top:1em" src="images/ipr.svg" alt="IPR declaration" title="IPR declaration"/>
-  <div id="introduction" class="header">Introduction</div>
+<img style="max-width:30%" src="images/fwp.svg" alt="logo" title="FWP logotype"/>
+<img style="max-width:30%;position:absolute;right:1em;top:1em" src="images/ipr.svg" alt="IPR declaration" title="IPR declaration"/>
+<div style="text-align:center" class="header">FIDO Web Pay</div>
+<div id="toc" class="header">Table of Contents</div>
+<div class="toc"><a href="#introduction">1 Introduction</a></div>
+<div class="toc"><a href="#scope">2 Scope</a></div>
+<div class="toc"><a href="#terminology">3 Terminology</a></div>
+<div class="toc"><a href="#credentialdatabase">4 Credential Database</a></div>
+<div class="toc"><a href="#enrollment">5 Enrollment</a></div>
+<div class="toc"><a href="#operation">6 Detailed Operation</a></div>
+<div class="toc">&nbsp;&nbsp;&nbsp;&nbsp;<a href="#seq-1">1: Initiate PaymentRequest</a></div>
+<div class="toc">&nbsp;&nbsp;&nbsp;&nbsp;<a href="#seq-2">2: Show Payment Authorization UI</a></div>
+<div class="toc">&nbsp;&nbsp;&nbsp;&nbsp;<a href="#seq-3">3: Perform User Authorization</a></div>
+<div class="toc">&nbsp;&nbsp;&nbsp;&nbsp;<a href="#seq-4">4: Create FWP Assertion</a></div>
+<div class="toc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#seq-4.1">4.1 Extract PaymentRequest Core Data (PRCD)</a></div>
+<div class="toc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#seq-4.2">4.2 Create Authorization Data (AD)</a></div>
+<div class="toc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#seq-4.3">4.3 Create Signed Authorization Data (SAD)</a></div>
+<div class="toc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#seq-4.4">4.4 Create Encrypted Signed Authorization Data (ESAD)</a></div>
+<div class="toc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#seq-4.5">4.5 Assemble FWP Assertion</a></div>
+<div class="toc">&nbsp;&nbsp;&nbsp;&nbsp;<a href="#seq-5">5: Return FWP Assertion</a></div>
+<div class="toc">&nbsp;&nbsp;&nbsp;&nbsp;<a href="#seq-6">6: Process FWP Assertion and Create PSPRequest Object</a></div>
+<div class="toc">&nbsp;&nbsp;&nbsp;&nbsp;<a href="#seq-7">7: Send PSPRequest Object</a></div>
+<div class="toc">&nbsp;&nbsp;&nbsp;&nbsp;<a href="#seq-8">8: Process PSPRequest and Create IssuerRequest Object</a></div>
+<div class="toc">&nbsp;&nbsp;&nbsp;&nbsp;<a href="#seq-9">9: Send IssuerRequest Object</a></div>
+<div class="toc">&nbsp;&nbsp;&nbsp;&nbsp;<a href="#seq-10">10: Process IssuerRequest</a></div>
+<div class="toc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#seq-10.1">10.1 Core Validation</a></div>
+<div class="toc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#seq-10.2">10.2 Extract Signed Authorization Data (SAD)</a></div>
+<div class="toc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#seq-10.3">10.3 Validate Request Data</a></div>
+<div class="toc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#seq-10.4">10.4 Validate Authorization Signature</a></div>
+<div class="toc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#seq-10.5">10.5 Replay Handling</a></div>
+<div class="toc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#seq-10.6">10.6 Other Validation Steps</a></div>
+<div class="toc"><a href="#delegatedauthorization">8 Delegated Authorization</a></div>
+<div class="toc">&nbsp;&nbsp;&nbsp;&nbsp;<a href="#seq-D1">D1: Process PSPRequest and Create AuthorizeRequest Object</a></div>
+<div class="toc">&nbsp;&nbsp;&nbsp;&nbsp;<a href="#seq-D2">D2: Send AuthorizeRequest Object</a></div>
+<div class="toc">&nbsp;&nbsp;&nbsp;&nbsp;<a href="#seq-D3">D3: Process AuthorizeRequest</a></div>
+<div class="toc">&nbsp;&nbsp;&nbsp;&nbsp;<a href="#seq-D4">D4: Return Authorized Data</a></div>
+<div class="toc">&nbsp;&nbsp;&nbsp;&nbsp;<a href="#seq-D5">D5: Create Payment Instruction</a></div>
+<div class="toc">&nbsp;&nbsp;&nbsp;&nbsp;<a href="#seq-D6">D6: Invoke &quot;Payment Rails&quot;</a></div>
+<div class="toc">&nbsp;&nbsp;&nbsp;&nbsp;<a href="#seq-D7">D7: Process Payment Instruction</a></div>
+<div class="toc"><a href="#integration">Integration</a></div>
+<div class="toc"><a href="#extensions">Extensions</a></div>
+<div class="toc"><a href="#implementationoptions">Implementation Options</a></div>
+<div class="toc"><a href="#cbor">Usage of CBOR</a></div>
+<div class="toc"><a href="#acknowledgements">Acknowledgements</a></div>
+<div class="toc"><a href="#documenthistory">Document History</a></div>
+<div class="toc"><a href="#authors">Authors</a></div>
+<div class="toc"><a href="#trademarks">Trademarks</a></div>
+<div id="introduction" class="header">1. Introduction</div>
   <div>
     <a href="https://www.emvco.com/" title="EMVCo Site">EMV&reg;<img src="images/xtl.svg" alt="link"></a> represents
     the current &quot;Gold Standard&quot; for <i>secure and convenient payments</i>
@@ -55,38 +102,44 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     a browser-resident (<i>built-in</i>) payment application.
   </div>
   <div class="para">
-    Through an extension to EMV, FWP can be used with virtually to any <i>account-based payment system</i>,
+    Apart from obvious data format differences (CBOR/JSON/JavaScript versus ISO7816),
+    this specification introduces two major enhancements to EMV:
+<ol>
+  <li>
+    By separating account numbers from issuer (bank branch) identifiers,
+    FWP can be used with virtually any account-based payment system,
     including the eurozone's
     <a href="https://www.europeanpaymentscouncil.eu/"
        title="European Payments Council">SEPA Instant<img src="images/xtl.svg" alt="link"></a>.
+  </li>
+  <li>
+    Through <i>encryption of user-authorizations</i>, 
+    FWP enables the following security and privacy improvements to EMV:
+    <ul>
+      <li>
+        Obviating the need for <i>tokenization services</i>.
+      </li>
+      <li>
+        Limiting the amount of personally identifiable information (PII) shared
+        with <i>third parties</i>, to the name of the user's bank and payment method.
+        This is presumably compliant with
+        <a href="https://www.pcisecuritystandards.org"
+           title="PCI Site">PCI<img src="images/xtl.svg" alt="link"></a>
+        requirements as well as with <a href="https://gdprinfo.eu/"
+                                        title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
+      </li>
+    </ul>
+  </li>
+</ol>
+ </div>
+  <div class="comment box">
+    Since applying FIDO to payments typically require updating multiple 
+    &quot;backend&quot; components and services,
+    FWP was designed from the ground-up to achieve high functionality while
+    keeping the complexity of a <i>matching backend</i> at a comparatively modest level.
   </div>
-  <div class="para">
-     Apart from obvious data format differences (CBOR/JSON/JavaScript versus ISO7816),
-     the primary technical enhancement to EMV, is that the FWP client
-     <i>encrypts user-authorizations</i>, enabling the following subgoals:
-  </div>
-  <ul>
-    <li>
-      Obviate the need for <i>tokenization services</i>.
-    </li>
-    <li>
-      Limit the amount of personally identifiable information (PII) shared
-      with <i>third parties</i>, to the name of the user's bank and payment method.
-      This is presumably compliant with
-      <a href="https://www.pcisecuritystandards.org"
-         title="PCI Site">PCI<img src="images/xtl.svg" alt="link"></a>
-      requirements as well as with <a href="https://gdprinfo.eu/"
-title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
-    </li>
-    <li>
-      Separate account numbers from issuer (bank branch) identifiers.
-      The latter should preferably be expressed as <a href="#servicediscovery">service URLs</a>,
-      potentially eliminating 
-      <i>externally managed databases</i> holding issuer payment processor end-points.
-    </li>
-  </ul>
   <div id="scope" class="header">
-    Scope
+    2. Scope
   </div>
   <div>
     Note that FWP is not a payment system, it is a <i>payment authorization</i> scheme,
@@ -96,7 +149,7 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
   <div class="para">
     However, to guide implementers, this document outlines
     a sample infrastructure at a &quot;conceptual&quot; level.
-    Note though that regardless of the backend design, FWP assertions
+    Note though that regardless of backend design, FWP assertions
     must (due to the EMV <i>end-to-end security model</i>),
     always be routed back to the designated issuer &quot;verbatim&quot;
     (together with other required data) in order to initiate a payment transaction.
@@ -107,7 +160,7 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
     rather than becoming a unified standard.  See also <a href="#integration">Integration</a>.
   </div>
   <div id="terminology" class="header">
-    Terminology
+    3. Terminology
   </div>
   <div>
     Throughout the rest of this document, actor names are
@@ -120,7 +173,7 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
     In FWP objects, <span class="actor">Merchant</span> is referred to as &quot;payee&quot;.
   </div>
   <div id="credentialdatabase" class="header">
-    Credential Database
+    4. Credential Database
   </div>
   <div>
     The steps outlined in <a href="#operation">Detailed Operation</a>
@@ -239,7 +292,7 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
       access by all parties but their respective <span class="actor">Issuer</span>.
     </div>
     <div id="enrollment" class="header">
-      Enrollment
+      5. Enrollment
     </div>
     <div>
       The exact enrollment process is yet to be defined; the assumption is that it
@@ -270,7 +323,7 @@ title="GDPR Site">GDPR<img src="images/xtl.svg" alt="link"></a>.
       and <code>paymentMethod</code>.
     </div>
     <div id="operation" class="header">
-      Detailed Operation
+     6. Detailed Operation
     </div>
     <div>
       This section describes the different steps needed to authorize a payment operation using FWP.
@@ -1819,7 +1872,6 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
     </div>
     <div>
       This object is subsequently referred to as Encrypted Signed Authorization Data (ESAD).
-      Note that the sample uses an <a href="#credentialdatabase">encryptionKeyId</a>.
     </div>
     <div id="domainconstraints" class="para box comment">
       Due to the end-to-end encryption scheme, the domain
@@ -2033,224 +2085,197 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
         </tr>
       </table>
 </div>
-      <div class="step">
-        <div id="seq-9" class="numbox">9</div>Send IssuerRequest Object
-      </div>
-      <div>
-        At this point the <b class="actor">PSP</b> sends the completed <span class="msg">IssuerRequest</span>
-        object to the designated <b class="actor">Issuer</b>.
-        Note that the method used for locating the proper <b class="actor">Issuer</b> depends on
-        the <code>paymentMethod</code> and <code>issuerId</code> attributes.
-        In the sample the <span class="msg">IssuerRequest</span> object
-        would presumably be sent to <span class="msg">https://mybank.fr/payment</span>.
-      </div>
-      <div class="step">
-        <div id="seq-10" class="numbox">10</div>Process IssuerRequest
-      </div>
-      <div>
-        Before initiating a payment transaction the <b class="actor">Issuer</b>
-        MUST decode and perform a number of steps to verify the
-        correctness of the received <span class="msg">IssuerRequest</span> object.
-        Any deviation MUST terminate the operation in progress and return an
-        error message to the <b class="actor">PSP</b> in a not here specified manner.
-      </div>
-      <div id="seq-10.1" class="step">
-        10.1 Core Validation.
-      </div>
-      <ul>
-        <li>
-          Verify that <span class="msg">IssuerRequest</span> schema-wise is properly formatted.
-        </li>
-        <li>
-          Verify that the <code>timeStamp</code> is within &quot;reasonable limits&quot;.
-        </li>
-        <li>
-          Verify that the <code>pspRequest.fwpAssertion.paymentMethod</code> is supported.
-        </li>
-        <li>
-          Verify that the <code>pspRequest.receiveAccount</code>
-          is compatible with the <code>pspRequest.fwpAssertion.paymentMethod</code>.
-        </li>
-        <li>
-          Verify that the <code>pspRequest.fwpAssertion.issuerId</code>
-          is compatible with the <code>pspRequest.fwpAssertion.paymentMethod</code>
-          as well as matching the <b class="actor">Issuer</b>.
-        </li>
-        <li>
-          Verify that <code>pspRequest.paymentRequest</code>
-          represents a valid <a href="#seq-4.1">PRCD</a> object.
-        </li>
-      </ul>
-      <div id="seq-10.2" class="step">
-        10.2 Extract Signed Authorization Data (SAD)
-      </div>
-      <ul>
-        <li>
-          Decode the Base64Url string supplied in <code>pspRequest.fwpAssertion.encryptedAuthorization</code>.
-        </li>
-        <li>
-          Parse the result of the previous operation as CBOR and set result as <a href="#seq-4.4">ESAD</a>.
-        </li>
-        <li>
-          Verify that the resulting object is compatible with the CEF profile specified by FWP.
-        </li>
-        <li>
-          Verify that the public key or key Id declared in the CEF object matches an
-          existing decryption (private) key of the <b class="actor">Issuer</b>.
-        </li>
-        <li>
-          Decrypt the ESAD object using the private key retrieved in the previous operation.
-        </li>
-        <li>
-          Parse the result of the previous operation as CBOR and set result as <a href="#seq-4.3">SAD</a>.
-        </li>
-        <li>
-          Verify that the SAD object schema-wise has the proper format.
-        </li>
-      </ul>
-      <div id="seq-10.3" class="step">
-        10.3 Validate Request Data
-      </div>
-      <ul>
-        <li>
-          Verify that <code>SAD.version</code> is supported.
-        </li>
-        <li>
-          Verify that <code>pspRequest.paymentRequest</code> is equivalent to <code>SAD.paymentRequest</code>.
-          That is, verifying that the <b class="actor">Merchant</b> payment claim corresponds to what the
-          <b class="actor">User</b> have actually <i>seen and authorized</i>.
-        </li>
-        <li>
-          Verify that <code>pspRequest.payeeHost</code> is equivalent to <code>SAD.payeeHost</code>.
-          That is, verifying that the <b class="actor">User</b> was not subject to phishing.
-          Note that phishing attacks against FWP are not useful for stealing money,
-          but for redirecting purchased goods to another address.
-        </li>
-        <li>
-          Verify that the <code>SAD.timeStamp</code> is within &quot;reasonable limits&quot;.
-          <i>Tentative:</i> CurrentTime - 600s &lt; <code>SAD.timeStamp</code> &lt; CurrentTime + 60s.
-        </li>
-        <li>
-          Verify that the <i>optional</i> <code>SAD.networkData</code> attribute complies
-          with the <b class="actor">Issuer</b> specific requirements.
-        </li>
-      </ul>
+    <div class="step">
+      <div id="seq-9" class="numbox">9</div>Send IssuerRequest Object
+    </div>
+    <div>
+      At this point the <b class="actor">PSP</b> sends the completed <span class="msg">IssuerRequest</span>
+      object to the designated <b class="actor">Issuer</b>.
+      Note that the method used for locating the proper <b class="actor">Issuer</b> depends on
+      the <code>paymentMethod</code> and <code>issuerId</code> attributes.
+      In the sample the <span class="msg">IssuerRequest</span> object
+      would presumably be sent to <span class="msg">https://mybank.fr/payment</span>.
+    </div>
+    <div class="step">
+      <div id="seq-10" class="numbox">10</div>Process IssuerRequest
+    </div>
+    <div>
+      Before initiating a payment transaction the <b class="actor">Issuer</b>
+      MUST decode and perform a number of steps to verify the
+      correctness of the received <span class="msg">IssuerRequest</span> object.
+      Any deviation MUST terminate the operation in progress and return an
+      error message to the <b class="actor">PSP</b> in a not here specified manner.
+    </div>
+    <div id="seq-10.1" class="step">
+      10.1 Core Validation
+    </div>
+    <ul>
+      <li>
+        Verify that <span class="msg">IssuerRequest</span> schema-wise is properly formatted.
+      </li>
+      <li>
+        Verify that the <code>timeStamp</code> is within &quot;reasonable limits&quot;.
+      </li>
+      <li>
+        Verify that the <code>pspRequest.fwpAssertion.paymentMethod</code> is supported.
+      </li>
+      <li>
+        Verify that the <code>pspRequest.receiveAccount</code>
+        is compatible with the <code>pspRequest.fwpAssertion.paymentMethod</code>.
+      </li>
+      <li>
+        Verify that the <code>pspRequest.fwpAssertion.issuerId</code>
+        is compatible with the <code>pspRequest.fwpAssertion.paymentMethod</code>
+        as well as matching the <b class="actor">Issuer</b>.
+      </li>
+      <li>
+        Verify that <code>pspRequest.paymentRequest</code>
+        represents a valid <a href="#seq-4.1">PRCD</a> object.
+      </li>
+    </ul>
+    <div id="seq-10.2" class="step">
+      10.2 Extract Signed Authorization Data (SAD)
+    </div>
+    <ul>
+      <li>
+        Decode the Base64Url string supplied in <code>pspRequest.fwpAssertion.encryptedAuthorization</code>.
+      </li>
+      <li>
+        Parse the result of the previous operation as CBOR and set result as <a href="#seq-4.4">ESAD</a>.
+      </li>
+      <li>
+        Verify that the resulting object is compatible with the CEF profile specified by FWP.
+      </li>
+      <li>
+        Verify that the public key or key Id declared in the CEF object matches an
+        existing decryption (private) key of the <b class="actor">Issuer</b>.
+      </li>
+      <li>
+        Decrypt the ESAD object using the private key retrieved in the previous operation.
+      </li>
+      <li>
+        Parse the result of the previous operation as CBOR and set result as <a href="#seq-4.3">SAD</a>.
+      </li>
+      <li>
+        Verify that the SAD object schema-wise has the proper format.
+      </li>
+    </ul>
+    <div id="seq-10.3" class="step">
+      10.3 Validate Request Data
+    </div>
+    <ul>
+      <li>
+        Verify that <code>SAD.version</code> is supported.
+      </li>
+      <li>
+        Verify that <code>pspRequest.paymentRequest</code> is equivalent to <code>SAD.paymentRequest</code>.
+        That is, verifying that the <b class="actor">Merchant</b> payment claim corresponds to what the
+        <b class="actor">User</b> have actually <i>seen and authorized</i>.
+      </li>
+      <li>
+        Verify that <code>pspRequest.payeeHost</code> is equivalent to <code>SAD.payeeHost</code>.
+        That is, verifying that the <b class="actor">User</b> was not subject to phishing.
+        Note that phishing attacks against FWP are not useful for stealing money,
+        but for redirecting purchased goods to another address.
+      </li>
+      <li>
+        Verify that the <code>SAD.timeStamp</code> is within &quot;reasonable limits&quot;.
+        <i>Tentative:</i> CurrentTime - 600s &lt; <code>SAD.timeStamp</code> &lt; CurrentTime + 60s.
+      </li>
+      <li>
+        Verify that the <i>optional</i> <code>SAD.networkData</code> attribute complies
+        with the <b class="actor">Issuer</b> specific requirements.
+      </li>
+    </ul>
 
-      <div id="seq-10.4" class="step">
-        10.4 Validate Authorization Signature
-      </div>
-      <ul>
-        <li>
-          Verify the signature of the recovered SAD object.
-          Since the public key is included in the signature container, signature validation
-          does not require database lookups.
-        </li>
-        <li>
-          Verify that the aforementioned public key is linked to a <b class="actor">User</b>
-          account matching the <code>SAD.accountId</code> and <code>SAD.serialNumber</code> attributes
-          (where the latter would typically serve as the primary key in a credential database table).
-          Note that this check requires that the public key is in a <i>canonical form</i>.
-          Fortunately, this is a &quot;built-in&quot; feature if public keys are stored in the COSE format.
-          <div class="gutter">
-            Using SHA256 hashes of public keys is a common method for limiting the
-            the need storing and comparing large keys (like required by the RSA algorithm).
-          </div>
-        </li>
-      </ul>
-      <div id="seq-10.5" class="step">
-        10.5 Replay Handling
-      </div>
-      <div>
-        To cope with possible replays, verify that the received <b class="actor">User</b> authorization
-        has not already been used. This can be accomplished by maintaining a lookup cache
-        holding SHA256 hashes of <a href="#seq-4.4">ESAD</a> objects associated
-        with <i>successfully</i> processed requests.
-        Cached items would be removed based on their <code>SAD.timeStamp</code> value.
-      </div>
-      <div class="para">
-        Ideally, <b class="actor">Issuer</b>s
-        SHOULD support <i>idempotent operation</i> to facilitate transaction retries
-        that may happen due to network glitches or similar.
-      </div>
-      <div class="step">
-        Other Validation Steps
-      </div>
-      <div>
-        Obviously there are other things to verify but these are not directly related to FWP,
-        like checking that the <b class="actor">User</b> has funds available matching the
-        current request.
-      </div>
-      <div id="integration" class="header">
-        Integration
-      </div>
-      <div>
-        It is pretty clear that the integration of systems like FWP in payment networks
-        is crucial for acceptance by the market.
-      </div>
-      <div class="para">
-        For card based payments FWP implementations can build on the existing
-        EMV foundation since essentially only the formats differ.
-        Although the lack of a PAN (card number) in FWP may appear as a major obstacle,
-        the <code>issuerId</code> would in this case hold a &quot;neutered&quot; PAN where
-        the BIN (Bank Identification Number) is set, while the rest are set to zeroes + Luhn check digit.
-        E.g. VISA: 4972039000000004.  However, using <b class="actor">Issuer</b> URLs
-        is also a viable alternative for card payments because payment processors
-        associated with &quot;regular&quot; EMV and FWP payments would probably not
-        share end points.
-      </div>
-      <div class="para">
-        For account-to-account payments there are currently no generally agreed upon standards
-        for consumer payments, but remapping existing card based systems and infrastructures
-        seems though like a possible path.
-      </div>
-      <div class="para">
-        <a href="#delegatedauthorization">Delegated Authorization</a>
-        represents yet another way addressing payment system integration.
-      </div>
-
-      <div id="delegatedauthorization" class="header">
-        Delegated Authorization
-      </div>
-      <div>
-        Using delegated authorization the validation
-        of <b class="actor">User</b> authorizations is separated
-        from payment initiations. The purpose with such arrangements include:
-      </div>
-      <ul>
-        <li>Ease the integration of FWP in existing payment systems.</li>
-        <li>Open the possibility <i>outsourcing</i> the authorization process to TPPs.</li>
-        <li>
-          Provide an <a href="#seq-2">enhanced UX</a> to payment systems based on
-          <a href="#openbanking">Open Banking</a> APIs.
-        </li>
-      </ul>
-      <div class="para">
-        Note that FWP makes the use of delegated authorization <i>transparent</i>
-        for both the <b class="actor">User</b> and the <b class="actor">Merchant</b>.
-      </div>
-      <div class="para">
-        Delegated authorization differs from
-        <a href="https://www.emvco.com/emv-technologies/3d-secure/"
-           title="3DS Site">3D&nbsp;Secure<img src="images/xtl.svg" alt="link"></a>
-        by keeping the authorization process and associated <b class="actor">User</b>
-        account information, inside of the core payment network.
-        This enables validation of potentially <i>untrusted</i> <b class="actor">Merchant</b>
-        data as well as eliminating dependencies on certified <b class="actor">Merchant</b>
-        3D&nbsp;Secure SDKs.
-      </div>
-      <div class="para">
-        Delegated authorization builds on the assumption that the <b class="actor">PSP</b> is trusted
-        for carrying out payment initiations on behalf of a <b class="actor">User</b>
-        (based on a preceding <b class="actor">User</b> authorization step),
-        which is an established concept in most payment networks.
-        (In the FWP standard mode the <b class="actor">PSP</b> only acts as a proxy
-        for the <b class="actor">Merchant</b>).
-      </div>
-      <div class="para">
-        The delegated authorization mode is illustrated by the following sequence diagram:
-      </div>
-      <div style="overflow-x:auto;padding:8pt 0">
-        <svg style='display:block;width:400pt' class='box' viewBox='0 0 486 355' xmlns='http://www.w3.org/2000/svg'>
+    <div id="seq-10.4" class="step">
+      10.4 Validate Authorization Signature
+    </div>
+    <ul>
+      <li>
+        Verify the signature of the recovered SAD object.
+        Since the public key is included in the signature container, signature validation
+        does not require database lookups.
+      </li>
+      <li>
+        Verify that the aforementioned public key is linked to a <b class="actor">User</b>
+        account matching the <code>SAD.accountId</code> and <code>SAD.serialNumber</code> attributes
+        (where the latter would typically serve as the primary key in a credential database table).
+        Note that this check requires that the public key is in a <i>canonical form</i>.
+        Fortunately, this is a &quot;built-in&quot; feature if public keys are stored in the COSE format.
+        <div class="gutter">
+          Using SHA256 hashes of public keys is a common method for limiting the
+          the need storing and comparing large keys (like required by the RSA algorithm).
+        </div>
+      </li>
+    </ul>
+    <div id="seq-10.5" class="step">
+      10.5 Replay Handling
+    </div>
+    <div>
+      To cope with possible replays, verify that the received <b class="actor">User</b> authorization
+      has not already been used. This can be accomplished by maintaining a lookup cache
+      holding SHA256 hashes of <a href="#seq-4.4">ESAD</a> objects associated
+      with <i>successfully</i> processed requests.
+      Cached items would be removed based on their <code>SAD.timeStamp</code> value.
+    </div>
+    <div class="para">
+      Ideally, <b class="actor">Issuer</b>s
+      SHOULD support <i>idempotent operation</i> to facilitate transaction retries
+      that may happen due to network glitches or similar.
+    </div>
+    <div id="seq-10.6" class="step">
+      10.6 Other Validation Steps
+    </div>
+    <div>
+      Obviously there are other things to verify but these are not directly related to FWP,
+      like checking that the <b class="actor">User</b> has funds available matching the
+      current request.
+    </div>
+      
+    <div id="delegatedauthorization" class="header">
+      8. Delegated Authorization
+    </div>
+    <div>
+      Using delegated authorization the validation
+      of <b class="actor">User</b> authorizations is separated
+      from payment initiations. The purpose with such arrangements include:
+    </div>
+    <ul>
+      <li>Ease the integration of FWP in existing payment systems.</li>
+      <li>Open the possibility <i>outsourcing</i> the authorization process to TPPs.</li>
+      <li>
+        Provide an <a href="#seq-2">enhanced UX</a> to payment systems based on
+        <a href="#openbanking">Open Banking</a> APIs.
+      </li>
+    </ul>
+    <div class="para">
+      Note that FWP makes the use of delegated authorization <i>transparent</i>
+      for both the <b class="actor">User</b> and the <b class="actor">Merchant</b>.
+    </div>
+    <div class="para">
+      Delegated authorization differs from
+      <a href="https://www.emvco.com/emv-technologies/3d-secure/"
+          title="3DS Site">3D&nbsp;Secure<img src="images/xtl.svg" alt="link"></a>
+      by keeping the authorization process and associated <b class="actor">User</b>
+      account information, inside of the core payment network.
+      This enables validation of potentially <i>untrusted</i> <b class="actor">Merchant</b>
+      data as well as eliminating dependencies on certified <b class="actor">Merchant</b>
+      3D&nbsp;Secure SDKs.
+    </div>
+    <div class="para">
+      Delegated authorization builds on the assumption that the <b class="actor">PSP</b> is trusted
+      for carrying out payment initiations on behalf of a <b class="actor">User</b>
+      (based on a preceding <b class="actor">User</b> authorization step),
+      which is an established concept in most payment networks.
+      (In the FWP standard mode the <b class="actor">PSP</b> only acts as a proxy
+      for the <b class="actor">Merchant</b>).
+    </div>
+    <div class="para">
+      The delegated authorization mode is illustrated by the following sequence diagram:
+    </div>
+    <div style="overflow-x:auto;padding:8pt 0">
+      <svg style='display:block;width:400pt' class='box' viewBox='0 0 486 355' xmlns='http://www.w3.org/2000/svg'>
     <title>FIDO Web Pay - Sample Delegated Sequence Diagram</title>
     <!-- Anders Rundgren 2021 -->
     
@@ -2814,227 +2839,256 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
   <text x='379.75' y='324.05' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>D7</text>
   </a>
 </svg>
-      </div>
-      <div>
-        Note that step 1-7 are <i>identical</i> to the FWP &quot;standard&quot; mode.
-        &quot;Payment Rails&quot; refer to existing payment systems.
-      </div>
-      <div class="para">
-        In an <a href="#openbanking">Open Banking</a> context the <b class="actor">PSP</b> would be equivalent to a PISP while
-        the <b class="actor">Authorizer</b> would be a specialized AS.
-      </div>
-      <div class="step"><div id="seq-D1" class="numbox">D1</div>Process PSPRequest and Create AuthorizeRequest Object</div>
-      <div>
-        This step should involve the same verifications as in <a href="#seq-8">step 8</a>
-        in the standard mode.
-        A suitable <span class="msg">AuthorizeRequest</span> object would typically follow the
-        <span class="msg">IssuerRequest</span> sample in step 8.
-      </div>
-      <div class="comment box">
-        Using delegated authorization may be decided by each <b class="actor">Issuer</b>
-        <i>individually</i>.  The actual configuration is preferably resolved by making
-        the <code>issuerId</code> attribute play the role of a <a href="#servicediscovery">Service Discovery URL</a>.
-      </div>
-      <div class="step"><div id="seq-D2" class="numbox">D2</div>Send AuthorizeRequest Object</div>
-      <div>
-        At this point the <b class="actor">PSP</b> sends the completed <span class="msg">AuthorizeRequest</span>
-        object to the designated <b class="actor">Authorizer</b>.
-        Note that the method used for locating the proper <b class="actor">Authorizer</b> depends on
-        the <code>paymentMethod</code> and <code>issuerId</code> attributes.
-      </div>
-      <div class="step"><div id="seq-D3" class="numbox">D3</div>Process AuthorizeRequest</div>
-      <div>
-        This step should involve the same verifications as in <a href="#seq-10">step 10</a>
-        in the standard mode.
-      </div>
-      <div class="step"><div id="seq-D4" class="numbox">D4</div>Return Authorized Data</div>
-      <div>
-        If the preceding step is successful, <span class="msg">AuthorizeRequest</span>
-        would typically return the (now decrypted) <b class="actor">User</b> account number.
-      </div>
-      <div id="delegatedreturnoptions" class="comment box">
-        A more sophisticated approach would be to return signed data for maintaining the
-        end-to-end security model.  For card payments this would preferably be in the
-        form of EMV compliant objects that can be passed on to existing payment systems
-        &quot;as&nbsp;is&quot;.
-      </div>
-      <div id="openbanking">
-        &nbsp;<br />In an Open Banking implementation based on OAuth2 concepts,
-        the return data would contain access tokens and consent information.
-      </div>
-      <div class="step"><div id="seq-D5" class="numbox">D5</div>Create Payment Instruction</div>
-      <div>
-        After receiving the <b class="actor">User</b> account number a
-        <span class="msg">payment instruction</span> object is created.
-        The format and contents of such objects are payment network specific and
-        are therefore not described here.
-      </div>
-      <div class="step"><div id="seq-D6" class="numbox">D6</div>Invoke &quot;Payment Rails&quot;</div>
-      <div>
-        Perform a <span class="msg">payment instruction</span> request in a payment network specific way.
-      </div>
-      <div class="step"><div id="seq-D7" class="numbox">D7</div>Process Payment Instruction</div>
-      <div>
-        Process the <span class="msg">payment instruction</span>
-        request in a payment network specific way.
-      </div>
-      <div id="extensions" class="header">
-        Extensions
-      </div>
-      <div>
-        The FWP <i>client</i> is loosely derived from a proof-of-concept system called
-        <a href="https://cyberphone.github.io/doc/saturn/"
-           title="Saturn">Saturn<img src="images/xtl.svg" alt="link" /></a>.
-        By continuing along this path, features like the following could potentially be added:
-      </div>
-      <ul>
-        <li>
-          Support for <i>non-direct payments</i>,
-          including secure (<i>tokenized</i>) versions of Card-on-File.
-        </li>
-        <li>
-          Support for real-time <i>account balances</i>.
-        </li>
-        <li>
-          Support for <b class="actor">User</b> <i>refunding</i>.
-        </li>
-        <li>
-          Support for universal <i>digital receipts</i>.
-        </li>
-        <li>
-          Support for <i>private messaging</i> and additional authentication information between the
-          <b class="actor">Issuer</b> and <b class="actor">User</b>.
-        </li>
-      </ul>
-      <div class="para">
-        Note that <i>some</i> of the features above could impact the PaymentRequest API.
-      </div>
-      <div id="implementationoptions" class="header">
-        Implementation Options
-      </div>
-      <div>
-        An alternative to building FWP support into browsers, is moving the FWP implementation
-        (including the <a href="#credentialdatabase">credential database</a>), down into the client platform layer.
-        This would open FWP to other scenarios like:
-      </div>
-      <ul style="margin-bottom:0.3em">
-        <li>
-          Point-of-sale (PoS) payments.
-          This would (at least <i>initially</i>) depend on QR-code for invocation.
-        </li>
-        <li>
-          Person-to-person (P2P) payments.
-        </li>
-      </ul>
-      <div class="para">
-        Such an arrangement would also introduce additional features including:
-      </div>
-      <ul>
-        <li>
-          Making it easier for alternative browser vendors adopting the FWP system
-          since they would not have to build a copy of FWP themselves;
-          a thin wrapper should suffice.
-        </li>
-        <li>
-          Relieving users from having to enroll payment credentials
-          for each browser they want to use.
-        </li>
-        <li>
-          Limiting the number of systems to certify in the case certification
-          becomes a requirement.
-        </li>
-      </ul>
- 
-     <div id="cbor" class="header">
-        Usage of CBOR
-      </div>
-      <div>
-        That the <i>internals</i> of FWP assertions are based on CBOR rather than JSON may
-        seem odd since CBOR currently is not particularly common on the Web.
-        However, there is a pretty strong rationale for using CBOR for this
-        application including:
-      </div>
-      <ul>
-        <li>
-          The <i>deterministic mode</i> of <a href="https://tools.ietf.org/html/rfc8949"
-          title="RFC8949">RFC8949<img src="images/xtl.svg" alt="link"></a>
-          offers the following advantages:
-          <ul>
-            <li>
-              Simplified cryptographic operations, not needing specific canonicalization support or
-              awkward Base64Url encoding of data to be signed.
-            </li>
-            <li>
-              Elements always appear at the same position, making documentation
-              matching actual data.
-            </li>
-          </ul>
-        </li>
-        <li>
-          Denser code.
-        </li>
-        <li>
-          FWP assertions are (due to the end-to-and security model), only processable by
-          the <b class="actor">Issuer</b> and possible <a href="#delegatedauthorization">delegated parties</a>.
-        </li>
-        <li>
-          FIDO attestations require CBOR support.
-        </li>
-      </ul>
-      <div id="acknowledgements" class="header">
-        Acknowledgements
-      </div>
-      <div>
-        The FWP core was heavily influenced by an earlier Microsoft research project
-        called <a href="https://en.wikipedia.org/wiki/Windows_CardSpace"
-                  title="CardSpace">Windows CardSpace<img src="images/xtl.svg" alt="link"></a>.
-      </div>
-      <div class="para">
-        The <b class="actor">User</b> icon was derived from
-        <a style="word-break:break-all;white-space:normal"
-           href="https://commons.wikimedia.org/wiki/File:Crystal_Clear_kdm_user_female.svg"
-           title="User Icon">
-          https://commons.wikimedia.org/wiki/File:Crystal_Clear_kdm_user_female.svg<img src="images/xtl.svg" alt="link">
-        </a>
-      </div>
+    </div>
+    <div>
+      Note that step 1-7 are <i>identical</i> to the FWP &quot;standard&quot; mode.
+      &quot;Payment Rails&quot; refer to existing payment systems.
+    </div>
+    <div class="para">
+      In an <a href="#openbanking">Open Banking</a> context the <b class="actor">PSP</b> would be equivalent to a PISP while
+      the <b class="actor">Authorizer</b> would be a specialized AS.
+    </div>
+    <div class="step"><div id="seq-D1" class="numbox">D1</div>Process PSPRequest and Create AuthorizeRequest Object</div>
+    <div>
+      This step should involve the same verifications as in <a href="#seq-8">step 8</a>
+      in the standard mode.
+      A suitable <span class="msg">AuthorizeRequest</span> object would typically follow the
+      <span class="msg">IssuerRequest</span> sample in step 8.
+    </div>
+    <div class="comment box">
+      Using delegated authorization may be decided by each <b class="actor">Issuer</b>
+      <i>individually</i>.  The actual configuration is preferably resolved by making
+      the <code>issuerId</code> attribute play the role of a <a href="#servicediscovery">Service Discovery URL</a>.
+    </div>
+    <div class="step"><div id="seq-D2" class="numbox">D2</div>Send AuthorizeRequest Object</div>
+    <div>
+      At this point the <b class="actor">PSP</b> sends the completed <span class="msg">AuthorizeRequest</span>
+      object to the designated <b class="actor">Authorizer</b>.
+      Note that the method used for locating the proper <b class="actor">Authorizer</b> depends on
+      the <code>paymentMethod</code> and <code>issuerId</code> attributes.
+    </div>
+    <div class="step"><div id="seq-D3" class="numbox">D3</div>Process AuthorizeRequest</div>
+    <div>
+      This step should involve the same verifications as in <a href="#seq-10">step 10</a>
+      in the standard mode.
+    </div>
+    <div class="step"><div id="seq-D4" class="numbox">D4</div>Return Authorized Data</div>
+    <div>
+      If the preceding step is successful, <span class="msg">AuthorizeRequest</span>
+      would typically return the (now decrypted) <b class="actor">User</b> account number.
+    </div>
+    <div id="delegatedreturnoptions" class="comment box">
+      A more sophisticated approach would be to return signed data for maintaining the
+      end-to-end security model.  For card payments this would preferably be in the
+      form of EMV compliant objects that can be passed on to existing payment systems
+      &quot;as&nbsp;is&quot;.
+    </div>
+    <div id="openbanking">
+      &nbsp;<br />In an Open Banking implementation based on OAuth2 concepts,
+      the return data would contain access tokens and consent information.
+    </div>
+    <div class="step"><div id="seq-D5" class="numbox">D5</div>Create Payment Instruction</div>
+    <div>
+      After receiving the <b class="actor">User</b> account number a
+      <span class="msg">payment instruction</span> object is created.
+      The format and contents of such objects are payment network specific and
+      are therefore not described here.
+    </div>
+    <div class="step"><div id="seq-D6" class="numbox">D6</div>Invoke &quot;Payment Rails&quot;</div>
+    <div>
+      Perform a <span class="msg">payment instruction</span> request in a payment network specific way.
+    </div>
+    <div class="step"><div id="seq-D7" class="numbox">D7</div>Process Payment Instruction</div>
+    <div>
+      Process the <span class="msg">payment instruction</span>
+      request in a payment network specific way.
+    </div>
+     
+<div id="integration" class="header">
+      Integration
+    </div>
+    <div>
+      It is pretty clear that the integration of systems like FWP in payment networks
+      is crucial for acceptance by the market.
+    </div>
+    <div class="para">
+      For card based payments FWP implementations can build on the existing
+      EMV foundation since essentially only the formats differ.
+      Although the lack of a PAN (card number) in FWP may appear as a major obstacle,
+      the <code>issuerId</code> would in this case hold a &quot;neutered&quot; PAN where
+      the BIN (Bank Identification Number) is set, while the rest are set to zeroes + Luhn check digit.
+      E.g. VISA: 4972039000000004.  However, using <b class="actor">Issuer</b> URLs
+      is also a viable alternative for card payments because payment processors
+      associated with &quot;regular&quot; EMV and FWP payments would probably not
+      share end points.
+    </div>
+    <div class="para">
+      For account-to-account payments there are currently no generally agreed upon standards
+      for consumer payments, but remapping existing card based systems and infrastructures
+      seems though like a possible path.
+    </div>
+    <div class="para">
+      <a href="#delegatedauthorization">Delegated Authorization</a>
+      represents yet another way addressing payment system integration.
+    </div>
 
-      <div id="documenthistory" class="header">
-        Document History
-      </div>
-      <div style='overflow-x:auto;padding-right:0.2em'>
-        <table class="tftable">
-          <tr><th>Date</th><th>Version</th><th style="min-width:30em">Comment</th></tr>
-          <tr><td style="text-align:center;white-space:nowrap">2021-03-12</td><td style="text-align:center">0.1</td><td>Initial publishing.</td></tr>
-          <tr><td style="text-align:center;white-space:nowrap">2021-03-15</td><td style="text-align:center">0.11</td><td>Added external token comment.</td></tr>
-          <tr><td style="text-align:center;white-space:nowrap">2021-03-29</td><td style="text-align:center">0.12</td><td>Improved replay handling + Changed &quot;Acquirer&quot; to &quot;PSP&quot;.</td></tr>
-          <tr><td style="text-align:center;white-space:nowrap">2021-04-02</td><td style="text-align:center">0.13</td><td>Added section Delegated Authorization.</td></tr>
-          <tr><td style="text-align:center;white-space:nowrap">2021-04-11</td><td style="text-align:center">0.14</td><td>Added credentialId + more text on the credential database.</td></tr>
-          <tr><td style="text-align:center;white-space:nowrap">2021-04-14</td><td style="text-align:center">0.15</td><td>Added section Implementation Options.</td></tr>
-          <tr><td style="text-align:center;white-space:nowrap">2021-04-16</td><td style="text-align:center">0.16</td><td>Added sequence diagram &quot;scope&quot; rectangle.</td></tr>
-          <tr><td style="text-align:center;white-space:nowrap">2021-05-09</td><td style="text-align:center">0.17</td><td>Simplification: Removed hashing of PRCD.</td></tr>
-          <tr><td style="text-align:center;white-space:nowrap">2021-05-19</td><td style="text-align:center">0.18</td><td>Aligned wallet database with FIDO names.</td></tr>
-          <tr><td style="text-align:center;white-space:nowrap">2021-06-03</td><td style="text-align:center">0.19</td><td>Added IPR declaration.</td></tr>
-          <tr><td style="text-align:center;white-space:nowrap">2021-06-21</td><td style="text-align:center">0.20</td><td>Converted the FWP core to CBOR (was JSON).</td></tr>
-          <tr><td style="text-align:center;white-space:nowrap">2021-07-02</td><td style="text-align:center">0.21</td><td>Removed redundant FINGERPRINT item.</td></tr>
-          <tr><td style="text-align:center;white-space:nowrap">2021-07-26</td><td style="text-align:center">0.22</td><td>Added document &quot;FIDO Web Pay - Crypto&quot;.</td></tr>
-        </table>
-      </div>
-      <div id="authors" class="header">
-        Authors
-      </div>
-      <div>
-        The FWP specification is currently authored by Anders Rundgren
-        (anders.rundgren.net@gmail.com) on GitHub
-          (<a href="https://github.com/fido-web-pay/specification"
-             title="GitHub">https://github.com/fido-web-pay/specification<img src="images/xtl.svg" alt="link"></a>).
-      </div>
-      <div class="header">
-        Trademarks
-      </div>
-      <div id="trademarks">
-        FIDO is a registered trademark of the FIDO alliance.<br />
-        EMV is a registered trademark of EMVCo.<br />&nbsp;<br />
-        This specification represents an <i>independent effort</i>,
-        not associated with the FIDO alliance or EMVCo.
-      </div>
+<div id="extensions" class="header">
+      Extensions
+    </div>
+    <div>
+      The FWP <i>client</i> is loosely derived from a proof-of-concept system called
+      <a href="https://cyberphone.github.io/doc/saturn/"
+          title="Saturn">Saturn<img src="images/xtl.svg" alt="link" /></a>.
+      By continuing along this path, features like the following could potentially be added:
+    </div>
+    <ul>
+      <li>
+        Support for <i>non-direct payments</i>,
+        including secure (<i>tokenized</i>) versions of Card-on-File.
+      </li>
+      <li>
+        Support for real-time <i>account balances</i>.
+      </li>
+      <li>
+        Support for <b class="actor">User</b> <i>refunding</i>.
+      </li>
+      <li>
+        Support for universal <i>digital receipts</i>.
+      </li>
+      <li>
+        Support for <i>private messaging</i> and additional authentication information between the
+        <b class="actor">Issuer</b> and <b class="actor">User</b>.
+      </li>
+    </ul>
+    <div class="para">
+      Note that <i>some</i> of the features above could impact the PaymentRequest API.
+    </div>
+    <div id="implementationoptions" class="header">
+      Implementation Options
+    </div>
+    <div>
+      An alternative to building FWP support into browsers, is moving the FWP implementation
+      (including the <a href="#credentialdatabase">credential database</a>), down into the client platform layer.
+      This would open FWP to other scenarios like:
+    </div>
+    <ul style="margin-bottom:0.3em">
+      <li>
+        Point-of-sale (PoS) payments.
+        This would (at least <i>initially</i>) depend on QR-code for invocation.
+      </li>
+      <li>
+        Person-to-person (P2P) payments.
+      </li>
+    </ul>
+    <div class="para">
+      Such an arrangement would also introduce additional features including:
+    </div>
+    <ul>
+      <li>
+        Making it easier for alternative browser vendors adopting the FWP system
+        since they would not have to build a copy of FWP themselves;
+        a thin wrapper should suffice.
+      </li>
+      <li>
+        Relieving users from having to enroll payment credentials
+        for each browser they want to use.
+      </li>
+      <li>
+        Limiting the number of systems to certify in the case certification
+        becomes a requirement.
+      </li>
+    </ul>
+ 
+    <div id="cbor" class="header">
+    Usage of CBOR
+    </div>
+    <div>
+      That the <i>internals</i> of FWP assertions are based on CBOR rather than JSON may
+      seem odd since CBOR currently is not particularly common on the Web.
+      However, there is a pretty strong rationale for using CBOR for this
+      application including:
+    </div>
+    <ul>
+      <li>
+        The <i>deterministic mode</i> of <a href="https://tools.ietf.org/html/rfc8949"
+        title="RFC8949">RFC8949<img src="images/xtl.svg" alt="link"></a>
+        offers the following advantages:
+        <ul>
+          <li>
+            Simplified cryptographic operations, not needing specific canonicalization support or
+            awkward Base64Url encoding of data to be signed.
+          </li>
+          <li>
+            Elements always appear at the same position, making documentation
+            matching actual data.
+          </li>
+        </ul>
+      </li>
+      <li>
+        Denser code.
+      </li>
+      <li>
+        FWP assertions are (due to the end-to-and security model), only processable by
+        the <b class="actor">Issuer</b> and possible <a href="#delegatedauthorization">delegated parties</a>.
+      </li>
+      <li>
+        FIDO attestations require CBOR support.
+      </li>
+    </ul>
+    <div id="acknowledgements" class="header">
+      Acknowledgements
+    </div>
+    <div>
+      The FWP core was heavily influenced by an earlier Microsoft research project
+      called <a href="https://en.wikipedia.org/wiki/Windows_CardSpace"
+                title="CardSpace">Windows CardSpace<img src="images/xtl.svg" alt="link"></a>.
+    </div>
+    <div class="para">
+      The <b class="actor">User</b> icon was derived from
+      <a style="word-break:break-all;white-space:normal"
+          href="https://commons.wikimedia.org/wiki/File:Crystal_Clear_kdm_user_female.svg"
+          title="User Icon">
+        https://commons.wikimedia.org/wiki/File:Crystal_Clear_kdm_user_female.svg<img src="images/xtl.svg" alt="link">
+      </a>
+    </div>
+
+    <div id="documenthistory" class="header">
+      Document History
+    </div>
+    <div style='overflow-x:auto;padding-right:0.2em'>
+      <table class="tftable">
+        <tr><th>Date</th><th>Version</th><th style="min-width:30em">Comment</th></tr>
+        <tr><td style="text-align:center;white-space:nowrap">2021-03-12</td><td style="text-align:center">0.1</td><td>Initial publishing.</td></tr>
+        <tr><td style="text-align:center;white-space:nowrap">2021-03-15</td><td style="text-align:center">0.11</td><td>Added external token comment.</td></tr>
+        <tr><td style="text-align:center;white-space:nowrap">2021-03-29</td><td style="text-align:center">0.12</td><td>Improved replay handling + Changed &quot;Acquirer&quot; to &quot;PSP&quot;.</td></tr>
+        <tr><td style="text-align:center;white-space:nowrap">2021-04-02</td><td style="text-align:center">0.13</td><td>Added section Delegated Authorization.</td></tr>
+        <tr><td style="text-align:center;white-space:nowrap">2021-04-11</td><td style="text-align:center">0.14</td><td>Added credentialId + more text on the credential database.</td></tr>
+        <tr><td style="text-align:center;white-space:nowrap">2021-04-14</td><td style="text-align:center">0.15</td><td>Added section Implementation Options.</td></tr>
+        <tr><td style="text-align:center;white-space:nowrap">2021-04-16</td><td style="text-align:center">0.16</td><td>Added sequence diagram &quot;scope&quot; rectangle.</td></tr>
+        <tr><td style="text-align:center;white-space:nowrap">2021-05-09</td><td style="text-align:center">0.17</td><td>Simplification: Removed hashing of PRCD.</td></tr>
+        <tr><td style="text-align:center;white-space:nowrap">2021-05-19</td><td style="text-align:center">0.18</td><td>Aligned wallet database with FIDO names.</td></tr>
+        <tr><td style="text-align:center;white-space:nowrap">2021-06-03</td><td style="text-align:center">0.19</td><td>Added IPR declaration.</td></tr>
+        <tr><td style="text-align:center;white-space:nowrap">2021-06-21</td><td style="text-align:center">0.20</td><td>Converted the FWP core to CBOR (was JSON).</td></tr>
+        <tr><td style="text-align:center;white-space:nowrap">2021-07-02</td><td style="text-align:center">0.21</td><td>Removed redundant FINGERPRINT item.</td></tr>
+        <tr><td style="text-align:center;white-space:nowrap">2021-08-02</td><td style="text-align:center">0.22</td><td>Added document &quot;FIDO Web Pay - Crypto&quot; and ToC.</td></tr>
+      </table>
+    </div>
+    <div id="authors" class="header">
+      Authors
+    </div>
+    <div>
+      The FWP specification is currently authored by Anders Rundgren
+      (anders.rundgren.net@gmail.com) on GitHub
+        (<a href="https://github.com/fido-web-pay/specification"
+            title="GitHub">https://github.com/fido-web-pay/specification<img src="images/xtl.svg" alt="link"></a>).
+    </div>
+    <div id="trademarks" class="header">
+      Trademarks
+    </div>
+    <div>
+      FIDO is a registered trademark of the FIDO alliance.<br />
+      EMV is a registered trademark of EMVCo.<br />&nbsp;<br />
+      This specification represents an <i>independent effort</i>,
+      not associated with the FIDO alliance or EMVCo.
+    </div>
 </body></html>

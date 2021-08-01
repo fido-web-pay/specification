@@ -9,9 +9,11 @@ public class CreateDocument  {
 
     String originalBase;
 
+    String template;
+
     String sequenceDiagram;
 
-    void removeDuplicate(String what) throws Exception {
+     void removeDuplicate(String what) throws Exception {
         int i = sequenceDiagram.lastIndexOf("<title>" + what);
         if (i < 0) {
             throw new IOException("SVG err");
@@ -19,6 +21,10 @@ public class CreateDocument  {
         int start = sequenceDiagram.indexOf("<defs", i);
         int stop = sequenceDiagram.indexOf("</defs>", i);
         sequenceDiagram = sequenceDiagram.substring(0, start) + sequenceDiagram.substring(stop + 7);
+    }
+
+    void replace(String codedString, String withWhat) {
+         template = template.replace(codedString, withWhat);
     }
 
     String esadFilter(String json) throws Exception {
@@ -64,11 +70,11 @@ public class CreateDocument  {
 
     CreateDocument (String originalBase) throws Exception {
         this.originalBase = originalBase;
-        String template = readOriginal("template.html");
+        template = readOriginal("template.html");
         sequenceDiagram = readOriginal(SequenceDiagram.STANDARD_SEQUENCE_FILE);
         sequenceDiagram = "<svg style='display:block;width:500pt' class='box' " + 
                           sequenceDiagram.substring(sequenceDiagram.indexOf("<svg ") + 5);
-        template = template.replace("@sequencediagram@", sequenceDiagram);
+        replace("@sequencediagram@", sequenceDiagram);
         sequenceDiagram = readOriginal(SequenceDiagram.DELEGATED_SEQUENCE_FILE);
         sequenceDiagram = "<svg style='display:block;width:400pt' class='box' " + 
                           sequenceDiagram.substring(sequenceDiagram.indexOf("<svg ") + 5);
@@ -76,15 +82,15 @@ public class CreateDocument  {
         removeDuplicate("PSP");
         removeDuplicate("Issuer");
         removeDuplicate("FIDO Web Pay - Sample ");
-        template = template.replace("@delegateddiagram@", sequenceDiagram);
-        template = template.replace("@browser-PR.txt@", processCodeTxt("browser-PR.txt"));
-        template = template.replace("@AD.txt@", processCodeTxt("AD.txt"));
-        template = template.replace("@SAD.txt@", processCodeTxt("SAD.txt"));
-        template = template.replace("@ESAD.txt@", processCodeTxt("ESAD.txt"));
-        template = template.replace("@PRCD.txt@", processCodeTxt("PRCD.txt"));
-        template = template.replace("@FWP-assertion.json@", processCodeTxt("FWP-assertion.json"));
-        template = template.replace("@PSP-request.json@", esadFilter(processCodeTxt("PSP-request.json")));
-        template = template.replace("@ISSUER-request.json@", esadFilter(processCodeTxt("ISSUER-request.json")));
+        replace("@delegateddiagram@", sequenceDiagram);
+        replace("@browser-PR.txt@", processCodeTxt("browser-PR.txt"));
+        replace("@AD.txt@", processCodeTxt("AD.txt"));
+        replace("@SAD.txt@", processCodeTxt("SAD.txt"));
+        replace("@ESAD.txt@", processCodeTxt("ESAD.txt"));
+        replace("@PRCD.txt@", processCodeTxt("PRCD.txt"));
+        replace("@FWP-assertion.json@", processCodeTxt("FWP-assertion.json"));
+        replace("@PSP-request.json@", esadFilter(processCodeTxt("PSP-request.json")));
+        replace("@ISSUER-request.json@", esadFilter(processCodeTxt("ISSUER-request.json")));
      new FileOutputStream(originalBase + ".." + File.separator + "draft.html").write(template.getBytes("utf-8"));
      }
 
