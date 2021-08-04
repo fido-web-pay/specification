@@ -694,9 +694,10 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
           title="FIDO Web Pay - Crypto">FIDO Web Pay - Crypto<img src="images/xtl.svg" alt="link"></a>.
     </div>
    <div class="para">
-      The actual CEF algorithms to use are defined by the
+      The encryption algorithms are defined by the
       <a href="#credentialdatabase">contentEncryptionAlgorithm</a> and
-      <a href="#credentialdatabase">keyEncryptionAlgorithm</a> attributes.
+      <a href="#credentialdatabase">keyEncryptionAlgorithm</a> attributes
+      of the selected FWP credential.
     </div>
     <div class="para">
       Note that the public key MUST be <i>shared</i> with
@@ -985,10 +986,10 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
         Parse the result of the previous operation as CBOR and set result as <a href="#seq-4.4">ESAD</a>.
       </li>
       <li>
-        Verify that the resulting object is compatible with the CEF profile specified by FWP.
+        Verify that the resulting object is compatible with the encryption profile specified by FWP.
       </li>
       <li>
-        Verify that the public key or key Id declared in the CEF object matches an
+        Verify that the public key or key Id declared in the encrypted object matches an
         existing decryption (private) key of the <b class="actor">Issuer</b>.
       </li>
       <li>
