@@ -79,6 +79,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
 <div class="toc">&nbsp;&nbsp;&nbsp;&nbsp;<a href="#seq-D5">D5: Create Payment Instruction</a></div>
 <div class="toc">&nbsp;&nbsp;&nbsp;&nbsp;<a href="#seq-D6">D6: Invoke &quot;Payment Rails&quot;</a></div>
 <div class="toc">&nbsp;&nbsp;&nbsp;&nbsp;<a href="#seq-D7">D7: Process Payment Instruction</a></div>
+<div class="toc"><a href="#security">Security Considerations</a></div>
 <div class="toc"><a href="#integration">Integration</a></div>
 <div class="toc"><a href="#extensions">Extensions</a></div>
 <div class="toc"><a href="#implementationoptions">Implementation Options</a></div>
@@ -1182,7 +1183,36 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
       Process the <span class="msg">payment instruction</span>
       request in a payment network specific way.
     </div>
-     
+
+<div id="security" class="header">
+  Security Considerations
+</div>
+<div>
+  Security in FWP depends to a large extent on the W3C
+  <a href="https://www.w3.org/TR/payment-request/"
+     title="PaymentRequest">PaymentRequest<img src="images/xtl.svg" alt="link"></a> API
+  which acts as a &quot;moderator&quot; between the untrusted Web and payment applications.
+  That does though not stop an arbitrary Web site from invoking FWP when the user clicks a
+  link on that site.
+  However, if the site does not represent a genuine merchant even a completed user authorization
+  will not lead to a security breach, because properly designed backend systems will
+  block the rest of the process since the requester would not be recognized.
+  If on the other hand the site is legitimate, the assumption is that in order to
+  become a merchant entitled to request payments, you usually need to follow specific rules 
+ regarding how and when payments requests may be performed.
+</div>
+<div class="para">
+  It is technically possible creating Web applications that look like FWP (&quot;spoofing&quot;),
+  but they are not able producing valid assertions since that requires
+  unconstrained access to FIDO keys which is reserved for FWP (which runs
+  with higher privileges than ordinary Web code).
+</div>
+<div class="para">
+FWP is of course also dependent on that the underlying software is operating
+correctly. Bugs or successful attacks on the platform may force the FWP system
+to perform payments in the background or violate the user's privacy.
+</div>
+    
 <div id="integration" class="header">
       Integration
     </div>
@@ -1350,6 +1380,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
         <tr><td style="text-align:center;white-space:nowrap">2021-06-21</td><td style="text-align:center">0.20</td><td>Converted the FWP core to CBOR (was JSON).</td></tr>
         <tr><td style="text-align:center;white-space:nowrap">2021-07-02</td><td style="text-align:center">0.21</td><td>Removed redundant FINGERPRINT item.</td></tr>
         <tr><td style="text-align:center;white-space:nowrap">2021-08-02</td><td style="text-align:center">0.22</td><td>Added document &quot;FIDO Web Pay - Crypto&quot; and ToC.</td></tr>
+        <tr><td style="text-align:center;white-space:nowrap">2021-08-27</td><td style="text-align:center">0.23</td><td>Added section Security Considerations.</td></tr>
       </table>
     </div>
     <div id="authors" class="header">
