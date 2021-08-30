@@ -1512,12 +1512,15 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
     </div>
     <div class="step"><div id="seq-1" class="numbox">1</div>Initiate PaymentRequest</div>
     <div>
-      At this point the <b class="actor">User</b> is assumed to have selected
-      an FWP compliant payment method,
+      At this point the <b class="actor">User</b> is assumed having clicked on
+      an FWP compliant icon like
+    </div>
+    <img src="images/fwp-pay.svg" alt="fwp pay" style="width:10em;padding:0.7em 0 0.4em 0"/>
+    <div>
       causing a <b class="actor">Merchant</b> Web page to invoke
       a custom doPaymentRequest() method, like in the following sample:
-    </div>
-    <div style='overflow-x:auto;padding-right:0.2em'>
+    </div> 
+     <div style='overflow-x:auto;padding-right:0.2em'>
       <div class="staticbox" style="min-width:45em">
         //&nbsp;FWP&nbsp;sample&nbsp;code<br><br>const&nbsp;methodData&nbsp;=&nbsp;[{<br>&nbsp;&nbsp;supportedMethods:&nbsp;&quot;fido-web-pay/v1&quot;,<br>&nbsp;&nbsp;data:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;payeeName:&nbsp;&quot;Space&nbsp;Shop&quot;,&nbsp;&nbsp;//&nbsp;Shown&nbsp;in&nbsp;the&nbsp;UI<br>&nbsp;&nbsp;&nbsp;&nbsp;networks:&nbsp;[{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name:&nbsp;&quot;https://emvco.com/fwp/mastercard&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;},{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name:&nbsp;&quot;https://emvco.com/fwp/visa&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;},{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name:&nbsp;&quot;https://bankdirect.com&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;networkData:&nbsp;&quot;additional&nbsp;stuff...&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;}]<br>&nbsp;&nbsp;}<br>}];<br><br>const&nbsp;request&nbsp;=&nbsp;new&nbsp;PaymentRequest(methodData,&nbsp;{<br>&nbsp;&nbsp;id:&nbsp;&quot;7040566321&quot;,&nbsp;&nbsp;&nbsp;//&nbsp;Mandatory&nbsp;for&nbsp;FWP<br>&nbsp;&nbsp;total:&nbsp;{label:&nbsp;null,&nbsp;amount:&nbsp;{currency:&nbsp;&quot;EUR&quot;,&nbsp;value:&nbsp;&quot;435.00&quot;}}<br>});<br><br>async&nbsp;function&nbsp;doPaymentRequest()&nbsp;{<br>&nbsp;&nbsp;const&nbsp;response&nbsp;=&nbsp;await&nbsp;request.show();<br>&nbsp;&nbsp;await&nbsp;response.complete(&quot;success&quot;);<br>&nbsp;&nbsp;return&nbsp;response.details;<br>}<br>
       </div>

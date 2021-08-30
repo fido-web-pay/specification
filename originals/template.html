@@ -350,12 +350,15 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     </div>
     <div class="step"><div id="seq-1" class="numbox">1</div>Initiate PaymentRequest</div>
     <div>
-      At this point the <b class="actor">User</b> is assumed to have selected
-      an FWP compliant payment method,
+      At this point the <b class="actor">User</b> is assumed having clicked on
+      an FWP compliant icon like
+    </div>
+    <img src="images/fwp-pay.svg" alt="fwp pay" style="width:10em;padding:0.7em 0 0.4em 0"/>
+    <div>
       causing a <b class="actor">Merchant</b> Web page to invoke
       a custom doPaymentRequest() method, like in the following sample:
-    </div>
-    <div style='overflow-x:auto;padding-right:0.2em'>
+    </div> 
+     <div style='overflow-x:auto;padding-right:0.2em'>
       <div class="staticbox" style="min-width:45em">
         @browser-PR.txt@
       </div>
