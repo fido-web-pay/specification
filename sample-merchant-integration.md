@@ -57,6 +57,7 @@ FWP is due to this arrangement also GDPR compliant.
 The FWP assertion now needs to be augmented with additional merchant data 
 and subsequently be sent to a PSP (Payment System Provider) for fulfillment.
 
-This part is PSP specific including the method used for authenticating the merchant.
+Note that that each `paymentMethod` may require specific additional information,
+as well as potentially relying on different PSPs.
 
-It is also likely that different `paymentMethods` require different PSPs.
+Turn to PSP documentation for details. 
