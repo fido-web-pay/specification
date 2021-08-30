@@ -1,6 +1,6 @@
 ## Sample Merchant FWP Integration
-This sample shows the code and steps needed after the
-client have clicked an FWP icon.
+This sample shows the code and steps required after a
+client having clicked an FWP icon.
 
 ### FWP invocation
 ```javascript
