@@ -1,6 +1,9 @@
 ## Sample Merchant FWP Integration
-This sample shows the code and steps required after a
-client having clicked an FWP icon.
+This sample shows the code and steps required after the
+client having clicked an FWP compliant icon like the following:
+
+![FWP PAY](https://fido-web-pay.github.io/specification/images/fwp-pay.svg)
+
 
 ### FWP invocation
 ```javascript
@@ -33,7 +36,7 @@ async function doPaymentRequest() {
 }
 ```
 ### Payment authorization UI:
-![FWP Logo](https://fido-web-pay.github.io/specification/images/ui.svg)
+![FWP WALLET](https://fido-web-pay.github.io/specification/images/ui.svg)
 
 The UI is a part of the browser resident FWP wallet.
 
@@ -60,4 +63,4 @@ and subsequently be sent to a PSP (Payment System Provider) for fulfillment.
 Note that that each `paymentMethod` may require specific additional information,
 as well as potentially relying on different PSPs.
 
-Turn to PSP documentation for details. 
+Please turn to PSP documentation for details. 
