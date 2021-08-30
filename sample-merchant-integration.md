@@ -23,10 +23,11 @@ const methodData = [{
 }];
 
 const request = new PaymentRequest(methodData, {
-  id: "7040566321",   // Mandatory item for FWP
+  id: "7040566321",   // Mandatory FWP item
   total: {label: null, amount: {currency: "EUR", value: "435.00"}}
 });
 
+// Custom payment invocation method
 async function doPaymentRequest() {
   const response = await request.show();
   await response.complete("success");
