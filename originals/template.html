@@ -647,10 +647,10 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
           <td style='text-align:center'><kbd>10</kbd></td>
           <td><kbd>map</kbd></td>
           <td>
-            Since the authorization signature is intended to also cover the the FIDO
-            <code>publicKey</code> and <code>signatureAlgorithm</code>
-            associated with the selected <a href="#credentialdatabase">FWP credential</a>,
-            these elements MUST also be included in the data to be signed.
+            See <a href="https://fido-web-pay.github.io/specification/crypto.html#4.1"
+               title="FIDO Web Pay - Crypto">FIDO Web Pay - Crypto<img src="images/xtl.svg" alt="link"></a>
+            for details.
+
           </td>
         </tr>
       </table>
@@ -667,7 +667,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
       Now apply the FIDO signature key (identified by <a href="#credentialdatabase">credentialId</a>),
       associated with the selected FWP credential to sign AD using the
       scheme described in
-      <a href="https://fido-web-pay.github.io/specification/crypto.html"
+      <a href="https://fido-web-pay.github.io/specification/crypto.html#4.3"
          title="FIDO Web Pay - Crypto">FIDO Web Pay - Crypto<img src="images/xtl.svg" alt="link"></a>.
       For the sample code this should result in the following object:
     </div>
@@ -694,7 +694,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     </div>
      <div class="para">
       This specification mandates the encryption scheme described in
-       <a href="https://fido-web-pay.github.io/specification/crypto.html"
+       <a href="https://fido-web-pay.github.io/specification/crypto.html#5"
           title="FIDO Web Pay - Crypto">FIDO Web Pay - Crypto<img src="images/xtl.svg" alt="link"></a>.
     </div>
    <div class="para">
