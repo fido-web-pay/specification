@@ -1225,11 +1225,15 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
   with higher privileges than ordinary Web code).
 </div>
 <div class="para">
-FWP is of course also dependent on that the underlying software is operating
-correctly. Bugs or successful attacks on the platform may force the FWP system
-to perform payments in the background or violate the user's privacy.
+  If the internal clock of an FWP client is severely <a href="#expired">out of sync</a>, associated
+  authorizations will be rejected.
+  This also makes clock manipulations useless as attack vectors.
 </div>
-    
+<div class="para">
+  FWP is of course also dependent on that the underlying software is operating
+  correctly. Bugs or successful attacks on the platform may force the FWP system
+  to perform payments in the background or violate the user's privacy.
+</div>    
 <div id="integration" class="header">
       Integration
     </div>
