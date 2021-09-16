@@ -12,12 +12,11 @@ const methodData = [{
   data: {
     payeeName: "Space Shop",  // Shown in the UI
     networks: [{
-      name: "https://emvco.com/fwp/mastercard"
+      name: "https://mastercard.com/fwp"
     },{
-      name: "https://emvco.com/fwp/visa"
+      name: "https://visa.com/fwp"
     },{
-      name: "https://bankdirect.com",
-      networkData: "additional stuff..."
+      name: "https://bankdirect.com"
     }]
   }
 }];
