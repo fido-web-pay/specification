@@ -2234,8 +2234,8 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
       Since the authorization signature encompasses variant data like
       the <code>timeStamp</code> and <code>paymentRequest</code> elements,
       as well as the signature counter in the FIDO <code>authenticatorData</code> object,
-      false cache collisions on individual SAD objects, should also be
-      &quot;impossible&quot; in the cryptographic sense.
+      false cache collisions on individual SAD objects should be
+      &quot;impossible&quot, also in the cryptographic sense.
       Cached SAD objects can safely be removed <a href="#expired">when expired</a>,
       preferable using a background process.
     </div>
