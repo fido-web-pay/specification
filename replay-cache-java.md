@@ -36,9 +36,9 @@ public enum ReplayCache {
                         long now = System.currentTimeMillis();
                         cache.forEach((cacheableSadObject, expirationTime) -> {
                             if (expirationTime < now) {
-                                // This authorization is already consumed and has now expired 
-                                // so we can safely remove it from the replay cache (in order 
-                                // to keep it as small and up-to-date as possible).
+                                // The authorization has apparently expired so we can safely
+                                // remove it from the replay cache (in order to keep it as
+                                // small and up-to-date as possible).
                                 cache.remove(cacheableSadObject);
                             }
                         });
