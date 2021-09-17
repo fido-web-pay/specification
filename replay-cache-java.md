@@ -7,8 +7,6 @@ import java.nio.ByteBuffer;
 
 import java.util.concurrent.ConcurrentHashMap;
 
-import java.util.logging.Logger;
-
 /**
  * Singleton thread maintaining a reply cache.
  * 
@@ -25,8 +23,6 @@ public enum ReplayCache {
 
     static final long CYCLE_TIME = 120000;
 
-    Logger logger = Logger.getLogger(ReplayCache.class.getCanonicalName());
-
     final ConcurrentHashMap<ByteBuffer, Long> cache = new ConcurrentHashMap<>();
 
     ReplayCache() {
@@ -40,12 +36,10 @@ public enum ReplayCache {
                         long now = System.currentTimeMillis();
                         cache.forEach((cacheableSadObject, expirationTime) -> {
                             if (expirationTime < now) {
-                                // This authorization is already consumed but is now too 
-                                // old to qualify, so we can safely remove it from the cache
-                                // (in order to keep it as small and up-to-date as possible).
+                                // This authorization is already consumed and has now expired 
+                                // so we can safely remove it from the replay cache (in order 
+                                // to keep it as small and up-to-date as possible).
                                 cache.remove(cacheableSadObject);
-                                logger.info("Removed authorization token: " + 
-                                            cacheableSadObject.hashCode());
                             }
                         });
                     } catch (InterruptedException e) {
