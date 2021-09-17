@@ -1067,13 +1067,14 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
       To cope with possible replays, verify that the received <b class="actor">User</b> authorization
       has not already been used. This can be accomplished by maintaining a lookup cache
       holding received <a href="#seq-4.3">SAD</a> objects.
-      Due to the unique, account specific data featured in SAD objects,
+      Due to the unique, <i>account specific</i> data featured in SAD objects,
       authorizations belonging to different users can securely share a common cache.
       Since the signature also encompasses variant data like the <code>timeStamp</code> and
-      <code>paymentRequest</code> elements, clashes on individual SAD objects
+      <code>paymentRequest</code> elements, as well as the signature counter
+      in the FIDO <code>authenticatorData</code> object, clashes on individual SAD objects
       are &quot;impossible&quot; in the cryptographic sense.
-      Cached items should be removed <a href="#expired">when expired</a>,
-      using a background &quot;cleaning&quot; process.
+      Cached SAD objects should be removed <a href="#expired">when expired</a>,
+      preferable using a background process.
     </div>
     <div class="para">
       Note that using this scheme, SAD objects MUST be <i>fully validated</i> before being
