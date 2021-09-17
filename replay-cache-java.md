@@ -67,7 +67,7 @@ public enum ReplayCache {
 }
 ```
 
-### Use
+### Usage
 
 ```java
     if (ReplayCache.INSTANCE.add(ByteBuffer.wrap(sadByteArray), expirationTime)) {
