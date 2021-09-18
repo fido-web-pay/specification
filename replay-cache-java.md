@@ -75,11 +75,16 @@ public enum ReplayCache {
     // The SAD binary is available in: byte[] sadByteArray;
     // The SAD timeStamp is available in: long timeStamp;
     
+    long now = System.currentTimeMillis();
     long expirationTime = timeStamp + AUTHORIZATION_MAX_AGE;
-    if (expirationTime < System.currentTimeMillis()) {
+    if (expirationTime < now) {
         // Expired
     }
-    
+
+    if (timeStamp - AUTHORIZATION_MAX_FUTURE > now) {
+        // Out of sync
+    }
+
     if (ReplayCache.INSTANCE.add(ByteBuffer.wrap(sadByteArray), expirationTime)) {
         // Replay
     }
