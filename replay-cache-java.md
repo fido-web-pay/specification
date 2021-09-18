@@ -70,7 +70,17 @@ public enum ReplayCache {
 ### Usage
 
 ```java
+    // Assumptions:
+    // The SAD object has been fully validated.
+    // The SAD binary is available in: byte[] sadByteArray;
+    // The SAD timeStamp is available in: long timeStamp;
+    
+    long expirationTime = timeStamp + AUTHORIZATION_MAX_AGE;
+    if (expirationTime < System.currentTimeMillis()) {
+        // Expired
+    }
+    
     if (ReplayCache.INSTANCE.add(ByteBuffer.wrap(sadByteArray), expirationTime)) {
-        // Deal with the replay
+        // Replay
     }
 ```
