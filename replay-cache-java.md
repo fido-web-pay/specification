@@ -21,11 +21,11 @@ public enum ReplayCache {
     // a viable option for creating singletons in multi-threaded applications.
     INSTANCE;
 
-    static final long CYCLE_TIME = 120000;
+    private static final long CYCLE_TIME = 120000;
 
-    final ConcurrentHashMap<ByteBuffer, Long> cache = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<ByteBuffer, Long> cache = new ConcurrentHashMap<>();
 
-    ReplayCache() {
+    private ReplayCache() {
         new Thread(new Runnable() {
 
             @Override
