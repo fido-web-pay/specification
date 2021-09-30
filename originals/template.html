@@ -176,6 +176,11 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     a <span class="actor">Merchant</span> and an <span class="actor">Issuer</span>.
     In FWP objects, <span class="actor">Merchant</span> is referred to as &quot;payee&quot;.
   </div>
+  <div class="para">
+    The <a href="#cbor">CBOR</a> types <kbd>unsigned&nbsp;integer</kbd> and
+    <kbd>negative&nbsp;integer</kbd> are in this document denoted as <kbd>integer</kbd> only.
+    That is, it is the value which governs the actual type.
+  </div>
   <div id="credentialdatabase" class="header">
     4. Credential Database
   </div>
@@ -185,74 +190,89 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     one or more FWP credentials
     (&quot;Virtual Cards&quot;) in an <a href="#enrollment">Enrollment</a> process.
     FWP credentials are stored in a local database in the client device, where each entry is
-    supposed to contain the following attributes:
+    supposed to contain the following <a href="#cbor">CBOR</a> attributes:
 </div>
 <div style='overflow-x:auto;padding-right:0.2em'>
   <table class="tftable">
+    <tr><th>Name</th><th>Label</th><th>Type</th><th style="min-width:30em">Description</th></tr>
     <tr>
-      <th>Name</th><th style="min-width:30em">Description</th>
+      <td><code>version</code></td>
+      <td style='text-align:center'><kbd>1</kbd></td>
+      <td><kbd>text&nbsp;string</kbd></td>
+      <td>
+        Since credential databases may evolve, versioning is nessesary.
+        This specification covers version &quot;1.0&quot;.
+      </td>
     </tr>
     <tr>
       <td><code>credentialId</code></td>
+      <td style='text-align:center'><kbd>2</kbd></td>
+      <td><kbd>byte&nbsp;string</kbd></td>
       <td>
         FIDO key identifier for creating FWP <a href="#seq-4.3">signatures</a>.
       </td>
     </tr>
     <tr>
       <td><code>publicKey</code></td>
+      <td style='text-align:center'><kbd>3</kbd></td>
+      <td><kbd>map</kbd></td>
       <td>
-        FIDO public key matching the private key associated with <code>credentialId</code>.
-      </td>
-    </tr>
-    <tr>
-      <td><code>rpId</code></td>
-      <td>
-        FIDO relying party identifier for creating FWP <a href="#seq-4.3">signatures</a>.
+        COSE compliant FIDO public key matching the private key associated with <code>credentialId</code>.
       </td>
     </tr>
     <tr>
       <td><code>signatureAlgorithm</code></td>
+      <td style='text-align:center'><kbd>4</kbd></td>
+      <td><kbd>integer</kbd></td>
       <td>
-        FIDO signature algorithm for FWP <a href="#seq-4.3">signatures</a>.
+        FIDO key/signature algorithm for FWP <a href="#seq-4.3">signatures</a>.
       </td>
     </tr>
     <tr>
       <td><code>encryptionKey</code></td>
+      <td style='text-align:center'><kbd>5</kbd></td>
+      <td><kbd>map</kbd></td>
       <td>
-        <span class="actor">Issuer</span> specific (<i>shared</i>) public encryption key.
-        Unless an <code>encryptionKeyId</code> has been specified, the <code>encryptionKey</code>
-        MUST be inserted in FWP <a href="#seq-4.4">encryption</a> objects.
+        COSE compliant <span class="actor">Issuer</span> specific
+        (<i>shared</i>) public encryption key. See FWP <a href="#seq-4.4">encryption</a>.
       </td>
     </tr>
     <tr>
       <td><code>encryptionKeyId</code></td>
+      <td style='text-align:center'><kbd>6</kbd></td>
+      <td><kbd>byte&nbsp;string</kbd></td>
       <td>
-        <i>Optional</i>. If specified, FWP <a href="#seq-4.4">encryption</a> objects
-        MUST contain this identifier.
+        <i>Optional</i>. See FWP <a href="#seq-4.4">encryption</a>.
       </td>
     </tr>
     <tr>
       <td><code>contentEncryptionAlgorithm</code></td>
+      <td style='text-align:center'><kbd>7</kbd></td>
+      <td><kbd>integer</kbd></td>
       <td>
-        COSE compliant content encryption algorithm for
-        FWP <a href="#seq-4.4">encryption</a>.
+        COSE compliant content encryption algorithm.  See FWP <a href="#seq-4.4">encryption</a>.
       </td>
     </tr>
     <tr>
       <td><code>keyEncryptionAlgorithm</code></td>
+      <td style='text-align:center'><kbd>8</kbd></td>
+      <td><kbd>integer</kbd></td>
       <td>
-        COSE compliant key encryption algorithm for
-        FWP <a href="#seq-4.4">encryption</a>.
+        COSE compliant key encryption algorithm.  See FWP <a href="#seq-4.4">encryption</a>.
       </td>
     </tr>
     <tr>
       <td><code>accountId</code></td>
+      <td style='text-align:center'><kbd>9</kbd></td>
+      <td><kbd>text&nbsp;string</kbd></td>
       <td>
         Account identifier associated with the credential.
       </td>
     </tr>
     <tr>
       <td><code>serialNumber</code></td>
+      <td style='text-align:center'><kbd>10</kbd></td>
+      <td><kbd>text&nbsp;string</kbd></td>
       <td>
         Text string that (with respect to the <span class="actor">Issuer</span>),
         uniquely identifies the payment credential.
@@ -260,12 +280,16 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     </tr>
     <tr>
       <td><code>paymentMethod</code></td>
+      <td style='text-align:center'><kbd>11</kbd></td>
+      <td><kbd>text&nbsp;string</kbd></td>
       <td>
         URL holding the FWP method for a particular payment network.
       </td>
     </tr>
     <tr>
       <td><code>issuerId</code></td>
+      <td style='text-align:center'><kbd>12</kbd></td>
+      <td><kbd>text&nbsp;string</kbd></td>
       <td>
         Bank Identification Number (BIN) or URL associated with
         the <span class="actor">Issuer</span>.
@@ -275,8 +299,10 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     </tr>
     <tr>
       <td><code>cardImage</code></td>
+      <td style='text-align:center'><kbd>13</kbd></td>
+      <td><kbd>byte&nbsp;string</kbd></td>
       <td>
-        SVG image identifying the payment credential for
+        UTF-8 encoded SVG image identifying the payment credential for
         the <span class="actor">User</span>.
         The content of such images are entirely <span class="actor">Issuer</span> specific,
         but images MUST adhere to certain (TDB), dimensions in order
@@ -285,10 +311,6 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     </tr>
   </table>
 </div>
-    <div>
-      Note: how attributes are represented in the credential database is <i>implementation specific</i>,
-      whereas FWP assertions are <i>normative</i>.
-    </div>
     <div id="keyprotection" class="comment box">
       Through the use of a dedicated credential database,
       associated FIDO keys can be freely used by the FWP implementation,
@@ -696,12 +718,6 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
       This specification mandates the encryption scheme described in
        <a href="https://fido-web-pay.github.io/specification/crypto.html#5"
           title="FIDO Web Pay - Crypto">FIDO Web Pay - Crypto<img src="images/xtl.svg" alt="link"></a>.
-    </div>
-   <div class="para">
-      The encryption algorithms are defined by the
-      <a href="#credentialdatabase">contentEncryptionAlgorithm</a> and
-      <a href="#credentialdatabase">keyEncryptionAlgorithm</a> attributes
-      of the selected FWP credential.
     </div>
     <div class="para">
       Note that the public key MUST be <i>shared</i> with
@@ -1409,6 +1425,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
         <tr><td style="text-align:center;white-space:nowrap">2021-07-02</td><td style="text-align:center">0.21</td><td>Removed redundant FINGERPRINT item.</td></tr>
         <tr><td style="text-align:center;white-space:nowrap">2021-08-02</td><td style="text-align:center">0.22</td><td>Added document &quot;FIDO Web Pay - Crypto&quot; and ToC.</td></tr>
         <tr><td style="text-align:center;white-space:nowrap">2021-08-27</td><td style="text-align:center">0.23</td><td>Added section Security Considerations.</td></tr>
+        <tr><td style="text-align:center;white-space:nowrap">2021-09-30</td><td style="text-align:center">0.24</td><td>Added CBOR types in section Credential Database.</td></tr>
       </table>
     </div>
     <div id="authors" class="header">
