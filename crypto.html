@@ -202,8 +202,8 @@ to be signed, potentially making the signature scheme more resistant to tamperin
    <div id="ctap2api" style="border-width:1pt;border-style:solid;border-color:red;display:inline-block;padding:0.5em 1em;margin-top:0.7em">
     An even better solution would be to use the &quot;raw&quot; CTAP2 API
     by feeding the hashed AD into <kbd>clientDataHash</kbd>.  This would eliminate the <code>clientDataJSON</code> 
-    element (the <i>applicable</i> signature meta data is already featured in AD) and associated
-    JSON parsing as well as a redundant layer of SHA256 hashing.
+    element (the for <i>payments</i> applicable data is already featured in AD) and associated
+    JSON parsing, as well as removing one level of SHA256 hashing.
     FIDO authenticators would still be fully compatible with <a href='https://www.w3.org/TR/webauthn-2/' title='Web Authentication'>Web&nbsp;Authentication<img src='images/xtl.svg' alt='link'></a>,
     making it technically possible reusing them for login, only constrained by local policies.
      
