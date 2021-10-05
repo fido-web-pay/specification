@@ -34,12 +34,12 @@ public enum ReplayCache {
                     try {
                         Thread.sleep(CYCLE_TIME);
                         long now = System.currentTimeMillis();
-                        cache.forEach((cacheableSadObject, expirationTime) -> {
+                        cache.forEach((hashableSadObject, expirationTime) -> {
                             if (expirationTime < now) {
                                 // The authorization has apparently expired so we can safely
                                 // remove it from the replay cache in order to keep the cache
                                 // as small and up-to-date as possible.
-                                cache.remove(cacheableSadObject);
+                                cache.remove(hashableSadObject);
                             }
                         });
                     } catch (InterruptedException e) {
@@ -57,12 +57,12 @@ public enum ReplayCache {
      * Note: the <code>expirationTime</code> stays the same for replayed SAD objects,
      * making rewrites benign.
      * 
-     * @param cacheableSadObject The SAD object packaged to suit HashMap
+     * @param hashableSadObject The SAD object packaged to suit HashMap
      * @param expirationTime For the SAD object
      * @return <code>true</code> if replay, else <code>false</code>
      */
-    public boolean add(ByteBuffer cacheableSadObject, long expirationTime) {
-        return cache.put(cacheableSadObject, expirationTime) != null;
+    public boolean add(ByteBuffer hashableSadObject, long expirationTime) {
+        return cache.put(hashableSadObject, expirationTime) != null;
     }
 }
 ```
@@ -78,11 +78,11 @@ public enum ReplayCache {
     long now = System.currentTimeMillis();
     long expirationTime = timeStamp + AUTHORIZATION_MAX_AGE;
     if (expirationTime < now) {
-        // Expired
+        // Expired, reject
     }
 
     if (timeStamp - AUTHORIZATION_MAX_FUTURE > now) {
-        // Out of sync
+        // Out of sync, reject
     }
 
     if (ReplayCache.INSTANCE.add(ByteBuffer.wrap(sadByteArray), expirationTime)) {
