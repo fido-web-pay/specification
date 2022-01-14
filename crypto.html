@@ -497,12 +497,12 @@ Generate a key pair compatible with the <code>encryptionKey</code>.
 </li>
 <li>Create an empty CBOR <a href="#mainmap">Main map</a> object.</li>
 <li>
-  Copy the previously created CBOR <a href="#submap">Sub map</a> object to
-  the <code>keyEncryption</code> label.
-</li>
-<li>
   Copy the <code>contentEncryptionAlgorithm</code>
   to the <code>algorithm</code> label.
+</li>
+<li>
+  Copy the previously created CBOR <a href="#submap">Sub map</a> object to
+  the <code>keyEncryption</code> label.
 </li>
 <li>Serialize the current <a href="#mainmap">Main map</a> object and assign the result
 to an AAD (Additional Authenticated Data) variable.</li>
