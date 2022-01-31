@@ -79,7 +79,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
 <div class="toc">&nbsp;&nbsp;&nbsp;&nbsp;<a href="#seq-D5">D5: Create Payment Instruction</a></div>
 <div class="toc">&nbsp;&nbsp;&nbsp;&nbsp;<a href="#seq-D6">D6: Invoke &quot;Payment Rails&quot;</a></div>
 <div class="toc">&nbsp;&nbsp;&nbsp;&nbsp;<a href="#seq-D7">D7: Process Payment Instruction</a></div>
-<div class="toc"><a href="#security">Security Considerations</a></div>
+<div class="toc"><a href="#security">Security and Privacy Considerations</a></div>
 <div class="toc"><a href="#integration">Integration</a></div>
 <div class="toc"><a href="#extensions">Extensions</a></div>
 <div class="toc"><a href="#implementationoptions">Implementation Options</a></div>
@@ -136,7 +136,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
 </ol>
  </div>
   <div class="comment box">
-    Since applying FIDO to payments typically require updating multiple 
+    Since changes in payment systems typically require updating multiple 
     &quot;backend&quot; components and services,
     FWP was designed from the ground-up to keep the complexity of
 <i>matching backends</i> at a <a href="https://fido-web-pay.github.io/specification/backend-infrastructure-requirements.pdf"
@@ -149,7 +149,8 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     Note that FWP is not a payment system, it is a universal <i>payment authorization</i> method,
     exclusively dealing with the <i>user's</i> part of the payment process.
     That is, <i>the backend infrastructure and associated APIs are out of scope for this specification</i>.
-   </div>
+    See also <a href="#integration">Integration</a>.
+  </div>
   <div class="para">
     However, to guide implementers, this document outlines
     a sample infrastructure at a &quot;conceptual&quot; level.
@@ -157,11 +158,6 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     must (due to the EMV <i>end-to-end security model</i>),
     always be routed back to the designated issuer &quot;verbatim&quot;
     (together with other required data) in order to initiate a payment transaction.
-  </div>
-  <div class="para">
-    It is assumed that <i>at this stage in time</i>,
-    backend infrastructures will be <i>independently defined</i> by each payment network
-    rather than becoming a unified standard.  See also <a href="#integration">Integration</a>.
   </div>
   <div id="terminology" class="header">
     3. Terminology
@@ -1224,7 +1220,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     </div>
 
 <div id="security" class="header">
-  Security Considerations
+  Security and Privacy Considerations
 </div>
 <div>
   Security in FWP depends to a large extent on the W3C
@@ -1247,7 +1243,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
 </div>
 <div class="para">
   It is technically possible creating Web applications that look like FWP (&quot;spoofing&quot;),
-  but they are not able producing valid assertions since that requires
+  but such applications are not able producing valid assertions since that requires
   unconstrained access to FIDO keys which is reserved for FWP (which runs
   with higher privileges than ordinary Web code).
 </div>
@@ -1260,18 +1256,35 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
   FWP depends on that the underlying software is operating
   correctly. Bugs or successful attacks on the platform may force the FWP system
   to perform payments in the background or violate the user's privacy.
-</div>    
+</div>
+<div class="para">
+  Although FWP was designed with privacy in mind, it does add some
+  data which (to a rather limited extent),
+  can be used by merchants for &quot;binning&quot; users:
+ </div>
+<ul>
+  <li>
+    Each authorization returns a <i>non-personal</i> payment method.
+  </li>
+  <li>
+    Each authorization returns a <i>non-personal</i> bank identifier.  This information
+    provides a crude estimate of where the user may live.
+  </li>
+  <li>
+    The availability of FWP itself represents user related data.
+  </li>
+</ul>
 <div id="integration" class="header">
       Integration
     </div>
     <div>
-      It is pretty clear that the integration of systems like FWP in payment networks
-      is crucial for acceptance by the market.
+      It goes without saying that the integration of systems like FWP in
+      payment networks is crucial for acceptance by the market.
     </div>
     <div class="para">
       For card based payments FWP implementations can build on the existing
       EMV foundation since essentially only the formats differ.
-      Although the lack of a PAN (card number) in FWP may appear as a major obstacle,
+      Although the lack of a PAN (card number) in FWP may appear as an obstacle,
       the <code>issuerId</code> would in this case hold a &quot;neutered&quot; PAN where
       the BIN (Bank Identification Number) is set, while the rest are set to zeroes + Luhn check digit.
       E.g. VISA: 4972039000000004.  However, using <b class="actor">Issuer</b> URLs
