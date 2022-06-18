@@ -173,9 +173,10 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     In FWP objects, <span class="actor">Merchant</span> is referred to as &quot;payee&quot;.
   </div>
   <div class="para">
-    The <a href="#cbor">CBOR</a> types <kbd>unsigned&nbsp;integer</kbd> and
-    <kbd>negative&nbsp;integer</kbd> are in this document denoted as <kbd>integer</kbd> only.
-    That is, it is the actual value that governs which sub type to use.
+    In this document <a href="#cbor">CBOR</a> primitives are expressed in
+    CDDL [<a href="https://tools.ietf.org/html/rfc8610"
+             title="RFC8610">RFC8610<img src="images/xtl.svg" alt="link"></a>]
+    notation.
   </div>
   <div id="credentialdatabase" class="header">
     4. Credential Database
@@ -194,7 +195,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     <tr>
       <td><code>version</code></td>
       <td style='text-align:center'><kbd>1</kbd></td>
-      <td><kbd>text&nbsp;string</kbd></td>
+      <td><kbd>tstr</kbd></td>
       <td>
         Since credential data may evolve over time, versioning is necessary.
         This specification covers version &quot;1.0&quot;.
@@ -203,7 +204,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     <tr>
       <td><code>credentialId</code></td>
       <td style='text-align:center'><kbd>2</kbd></td>
-      <td><kbd>byte&nbsp;string</kbd></td>
+      <td><kbd>bstr</kbd></td>
       <td>
         FIDO key identifier for creating FWP <a href="#seq-4.3">signatures</a>.
       </td>
@@ -219,7 +220,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     <tr>
       <td><code>signatureAlgorithm</code></td>
       <td style='text-align:center'><kbd>4</kbd></td>
-      <td><kbd>integer</kbd></td>
+      <td><kbd>int</kbd></td>
       <td>
         FIDO key/signature algorithm for FWP <a href="#seq-4.3">signatures</a>.
       </td>
@@ -244,7 +245,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     <tr>
       <td><code>contentEncryptionAlgorithm</code></td>
       <td style='text-align:center'><kbd>7</kbd></td>
-      <td><kbd>integer</kbd></td>
+      <td><kbd>int</kbd></td>
       <td>
         COSE compliant content encryption algorithm.  See FWP <a href="#seq-4.4">encryption</a>.
       </td>
@@ -252,7 +253,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     <tr>
       <td><code>keyEncryptionAlgorithm</code></td>
       <td style='text-align:center'><kbd>8</kbd></td>
-      <td><kbd>integer</kbd></td>
+      <td><kbd>int</kbd></td>
       <td>
         COSE compliant key encryption algorithm.  See FWP <a href="#seq-4.4">encryption</a>.
       </td>
@@ -260,7 +261,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     <tr>
       <td><code>accountId</code></td>
       <td style='text-align:center'><kbd>9</kbd></td>
-      <td><kbd>text&nbsp;string</kbd></td>
+      <td><kbd>tstr</kbd></td>
       <td>
         Account identifier associated with the credential.
       </td>
@@ -268,7 +269,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     <tr>
       <td><code>serialNumber</code></td>
       <td style='text-align:center'><kbd>10</kbd></td>
-      <td><kbd>text&nbsp;string</kbd></td>
+      <td><kbd>tstr</kbd></td>
       <td>
         Text string that (with respect to the <span class="actor">Issuer</span>),
         uniquely identifies the payment credential.
@@ -277,7 +278,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     <tr>
       <td><code>paymentMethod</code></td>
       <td style='text-align:center'><kbd>11</kbd></td>
-      <td><kbd>text&nbsp;string</kbd></td>
+      <td><kbd>tstr</kbd></td>
       <td>
         URL holding the FWP method for a particular payment network.
       </td>
@@ -285,7 +286,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     <tr>
       <td><code>issuerId</code></td>
       <td style='text-align:center'><kbd>12</kbd></td>
-      <td><kbd>text&nbsp;string</kbd></td>
+      <td><kbd>tstr</kbd></td>
       <td>
         Bank Identification Number (BIN) or URL associated with
         the <span class="actor">Issuer</span>.
@@ -296,7 +297,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     <tr>
       <td><code>cardImage</code></td>
       <td style='text-align:center'><kbd>13</kbd></td>
-      <td><kbd>byte&nbsp;string</kbd></td>
+      <td><kbd>bstr</kbd></td>
       <td>
         UTF-8 encoded SVG image identifying the payment credential for
         the <span class="actor">User</span>.
@@ -366,12 +367,15 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
              title="PaymentRequest">PaymentRequest<img src="images/xtl.svg" alt="link"></a>
       interface.
     </div>
+     <div class="para">
+       For brevity return (status) messages are not shown in the diagram.
+     </div>
     <div class="step"><div id="seq-1" class="numbox">1</div>Initiate PaymentRequest</div>
     <div>
       At this point the <b class="actor">User</b> is assumed having clicked on
       an FWP compliant icon like
     </div>
-    <img src="images/fwp-pay.svg" alt="fwp pay" style="width: 10em; margin: 0.7em 0 0.4em 0; box-shadow: 0.2em 0.2em 0.2em #d0d0d0"/>
+    <img src="images/fwp-pay.svg" alt="fwp pay" title="FWP logo in a payment method selection page" style="width: 10em; margin: 0.7em 0 0.4em 0; box-shadow: 0.2em 0.2em 0.2em #d0d0d0"/>
     <div>
       causing a <b class="actor">Merchant</b> Web page to invoke
       a custom doPaymentRequest() method, like in the following sample:
@@ -441,7 +445,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
       a payment authorization UI like the following:
     </div>
     <div style="overflow-x:auto;padding-bottom:0.5em">
-      <img style="display:block;width:22em;box-shadow:2pt 2pt 3pt #808080;border-width:1pt;border-style:solid;border-color:darkgrey" alt="Payment UI" src="images/ui.svg">
+      <img style="display:block;width:22em;box-shadow:2pt 2pt 3pt #808080;border-width:1pt;border-style:solid;border-color:darkgrey" alt="Payment UI" title="Payment UI" src="images/ui.svg">
     </div>
     <div>Non-normative UI in &quot;dark mode&quot;.</div>
     <div class="para">
@@ -488,7 +492,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
       <tr>
         <td><code>payeeName</code></td>
         <td style='text-align:center'><kbd>1</kbd></td>
-        <td><kbd>text&nbsp;string</kbd></td>
+        <td><kbd>tstr</kbd></td>
         <td>
           <b class="actor">Merchant</b> common name.
         </td>
@@ -496,7 +500,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
       <tr>
         <td><code>requestId</code></td>
         <td style='text-align:center'><kbd>2</kbd></td>
-        <td><kbd>text&nbsp;string</kbd></td>
+        <td><kbd>tstr</kbd></td>
         <td>
           <b class="actor">Merchant</b> request Id. Copy of <code>details.id</code>.
         </td>
@@ -504,7 +508,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
       <tr>
         <td><code>amount</code></td>
         <td style='text-align:center'><kbd>3</kbd></td>
-        <td><kbd>text&nbsp;string</kbd></td>
+        <td><kbd>tstr</kbd></td>
         <td>
           Amount of money requested by the <b class="actor">Merchant</b>.
         </td>
@@ -512,7 +516,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
       <tr>
         <td><code>currency</code></td>
         <td style='text-align:center'><kbd>4</kbd></td>
-        <td><kbd>text&nbsp;string</kbd></td>
+        <td><kbd>tstr</kbd></td>
         <td>
           The type of currency requested by the <b class="actor">Merchant</b>.
         </td>
@@ -547,7 +551,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
         <tr>
           <td><code>version</code></td>
           <td style='text-align:center'><kbd>1</kbd></td>
-          <td><kbd>text&nbsp;string</kbd></td>
+          <td><kbd>tstr</kbd></td>
           <td>
             FWP assertion data version.  This specification covers version &quot;1.0&quot;.
           </td>
@@ -563,7 +567,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
         <tr>
           <td><code>payeeHost</code></td>
           <td style='text-align:center'><kbd>3</kbd></td>
-          <td><kbd>text&nbsp;string</kbd></td>
+          <td><kbd>tstr</kbd></td>
           <td>
             Host name as interpreted by the <b class="actor">Browser</b>.
             Included for optional validation by the <b class="actor">Issuer</b>,
@@ -573,7 +577,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
         <tr>
           <td><code>accountId</code></td>
           <td style='text-align:center'><kbd>4</kbd></td>
-          <td><kbd>text&nbsp;string</kbd></td>
+          <td><kbd>tstr</kbd></td>
           <td>
             <b class="actor">User</b> account number associated
             with the selected <a href="#credentialdatabase">FWP credential</a>.
@@ -582,7 +586,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
         <tr>
           <td><code>serialNumber</code></td>
           <td style='text-align:center'><kbd>5</kbd></td>
-          <td><kbd>text&nbsp;string</kbd></td>
+          <td><kbd>tstr</kbd></td>
           <td>
             Unique identifier associated with the selected <a href="#credentialdatabase">FWP credential</a>.
           </td>
@@ -590,7 +594,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
         <tr>
           <td><code>paymentMethod</code></td>
           <td style='text-align:center'><kbd>6</kbd></td>
-          <td><kbd>text&nbsp;string</kbd></td>
+          <td><kbd>tstr</kbd></td>
           <td>
             Payment method associated with the selected <a href="#credentialdatabase">FWP credential</a>.
             Included for &quot;completeness&quot;.
@@ -599,13 +603,13 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
         <tr>
           <td><code>networkData</code></td>
           <td style='text-align:center'><kbd>7</kbd></td>
-          <td><i>Arbitrary</i></td>
+          <td><i>&quot;Any&quot;</i></td>
           <td>
             <i>Optional</i>.  This attribute MUST be included if
             specified in the <code>PaymentRequest</code> constructor
             for the particular <code>paymentMethod</code>, otherwise it MUST NOT be defined.
             <div style="margin-top:0.4em">
-              Note that possible <code>networkData</code> data is specified by the calling
+              Note that possible <code>networkData</code> is specified by the calling
               <span class="actor">Merchant</span> as JavaScript, but MUST subsequently
               be converted to CBOR when included in this object.  Due to a
               <a href="#jsonlimit">mandated restriction</a>
@@ -613,11 +617,10 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
               straightforward:
               <ul>
                 <li>
-                  <kbd>Number</kbd> is converted to <kbd>integer</kbd>.
+                  <kbd>Number</kbd> is converted to <kbd>int</kbd>.
                 </li>
                 <li>
-                  <kbd>String</kbd> is converted to
-                  <kbd>text&nbsp;string</kbd>.
+                  <kbd>String</kbd> is converted to <kbd>tstr</kbd>.
                 </li>
                 <li><kbd>Object</kbd> is converted to <kbd>map</kbd>.</li>
                 <li><kbd>Array</kbd> is converted to <kbd>array</kbd>.</li>
@@ -650,7 +653,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
         <tr>
           <td><code>timeStamp</code></td>
           <td style='text-align:center'><kbd>9</kbd></td>
-          <td><kbd>text&nbsp;string</kbd></td>
+          <td><kbd>tstr</kbd></td>
           <td>
             ISO (<a href="https://tools.ietf.org/html/rfc3339"
                     title="RFC3399">RFC3399<img src="images/xtl.svg" alt="link"></a>)
@@ -1449,6 +1452,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
         <tr><td style="text-align:center;white-space:nowrap">2021-08-27</td><td style="text-align:center">0.23</td><td>Added section <a href="#security">Security Considerations</a>.</td></tr>
         <tr><td style="text-align:center;white-space:nowrap">2021-09-30</td><td style="text-align:center">0.24</td><td>Added CBOR types in <a href="#credentialdatabase">Credential Database</a>.</td></tr>
         <tr><td style="text-align:center;white-space:nowrap">2022-02-02</td><td style="text-align:center">0.25</td><td>CBOR date time replaced by text string.</td></tr>
+        <tr><td style="text-align:center;white-space:nowrap">2022-06-15</td><td style="text-align:center">0.26</td><td>CBOR primitives expressed in CDDL notation.</td></tr>
       </table>
     </div>
     <div id="authors" class="header">

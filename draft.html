@@ -173,9 +173,10 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     In FWP objects, <span class="actor">Merchant</span> is referred to as &quot;payee&quot;.
   </div>
   <div class="para">
-    The <a href="#cbor">CBOR</a> types <kbd>unsigned&nbsp;integer</kbd> and
-    <kbd>negative&nbsp;integer</kbd> are in this document denoted as <kbd>integer</kbd> only.
-    That is, it is the actual value that governs which sub type to use.
+    In this document <a href="#cbor">CBOR</a> primitives are expressed in
+    CDDL [<a href="https://tools.ietf.org/html/rfc8610"
+             title="RFC8610">RFC8610<img src="images/xtl.svg" alt="link"></a>]
+    notation.
   </div>
   <div id="credentialdatabase" class="header">
     4. Credential Database
@@ -194,7 +195,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     <tr>
       <td><code>version</code></td>
       <td style='text-align:center'><kbd>1</kbd></td>
-      <td><kbd>text&nbsp;string</kbd></td>
+      <td><kbd>tstr</kbd></td>
       <td>
         Since credential data may evolve over time, versioning is necessary.
         This specification covers version &quot;1.0&quot;.
@@ -203,7 +204,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     <tr>
       <td><code>credentialId</code></td>
       <td style='text-align:center'><kbd>2</kbd></td>
-      <td><kbd>byte&nbsp;string</kbd></td>
+      <td><kbd>bstr</kbd></td>
       <td>
         FIDO key identifier for creating FWP <a href="#seq-4.3">signatures</a>.
       </td>
@@ -219,7 +220,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     <tr>
       <td><code>signatureAlgorithm</code></td>
       <td style='text-align:center'><kbd>4</kbd></td>
-      <td><kbd>integer</kbd></td>
+      <td><kbd>int</kbd></td>
       <td>
         FIDO key/signature algorithm for FWP <a href="#seq-4.3">signatures</a>.
       </td>
@@ -244,7 +245,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     <tr>
       <td><code>contentEncryptionAlgorithm</code></td>
       <td style='text-align:center'><kbd>7</kbd></td>
-      <td><kbd>integer</kbd></td>
+      <td><kbd>int</kbd></td>
       <td>
         COSE compliant content encryption algorithm.  See FWP <a href="#seq-4.4">encryption</a>.
       </td>
@@ -252,7 +253,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     <tr>
       <td><code>keyEncryptionAlgorithm</code></td>
       <td style='text-align:center'><kbd>8</kbd></td>
-      <td><kbd>integer</kbd></td>
+      <td><kbd>int</kbd></td>
       <td>
         COSE compliant key encryption algorithm.  See FWP <a href="#seq-4.4">encryption</a>.
       </td>
@@ -260,7 +261,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     <tr>
       <td><code>accountId</code></td>
       <td style='text-align:center'><kbd>9</kbd></td>
-      <td><kbd>text&nbsp;string</kbd></td>
+      <td><kbd>tstr</kbd></td>
       <td>
         Account identifier associated with the credential.
       </td>
@@ -268,7 +269,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     <tr>
       <td><code>serialNumber</code></td>
       <td style='text-align:center'><kbd>10</kbd></td>
-      <td><kbd>text&nbsp;string</kbd></td>
+      <td><kbd>tstr</kbd></td>
       <td>
         Text string that (with respect to the <span class="actor">Issuer</span>),
         uniquely identifies the payment credential.
@@ -277,7 +278,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     <tr>
       <td><code>paymentMethod</code></td>
       <td style='text-align:center'><kbd>11</kbd></td>
-      <td><kbd>text&nbsp;string</kbd></td>
+      <td><kbd>tstr</kbd></td>
       <td>
         URL holding the FWP method for a particular payment network.
       </td>
@@ -285,7 +286,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     <tr>
       <td><code>issuerId</code></td>
       <td style='text-align:center'><kbd>12</kbd></td>
-      <td><kbd>text&nbsp;string</kbd></td>
+      <td><kbd>tstr</kbd></td>
       <td>
         Bank Identification Number (BIN) or URL associated with
         the <span class="actor">Issuer</span>.
@@ -296,7 +297,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     <tr>
       <td><code>cardImage</code></td>
       <td style='text-align:center'><kbd>13</kbd></td>
-      <td><kbd>byte&nbsp;string</kbd></td>
+      <td><kbd>bstr</kbd></td>
       <td>
         UTF-8 encoded SVG image identifying the payment credential for
         the <span class="actor">User</span>.
@@ -1528,12 +1529,15 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
              title="PaymentRequest">PaymentRequest<img src="images/xtl.svg" alt="link"></a>
       interface.
     </div>
+     <div class="para">
+       For brevity return (status) messages are not shown in the diagram.
+     </div>
     <div class="step"><div id="seq-1" class="numbox">1</div>Initiate PaymentRequest</div>
     <div>
       At this point the <b class="actor">User</b> is assumed having clicked on
       an FWP compliant icon like
     </div>
-    <img src="images/fwp-pay.svg" alt="fwp pay" style="width: 10em; margin: 0.7em 0 0.4em 0; box-shadow: 0.2em 0.2em 0.2em #d0d0d0"/>
+    <img src="images/fwp-pay.svg" alt="fwp pay" title="FWP logo in a payment method selection page" style="width: 10em; margin: 0.7em 0 0.4em 0; box-shadow: 0.2em 0.2em 0.2em #d0d0d0"/>
     <div>
       causing a <b class="actor">Merchant</b> Web page to invoke
       a custom doPaymentRequest() method, like in the following sample:
@@ -1603,7 +1607,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
       a payment authorization UI like the following:
     </div>
     <div style="overflow-x:auto;padding-bottom:0.5em">
-      <img style="display:block;width:22em;box-shadow:2pt 2pt 3pt #808080;border-width:1pt;border-style:solid;border-color:darkgrey" alt="Payment UI" src="images/ui.svg">
+      <img style="display:block;width:22em;box-shadow:2pt 2pt 3pt #808080;border-width:1pt;border-style:solid;border-color:darkgrey" alt="Payment UI" title="Payment UI" src="images/ui.svg">
     </div>
     <div>Non-normative UI in &quot;dark mode&quot;.</div>
     <div class="para">
@@ -1650,7 +1654,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
       <tr>
         <td><code>payeeName</code></td>
         <td style='text-align:center'><kbd>1</kbd></td>
-        <td><kbd>text&nbsp;string</kbd></td>
+        <td><kbd>tstr</kbd></td>
         <td>
           <b class="actor">Merchant</b> common name.
         </td>
@@ -1658,7 +1662,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
       <tr>
         <td><code>requestId</code></td>
         <td style='text-align:center'><kbd>2</kbd></td>
-        <td><kbd>text&nbsp;string</kbd></td>
+        <td><kbd>tstr</kbd></td>
         <td>
           <b class="actor">Merchant</b> request Id. Copy of <code>details.id</code>.
         </td>
@@ -1666,7 +1670,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
       <tr>
         <td><code>amount</code></td>
         <td style='text-align:center'><kbd>3</kbd></td>
-        <td><kbd>text&nbsp;string</kbd></td>
+        <td><kbd>tstr</kbd></td>
         <td>
           Amount of money requested by the <b class="actor">Merchant</b>.
         </td>
@@ -1674,7 +1678,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
       <tr>
         <td><code>currency</code></td>
         <td style='text-align:center'><kbd>4</kbd></td>
-        <td><kbd>text&nbsp;string</kbd></td>
+        <td><kbd>tstr</kbd></td>
         <td>
           The type of currency requested by the <b class="actor">Merchant</b>.
         </td>
@@ -1699,7 +1703,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
 
     <div style='overflow-x:auto;padding-right:0.2em'>
       <div class="staticbox" style="min-width:50em">
-        {<br>&nbsp;&nbsp;1:&nbsp;&quot;1.0&quot;,<br>&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;&quot;Space&nbsp;Shop&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;&quot;7040566321&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;435.00&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;EUR&quot;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;3:&nbsp;&quot;spaceshop.com&quot;,<br>&nbsp;&nbsp;4:&nbsp;&quot;FR7630002111110020050014382&quot;,<br>&nbsp;&nbsp;5:&nbsp;&quot;0057162932&quot;,<br>&nbsp;&nbsp;6:&nbsp;&quot;https://bankdirect.com&quot;,<br>&nbsp;&nbsp;7:&nbsp;&quot;additional&nbsp;stuff...&quot;,<br>&nbsp;&nbsp;8:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;Android&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;10.0&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;Chrome&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;103&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;9:&nbsp;&quot;2022-02-02T10:14:07+01:00&quot;,<br>&nbsp;&nbsp;10:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;-7,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;2,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1:&nbsp;1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2:&nbsp;h&#039;e812b1a6dcbc708f9ec43cc2921fa0a14e9d5eadcc6dc63471dd4b680c6236b5&#039;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-3:&nbsp;h&#039;9826dcbd4ce6e388f72edd9be413f2425a10f75b5fd83d95fa0cde53159a51d8&#039;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;}<br>}
+        {<br>&nbsp;&nbsp;1:&nbsp;&quot;1.0&quot;,<br>&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;&quot;Space&nbsp;Shop&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;&quot;7040566321&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;435.00&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;EUR&quot;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;3:&nbsp;&quot;spaceshop.com&quot;,<br>&nbsp;&nbsp;4:&nbsp;&quot;FR7630002111110020050014382&quot;,<br>&nbsp;&nbsp;5:&nbsp;&quot;0057162932&quot;,<br>&nbsp;&nbsp;6:&nbsp;&quot;https://bankdirect.com&quot;,<br>&nbsp;&nbsp;7:&nbsp;&quot;additional&nbsp;stuff...&quot;,<br>&nbsp;&nbsp;8:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;Android&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;10.0&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;Chrome&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;103&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;9:&nbsp;&quot;2022-06-17T10:14:07+01:00&quot;,<br>&nbsp;&nbsp;10:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;-7,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;2,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1:&nbsp;1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2:&nbsp;h&#039;e812b1a6dcbc708f9ec43cc2921fa0a14e9d5eadcc6dc63471dd4b680c6236b5&#039;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-3:&nbsp;h&#039;9826dcbd4ce6e388f72edd9be413f2425a10f75b5fd83d95fa0cde53159a51d8&#039;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;}<br>}
       </div>
     </div>
     <div>Definition:</div>
@@ -1709,7 +1713,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
         <tr>
           <td><code>version</code></td>
           <td style='text-align:center'><kbd>1</kbd></td>
-          <td><kbd>text&nbsp;string</kbd></td>
+          <td><kbd>tstr</kbd></td>
           <td>
             FWP assertion data version.  This specification covers version &quot;1.0&quot;.
           </td>
@@ -1725,7 +1729,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
         <tr>
           <td><code>payeeHost</code></td>
           <td style='text-align:center'><kbd>3</kbd></td>
-          <td><kbd>text&nbsp;string</kbd></td>
+          <td><kbd>tstr</kbd></td>
           <td>
             Host name as interpreted by the <b class="actor">Browser</b>.
             Included for optional validation by the <b class="actor">Issuer</b>,
@@ -1735,7 +1739,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
         <tr>
           <td><code>accountId</code></td>
           <td style='text-align:center'><kbd>4</kbd></td>
-          <td><kbd>text&nbsp;string</kbd></td>
+          <td><kbd>tstr</kbd></td>
           <td>
             <b class="actor">User</b> account number associated
             with the selected <a href="#credentialdatabase">FWP credential</a>.
@@ -1744,7 +1748,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
         <tr>
           <td><code>serialNumber</code></td>
           <td style='text-align:center'><kbd>5</kbd></td>
-          <td><kbd>text&nbsp;string</kbd></td>
+          <td><kbd>tstr</kbd></td>
           <td>
             Unique identifier associated with the selected <a href="#credentialdatabase">FWP credential</a>.
           </td>
@@ -1752,7 +1756,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
         <tr>
           <td><code>paymentMethod</code></td>
           <td style='text-align:center'><kbd>6</kbd></td>
-          <td><kbd>text&nbsp;string</kbd></td>
+          <td><kbd>tstr</kbd></td>
           <td>
             Payment method associated with the selected <a href="#credentialdatabase">FWP credential</a>.
             Included for &quot;completeness&quot;.
@@ -1761,13 +1765,13 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
         <tr>
           <td><code>networkData</code></td>
           <td style='text-align:center'><kbd>7</kbd></td>
-          <td><i>Arbitrary</i></td>
+          <td><i>&quot;Any&quot;</i></td>
           <td>
             <i>Optional</i>.  This attribute MUST be included if
             specified in the <code>PaymentRequest</code> constructor
             for the particular <code>paymentMethod</code>, otherwise it MUST NOT be defined.
             <div style="margin-top:0.4em">
-              Note that possible <code>networkData</code> data is specified by the calling
+              Note that possible <code>networkData</code> is specified by the calling
               <span class="actor">Merchant</span> as JavaScript, but MUST subsequently
               be converted to CBOR when included in this object.  Due to a
               <a href="#jsonlimit">mandated restriction</a>
@@ -1775,11 +1779,10 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
               straightforward:
               <ul>
                 <li>
-                  <kbd>Number</kbd> is converted to <kbd>integer</kbd>.
+                  <kbd>Number</kbd> is converted to <kbd>int</kbd>.
                 </li>
                 <li>
-                  <kbd>String</kbd> is converted to
-                  <kbd>text&nbsp;string</kbd>.
+                  <kbd>String</kbd> is converted to <kbd>tstr</kbd>.
                 </li>
                 <li><kbd>Object</kbd> is converted to <kbd>map</kbd>.</li>
                 <li><kbd>Array</kbd> is converted to <kbd>array</kbd>.</li>
@@ -1812,7 +1815,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
         <tr>
           <td><code>timeStamp</code></td>
           <td style='text-align:center'><kbd>9</kbd></td>
-          <td><kbd>text&nbsp;string</kbd></td>
+          <td><kbd>tstr</kbd></td>
           <td>
             ISO (<a href="https://tools.ietf.org/html/rfc3339"
                     title="RFC3399">RFC3399<img src="images/xtl.svg" alt="link"></a>)
@@ -1852,7 +1855,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
     </div>
     <div style='overflow-x:auto;padding-right:0.2em'>
       <div class="staticbox" style="min-width:60em">
-        {<br>&nbsp;&nbsp;1:&nbsp;&quot;1.0&quot;,<br>&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;&quot;Space&nbsp;Shop&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;&quot;7040566321&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;435.00&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;EUR&quot;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;3:&nbsp;&quot;spaceshop.com&quot;,<br>&nbsp;&nbsp;4:&nbsp;&quot;FR7630002111110020050014382&quot;,<br>&nbsp;&nbsp;5:&nbsp;&quot;0057162932&quot;,<br>&nbsp;&nbsp;6:&nbsp;&quot;https://bankdirect.com&quot;,<br>&nbsp;&nbsp;7:&nbsp;&quot;additional&nbsp;stuff...&quot;,<br>&nbsp;&nbsp;8:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;Android&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;10.0&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;Chrome&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;103&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;9:&nbsp;&quot;2022-02-02T10:14:07+01:00&quot;,<br>&nbsp;&nbsp;10:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;-7,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;2,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1:&nbsp;1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2:&nbsp;h&#039;e812b1a6dcbc708f9ec43cc2921fa0a14e9d5eadcc6dc63471dd4b680c6236b5&#039;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-3:&nbsp;h&#039;9826dcbd4ce6e388f72edd9be413f2425a10f75b5fd83d95fa0cde53159a51d8&#039;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;h&#039;412e175a0f0bdc06dabf0b1db79b97541c08dbacee7e31c97a553588ee922ea70500000017&#039;,<br>&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;h&#039;7b2274797065223a22776562617574686e2e676574222c226f726967696e223a2268747470733a2f2f6d7962616e6b2e6672222c226368616c6c656e6765223a22586276776d5047546962536d6c4a756d71684f4f6c70734475544b6972394a595a73774541624d38637249227d&#039;,<br>&nbsp;&nbsp;&nbsp;&nbsp;5:&nbsp;h&#039;304402205c29e1971c0ceb78a977b7fac2aa955ccc8e7d1b6de79e2b9fd1b230313392b70220392d17dacff64bf69a7586cc1aa11e93611a0514ae0c431eef67d47718de763a&#039;<br>&nbsp;&nbsp;}<br>}
+        {<br>&nbsp;&nbsp;1:&nbsp;&quot;1.0&quot;,<br>&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;&quot;Space&nbsp;Shop&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;&quot;7040566321&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;435.00&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;EUR&quot;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;3:&nbsp;&quot;spaceshop.com&quot;,<br>&nbsp;&nbsp;4:&nbsp;&quot;FR7630002111110020050014382&quot;,<br>&nbsp;&nbsp;5:&nbsp;&quot;0057162932&quot;,<br>&nbsp;&nbsp;6:&nbsp;&quot;https://bankdirect.com&quot;,<br>&nbsp;&nbsp;7:&nbsp;&quot;additional&nbsp;stuff...&quot;,<br>&nbsp;&nbsp;8:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;Android&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;10.0&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;Chrome&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;103&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;9:&nbsp;&quot;2022-06-17T10:14:07+01:00&quot;,<br>&nbsp;&nbsp;10:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;-7,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;2,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1:&nbsp;1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2:&nbsp;h&#039;e812b1a6dcbc708f9ec43cc2921fa0a14e9d5eadcc6dc63471dd4b680c6236b5&#039;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-3:&nbsp;h&#039;9826dcbd4ce6e388f72edd9be413f2425a10f75b5fd83d95fa0cde53159a51d8&#039;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;h&#039;412e175a0f0bdc06dabf0b1db79b97541c08dbacee7e31c97a553588ee922ea70500000017&#039;,<br>&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;h&#039;7b2274797065223a22776562617574686e2e676574222c226f726967696e223a2268747470733a2f2f6d7962616e6b2e6672222c226368616c6c656e6765223a22734531776358336434585f4975506c32495355487a4d7834506456363073364b4c4b76692d4a673334636b227d&#039;,<br>&nbsp;&nbsp;&nbsp;&nbsp;5:&nbsp;h&#039;3044022066b464453369f9a4a7530b42abb5a45b0a47f4655df90e6c76b159a35f903ab9022044a5713a3a6abfcda0187aaa160ba47eb1a05a2441908ca71fcf1bb187065a3c&#039;<br>&nbsp;&nbsp;}<br>}
       </div>
     </div>
     <div>
@@ -1886,7 +1889,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
     </div>
     <div style='overflow-x:auto;padding-right:0.2em'>
       <div class="staticbox" style="min-width:60em">
-        {<br>&nbsp;&nbsp;1:&nbsp;3,<br>&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;-31,<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;x25519:2022:1&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;5:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1:&nbsp;4,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2:&nbsp;h&#039;e55eaec6c26f9763a28efb83b17dd99ac2b02f71df03ca23db41f35b81e14d2f&#039;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;10:&nbsp;h&#039;2d28566b6a3680951448023224d76bfce969ee73d3c17c5a8445fa036c806a44d70597400fede2a6&#039;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;8:&nbsp;h&#039;84455e9fd0bf67573b958674cd477517&#039;,<br>&nbsp;&nbsp;9:&nbsp;h&#039;8042c80e60a80fa8de4d2927&#039;,<br>&nbsp;&nbsp;10:&nbsp;h&#039;e0b08a45ec44619ad0077efc1272a8d7675cb7a10dd3725604ab3eece6a94de480f849a7b5da3ebb79f2f2622e8582e81ad9cacde98ae63ca053414a637230303dec3955750706d9c642519cc6ecb21b8abe64a9aa0fd0886107b40d0dd1454698a89fb373e147684ea0f5baddbe1704842a56ad6ee96abcb33d83103f3b283071d6fb9d8637be45b348d4353ae4c04c219cf8c2d23b92bac14b759b761c821f06d309f835c98baf793e4d6cb42c5dedab50d16f8df60c3a8f24c3370f4634d313b1c0947f34c3b1fba26f641780abf6c0494da1338d78abe49e2ecaf12f21675f4a7cf9d4b4bb1cd594005e328ea9da5c2c64737fff1c8955343cf8a5f8c77b4ce59ab96bb945aa93463b1f11aae2090c08fec914125686ae1b0fed3c3e309b997c58d8f3d1a7d16240e3d84248c66ec2d34496a21a8976657fb5b5136ffb4d523c6b1ae97e2482d1ddcacea143aa762d962b49351bfce5b23b720fc273a455861778d25da3891cc8a9adab5fa7097a2b245f1ed2b43941881d21eaed60b89655a3b122954667a22e7f762579616b47b62237ececb3387a4b89562cf3aa0a35b07b23609564e303560e25231efdd46763e819257a976491a60f747ace81dc38283cd012f3068f2815741f1cd9b3f33b73d4fe6f90b1c2dab1a950c5c9ee350745cdb66badf4216c17d9da0f3e4eb999e7c4a8e0ea2b391aeff6a25c8bc1dc0ed8d596&#039;<br>}
+        {<br>&nbsp;&nbsp;1:&nbsp;3,<br>&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;-31,<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;x25519:2022:1&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;7:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1:&nbsp;4,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2:&nbsp;h&#039;55bf9e6f582da5e54b8177c4ad86626a9037be70dff05f49ec4ee4c32059e257&#039;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;10:&nbsp;h&#039;3e0434a215b0259806f94c8c29ed009de432a93bbb53ae70e1f1585b08f1ed92d7166377e1e2bea1&#039;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;8:&nbsp;h&#039;6a6c5c41f3bca7c9641bd95859fc9b54&#039;,<br>&nbsp;&nbsp;9:&nbsp;h&#039;68059411eeda604806afb6b8&#039;,<br>&nbsp;&nbsp;10:&nbsp;h&#039;4b7dc708b6c5afb8cf68c7cecc497aed235563b87a48b1d306c31aeabc29d6b95b2060b1c17acd6dc72c8f48e518a923a40f6438f480c49364a8efd0f1efe014756c1577bc55788cfa57723fce9126388c17a2ebaff88983bef7d3ee8e08eec4bee9f5b31fa01a40b35b9868e9efcd96462ff53fa75fc92620a477e963a502f390caec86859beb22449b3ba92904b7dff803c64223e161adb6b51b0360f1239134afeda5c086bda38d166b237fbc6eec0cbca399fa1f1b41ae2bdc607875b827ce96e36f893b3392d0ddbccc0dc1834b44d4b93299256007a7b55c4b65d54ccccd8dd83acdb47dbf73165f6b02b98a1aa3ddf6624e6e4d4614f189a6208d6619f65d693c316ad6441838036305e5a5d6f2028735f8ba449833ddfbc7634604764e28f5a1dfcc36a8d8dc9eba74fa74c43b796e782e0e607b5076b9187584286ca8868309623b44691dc2dec61af76b6dd2047f5862c482083bc72140d341cc87b187996497d16e5257228dd2029cf2a40987fbe64d0598e298f7a7202eb3ebae65adc0cb440608e330fcbe0fb810dff2fa1ed3a29bb11975a0bb2df9adbbd2541e8657fc02169f1f30710eff2645a351e2396273d011bfd9e8199eed46d0ea276c388899fd5e016c58f07926e0775e4c24b877ce402bc2eac7032ea6523fffdcac013ba47a27598086d83a94bcbc2bd0a4ae27aba4d12127c541c162ca998abfefed04&#039;<br>}
       </div>
     </div>
     <div>
@@ -1905,7 +1908,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
     </div>
     <div style='overflow-x:auto;padding-right:0.2em'>
       <div class="staticbox" style="min-width:60em">
-        {<br>&nbsp;&nbsp;&quot;paymentMethod&quot;:&nbsp;&quot;https://bankdirect.com&quot;,<br>&nbsp;&nbsp;&quot;issuerId&quot;:&nbsp;&quot;https://mybank.fr/payment&quot;,<br>&nbsp;&nbsp;&quot;encryptedAuthorization&quot;:&nbsp;&quot;pQEDAqQBOB4DbXgyNTUxOToyMDIyOjEFowEBIAQhWCDlXq7Gwm-XY6KO-4OxfdmawrAvcd8DyiPbQfNbgeFNLwpYKC0oVmtqNoCVFEgCMiTXa_zpae5z08F8WoRF-gNsgGpE1wWXQA_t4qYIUIRFXp_Qv2dXO5WGdM1HdRcJTIBCyA5gqA-o3k0pJwpZAgPgsIpF7ERhmtAHfvwScqjXZ1y3oQ3TclYEqz7s5qlN5ID4Sae12j67efLyYi6Fguga2crN6YrmPKBTQUpjcjAwPew5VXUHBtnGQlGcxuyyG4q-ZKmqD9CIYQe0DQ3RRUaYqJ-zc-FHaE6g9brdvhcEhCpWrW7paryzPYMQPzsoMHHW-52GN75Fs0jUNTrkwEwhnPjC0juSusFLdZt2HIIfBtMJ-DXJi695Pk1stCxd7atQ0W-N9gw6jyTDNw9GNNMTscCUfzTDsfuib2QXgKv2wElNoTONeKvkni7K8S8hZ19KfPnUtLsc1ZQAXjKOqdpcLGRzf_8ciVU0PPil-Md7TOWauWu5RaqTRjsfEariCQwI_skUElaGrhsP7Tw-MJuZfFjY89Gn0WJA49hCSMZuwtNElqIaiXZlf7W1E2_7TVI8axrpfiSC0d3KzqFDqnYtlitJNRv85bI7cg_Cc6RVhhd40l2jiRzIqa2rX6cJeiskXx7StDlBiB0h6u1guJZVo7EilUZnoi5_diV5YWtHtiI37OyzOHpLiVYs86oKNbB7I2CVZOMDVg4lIx791Gdj6BklepdkkaYPdHrOgdw4KDzQEvMGjygVdB8c2bPzO3PU_m-QscLasalQxcnuNQdFzbZrrfQhbBfZ2g8-TrmZ58So4OorORrv9qJci8HcDtjVlg&quot;<br>}<br>
+        {<br>&nbsp;&nbsp;&quot;paymentMethod&quot;:&nbsp;&quot;https://bankdirect.com&quot;,<br>&nbsp;&nbsp;&quot;issuerId&quot;:&nbsp;&quot;https://mybank.fr/payment&quot;,<br>&nbsp;&nbsp;&quot;encryptedAuthorization&quot;:&nbsp;&quot;pQEDAqQBOB4DbXgyNTUxOToyMDIyOjEHowEBIAQhWCBVv55vWC2l5UuBd8SthmJqkDe-cN_wX0nsTuTDIFniVwpYKD4ENKIVsCWYBvlMjCntAJ3kMqk7u1OucOHxWFsI8e2S1xZjd-HivqEIUGpsXEHzvKfJZBvZWFn8m1QJTGgFlBHu2mBIBq-2uApZAgNLfccItsWvuM9ox87MSXrtI1VjuHpIsdMGwxrqvCnWuVsgYLHBes1txyyPSOUYqSOkD2Q49IDEk2So79Dx7-AUdWwVd7xVeIz6V3I_zpEmOIwXouuv-ImDvvfT7o4I7sS-6fWzH6AaQLNbmGjp782WRi_1P6dfySYgpHfpY6UC85DK7IaFm-siRJs7qSkEt9_4A8ZCI-Fhrba1GwNg8SORNK_tpcCGvaONFmsjf7xu7Ay8o5n6HxtBrivcYHh1uCfOluNviTszktDdvMwNwYNLRNS5MpklYAentVxLZdVMzM2N2DrNtH2_cxZfawK5ihqj3fZiTm5NRhTxiaYgjWYZ9l1pPDFq1kQYOANjBeWl1vIChzX4ukSYM937x2NGBHZOKPWh38w2qNjcnrp0-nTEO3lueC4OYHtQdrkYdYQobKiGgwliO0RpHcLexhr3a23SBH9YYsSCCDvHIUDTQcyHsYeZZJfRblJXIo3SApzypAmH--ZNBZjimPenIC6z665lrcDLRAYI4zD8vg-4EN_y-h7TopuxGXWguy35rbvSVB6GV_wCFp8fMHEO_yZFo1HiOWJz0BG_2egZnu1G0OonbDiImf1eAWxY8Hkm4HdeTCS4d85AK8LqxwMuplI__9ysATukeidZgIbYOpS8vCvQpK4nq6TRISfFQcFiypmKv-_tBA&quot;<br>}<br>
       </div>
     </div>
     <div>Definition:</div>
@@ -1966,7 +1969,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
       </div>
     <div style='overflow-x:auto;padding-right:0.2em'>
       <div class="staticbox" style="min-width:35em">
-        {<br>&nbsp;&nbsp;&quot;paymentRequest&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;payeeName&quot;:&nbsp;&quot;Space&nbsp;Shop&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;requestId&quot;:&nbsp;&quot;7040566321&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;amount&quot;:&nbsp;&quot;435.00&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;currency&quot;:&nbsp;&quot;EUR&quot;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;&quot;fwpAssertion&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;paymentMethod&quot;:&nbsp;&quot;https://bankdirect.com&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;issuerId&quot;:&nbsp;&quot;https://mybank.fr/payment&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;encryptedAuthorization&quot;:&nbsp;&quot;pQED&#x2022;&#x2022;&#x2022;jVlg&quot;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;&quot;receiveAccount&quot;:&nbsp;&quot;DE89370400440532013000&quot;,<br>&nbsp;&nbsp;&quot;clientIpAddress&quot;:&nbsp;&quot;220.13.198.144&quot;,<br>&nbsp;&nbsp;&quot;timeStamp&quot;:&nbsp;&quot;2022-02-02T09:14:22Z&quot;<br>}<br>
+        {<br>&nbsp;&nbsp;&quot;paymentRequest&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;payeeName&quot;:&nbsp;&quot;Space&nbsp;Shop&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;requestId&quot;:&nbsp;&quot;7040566321&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;amount&quot;:&nbsp;&quot;435.00&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;currency&quot;:&nbsp;&quot;EUR&quot;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;&quot;fwpAssertion&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;paymentMethod&quot;:&nbsp;&quot;https://bankdirect.com&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;issuerId&quot;:&nbsp;&quot;https://mybank.fr/payment&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;encryptedAuthorization&quot;:&nbsp;&quot;pQED&#x2022;&#x2022;&#x2022;_tBA&quot;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;&quot;receiveAccount&quot;:&nbsp;&quot;DE89370400440532013000&quot;,<br>&nbsp;&nbsp;&quot;clientIpAddress&quot;:&nbsp;&quot;220.13.198.144&quot;,<br>&nbsp;&nbsp;&quot;timeStamp&quot;:&nbsp;&quot;2022-06-17T09:14:22Z&quot;<br>}<br>
       </div>
     </div>
       <div>Definition:</div>
@@ -2072,7 +2075,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
       </div>
     <div style='overflow-x:auto;padding-right:0.2em'>
       <div class="staticbox" style="min-width:35em">
-        {<br>&nbsp;&nbsp;&quot;pspRequest&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;paymentRequest&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;payeeName&quot;:&nbsp;&quot;Space&nbsp;Shop&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;requestId&quot;:&nbsp;&quot;7040566321&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;amount&quot;:&nbsp;&quot;435.00&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;currency&quot;:&nbsp;&quot;EUR&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;fwpAssertion&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;paymentMethod&quot;:&nbsp;&quot;https://bankdirect.com&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;issuerId&quot;:&nbsp;&quot;https://mybank.fr/payment&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;encryptedAuthorization&quot;:&nbsp;&quot;pQED&#x2022;&#x2022;&#x2022;jVlg&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;receiveAccount&quot;:&nbsp;&quot;DE89370400440532013000&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;clientIpAddress&quot;:&nbsp;&quot;220.13.198.144&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;timeStamp&quot;:&nbsp;&quot;2022-02-02T09:14:23Z&quot;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;&quot;payeeHost&quot;:&nbsp;&quot;spaceshop.com&quot;,<br>&nbsp;&nbsp;&quot;timeStamp&quot;:&nbsp;&quot;2022-02-02T09:14:23Z&quot;<br>}<br>
+        {<br>&nbsp;&nbsp;&quot;pspRequest&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;paymentRequest&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;payeeName&quot;:&nbsp;&quot;Space&nbsp;Shop&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;requestId&quot;:&nbsp;&quot;7040566321&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;amount&quot;:&nbsp;&quot;435.00&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;currency&quot;:&nbsp;&quot;EUR&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;fwpAssertion&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;paymentMethod&quot;:&nbsp;&quot;https://bankdirect.com&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;issuerId&quot;:&nbsp;&quot;https://mybank.fr/payment&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;encryptedAuthorization&quot;:&nbsp;&quot;pQED&#x2022;&#x2022;&#x2022;_tBA&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;receiveAccount&quot;:&nbsp;&quot;DE89370400440532013000&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;clientIpAddress&quot;:&nbsp;&quot;220.13.198.144&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;timeStamp&quot;:&nbsp;&quot;2022-06-17T09:14:23Z&quot;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;&quot;payeeHost&quot;:&nbsp;&quot;spaceshop.com&quot;,<br>&nbsp;&nbsp;&quot;timeStamp&quot;:&nbsp;&quot;2022-06-17T09:14:23Z&quot;<br>}<br>
       </div>
     </div>
 
@@ -3174,6 +3177,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
         <tr><td style="text-align:center;white-space:nowrap">2021-08-27</td><td style="text-align:center">0.23</td><td>Added section <a href="#security">Security Considerations</a>.</td></tr>
         <tr><td style="text-align:center;white-space:nowrap">2021-09-30</td><td style="text-align:center">0.24</td><td>Added CBOR types in <a href="#credentialdatabase">Credential Database</a>.</td></tr>
         <tr><td style="text-align:center;white-space:nowrap">2022-02-02</td><td style="text-align:center">0.25</td><td>CBOR date time replaced by text string.</td></tr>
+        <tr><td style="text-align:center;white-space:nowrap">2022-06-15</td><td style="text-align:center">0.26</td><td>CBOR primitives expressed in CDDL notation.</td></tr>
       </table>
     </div>
     <div id="authors" class="header">

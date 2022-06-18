@@ -68,9 +68,10 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
   </div>
  <div id='3' class='header'>3. Terminology</div>
   <div>
-    Throughout this document the CBOR types <kbd>unsigned&nbsp;integer</kbd> and
-    <kbd>negative&nbsp;integer</kbd> are denoted as <kbd>integer</kbd> only.
-    That is, it is the actual value that governs which sub type to use.
+    Throughout this document CBOR primitives are expressed in
+    CDDL [<a href="https://tools.ietf.org/html/rfc8610"
+             title="RFC8610">RFC8610<img src="images/xtl.svg" alt="link"></a>]
+    notation.
   </div>
   <div class="para">
     Items in <code>red</code> refer to elements associated with the selected <a href='index.html#credentialdatabase'>Payment Credential<img src='images/xtl.svg' alt='link'></a>.
@@ -93,7 +94,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
   </div>
   <div style='overflow-x:auto;padding-right:0.2em'>
     <div class="staticbox" style='min-width:50em'>
-      {<br>&nbsp;&nbsp;1:&nbsp;&quot;1.0&quot;,<br>&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;&quot;Space&nbsp;Shop&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;&quot;7040566321&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;435.00&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;EUR&quot;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;3:&nbsp;&quot;spaceshop.com&quot;,<br>&nbsp;&nbsp;4:&nbsp;&quot;FR7630002111110020050014382&quot;,<br>&nbsp;&nbsp;5:&nbsp;&quot;0057162932&quot;,<br>&nbsp;&nbsp;6:&nbsp;&quot;https://bankdirect.com&quot;,<br>&nbsp;&nbsp;7:&nbsp;&quot;additional&nbsp;stuff...&quot;,<br>&nbsp;&nbsp;8:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;Android&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;10.0&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;Chrome&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;103&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;9:&nbsp;&quot;2022-02-02T10:14:07+01:00&quot;,<br><div style='height:0.5em'></div>&nbsp;&nbsp;<span style='color:grey'>/ authorization /</span><br>&nbsp;&nbsp;10:&nbsp;{<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ signatureAlgorithm = ES256 /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;-7,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ publicKey /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ kty = EC /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;2,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ crv = P-256 /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1:&nbsp;1,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ x /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2:&nbsp;h&#039;e812b1a6dcbc708f9ec43cc2921fa0a14e9d5eadcc6dc63471dd4b680c6236b5&#039;,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ y /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-3:&nbsp;h&#039;9826dcbd4ce6e388f72edd9be413f2425a10f75b5fd83d95fa0cde53159a51d8&#039;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;}<br>}
+      {<br>&nbsp;&nbsp;1:&nbsp;&quot;1.0&quot;,<br>&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;&quot;Space&nbsp;Shop&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;&quot;7040566321&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;435.00&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;EUR&quot;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;3:&nbsp;&quot;spaceshop.com&quot;,<br>&nbsp;&nbsp;4:&nbsp;&quot;FR7630002111110020050014382&quot;,<br>&nbsp;&nbsp;5:&nbsp;&quot;0057162932&quot;,<br>&nbsp;&nbsp;6:&nbsp;&quot;https://bankdirect.com&quot;,<br>&nbsp;&nbsp;7:&nbsp;&quot;additional&nbsp;stuff...&quot;,<br>&nbsp;&nbsp;8:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;Android&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;10.0&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;Chrome&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;103&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;9:&nbsp;&quot;2022-06-17T10:14:07+01:00&quot;,<br><div style='height:0.5em'></div>&nbsp;&nbsp;<span style='color:grey'>/ authorization /</span><br>&nbsp;&nbsp;10:&nbsp;{<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ signatureAlgorithm = ES256 /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;-7,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ publicKey /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ kty = EC /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;2,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ crv = P-256 /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1:&nbsp;1,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ x /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2:&nbsp;h&#039;e812b1a6dcbc708f9ec43cc2921fa0a14e9d5eadcc6dc63471dd4b680c6236b5&#039;,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ y /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-3:&nbsp;h&#039;9826dcbd4ce6e388f72edd9be413f2425a10f75b5fd83d95fa0cde53159a51d8&#039;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;}<br>}
     </div>
    </div>
    <div>
@@ -113,7 +114,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
   <tr>
     <td><code>signatureAlgorithm</code></td>
     <td style='text-align:center'><kbd>1</kbd></td>
-    <td><kbd>integer</kbd></td>
+    <td><kbd>int</kbd></td>
     <td>
       FIDO <code>signatureAlgorithm</code> associated with the selected <a href='index.html#credentialdatabase'>Payment Credential<img src='images/xtl.svg' alt='link'></a>.
       The value to use is the &quot;Identifier&quot; specified in the <a href='#4.4'>Signature Algorithms</a> table.
@@ -133,7 +134,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
   <tr>
     <td><code>authenticatorData</code></td>
     <td style='text-align:center'><kbd>3</kbd></td>
-    <td><kbd>byte&nbsp;string</kbd></td>
+    <td><kbd>bstr</kbd></td>
     <td>
       FIDO assertion data element.
       See also <a href='https://www.w3.org/TR/webauthn-2/' title='Web Authentication'>Web&nbsp;Authentication<img src='images/xtl.svg' alt='link'></a>.
@@ -142,7 +143,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
   <tr>
     <td><code>clientDataJSON</code></td>
     <td style='text-align:center'><kbd>4</kbd></td>
-    <td><kbd>byte&nbsp;string</kbd></td>
+    <td><kbd>bstr</kbd></td>
     <td>
       FIDO assertion data element.
       See also <a href='https://www.w3.org/TR/webauthn-2/' title='Web Authentication'>Web&nbsp;Authentication<img src='images/xtl.svg' alt='link'></a>.
@@ -151,7 +152,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
   <tr>
     <td><code>signature</code></td>
     <td style='text-align:center'><kbd>5</kbd></td>
-    <td><kbd>byte&nbsp;string</kbd></td>
+    <td><kbd>bstr</kbd></td>
     <td>
       FIDO assertion signature.
       See also <a href='https://www.w3.org/TR/webauthn-2/' title='Web Authentication'>Web&nbsp;Authentication<img src='images/xtl.svg' alt='link'></a>.
@@ -173,13 +174,13 @@ to be signed, potentially making the signature scheme more resistant to tamperin
    </div>
      <div style='overflow-x:auto;padding-right:0.2em'>
       <div class="staticbox">
-      aa0163312e3002a4016a53706163652053686f70026a3730343035363633323103663433352e30300463455552036d737061636573686f702e636f6d04781b465237363330303032313131313130303230303530303134333832056a30303537313632393332067668747470733a2f2f62616e6b6469726563742e636f6d07736164646974696f6e616c2073747566662e2e2e08a201a20367416e64726f6964046431302e3002a203664368726f6d650463313033097819323032322d30322d30325431303a31343a30372b30313a30300aa2012602a401022001215820e812b1a6dcbc708f9ec43cc2921fa0a14e9d5eadcc6dc63471dd4b680c6236b52258209826dcbd4ce6e388f72edd9be413f2425a10f75b5fd83d95fa0cde53159a51d8
+      aa0163312e3002a4016a53706163652053686f70026a3730343035363633323103663433352e30300463455552036d737061636573686f702e636f6d04781b465237363330303032313131313130303230303530303134333832056a30303537313632393332067668747470733a2f2f62616e6b6469726563742e636f6d07736164646974696f6e616c2073747566662e2e2e08a201a20367416e64726f6964046431302e3002a203664368726f6d650463313033097819323032322d30362d31375431303a31343a30372b30313a30300aa2012602a401022001215820e812b1a6dcbc708f9ec43cc2921fa0a14e9d5eadcc6dc63471dd4b680c6236b52258209826dcbd4ce6e388f72edd9be413f2425a10f75b5fd83d95fa0cde53159a51d8
       </div>
     </div>
     <div>Applied to the sample, the hashed AD encoded as base64url should read as follows:</div>
      <div style='overflow-x:auto;padding-right:0.2em'>
       <div class="staticbox">
-      XbvwmPGTibSmlJumqhOOlpsDuTKir9JYZswEAbM8crI
+      sE1wcX3d4X_IuPl2ISUHzMx4PdV60s6KLKvi-Jg34ck
       </div>
     </div>
 <div id='4.3' class='subheader'>4.3. Create Signed Authorization Data (SAD)</div>
@@ -213,7 +214,7 @@ to be signed, potentially making the signature scheme more resistant to tamperin
 </div>
     <div style='overflow-x:auto;padding-right:0.2em'>
       <div class="staticbox" style='min-width:50em'>
-      {<br>&nbsp;&nbsp;1:&nbsp;&quot;1.0&quot;,<br>&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;&quot;Space&nbsp;Shop&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;&quot;7040566321&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;435.00&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;EUR&quot;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;3:&nbsp;&quot;spaceshop.com&quot;,<br>&nbsp;&nbsp;4:&nbsp;&quot;FR7630002111110020050014382&quot;,<br>&nbsp;&nbsp;5:&nbsp;&quot;0057162932&quot;,<br>&nbsp;&nbsp;6:&nbsp;&quot;https://bankdirect.com&quot;,<br>&nbsp;&nbsp;7:&nbsp;&quot;additional&nbsp;stuff...&quot;,<br>&nbsp;&nbsp;8:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;Android&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;10.0&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;Chrome&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;103&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;9:&nbsp;&quot;2022-02-02T10:14:07+01:00&quot;,<br><div style='height:0.5em'></div>&nbsp;&nbsp;<span style='color:grey'>/ authorization /</span><br>&nbsp;&nbsp;10:&nbsp;{<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ signatureAlgorithm = ES256 /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;-7,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ publicKey /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ kty = EC /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;2,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ crv = P-256 /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1:&nbsp;1,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ x /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2:&nbsp;h&#039;e812b1a6dcbc708f9ec43cc2921fa0a14e9d5eadcc6dc63471dd4b680c6236b5&#039;,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ y /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-3:&nbsp;h&#039;9826dcbd4ce6e388f72edd9be413f2425a10f75b5fd83d95fa0cde53159a51d8&#039;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ authenticatorData /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;h&#039;412e175a0f0bdc06dabf0b1db79b97541c08dbacee7e31c97a553588ee922ea70500000017&#039;,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ clientDataJSON /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;h&#039;7b2274797065223a22776562617574686e2e676574222c226f726967696e223a2268747470733a2f2f6d7962616e6b2e6672222c226368616c6c656e6765223a22586276776d5047546962536d6c4a756d71684f4f6c70734475544b6972394a595a73774541624d38637249227d&#039;,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ signature /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;5:&nbsp;h&#039;304402205c29e1971c0ceb78a977b7fac2aa955ccc8e7d1b6de79e2b9fd1b230313392b70220392d17dacff64bf69a7586cc1aa11e93611a0514ae0c431eef67d47718de763a&#039;<br>&nbsp;&nbsp;}<br>}
+      {<br>&nbsp;&nbsp;1:&nbsp;&quot;1.0&quot;,<br>&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;&quot;Space&nbsp;Shop&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;&quot;7040566321&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;435.00&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;EUR&quot;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;3:&nbsp;&quot;spaceshop.com&quot;,<br>&nbsp;&nbsp;4:&nbsp;&quot;FR7630002111110020050014382&quot;,<br>&nbsp;&nbsp;5:&nbsp;&quot;0057162932&quot;,<br>&nbsp;&nbsp;6:&nbsp;&quot;https://bankdirect.com&quot;,<br>&nbsp;&nbsp;7:&nbsp;&quot;additional&nbsp;stuff...&quot;,<br>&nbsp;&nbsp;8:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;Android&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;10.0&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;Chrome&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;103&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;9:&nbsp;&quot;2022-06-17T10:14:07+01:00&quot;,<br><div style='height:0.5em'></div>&nbsp;&nbsp;<span style='color:grey'>/ authorization /</span><br>&nbsp;&nbsp;10:&nbsp;{<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ signatureAlgorithm = ES256 /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;-7,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ publicKey /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ kty = EC /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;2,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ crv = P-256 /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1:&nbsp;1,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ x /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2:&nbsp;h&#039;e812b1a6dcbc708f9ec43cc2921fa0a14e9d5eadcc6dc63471dd4b680c6236b5&#039;,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ y /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-3:&nbsp;h&#039;9826dcbd4ce6e388f72edd9be413f2425a10f75b5fd83d95fa0cde53159a51d8&#039;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ authenticatorData /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;h&#039;412e175a0f0bdc06dabf0b1db79b97541c08dbacee7e31c97a553588ee922ea70500000017&#039;,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ clientDataJSON /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;h&#039;7b2274797065223a22776562617574686e2e676574222c226f726967696e223a2268747470733a2f2f6d7962616e6b2e6672222c226368616c6c656e6765223a22734531776358336434585f4975506c32495355487a4d7834506456363073364b4c4b76692d4a673334636b227d&#039;,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ signature /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;5:&nbsp;h&#039;3044022066b464453369f9a4a7530b42abb5a45b0a47f4655df90e6c76b159a35f903ab9022044a5713a3a6abfcda0187aaa160ba47eb1a05a2441908ca71fcf1bb187065a3c&#039;<br>&nbsp;&nbsp;}<br>}
       </div>
     </div>
 <div>This object is subsequently referred to as Signed Authorization Data (SAD).</div>
@@ -222,7 +223,7 @@ to be signed, potentially making the signature scheme more resistant to tamperin
   </div>
   <div style='overflow-x:auto;padding-right:0.2em'>
     <div class="staticbox">
-    aa0163312e3002a4016a53706163652053686f70026a3730343035363633323103663433352e30300463455552036d737061636573686f702e636f6d04781b465237363330303032313131313130303230303530303134333832056a30303537313632393332067668747470733a2f2f62616e6b6469726563742e636f6d07736164646974696f6e616c2073747566662e2e2e08a201a20367416e64726f6964046431302e3002a203664368726f6d650463313033097819323032322d30322d30325431303a31343a30372b30313a30300aa5012602a401022001215820e812b1a6dcbc708f9ec43cc2921fa0a14e9d5eadcc6dc63471dd4b680c6236b52258209826dcbd4ce6e388f72edd9be413f2425a10f75b5fd83d95fa0cde53159a51d8035825412e175a0f0bdc06dabf0b1db79b97541c08dbacee7e31c97a553588ee922ea7050000001704586e7b2274797065223a22776562617574686e2e676574222c226f726967696e223a2268747470733a2f2f6d7962616e6b2e6672222c226368616c6c656e6765223a22586276776d5047546962536d6c4a756d71684f4f6c70734475544b6972394a595a73774541624d38637249227d055846304402205c29e1971c0ceb78a977b7fac2aa955ccc8e7d1b6de79e2b9fd1b230313392b70220392d17dacff64bf69a7586cc1aa11e93611a0514ae0c431eef67d47718de763a
+    aa0163312e3002a4016a53706163652053686f70026a3730343035363633323103663433352e30300463455552036d737061636573686f702e636f6d04781b465237363330303032313131313130303230303530303134333832056a30303537313632393332067668747470733a2f2f62616e6b6469726563742e636f6d07736164646974696f6e616c2073747566662e2e2e08a201a20367416e64726f6964046431302e3002a203664368726f6d650463313033097819323032322d30362d31375431303a31343a30372b30313a30300aa5012602a401022001215820e812b1a6dcbc708f9ec43cc2921fa0a14e9d5eadcc6dc63471dd4b680c6236b52258209826dcbd4ce6e388f72edd9be413f2425a10f75b5fd83d95fa0cde53159a51d8035825412e175a0f0bdc06dabf0b1db79b97541c08dbacee7e31c97a553588ee922ea7050000001704586e7b2274797065223a22776562617574686e2e676574222c226f726967696e223a2268747470733a2f2f6d7962616e6b2e6672222c226368616c6c656e6765223a22734531776358336434585f4975506c32495355487a4d7834506456363073364b4c4b76692d4a673334636b227d0558463044022066b464453369f9a4a7530b42abb5a45b0a47f4655df90e6c76b159a35f903ab9022044a5713a3a6abfcda0187aaa160ba47eb1a05a2441908ca71fcf1bb187065a3c
     </div>
   </div>
   <div>
@@ -262,7 +263,7 @@ to be signed, potentially making the signature scheme more resistant to tamperin
 <div class="para">The listing below shows how the sample <a href='#4.3'>SAD</a> object could be encrypted:</div>
 <div style='overflow-x:auto;padding-right:0.2em'>
   <div class="staticbox" style='min-width:50em'>
-  {<br><div style='height:0.5em'></div>&nbsp;&nbsp;<span style='color:grey'>/ algorithm = A256GCM /</span><br>&nbsp;&nbsp;1:&nbsp;3,<br><div style='height:0.5em'></div>&nbsp;&nbsp;<span style='color:grey'>/ keyEncryption /</span><br>&nbsp;&nbsp;2:&nbsp;{<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ algorithm = ECDH-ES+A256KW /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;-31,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ keyId /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;x25519:2022:1&quot;,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ ephemeralKey /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;5:&nbsp;{<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ kty = OKP /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;1,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ crv = X25519 /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1:&nbsp;4,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ x /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2:&nbsp;h&#039;e55eaec6c26f9763a28efb83b17dd99ac2b02f71df03ca23db41f35b81e14d2f&#039;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ cipherText /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;10:&nbsp;h&#039;2d28566b6a3680951448023224d76bfce969ee73d3c17c5a8445fa036c806a44d70597400fede2a6&#039;<br>&nbsp;&nbsp;},<br><div style='height:0.5em'></div>&nbsp;&nbsp;<span style='color:grey'>/ tag /</span><br>&nbsp;&nbsp;8:&nbsp;h&#039;84455e9fd0bf67573b958674cd477517&#039;,<br><div style='height:0.5em'></div>&nbsp;&nbsp;<span style='color:grey'>/ iv /</span><br>&nbsp;&nbsp;9:&nbsp;h&#039;8042c80e60a80fa8de4d2927&#039;,<br><div style='height:0.5em'></div>&nbsp;&nbsp;<span style='color:grey'>/ cipherText /</span><br>&nbsp;&nbsp;10:&nbsp;h&#039;e0b08a45ec44619ad0077efc1272a8d7675cb7a10dd3725604ab3eece6a94de480f849a7b5da3ebb79f2f2622e8582e81ad9cacde98ae63ca053414a637230303dec3955750706d9c642519cc6ecb21b8abe64a9aa0fd0886107b40d0dd1454698a89fb373e147684ea0f5baddbe1704842a56ad6ee96abcb33d83103f3b283071d6fb9d8637be45b348d4353ae4c04c219cf8c2d23b92bac14b759b761c821f06d309f835c98baf793e4d6cb42c5dedab50d16f8df60c3a8f24c3370f4634d313b1c0947f34c3b1fba26f641780abf6c0494da1338d78abe49e2ecaf12f21675f4a7cf9d4b4bb1cd594005e328ea9da5c2c64737fff1c8955343cf8a5f8c77b4ce59ab96bb945aa93463b1f11aae2090c08fec914125686ae1b0fed3c3e309b997c58d8f3d1a7d16240e3d84248c66ec2d34496a21a8976657fb5b5136ffb4d523c6b1ae97e2482d1ddcacea143aa762d962b49351bfce5b23b720fc273a455861778d25da3891cc8a9adab5fa7097a2b245f1ed2b43941881d21eaed60b89655a3b122954667a22e7f762579616b47b62237ececb3387a4b89562cf3aa0a35b07b23609564e303560e25231efdd46763e819257a976491a60f747ace81dc38283cd012f3068f2815741f1cd9b3f33b73d4fe6f90b1c2dab1a950c5c9ee350745cdb66badf4216c17d9da0f3e4eb999e7c4a8e0ea2b391aeff6a25c8bc1dc0ed8d596&#039;<br>}
+  {<br><div style='height:0.5em'></div>&nbsp;&nbsp;<span style='color:grey'>/ algorithm = A256GCM /</span><br>&nbsp;&nbsp;1:&nbsp;3,<br><div style='height:0.5em'></div>&nbsp;&nbsp;<span style='color:grey'>/ keyEncryption /</span><br>&nbsp;&nbsp;2:&nbsp;{<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ algorithm = ECDH-ES+A256KW /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;-31,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ keyId /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;x25519:2022:1&quot;,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ ephemeralKey /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;7:&nbsp;{<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ kty = OKP /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;1,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ crv = X25519 /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1:&nbsp;4,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ x /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2:&nbsp;h&#039;55bf9e6f582da5e54b8177c4ad86626a9037be70dff05f49ec4ee4c32059e257&#039;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ cipherText /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;10:&nbsp;h&#039;3e0434a215b0259806f94c8c29ed009de432a93bbb53ae70e1f1585b08f1ed92d7166377e1e2bea1&#039;<br>&nbsp;&nbsp;},<br><div style='height:0.5em'></div>&nbsp;&nbsp;<span style='color:grey'>/ tag /</span><br>&nbsp;&nbsp;8:&nbsp;h&#039;6a6c5c41f3bca7c9641bd95859fc9b54&#039;,<br><div style='height:0.5em'></div>&nbsp;&nbsp;<span style='color:grey'>/ iv /</span><br>&nbsp;&nbsp;9:&nbsp;h&#039;68059411eeda604806afb6b8&#039;,<br><div style='height:0.5em'></div>&nbsp;&nbsp;<span style='color:grey'>/ cipherText /</span><br>&nbsp;&nbsp;10:&nbsp;h&#039;4b7dc708b6c5afb8cf68c7cecc497aed235563b87a48b1d306c31aeabc29d6b95b2060b1c17acd6dc72c8f48e518a923a40f6438f480c49364a8efd0f1efe014756c1577bc55788cfa57723fce9126388c17a2ebaff88983bef7d3ee8e08eec4bee9f5b31fa01a40b35b9868e9efcd96462ff53fa75fc92620a477e963a502f390caec86859beb22449b3ba92904b7dff803c64223e161adb6b51b0360f1239134afeda5c086bda38d166b237fbc6eec0cbca399fa1f1b41ae2bdc607875b827ce96e36f893b3392d0ddbccc0dc1834b44d4b93299256007a7b55c4b65d54ccccd8dd83acdb47dbf73165f6b02b98a1aa3ddf6624e6e4d4614f189a6208d6619f65d693c316ad6441838036305e5a5d6f2028735f8ba449833ddfbc7634604764e28f5a1dfcc36a8d8dc9eba74fa74c43b796e782e0e607b5076b9187584286ca8868309623b44691dc2dec61af76b6dd2047f5862c482083bc72140d341cc87b187996497d16e5257228dd2029cf2a40987fbe64d0598e298f7a7202eb3ebae65adc0cb440608e330fcbe0fb810dff2fa1ed3a29bb11975a0bb2df9adbbd2541e8657fc02169f1f30710eff2645a351e2396273d011bfd9e8199eed46d0ea276c388899fd5e016c58f07926e0775e4c24b877ce402bc2eac7032ea6523fffdcac013ba47a27598086d83a94bcbc2bd0a4ae27aba4d12127c541c162ca998abfefed04&#039;<br>}
   </div>
 </div>
 <div>The resulting object is referred to as Encrypted Signed Authorization Data (ESAD).</div>
@@ -271,7 +272,7 @@ to be signed, potentially making the signature scheme more resistant to tamperin
 </div>
 <div style='overflow-x:auto;padding-right:0.2em'>
 <div class="staticbox">
-a5010302a401381e036d7832353531393a323032323a3105a301012004215820e55eaec6c26f9763a28efb83b17dd99ac2b02f71df03ca23db41f35b81e14d2f0a58282d28566b6a3680951448023224d76bfce969ee73d3c17c5a8445fa036c806a44d70597400fede2a6085084455e9fd0bf67573b958674cd477517094c8042c80e60a80fa8de4d29270a590203e0b08a45ec44619ad0077efc1272a8d7675cb7a10dd3725604ab3eece6a94de480f849a7b5da3ebb79f2f2622e8582e81ad9cacde98ae63ca053414a637230303dec3955750706d9c642519cc6ecb21b8abe64a9aa0fd0886107b40d0dd1454698a89fb373e147684ea0f5baddbe1704842a56ad6ee96abcb33d83103f3b283071d6fb9d8637be45b348d4353ae4c04c219cf8c2d23b92bac14b759b761c821f06d309f835c98baf793e4d6cb42c5dedab50d16f8df60c3a8f24c3370f4634d313b1c0947f34c3b1fba26f641780abf6c0494da1338d78abe49e2ecaf12f21675f4a7cf9d4b4bb1cd594005e328ea9da5c2c64737fff1c8955343cf8a5f8c77b4ce59ab96bb945aa93463b1f11aae2090c08fec914125686ae1b0fed3c3e309b997c58d8f3d1a7d16240e3d84248c66ec2d34496a21a8976657fb5b5136ffb4d523c6b1ae97e2482d1ddcacea143aa762d962b49351bfce5b23b720fc273a455861778d25da3891cc8a9adab5fa7097a2b245f1ed2b43941881d21eaed60b89655a3b122954667a22e7f762579616b47b62237ececb3387a4b89562cf3aa0a35b07b23609564e303560e25231efdd46763e819257a976491a60f747ace81dc38283cd012f3068f2815741f1cd9b3f33b73d4fe6f90b1c2dab1a950c5c9ee350745cdb66badf4216c17d9da0f3e4eb999e7c4a8e0ea2b391aeff6a25c8bc1dc0ed8d596
+a5010302a401381e036d7832353531393a323032323a3107a30101200421582055bf9e6f582da5e54b8177c4ad86626a9037be70dff05f49ec4ee4c32059e2570a58283e0434a215b0259806f94c8c29ed009de432a93bbb53ae70e1f1585b08f1ed92d7166377e1e2bea108506a6c5c41f3bca7c9641bd95859fc9b54094c68059411eeda604806afb6b80a5902034b7dc708b6c5afb8cf68c7cecc497aed235563b87a48b1d306c31aeabc29d6b95b2060b1c17acd6dc72c8f48e518a923a40f6438f480c49364a8efd0f1efe014756c1577bc55788cfa57723fce9126388c17a2ebaff88983bef7d3ee8e08eec4bee9f5b31fa01a40b35b9868e9efcd96462ff53fa75fc92620a477e963a502f390caec86859beb22449b3ba92904b7dff803c64223e161adb6b51b0360f1239134afeda5c086bda38d166b237fbc6eec0cbca399fa1f1b41ae2bdc607875b827ce96e36f893b3392d0ddbccc0dc1834b44d4b93299256007a7b55c4b65d54ccccd8dd83acdb47dbf73165f6b02b98a1aa3ddf6624e6e4d4614f189a6208d6619f65d693c316ad6441838036305e5a5d6f2028735f8ba449833ddfbc7634604764e28f5a1dfcc36a8d8dc9eba74fa74c43b796e782e0e607b5076b9187584286ca8868309623b44691dc2dec61af76b6dd2047f5862c482083bc72140d341cc87b187996497d16e5257228dd2029cf2a40987fbe64d0598e298f7a7202eb3ebae65adc0cb440608e330fcbe0fb810dff2fa1ed3a29bb11975a0bb2df9adbbd2541e8657fc02169f1f30710eff2645a351e2396273d011bfd9e8199eed46d0ea276c388899fd5e016c58f07926e0775e4c24b877ce402bc2eac7032ea6523fffdcac013ba47a27598086d83a94bcbc2bd0a4ae27aba4d12127c541c162ca998abfefed04
 </div>
 </div>
 <div class="para">The following subsections describe the encryption scheme in detail.</div>
@@ -313,7 +314,7 @@ CBOR Encryption Format (CEF)<img src="images/xtl.svg" alt="link">
 <text x='629' y='234'>algorithm<tspan fill='black'> (1)</tspan></text>
 <text x='629' y='334'>keyId<tspan fill='black'> (3)</tspan></text>
 <text x='629' y='434'>publicKey<tspan fill='black'> (4)</tspan></text>
-<text x='629' y='534'>ephemeralKey<tspan fill='black'> (5)</tspan></text>
+<text x='629' y='534'>ephemeralKey<tspan fill='black'> (7)</tspan></text>
 <text x='629' y='634'>cipherText<tspan fill='black'> (10)</tspan></text>
 </g>
 <path fill='none' stroke='#4366bf' stroke-width='3' stroke-linecap='round' d='M500,180  m 85,0 c -33,0 -35,68 -35,68 0,30 -18,68 -48,72 30,8 48,35 48,80 v 186 c 0,0 0,74 36,74'/>
@@ -332,7 +333,7 @@ key encryption algorithm and encryption key reference method.</div>
   <tr>
     <td><code>algorithm</code></td>
     <td style='text-align:center'><kbd>1</kbd></td>
-    <td><kbd>integer</kbd></td>
+    <td><kbd>int</kbd></td>
     <td>
       Symmetric key algorithm used for encrypting the actual content.
       The value to use is the &quot;Identifier&quot; specified in the
@@ -350,7 +351,7 @@ key encryption algorithm and encryption key reference method.</div>
   <tr>
     <td><code>tag</code></td>
     <td style='text-align:center'><kbd>8</kbd></td>
-    <td><kbd>byte&nbsp;string</kbd></td>
+    <td><kbd>bstr</kbd></td>
     <td>
       Algorithm specific authentication data.
     </td>
@@ -358,7 +359,7 @@ key encryption algorithm and encryption key reference method.</div>
   <tr>
     <td><code>iv</code></td>
     <td style='text-align:center'><kbd>9</kbd></td>
-    <td><kbd>byte&nbsp;string</kbd></td>
+    <td><kbd>bstr</kbd></td>
     <td>
       Algorithm specific initialization vector.
     </td>
@@ -366,7 +367,7 @@ key encryption algorithm and encryption key reference method.</div>
   <tr>
     <td><code>cipherText</code></td>
     <td style='text-align:center'><kbd>10</kbd></td>
-    <td><kbd>byte&nbsp;string</kbd></td>
+    <td><kbd>bstr</kbd></td>
     <td>
       Encrypted content.
     </td>
@@ -382,7 +383,7 @@ key encryption algorithm and encryption key reference method.</div>
     <tr>
       <td><code>algorithm</code></td>
       <td style='text-align:center'><kbd>1</kbd></td>
-      <td><kbd>integer</kbd></td>
+      <td><kbd>int</kbd></td>
       <td>
         Key encryption algorithm.
         The value to use is the &quot;Identifier&quot; specified in the
@@ -401,8 +402,8 @@ key encryption algorithm and encryption key reference method.</div>
         be present in an FWP compliant encryption object.
         <div class="para">
           Note that the this specification does not define any specific <code>keyId</code> syntax.
-          The sample uses a <kbd>text&nbsp;string</kbd> but it could equally well be 
-          a hash of the <code>publicKey</code> featured in a <kbd>byte&nbsp;string</kbd>.
+          The sample uses a <kbd>tstr</kbd> but it could equally well be 
+          a hash of the <code>publicKey</code> featured in a <kbd>bstr</kbd>.
         </div>
       </td>
     </tr>
@@ -420,7 +421,7 @@ key encryption algorithm and encryption key reference method.</div>
     </tr>
     <tr>
       <td><code>ephemeralKey</code></td>
-      <td style='text-align:center'><kbd>5</kbd></td>
+      <td style='text-align:center'><kbd>7</kbd></td>
       <td><kbd>map</kbd></td>
       <td>
         Ephemeral public key in COSE format.
@@ -433,7 +434,7 @@ key encryption algorithm and encryption key reference method.</div>
     <tr>
       <td><code>cipherText</code></td>
       <td style='text-align:center'><kbd>10</kbd></td>
-      <td><kbd>byte&nbsp;string</kbd></td>
+      <td><kbd>bstr</kbd></td>
       <td>
         <i>Optional</i>: Encrypted key for key-wrapping ECDH algorithms.
       </td>
@@ -688,7 +689,7 @@ base64url-encoding return:
 </div>
      <div style='overflow-x:auto;padding-right:0.2em'>
       <div class="staticbox">
-      XbvwmPGTibSmlJumqhOOlpsDuTKir9JYZswEAbM8crI
+      sE1wcX3d4X_IuPl2ISUHzMx4PdV60s6KLKvi-Jg34ck
       </div>
     </div>
 <div>That is, the same <kbd>&quot;challenge&quot;</kbd> as during authorization.</div>
@@ -696,7 +697,7 @@ base64url-encoding return:
 attribute in the received <code>clientDataJSON</code> object:</div>
       <div style='overflow-x:auto;padding-right:0.2em'>
       <div class="staticbox">
-      {&quot;type&quot;:&quot;webauthn.get&quot;,&quot;origin&quot;:&quot;https://mybank.fr&quot;,&quot;challenge&quot;:&quot;XbvwmPGTibSmlJumqhOOlpsDuTKir9JYZswEAbM8crI&quot;}
+      {&quot;type&quot;:&quot;webauthn.get&quot;,&quot;origin&quot;:&quot;https://mybank.fr&quot;,&quot;challenge&quot;:&quot;sE1wcX3d4X_IuPl2ISUHzMx4PdV60s6KLKvi-Jg34ck&quot;}
       </div>
     </div>
 <div id='6.3' class='subheader'>6.3. Validate Signature</div>
@@ -768,6 +769,10 @@ Note that the ESAD sample uses a <code>keyId</code> for identifying the encrypti
 <tr>
 <td style="text-align:center;white-space:nowrap">2022-02-02</td>
 <td style="text-align:center">0.13</td><td>Main document update forced test data update.</td>
+</tr>
+</<tr>
+<td style="text-align:center;white-space:nowrap">2022-06-17</td>
+<td style="text-align:center">0.14</td><td>CBOR primitives expressed in CDDL notation.</td>
 </tr>
 </table>
 </div>
