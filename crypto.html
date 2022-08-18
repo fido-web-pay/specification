@@ -169,7 +169,8 @@ to be signed, potentially making the signature scheme more resistant to tamperin
 <div id='4.2' class='subheader'>4.2. Create Signed Authorization Data (SAD)</div>
      <div>
        Using the result of the previous step (but
-       using binary encoding), as the sole FIDO <kbd>&quot;clientData&quot;</kbd>,
+       using binary encoding), as the sole data input to the
+       FIDO signature process,
        the user should at this stage be asked to authorize a payment request
        using the key (authenticator)
        pointed out by the <code>credentialId</code> of the selected <a href='index.html#credentialdatabase'>Payment Credential<img src='images/xtl.svg' alt='link'></a>.
@@ -177,12 +178,16 @@ to be signed, potentially making the signature scheme more resistant to tamperin
 
    <div class="para">
     For a detailed description of how FIDO signatures are created,
-    turn to <a href='https://www.w3.org/TR/webauthn-2/' title='Web Authentication'>Web&nbsp;Authentication<img src='images/xtl.svg' alt='link'></a> (FWP is 100% compatible at the API level).
+    turn to <a href='https://www.w3.org/TR/webauthn-2/' title='Web Authentication'>Web&nbsp;Authentication<img src='images/xtl.svg' alt='link'></a>.  Note that AD is signed after <i>hashing</i>, making
+    <code>clientDataHash</code> the actual data to be signed:
 </div>
-     
+    <div style='overflow-x:auto;padding:0.5em 0.2em 0 0'>
+<img src='https://www.w3.org/TR/webauthn-2/images/fido-signature-formats-figure2.svg' alt='signature'>
+    </div>
 </div>
-   <div class="para">
-    After adding the received FIDO elements above to the <a href="#authorization">authorization</a>
+   <div>
+    After adding the asserted FIDO <code>authenticatorData</code> and
+    <code>signature</code> elements to the <a href="#authorization">authorization</a>
    <kbd>map</kbd> of AD, the resulting sample should read as follows:
 </div>
     <div style='overflow-x:auto;padding-right:0.2em'>
