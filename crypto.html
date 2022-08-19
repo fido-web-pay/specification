@@ -1,7 +1,7 @@
-<!DOCTYPE html><html><head>
+<!DOCTYPE html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="images/favicon.png" sizes="192x192">
-<title>FIDO Web Pay - Crypto</title><style type="text/css">
+<title>FIDO Web Pay - Crypto</title><style>
 .header {font-size:1.6em;margin:1em 0 0.8em 0}
 .subheader {font-size:1.2em;margin-top:1em;margin-bottom:0.6em}
 .step {font-size:1.2em;margin-top:1.5em;margin-bottom:0.6em}
@@ -184,12 +184,10 @@ to be signed, potentially making the signature scheme more resistant to tamperin
     <div style='overflow-x:auto;padding:0.5em 0.2em 0 0'>
 <img src='https://www.w3.org/TR/webauthn-2/images/fido-signature-formats-figure2.svg' alt='signature'>
     </div>
-</div>
    <div>
     After adding the asserted FIDO <code>authenticatorData</code> and
     <code>signature</code> elements to the <a href="#authorization">authorization</a>
-   <kbd>map</kbd> of AD, the resulting sample should read as follows:
-</div>
+   <kbd>map</kbd> of AD, the resulting sample should read as follows:</div>
     <div style='overflow-x:auto;padding-right:0.2em'>
       <div class="staticbox" style='min-width:50em'>
       {<br>&nbsp;&nbsp;1:&nbsp;&quot;1.0&quot;,<br>&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;&quot;Space&nbsp;Shop&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;&quot;7040566321&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;435.00&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;EUR&quot;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;3:&nbsp;&quot;spaceshop.com&quot;,<br>&nbsp;&nbsp;4:&nbsp;&quot;FR7630002111110020050014382&quot;,<br>&nbsp;&nbsp;5:&nbsp;&quot;0057162932&quot;,<br>&nbsp;&nbsp;6:&nbsp;&quot;https://bankdirect.com&quot;,<br>&nbsp;&nbsp;7:&nbsp;&quot;additional&nbsp;stuff...&quot;,<br>&nbsp;&nbsp;8:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;Android&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;10.0&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;Chrome&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;103&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;9:&nbsp;&quot;2022-08-18T10:14:07+01:00&quot;,<br><div style='height:0.5em'></div>&nbsp;&nbsp;<span style='color:grey'>/ authorization /</span><br>&nbsp;&nbsp;10:&nbsp;{<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ signatureAlgorithm = ES256 /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;-7,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ publicKey /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ kty = EC /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;2,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ crv = P-256 /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1:&nbsp;1,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ x /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2:&nbsp;h&#039;e812b1a6dcbc708f9ec43cc2921fa0a14e9d5eadcc6dc63471dd4b680c6236b5&#039;,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ y /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-3:&nbsp;h&#039;9826dcbd4ce6e388f72edd9be413f2425a10f75b5fd83d95fa0cde53159a51d8&#039;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ authenticatorData /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;h&#039;412e175a0f0bdc06dabf0b1db79b97541c08dbacee7e31c97a553588ee922ea70500000017&#039;,<br><div style='height:0.5em'></div>&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>/ signature /</span><br>&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;h&#039;304502200dc1a559e3294eed95279f8ac24a12b40d080d19ee1e7c1daeeeb198c12b7312022100dcf2f7c2f2ca342ae1eb9190f5991a82f0fa29927620ae233ac8cf7347d31fbe&#039;<br>&nbsp;&nbsp;}<br>}
@@ -662,6 +660,7 @@ is assumed to be a <a href='#4.2'>SAD</a> object.</div>
 <div class="para">Fetch and remove the FIDO elements <code>authenticatorData</code>
 and <code>signature</code> from the decoded object
 which now effectively is an <a href='#4.1'>AD</a> object.
+</div>
 <div id='6.3' class='subheader'>6.3. Validate Signature</div>
 <div>
 The signature is validated by applying the elements received in the 
