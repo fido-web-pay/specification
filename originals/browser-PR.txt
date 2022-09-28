@@ -9,7 +9,7 @@ const methodData = [{
     },{
       name: "https://visa.com/fwp"
     },{
-      name: "https://bankdirect.com",
+      name: "https://banknet2.org",
       networkData: "additional stuff..."
     }]
   }

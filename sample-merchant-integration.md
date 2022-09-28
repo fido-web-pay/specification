@@ -16,7 +16,7 @@ const methodData = [{
     },{
       name: "https://visa.com/fwp"
     },{
-      name: "https://bankdirect.com"
+      name: "https://banknet2.org"
     }]
   }
 }];
@@ -43,7 +43,7 @@ The UI is a part of the browser resident FWP wallet.
 ### Resulting authorization data
 ```json
 {
-  "paymentMethod": "https://bankdirect.com",
+  "paymentMethod": "https://banknet2.org",
   "issuerId": "https://mybank.fr/payment",
   "encryptedAuthorization": "pQED•••xg3w"
 }
