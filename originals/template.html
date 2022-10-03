@@ -210,16 +210,26 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
       </td>
     </tr>
     <tr>
-      <td><code>publicKey</code></td>
+      <td><code>rpId</code></td>
       <td style='text-align:center'><kbd>3</kbd></td>
+      <td><kbd>tstr</kbd></td>
+      <td>
+        FIDO relying party (domain) identifier for maintaining
+        <span class="actor">Issuer</span> isolation.
+      </td>
+    </tr>
+    <tr>
+      <td><code>publicKey</code></td>
+      <td style='text-align:center'><kbd>4</kbd></td>
       <td><kbd>map</kbd></td>
       <td>
-        COSE compliant FIDO public key matching the private key associated with <code>credentialId</code>.
+        COSE compliant FIDO public key matching the private key associated with 
+        <code>credentialId</code> and <code>rpId</code>.
       </td>
     </tr>
     <tr>
       <td><code>signatureAlgorithm</code></td>
-      <td style='text-align:center'><kbd>4</kbd></td>
+      <td style='text-align:center'><kbd>5</kbd></td>
       <td><kbd>int</kbd></td>
       <td>
         FIDO key/signature algorithm for FWP <a href="#seq-4.3">signatures</a>.
@@ -227,7 +237,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     </tr>
     <tr>
       <td><code>encryptionKey</code></td>
-      <td style='text-align:center'><kbd>5</kbd></td>
+      <td style='text-align:center'><kbd>6</kbd></td>
       <td><kbd>map</kbd></td>
       <td>
         COSE compliant <span class="actor">Issuer</span> specific
@@ -236,7 +246,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     </tr>
     <tr>
       <td><code>encryptionKeyId</code></td>
-      <td style='text-align:center'><kbd>6</kbd></td>
+      <td style='text-align:center'><kbd>7</kbd></td>
       <td><i>&quot;Any&quot;</i></td>
       <td>
         <i>Optional</i>. See FWP <a href="#seq-4.4">encryption</a>.
@@ -244,7 +254,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     </tr>
     <tr>
       <td><code>contentEncryptionAlgorithm</code></td>
-      <td style='text-align:center'><kbd>7</kbd></td>
+      <td style='text-align:center'><kbd>8</kbd></td>
       <td><kbd>int</kbd></td>
       <td>
         COSE compliant content encryption algorithm.  See FWP <a href="#seq-4.4">encryption</a>.
@@ -252,7 +262,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     </tr>
     <tr>
       <td><code>keyEncryptionAlgorithm</code></td>
-      <td style='text-align:center'><kbd>8</kbd></td>
+      <td style='text-align:center'><kbd>9</kbd></td>
       <td><kbd>int</kbd></td>
       <td>
         COSE compliant key encryption algorithm.  See FWP <a href="#seq-4.4">encryption</a>.
@@ -260,7 +270,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     </tr>
     <tr>
       <td><code>accountId</code></td>
-      <td style='text-align:center'><kbd>9</kbd></td>
+      <td style='text-align:center'><kbd>10</kbd></td>
       <td><kbd>tstr</kbd></td>
       <td>
         Account identifier associated with the credential.
@@ -268,7 +278,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     </tr>
     <tr>
       <td><code>serialNumber</code></td>
-      <td style='text-align:center'><kbd>10</kbd></td>
+      <td style='text-align:center'><kbd>11</kbd></td>
       <td><kbd>tstr</kbd></td>
       <td>
         Text string that (with respect to the <span class="actor">Issuer</span>),
@@ -277,7 +287,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     </tr>
     <tr>
       <td><code>paymentMethod</code></td>
-      <td style='text-align:center'><kbd>11</kbd></td>
+      <td style='text-align:center'><kbd>12</kbd></td>
       <td><kbd>tstr</kbd></td>
       <td>
         URL holding the FWP method for a particular payment network.
@@ -285,7 +295,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     </tr>
     <tr>
       <td><code>issuerId</code></td>
-      <td style='text-align:center'><kbd>12</kbd></td>
+      <td style='text-align:center'><kbd>13</kbd></td>
       <td><kbd>tstr</kbd></td>
       <td>
         Bank Identification Number (BIN) or URL associated with
@@ -296,7 +306,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     </tr>
     <tr>
       <td><code>cardImage</code></td>
-      <td style='text-align:center'><kbd>13</kbd></td>
+      <td style='text-align:center'><kbd>14</kbd></td>
       <td><kbd>bstr</kbd></td>
       <td>
         UTF-8 encoded SVG image identifying the payment credential for
@@ -344,6 +354,10 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
       specific <span class="actor">Issuer</span>,
       <span class="actor">User</span> account,
       and <code>paymentMethod</code>.
+    </div>
+    <div class="para">
+      For details on a preliminary enrollment system you may take a peek at
+      <a href='fido-wallet-a.rundgren.pdf'>this&nbsp;document<img src="images/xtl.svg" alt="link"></a>.
     </div>
     <div id="operation" class="header">
      6. Detailed Operation
@@ -667,7 +681,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
           <td style='text-align:center'><kbd>10</kbd></td>
           <td><kbd>map</kbd></td>
           <td>
-            See <a href="https://fido-web-pay.github.io/specification/crypto.html#4.1"
+            See <a href="crypto.html#4.1"
                title="FIDO Web Pay - Crypto">FIDO Web Pay - Crypto<img src="images/xtl.svg" alt="link"></a>
             for details.
 
@@ -681,10 +695,11 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
 
     <div id="seq-4.3" class="step">4.3 Create Signed Authorization Data (SAD)</div>
     <div class="para">
-      Now apply the FIDO signature key (identified by <a href="#credentialdatabase">credentialId</a>),
+      Now apply the FIDO signature key (identified by <a href="#credentialdatabase">credentialId</a>
+      and <a href="#credentialdatabase">rpId</a>),
       associated with the selected FWP credential to sign AD using the
       scheme described in
-      <a href="https://fido-web-pay.github.io/specification/crypto.html#4.2"
+      <a href="crypto.html#4.2"
          title="FIDO Web Pay - Crypto">FIDO Web Pay - Crypto<img src="images/xtl.svg" alt="link"></a>.
       For the sample code this should result in the following object:
     </div>
@@ -711,7 +726,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     </div>
      <div class="para">
       This specification mandates the encryption scheme described in
-       <a href="https://fido-web-pay.github.io/specification/crypto.html#5"
+       <a href="crypto.html#5"
           title="FIDO Web Pay - Crypto">FIDO Web Pay - Crypto<img src="images/xtl.svg" alt="link"></a>.
     </div>
     <div class="para">
@@ -1451,6 +1466,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
         <tr><td style="text-align:center;white-space:nowrap">2022-02-02</td><td style="text-align:center">0.25</td><td>CBOR date time replaced by text string.</td></tr>
         <tr><td style="text-align:center;white-space:nowrap">2022-06-15</td><td style="text-align:center">0.26</td><td>CBOR primitives expressed in CDDL notation.</td></tr>
         <tr><td style="text-align:center;white-space:nowrap">2022-08-18</td><td style="text-align:center">0.27</td><td>CTAP2 signature scheme.</td></tr>
+        <tr><td style="text-align:center;white-space:nowrap">2022-10-03</td><td style="text-align:center">0.28</td><td>Added <code>rpId</code> to <a href="#credentialdatabase">Credential Database</a>.</td></tr>
       </table>
     </div>
     <div id="authors" class="header">
