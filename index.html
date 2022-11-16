@@ -39,8 +39,8 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
 </style>
 </head>
 <body>
-<img style="max-width:30%" src="images/fwp.svg" alt="logo" title="FWP logotype"/>
-<img style="max-width:30%;position:absolute;right:1em;top:1em" src="images/ipr.svg" alt="IPR declaration" title="IPR declaration"/>
+<img style="max-width:30%" src="images/fwp.svg" alt="logo" title="FWP logotype">
+<img style="max-width:30%;position:absolute;right:1em;top:1em" src="images/ipr.svg" alt="IPR declaration" title="IPR declaration">
 <div style="text-align:center" class="header">FIDO Web Pay</div>
 <div id="toc" class="header">Table of Contents</div>
 <div style='overflow-x:auto;padding-right:0.2em'>
@@ -1551,7 +1551,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
       At this point the <b class="actor">User</b> is assumed having clicked on
       an FWP compliant icon like
     </div>
-    <img src="images/fwp-pay.svg" alt="fwp pay" title="FWP logo in a payment network selection page" style="width: 10em; margin: 0.7em 0 0.4em 0; box-shadow: 0.2em 0.2em 0.2em #d0d0d0"/>
+    <img src="images/fwp-pay.svg" alt="fwp pay" title="FWP logo in a payment network selection page" style="width: 10em; margin: 0.7em 0 0.4em 0; box-shadow: 0.2em 0.2em 0.2em #d0d0d0">
     <div>
       causing a <b class="actor">Merchant</b> Web page to invoke
       a custom doPaymentRequest() method, like in the following sample:
@@ -1816,9 +1816,13 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
             Up-to-date information about the core <i>software</i> components.
             Included for <i>security and logging</i> purposes.
             <div style="margin-top:0.4em">
-              The outer CBOR map contains two entries, <kbd>1</kbd> for the operating system,
-              and <kbd>2</kbd> for the &quot;user-agent&quot; (browser),
-              while the sub-maps hold name (<kbd>3</kbd>) and version (<kbd>4</kbd>) respectively.
+              The outer CBOR map holds two sub&nbsp;maps with
+              <kbd>int</kbd> label <kbd>1</kbd> for the operating system,
+              and <kbd>int</kbd> label <kbd>2</kbd> for the "user-agent" (browser).
+              Each sub&nbsp;map holds two <kbd>tstr</kbd> arguments,
+              <code>name</code> with <kbd>int</kbd> label <kbd>3</kbd>
+              and <code>version</code> with <kbd>int</kbd> label <kbd>4</kbd>
+              respectively.
             </div>
             <div style="margin-top:0.4em">
               Note that <i>hardware</i> (device) data is assumed to be established during credential
@@ -2939,7 +2943,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
       &quot;as&nbsp;is&quot;.
     </div>
     <div id="openbanking">
-      &nbsp;<br />In an Open Banking implementation based on OAuth2 concepts,
+      &nbsp;<br>In an Open Banking implementation based on OAuth2 concepts,
       the return data would contain access tokens and consent information.
     </div>
     <div class="step"><div id="seq-D5" class="numbox">D5</div>Create Payment Instruction</div>
@@ -3048,7 +3052,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
     <div>
       The FWP <i>client</i> is loosely derived from a proof-of-concept system called
       <a href="https://cyberphone.github.io/doc/saturn/"
-          title="Saturn">Saturn<img src="images/xtl.svg" alt="link" /></a>.
+          title="Saturn">Saturn<img src="images/xtl.svg" alt="link"></a>.
       By continuing along this path, features like the following could potentially be added:
     </div>
     <ul>
@@ -3208,8 +3212,8 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
       Trademarks
     </div>
     <div>
-      FIDO is a registered trademark of the FIDO alliance.<br />
-      EMV is a registered trademark of EMVCo.<br />&nbsp;<br />
+      FIDO is a registered trademark of the FIDO alliance.<br>
+      EMV is a registered trademark of EMVCo.<br>&nbsp;<br>
       This specification represents an <i>independent effort</i>,
       not associated with the FIDO alliance or EMVCo.
     </div>
