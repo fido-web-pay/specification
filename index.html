@@ -124,7 +124,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
       </li>
       <li>
         Limiting the amount of personally identifiable information (PII) shared
-        with <i>third parties</i> like merchants, to the name of the user's bank and payment method,
+        with <i>third parties</i> like merchants, to the name of the user's bank and payment network,
         making FWP intrinsically compliant with
         <a href="https://www.pcisecuritystandards.org"
            title="PCI Site">PCI<img src="images/xtl.svg" alt="link"></a>
@@ -286,11 +286,11 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
       </td>
     </tr>
     <tr>
-      <td><code>paymentMethod</code></td>
+      <td><code>paymentNetwork</code></td>
       <td style='text-align:center'><kbd>12</kbd></td>
       <td><kbd>tstr</kbd></td>
       <td>
-        URL holding the FWP method for a particular payment network.
+        URL or predefined short identifier holding the particular payment network.
       </td>
     </tr>
     <tr>
@@ -300,7 +300,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
       <td>
         Bank Identification Number (BIN) or URL associated with
         the <span class="actor">Issuer</span>.
-        The exact definition is specific for each <code>paymentMethod</code>.
+        The exact definition is specific for each <code>paymentNetwork</code>.
         See also <a href="#servicediscovery">Service Discovery</a>.
       </td>
     </tr>
@@ -353,7 +353,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
       holding an arbitrary number of payment credentials, each representing a
       specific <span class="actor">Issuer</span>,
       <span class="actor">User</span> account,
-      and <code>paymentMethod</code>.
+      and <code>paymentNetwork</code>.
     </div>
     <div class="para">
       For details on a preliminary enrollment system you may take a peek at
@@ -1551,7 +1551,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
       At this point the <b class="actor">User</b> is assumed having clicked on
       an FWP compliant icon like
     </div>
-    <img src="images/fwp-pay.svg" alt="fwp pay" title="FWP logo in a payment method selection page" style="width: 10em; margin: 0.7em 0 0.4em 0; box-shadow: 0.2em 0.2em 0.2em #d0d0d0"/>
+    <img src="images/fwp-pay.svg" alt="fwp pay" title="FWP logo in a payment network selection page" style="width: 10em; margin: 0.7em 0 0.4em 0; box-shadow: 0.2em 0.2em 0.2em #d0d0d0"/>
     <div>
       causing a <b class="actor">Merchant</b> Web page to invoke
       a custom doPaymentRequest() method, like in the following sample:
@@ -1605,7 +1605,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
     <div class="para">Any deviations MUST throw an exception.</div>
     <div class="para">
       Note that the <code>name</code> properties in the <code>networks</code>
-      array denote the actual payment methods, corresponding to the <code>paymentMethod</code>
+      array denote the actual payment networks, corresponding to the <code>paymentNetwork</code>
       attribute in <a href="#credentialdatabase">FWP credentials</a>.
     </div>
     <div class="para">
@@ -1768,11 +1768,11 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
           </td>
         </tr>
         <tr>
-          <td><code>paymentMethod</code></td>
+          <td><code>paymentNetwork</code></td>
           <td style='text-align:center'><kbd>6</kbd></td>
           <td><kbd>tstr</kbd></td>
           <td>
-            Payment method associated with the selected <a href="#credentialdatabase">FWP credential</a>.
+            Payment network associated with the selected <a href="#credentialdatabase">FWP credential</a>.
             Included for &quot;completeness&quot;.
           </td>
         </tr>
@@ -1783,7 +1783,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
           <td>
             <i>Optional</i>.  This attribute MUST be included if
             specified in the <code>PaymentRequest</code> constructor
-            for the particular <code>paymentMethod</code>, otherwise it MUST NOT be defined.
+            for the particular <code>paymentNetwork</code>, otherwise it MUST NOT be defined.
             <div style="margin-top:0.4em">
               Note that possible <code>networkData</code> is specified by the calling
               <span class="actor">Merchant</span> as JavaScript, but MUST subsequently
@@ -1920,7 +1920,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
     </div>
     <div style='overflow-x:auto;padding-right:0.2em'>
       <div class="staticbox" style="min-width:60em">
-        {<br>&nbsp;&nbsp;&quot;paymentMethod&quot;:&nbsp;&quot;https://banknet2.org&quot;,<br>&nbsp;&nbsp;&quot;issuerId&quot;:&nbsp;&quot;https://mybank.fr/payment&quot;,<br>&nbsp;&nbsp;&quot;encryptedAuthorization&quot;:&nbsp;&quot;pQEDAqQBOB4DbXgyNTUxOToyMDIyOjEHowEBIAQhWCD0DKt_mMSBfbya76u-q3BcdgvqZyph1eOojxiPvAGDHwpYKN323wSMNn3oaYpgchMJicQOsRCxSvqL0IAUxBRBq1L8OobzUhulBD4IULhnf_ug9EoypHqd0iEUhYgJTAz9-0NaHVS4RFzrawpZAZKbni0otGINfyDnzLZdTgctxNDoHvrlK4jAmZnrMhs0y-LRSY0mMo75_yrabFdP3dwnihj8JfKN29gqPfhvSxNjmnrJeTWQFLeWOnzyzOJzxbt9zH7WsV5AUTCKWQQMT9ryIQsljZ2sAf4_UeGsAgCK7YKRM4CwqdTNadiO8U67RNriuxG9pEICfdZOtQ_nhAByYV_hEHmNeu6gC4rMrYgqVlZ_qAWK58lt0rVQKyKgWQQUWLT8A9nHUEN1eUGJc9kJOPL16PgAg0_E5x_k885E1Dzj8UX4PuVp15569ZHh9sW9HV2EnERe6DanfAtcJZ6xCQ5sU300sI6dfXhBT37C0k-qJ34russkW8y3JxUXbXaNuAXmPqy4v-drqKHJpChXz-MNbIcZzr0M1hUJ2Sv7BXFA0qTScizCmsMM7fkzbWENQVBz5gYVSoARORJIIO_x-4KX_Rn9Suui13jRab8Ue1SkGICUWvPoR_tzGnMg7ffZKimshPqeoZh8j5VYplVAR-TfACesXroSQuqgXghfaEg&quot;<br>}<br>
+        {<br>&nbsp;&nbsp;&quot;paymentNetwork&quot;:&nbsp;&quot;https://banknet2.org&quot;,<br>&nbsp;&nbsp;&quot;issuerId&quot;:&nbsp;&quot;https://mybank.fr/payment&quot;,<br>&nbsp;&nbsp;&quot;encryptedAuthorization&quot;:&nbsp;&quot;pQEDAqQBOB4DbXgyNTUxOToyMDIyOjEHowEBIAQhWCD0DKt_mMSBfbya76u-q3BcdgvqZyph1eOojxiPvAGDHwpYKN323wSMNn3oaYpgchMJicQOsRCxSvqL0IAUxBRBq1L8OobzUhulBD4IULhnf_ug9EoypHqd0iEUhYgJTAz9-0NaHVS4RFzrawpZAZKbni0otGINfyDnzLZdTgctxNDoHvrlK4jAmZnrMhs0y-LRSY0mMo75_yrabFdP3dwnihj8JfKN29gqPfhvSxNjmnrJeTWQFLeWOnzyzOJzxbt9zH7WsV5AUTCKWQQMT9ryIQsljZ2sAf4_UeGsAgCK7YKRM4CwqdTNadiO8U67RNriuxG9pEICfdZOtQ_nhAByYV_hEHmNeu6gC4rMrYgqVlZ_qAWK58lt0rVQKyKgWQQUWLT8A9nHUEN1eUGJc9kJOPL16PgAg0_E5x_k885E1Dzj8UX4PuVp15569ZHh9sW9HV2EnERe6DanfAtcJZ6xCQ5sU300sI6dfXhBT37C0k-qJ34russkW8y3JxUXbXaNuAXmPqy4v-drqKHJpChXz-MNbIcZzr0M1hUJ2Sv7BXFA0qTScizCmsMM7fkzbWENQVBz5gYVSoARORJIIO_x-4KX_Rn9Suui13jRab8Ue1SkGICUWvPoR_tzGnMg7ffZKimshPqeoZh8j5VYplVAR-TfACesXroSQuqgXghfaEg&quot;<br>}<br>
       </div>
     </div>
     <div>Definition:</div>
@@ -1928,10 +1928,10 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
     <table class="tftable">
       <tr><th>Name</th><th>Type</th><th style="min-width:30em">Description</th></tr>
       <tr>
-        <td><code>paymentMethod</code></td>
+        <td><code>paymentNetwork</code></td>
         <td><kbd>String</kbd></td>
         <td>
-          Payment method associated with the selected <a href="#credentialdatabase">FWP credential</a>.
+          Payment network associated with the selected <a href="#credentialdatabase">FWP credential</a>.
         </td>
       </tr>
       <tr>
@@ -1981,7 +1981,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
       </div>
     <div style='overflow-x:auto;padding-right:0.2em'>
       <div class="staticbox" style="min-width:35em">
-        {<br>&nbsp;&nbsp;&quot;paymentRequest&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;payeeName&quot;:&nbsp;&quot;Space&nbsp;Shop&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;requestId&quot;:&nbsp;&quot;7040566321&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;amount&quot;:&nbsp;&quot;435.00&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;currency&quot;:&nbsp;&quot;EUR&quot;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;&quot;fwpAssertion&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;paymentMethod&quot;:&nbsp;&quot;https://banknet2.org&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;issuerId&quot;:&nbsp;&quot;https://mybank.fr/payment&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;encryptedAuthorization&quot;:&nbsp;&quot;pQED&#x2022;&#x2022;&#x2022;faEg&quot;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;&quot;receiveAccount&quot;:&nbsp;&quot;DE89370400440532013000&quot;,<br>&nbsp;&nbsp;&quot;clientIpAddress&quot;:&nbsp;&quot;220.13.198.144&quot;,<br>&nbsp;&nbsp;&quot;timeStamp&quot;:&nbsp;&quot;2022-08-18T09:14:22Z&quot;<br>}<br>
+        {<br>&nbsp;&nbsp;&quot;paymentRequest&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;payeeName&quot;:&nbsp;&quot;Space&nbsp;Shop&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;requestId&quot;:&nbsp;&quot;7040566321&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;amount&quot;:&nbsp;&quot;435.00&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;currency&quot;:&nbsp;&quot;EUR&quot;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;&quot;fwpAssertion&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;paymentNetwork&quot;:&nbsp;&quot;https://banknet2.org&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;issuerId&quot;:&nbsp;&quot;https://mybank.fr/payment&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;encryptedAuthorization&quot;:&nbsp;&quot;pQED&#x2022;&#x2022;&#x2022;faEg&quot;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;&quot;receiveAccount&quot;:&nbsp;&quot;DE89370400440532013000&quot;,<br>&nbsp;&nbsp;&quot;clientIpAddress&quot;:&nbsp;&quot;220.13.198.144&quot;,<br>&nbsp;&nbsp;&quot;timeStamp&quot;:&nbsp;&quot;2022-08-18T09:14:22Z&quot;<br>}<br>
       </div>
     </div>
       <div>Definition:</div>
@@ -2041,7 +2041,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
       <div id="pspselection" class="comment box">
         Since FWP supports <i>multiple</i> and <i>independent</i> payment systems,
         a <b class="actor">Merchant</b> may use different <b class="actor">PSP</b>s
-        depending on received <code>paymentMethod</code>.
+        depending on received <code>paymentNetwork</code>.
       </div>
       <div class="step">
         <div id="seq-8" class="numbox">8</div>Process PSPRequest and Create IssuerRequest Object
@@ -2058,11 +2058,11 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
           matches the <b class="actor">Merchant</b> common name registered with the <b class="actor">PSP</b>.
         </li>
         <li>
-          That the <code>fwpAssertion.paymentMethod</code> is supported.
+          That the <code>fwpAssertion.paymentNetwork</code> is supported.
         </li>
         <li>
           That the format of the <code>fwpAssertion.issuerId</code> matches 
-          <code>fwpAssertion.paymentMethod</code>.
+          <code>fwpAssertion.paymentNetwork</code>.
         </li>
         <li>
           That the <code>receiveAccount</code> matches a <b class="actor">Merchant</b> account
@@ -2087,7 +2087,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
       </div>
     <div style='overflow-x:auto;padding-right:0.2em'>
       <div class="staticbox" style="min-width:35em">
-        {<br>&nbsp;&nbsp;&quot;pspRequest&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;paymentRequest&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;payeeName&quot;:&nbsp;&quot;Space&nbsp;Shop&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;requestId&quot;:&nbsp;&quot;7040566321&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;amount&quot;:&nbsp;&quot;435.00&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;currency&quot;:&nbsp;&quot;EUR&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;fwpAssertion&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;paymentMethod&quot;:&nbsp;&quot;https://banknet2.org&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;issuerId&quot;:&nbsp;&quot;https://mybank.fr/payment&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;encryptedAuthorization&quot;:&nbsp;&quot;pQED&#x2022;&#x2022;&#x2022;faEg&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;receiveAccount&quot;:&nbsp;&quot;DE89370400440532013000&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;clientIpAddress&quot;:&nbsp;&quot;220.13.198.144&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;timeStamp&quot;:&nbsp;&quot;2022-08-18T09:14:23Z&quot;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;&quot;payeeHost&quot;:&nbsp;&quot;spaceshop.com&quot;,<br>&nbsp;&nbsp;&quot;timeStamp&quot;:&nbsp;&quot;2022-08-18T09:14:23Z&quot;<br>}<br>
+        {<br>&nbsp;&nbsp;&quot;pspRequest&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;paymentRequest&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;payeeName&quot;:&nbsp;&quot;Space&nbsp;Shop&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;requestId&quot;:&nbsp;&quot;7040566321&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;amount&quot;:&nbsp;&quot;435.00&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;currency&quot;:&nbsp;&quot;EUR&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;fwpAssertion&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;paymentNetwork&quot;:&nbsp;&quot;https://banknet2.org&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;issuerId&quot;:&nbsp;&quot;https://mybank.fr/payment&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;encryptedAuthorization&quot;:&nbsp;&quot;pQED&#x2022;&#x2022;&#x2022;faEg&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;receiveAccount&quot;:&nbsp;&quot;DE89370400440532013000&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;clientIpAddress&quot;:&nbsp;&quot;220.13.198.144&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;timeStamp&quot;:&nbsp;&quot;2022-08-18T09:14:23Z&quot;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;&quot;payeeHost&quot;:&nbsp;&quot;spaceshop.com&quot;,<br>&nbsp;&nbsp;&quot;timeStamp&quot;:&nbsp;&quot;2022-08-18T09:14:23Z&quot;<br>}<br>
       </div>
     </div>
 
@@ -2126,7 +2126,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
       At this point the <b class="actor">PSP</b> sends the completed <span class="msg">IssuerRequest</span>
       object to the designated <b class="actor">Issuer</b>.
       Note that the method used for locating the proper <b class="actor">Issuer</b> depends on
-      the <code>paymentMethod</code> and <code>issuerId</code> attributes.
+      the <code>paymentNetwork</code> and <code>issuerId</code> attributes.
       In the sample the <span class="msg">IssuerRequest</span> object
       would presumably be sent to <span class="msg">https://mybank.fr/payment</span>.
     </div>
@@ -2156,15 +2156,15 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
         Verify that the <code>timeStamp</code> is within &quot;reasonable limits&quot;.
       </li>
       <li>
-        Verify that the <code>pspRequest.fwpAssertion.paymentMethod</code> is supported.
+        Verify that the <code>pspRequest.fwpAssertion.paymentNetwork</code> is supported.
       </li>
       <li>
         Verify that the <code>pspRequest.receiveAccount</code>
-        is compatible with the <code>pspRequest.fwpAssertion.paymentMethod</code>.
+        is compatible with the <code>pspRequest.fwpAssertion.paymentNetwork</code>.
       </li>
       <li>
         Verify that the <code>pspRequest.fwpAssertion.issuerId</code>
-        is compatible with the <code>pspRequest.fwpAssertion.paymentMethod</code>
+        is compatible with the <code>pspRequest.fwpAssertion.paymentNetwork</code>
         as well as matching the <b class="actor">Issuer</b>.
       </li>
       <li>
@@ -2920,7 +2920,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
       At this point the <b class="actor">PSP</b> sends the completed <span class="msg">AuthorizeRequest</span>
       object to the designated <b class="actor">Authorizer</b>.
       Note that the method used for locating the proper <b class="actor">Authorizer</b> depends on
-      the <code>paymentMethod</code> and <code>issuerId</code> attributes.
+      the <code>paymentNetwork</code> and <code>issuerId</code> attributes.
     </div>
     <div class="step"><div id="seq-D3" class="numbox">D3</div>Process AuthorizeRequest</div>
     <div>
@@ -3004,7 +3004,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
  </div>
 <ul>
   <li>
-    Each authorization returns a <i>non-personal</i> payment method.
+    Each authorization returns a <i>non-personal</i> payment network identfier.
   </li>
   <li>
     Each authorization returns a <i>non-personal</i> bank identifier.  This information
@@ -3192,6 +3192,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
         <tr><td style="text-align:center;white-space:nowrap">2022-06-15</td><td style="text-align:center">0.26</td><td>CBOR primitives expressed in CDDL notation.</td></tr>
         <tr><td style="text-align:center;white-space:nowrap">2022-08-18</td><td style="text-align:center">0.27</td><td>CTAP2 signature scheme.</td></tr>
         <tr><td style="text-align:center;white-space:nowrap">2022-10-03</td><td style="text-align:center">0.28</td><td>Added <code>rpId</code> to <a href="#credentialdatabase">Credential Database</a>.</td></tr>
+        <tr><td style="text-align:center;white-space:nowrap">2022-11-16</td><td style="text-align:center">0.29</td><td>Changed <code>paymentMethod</code> to <code>paymentNetwork</code>.</td></tr>
       </table>
     </div>
     <div id="authors" class="header">

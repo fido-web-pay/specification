@@ -7,7 +7,7 @@
       "currency": "EUR"
     },
     "fwpAssertion": {
-      "paymentMethod": "https://banknet2.org",
+      "paymentNetwork": "https://banknet2.org",
       "issuerId": "https://mybank.fr/payment",
       "encryptedAuthorization": "pQEDAqQBOB4DbXgyNTUxOToyMDIyOjEHowEBIAQhWCD0DKt_mMSBfbya76u-q3BcdgvqZyph1eOojxiPvAGDHwpYKN323wSMNn3oaYpgchMJicQOsRCxSvqL0IAUxBRBq1L8OobzUhulBD4IULhnf_ug9EoypHqd0iEUhYgJTAz9-0NaHVS4RFzrawpZAZKbni0otGINfyDnzLZdTgctxNDoHvrlK4jAmZnrMhs0y-LRSY0mMo75_yrabFdP3dwnihj8JfKN29gqPfhvSxNjmnrJeTWQFLeWOnzyzOJzxbt9zH7WsV5AUTCKWQQMT9ryIQsljZ2sAf4_UeGsAgCK7YKRM4CwqdTNadiO8U67RNriuxG9pEICfdZOtQ_nhAByYV_hEHmNeu6gC4rMrYgqVlZ_qAWK58lt0rVQKyKgWQQUWLT8A9nHUEN1eUGJc9kJOPL16PgAg0_E5x_k885E1Dzj8UX4PuVp15569ZHh9sW9HV2EnERe6DanfAtcJZ6xCQ5sU300sI6dfXhBT37C0k-qJ34russkW8y3JxUXbXaNuAXmPqy4v-drqKHJpChXz-MNbIcZzr0M1hUJ2Sv7BXFA0qTScizCmsMM7fkzbWENQVBz5gYVSoARORJIIO_x-4KX_Rn9Suui13jRab8Ue1SkGICUWvPoR_tzGnMg7ffZKimshPqeoZh8j5VYplVAR-TfACesXroSQuqgXghfaEg"
     },
