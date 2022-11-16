@@ -5,12 +5,12 @@ const methodData = [{
   data: {
     payeeName: "Space Shop",  // Shown in the UI
     networks: [{
-      name: "https://mastercard.com/fwp"
+      id: "https://mastercard.com/fwp"
     },{
-      name: "https://visa.com/fwp"
+      id: "https://visa.com/fwp"
     },{
-      name: "https://banknet2.org",
-      networkData: "additional stuff..."
+      id: "https://banknet2.org",
+      networkOptions: "additional stuff..."
     }]
   }
 }];

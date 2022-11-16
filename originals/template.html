@@ -223,7 +223,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
       <td style='text-align:center'><kbd>4</kbd></td>
       <td><kbd>map</kbd></td>
       <td>
-        COSE compliant FIDO public key matching the private key associated with 
+        COSE compliant FIDO public key matching the private key associated with
         <code>credentialId</code> and <code>rpId</code>.
       </td>
     </tr>
@@ -277,31 +277,31 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
       </td>
     </tr>
     <tr>
-      <td><code>serialNumber</code></td>
+      <td><code>paymentNetworkId</code></td>
       <td style='text-align:center'><kbd>11</kbd></td>
       <td><kbd>tstr</kbd></td>
       <td>
-        Text string that (with respect to the <span class="actor">Issuer</span>),
-        uniquely identifies the payment credential.
-      </td>
-    </tr>
-    <tr>
-      <td><code>paymentNetwork</code></td>
-      <td style='text-align:center'><kbd>12</kbd></td>
-      <td><kbd>tstr</kbd></td>
-      <td>
-        URL or predefined short identifier holding the particular payment network.
+        URL or predefined short string identifying the associated payment network.
       </td>
     </tr>
     <tr>
       <td><code>issuerId</code></td>
-      <td style='text-align:center'><kbd>13</kbd></td>
+      <td style='text-align:center'><kbd>12</kbd></td>
       <td><kbd>tstr</kbd></td>
       <td>
         Bank Identification Number (BIN) or URL associated with
         the <span class="actor">Issuer</span>.
-        The exact definition is specific for each <code>paymentNetwork</code>.
+        The exact definition is specific for each <code>paymentNetworkId</code>.
         See also <a href="#servicediscovery">Service Discovery</a>.
+      </td>
+    </tr>
+    <tr>
+      <td><code>serialNumber</code></td>
+      <td style='text-align:center'><kbd>13</kbd></td>
+      <td><kbd>tstr</kbd></td>
+      <td>
+        Text string that (with respect to the <span class="actor">Issuer</span>),
+        uniquely identifies the payment credential.
       </td>
     </tr>
     <tr>
@@ -353,7 +353,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
       holding an arbitrary number of payment credentials, each representing a
       specific <span class="actor">Issuer</span>,
       <span class="actor">User</span> account,
-      and <code>paymentNetwork</code>.
+      and <code>paymentNetworkId</code>.
     </div>
     <div class="para">
       For details on a preliminary enrollment system you may take a peek at
@@ -421,12 +421,12 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
         JavaScript <kbd>Object</kbd>s.
       </li>
       <li>
-        That each object in the <code>networks</code> array contains a <code>name</code>
+        That each object in the <code>networks</code> array contains a <code>id</code>
         attribute holding a <i>non-empty</i> JavaScript <kbd>String</kbd> argument.
       </li>
       <li id="jsonlimit">
         That none of the objects in the <code>networks</code> array contain other
-        attributes, with the exception of an <i>optional</i> <code>networkData</code>
+        attributes, with the exception of an <i>optional</i> <code>networkOptions</code>
         attribute holding an arbitrary JavaScript/JSON-compatible argument, where the
         <kbd>Number</kbd> type
         is limited to <i>integers</i> in the range of -2^53 to +2^53.
@@ -442,8 +442,8 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     </ul>
     <div class="para">Any deviations MUST throw an exception.</div>
     <div class="para">
-      Note that the <code>name</code> properties in the <code>networks</code>
-      array denote the actual payment networks, corresponding to the <code>paymentNetwork</code>
+      Note that the <code>id</code> properties in the <code>networks</code>
+      array denote the actual payment networks, corresponding to the <code>paymentNetworkId</code>
       attribute in <a href="#credentialdatabase">FWP credentials</a>.
     </div>
     <div class="para">
@@ -598,16 +598,8 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
           </td>
         </tr>
         <tr>
-          <td><code>serialNumber</code></td>
+          <td><code>paymentNetworkId</code></td>
           <td style='text-align:center'><kbd>5</kbd></td>
-          <td><kbd>tstr</kbd></td>
-          <td>
-            Unique identifier associated with the selected <a href="#credentialdatabase">FWP credential</a>.
-          </td>
-        </tr>
-        <tr>
-          <td><code>paymentNetwork</code></td>
-          <td style='text-align:center'><kbd>6</kbd></td>
           <td><kbd>tstr</kbd></td>
           <td>
             Payment network associated with the selected <a href="#credentialdatabase">FWP credential</a>.
@@ -615,15 +607,23 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
           </td>
         </tr>
         <tr>
-          <td><code>networkData</code></td>
+          <td><code>serialNumber</code></td>
+          <td style='text-align:center'><kbd>6</kbd></td>
+          <td><kbd>tstr</kbd></td>
+          <td>
+            Unique identifier associated with the selected <a href="#credentialdatabase">FWP credential</a>.
+          </td>
+        </tr>
+        <tr>
+          <td><code>networkOptions</code></td>
           <td style='text-align:center'><kbd>7</kbd></td>
           <td><i>&quot;Any&quot;</i></td>
           <td>
             <i>Optional</i>.  This attribute MUST be included if
             specified in the <code>PaymentRequest</code> constructor
-            for the particular <code>paymentNetwork</code>, otherwise it MUST NOT be defined.
+            for the particular <code>paymentNetworkId</code>, otherwise it MUST NOT be defined.
             <div style="margin-top:0.4em">
-              Note that possible <code>networkData</code> is specified by the calling
+              Note that possible <code>networkOptions</code> is specified by the calling
               <span class="actor">Merchant</span> as JavaScript, but MUST subsequently
               be converted to CBOR when included in this object.  Due to a
               <a href="#jsonlimit">mandated restriction</a>
@@ -682,7 +682,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
           <td><kbd>map</kbd></td>
           <td>
             See <a href="crypto.html#4.1"
-               title="FIDO Web Pay - Crypto">FIDO Web Pay - Crypto<img src="images/xtl.svg" alt="link"></a>
+                   title="FIDO Web Pay - Crypto">FIDO Web Pay - Crypto<img src="images/xtl.svg" alt="link"></a>
             for details.
 
           </td>
@@ -766,7 +766,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     <table class="tftable">
       <tr><th>Name</th><th>Type</th><th style="min-width:30em">Description</th></tr>
       <tr>
-        <td><code>paymentNetwork</code></td>
+        <td><code>paymentNetworkId</code></td>
         <td><kbd>String</kbd></td>
         <td>
           Payment network associated with the selected <a href="#credentialdatabase">FWP credential</a>.
@@ -879,7 +879,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
       <div id="pspselection" class="comment box">
         Since FWP supports <i>multiple</i> and <i>independent</i> payment systems,
         a <b class="actor">Merchant</b> may use different <b class="actor">PSP</b>s
-        depending on received <code>paymentNetwork</code>.
+        depending on received <code>paymentNetworkId</code>.
       </div>
       <div class="step">
         <div id="seq-8" class="numbox">8</div>Process PSPRequest and Create IssuerRequest Object
@@ -896,11 +896,11 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
           matches the <b class="actor">Merchant</b> common name registered with the <b class="actor">PSP</b>.
         </li>
         <li>
-          That the <code>fwpAssertion.paymentNetwork</code> is supported.
+          That the <code>fwpAssertion.paymentNetworkId</code> is supported.
         </li>
         <li>
           That the format of the <code>fwpAssertion.issuerId</code> matches 
-          <code>fwpAssertion.paymentNetwork</code>.
+          <code>fwpAssertion.paymentNetworkId</code>.
         </li>
         <li>
           That the <code>receiveAccount</code> matches a <b class="actor">Merchant</b> account
@@ -964,7 +964,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
       At this point the <b class="actor">PSP</b> sends the completed <span class="msg">IssuerRequest</span>
       object to the designated <b class="actor">Issuer</b>.
       Note that the method used for locating the proper <b class="actor">Issuer</b> depends on
-      the <code>paymentNetwork</code> and <code>issuerId</code> attributes.
+      the <code>paymentNetworkId</code> and <code>issuerId</code> attributes.
       In the sample the <span class="msg">IssuerRequest</span> object
       would presumably be sent to <span class="msg">https://mybank.fr/payment</span>.
     </div>
@@ -994,15 +994,15 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
         Verify that the <code>timeStamp</code> is within &quot;reasonable limits&quot;.
       </li>
       <li>
-        Verify that the <code>pspRequest.fwpAssertion.paymentNetwork</code> is supported.
+        Verify that the <code>pspRequest.fwpAssertion.paymentNetworkId</code> is supported.
       </li>
       <li>
         Verify that the <code>pspRequest.receiveAccount</code>
-        is compatible with the <code>pspRequest.fwpAssertion.paymentNetwork</code>.
+        is compatible with the <code>pspRequest.fwpAssertion.paymentNetworkId</code>.
       </li>
       <li>
         Verify that the <code>pspRequest.fwpAssertion.issuerId</code>
-        is compatible with the <code>pspRequest.fwpAssertion.paymentNetwork</code>
+        is compatible with the <code>pspRequest.fwpAssertion.paymentNetworkId</code>
         as well as matching the <b class="actor">Issuer</b>.
       </li>
       <li>
@@ -1060,7 +1060,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
         <i>Tentative:</i> CurrentTime - 600s &lt; <code>SAD.timeStamp</code> &lt; CurrentTime + 60s.
       </li>
       <li>
-        Verify that the <i>optional</i> <code>SAD.networkData</code> attribute complies
+        Verify that the <i>optional</i> <code>SAD.networkOptions</code> attribute complies
         with the <b class="actor">Issuer</b> specific requirements.
       </li>
     </ul>
@@ -1195,7 +1195,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
       At this point the <b class="actor">PSP</b> sends the completed <span class="msg">AuthorizeRequest</span>
       object to the designated <b class="actor">Authorizer</b>.
       Note that the method used for locating the proper <b class="actor">Authorizer</b> depends on
-      the <code>paymentNetwork</code> and <code>issuerId</code> attributes.
+      the <code>paymentNetworkId</code> and <code>issuerId</code> attributes.
     </div>
     <div class="step"><div id="seq-D3" class="numbox">D3</div>Process AuthorizeRequest</div>
     <div>
@@ -1467,7 +1467,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
         <tr><td style="text-align:center;white-space:nowrap">2022-06-15</td><td style="text-align:center">0.26</td><td>CBOR primitives expressed in CDDL notation.</td></tr>
         <tr><td style="text-align:center;white-space:nowrap">2022-08-18</td><td style="text-align:center">0.27</td><td>CTAP2 signature scheme.</td></tr>
         <tr><td style="text-align:center;white-space:nowrap">2022-10-03</td><td style="text-align:center">0.28</td><td>Added <code>rpId</code> to <a href="#credentialdatabase">Credential Database</a>.</td></tr>
-        <tr><td style="text-align:center;white-space:nowrap">2022-11-16</td><td style="text-align:center">0.29</td><td>Changed <code>paymentMethod</code> to <code>paymentNetwork</code>.</td></tr>
+        <tr><td style="text-align:center;white-space:nowrap">2022-11-16</td><td style="text-align:center">0.29</td><td>Changed paymentMethod to <code>paymentNetworkId</code>.</td></tr>
       </table>
     </div>
     <div id="authors" class="header">

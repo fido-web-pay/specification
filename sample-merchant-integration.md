@@ -12,11 +12,11 @@ const methodData = [{
   data: {
     payeeName: "Space Shop",  // Shown in the UI
     networks: [{
-      name: "https://mastercard.com/fwp"
+      id: "https://mastercard.com/fwp"
     },{
-      name: "https://visa.com/fwp"
+      id: "https://visa.com/fwp"
     },{
-      name: "https://banknet2.org"
+      id: "https://banknet2.org"
     }]
   }
 }];
@@ -43,7 +43,7 @@ The UI is a part of the browser resident FWP wallet.
 ### Resulting authorization data
 ```json
 {
-  "paymentMethod": "https://banknet2.org",
+  "paymentNetworkId": "https://banknet2.org",
   "issuerId": "https://mybank.fr/payment",
   "encryptedAuthorization": "pQED•••xg3w"
 }
@@ -60,7 +60,7 @@ FWP is due to this arrangement also GDPR compliant.
 The FWP assertion now needs to be augmented with additional merchant data 
 and subsequently be sent to a PSP (Payment System Provider) for fulfillment.
 
-Note that that each `paymentMethod` may require specific additional information,
+Note that that each `paymentNetworkId` may require specific additional information,
 as well as potentially relying on different PSPs.
 
 Please turn to PSP documentation for details. 
