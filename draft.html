@@ -1892,6 +1892,11 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
           title="FIDO Web Pay - Crypto">FIDO Web Pay - Crypto<img src="images/xtl.svg" alt="link"></a>.
     </div>
     <div class="para">
+      Note the <a href="https://www.ietf.org/archive/id/draft-rundgren-cotx-03.html">
+        COTX<img src="images/xtl.svg" alt="link">
+      </a> tag which is used to identify the FWP assertion object in its entirety.
+    </div>
+    <div class="para">
       Note that the public key MUST be <i>shared</i> with
       other clients of the <b class="actor">Issuer</b>, otherwise it will work
       as a static identifier to the specific <b class="actor">User</b>!
@@ -1906,11 +1911,6 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
     </div>
     <div>
       This object is subsequently referred to as Encrypted Signed Authorization Data (ESAD).
-    </div>
-    <div class="para">
-      Note the <a href="https://www.ietf.org/archive/id/draft-rundgren-cotx-03.html">
-        COTX<img src="images/xtl.svg" alt="link">
-      </a> tag which is used to identify the FWP assertion object in its entirety.
     </div>
     <div id="domainconstraints" class="para box comment">
       Due to the end-to-end encryption scheme, the domain
@@ -2228,7 +2228,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
       </li>
       <li>
         Verify that the <i>optional</i> <code>SAD.networkOptions</code> attribute complies
-        with the <b class="actor">Issuer</b> specific requirements.
+        with the specific requirements of the <b class="actor">Issuer</b>.
       </li>
     </ul>
 
@@ -3199,7 +3199,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
         <tr><td style="text-align:center;white-space:nowrap">2022-10-03</td><td style="text-align:center">0.28</td><td>Added <code>rpId</code> to <a href="#credentialdatabase">Credential Database</a>.</td></tr>
         <tr><td style="text-align:center;white-space:nowrap">2022-11-16</td><td style="text-align:center">0.29</td><td>Changed paymentMethod to <code>paymentNetworkId</code>.</td></tr>
         <tr><td style="text-align:center;white-space:nowrap">2022-12-19</td><td style="text-align:center">0.30</td><td>Changed <code>signature</code> key to <kbd>-1</kbd>.</td></tr>
-        <tr><td style="text-align:center;white-space:nowrap">2023-01-07</td><td style="text-align:center">0.31</td><td>Added COTX wrapper to ESAD object.</td></tr>
+        <tr><td style="text-align:center;white-space:nowrap">2023-01-07</td><td style="text-align:center">0.31</td><td>Added COTX tag to ESAD object.</td></tr>
       </table>
     </div>
     <div id="authors" class="header">
