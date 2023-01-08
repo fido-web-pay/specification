@@ -198,7 +198,10 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
       <td><kbd>tstr</kbd></td>
       <td>
         Since credential data may evolve over time, versioning is necessary.
-        This specification covers version &quot;1.0&quot;.
+        This specification covers version 
+        <kbd style='white-space:nowrap'>&quot;https://fido-web-pay.github.io/ns/w1&quot;</kbd>
+        which is compatible with FWP assertions of the type described here 
+        (<kbd style='white-space:nowrap'>&quot;https://fido-web-pay.github.io/ns/p1&quot;</kbd>).
       </td>
     </tr>
     <tr>
@@ -563,16 +566,8 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
       <table class="tftable">
         <tr><th>Name</th><th>Label</th><th>Type</th><th style="min-width:30em">Description</th></tr>
         <tr>
-          <td><code>version</code></td>
-          <td style='text-align:center'><kbd>1</kbd></td>
-          <td><kbd>tstr</kbd></td>
-          <td>
-            FWP assertion data version.  This specification covers version &quot;1.0&quot;.
-          </td>
-        </tr>
-        <tr>
           <td><code>paymentRequest</code></td>
-          <td style='text-align:center'><kbd>2</kbd></td>
+          <td style='text-align:center'><kbd>1</kbd></td>
           <td><kbd>map</kbd></td>
           <td>
             Copy of PaymentRequest Core Data (<a href="#seq-4.1">PRCD</a>).
@@ -580,7 +575,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
         </tr>
         <tr>
           <td><code>payeeHost</code></td>
-          <td style='text-align:center'><kbd>3</kbd></td>
+          <td style='text-align:center'><kbd>2</kbd></td>
           <td><kbd>tstr</kbd></td>
           <td>
             Host name as interpreted by the <b class="actor">Browser</b>.
@@ -590,7 +585,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
         </tr>
         <tr>
           <td><code>accountId</code></td>
-          <td style='text-align:center'><kbd>4</kbd></td>
+          <td style='text-align:center'><kbd>3</kbd></td>
           <td><kbd>tstr</kbd></td>
           <td>
             <b class="actor">User</b> account number associated
@@ -599,7 +594,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
         </tr>
         <tr>
           <td><code>paymentNetworkId</code></td>
-          <td style='text-align:center'><kbd>5</kbd></td>
+          <td style='text-align:center'><kbd>4</kbd></td>
           <td><kbd>tstr</kbd></td>
           <td>
             Payment network associated with the selected <a href="#credentialdatabase">FWP credential</a>.
@@ -608,7 +603,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
         </tr>
         <tr>
           <td><code>serialNumber</code></td>
-          <td style='text-align:center'><kbd>6</kbd></td>
+          <td style='text-align:center'><kbd>5</kbd></td>
           <td><kbd>tstr</kbd></td>
           <td>
             Unique identifier associated with the selected <a href="#credentialdatabase">FWP credential</a>.
@@ -616,7 +611,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
         </tr>
         <tr>
           <td><code>networkOptions</code></td>
-          <td style='text-align:center'><kbd>7</kbd></td>
+          <td style='text-align:center'><kbd>6</kbd></td>
           <td><i>&quot;Any&quot;</i></td>
           <td>
             <i>Optional</i>.  This attribute MUST be included if
@@ -648,7 +643,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
         </tr>
         <tr>
           <td><code>platformData</code></td>
-          <td style='text-align:center'><kbd>8</kbd></td>
+          <td style='text-align:center'><kbd>7</kbd></td>
           <td><kbd>map</kbd></td>
           <td>
             Up-to-date information about the core <i>software</i> components.
@@ -670,7 +665,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
         </tr>
         <tr>
           <td><code>timeStamp</code></td>
-          <td style='text-align:center'><kbd>9</kbd></td>
+          <td style='text-align:center'><kbd>8</kbd></td>
           <td><kbd>tstr</kbd></td>
           <td>
             ISO (<a href="https://tools.ietf.org/html/rfc3339"
@@ -681,11 +676,11 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
           </td>
         </tr>
         <tr>
-          <td><code>authorization</code></td>
+          <td><code>signature</code></td>
           <td style='text-align:center'><kbd>-1</kbd></td>
           <td><kbd>map</kbd></td>
           <td>
-            <b class="actor">User</b> authorization.
+            <b class="actor">User</b> authorization signature.
             See <a href="crypto.html#4.1"
                    title="FIDO Web Pay - Crypto">FIDO Web Pay - Crypto<img src="images/xtl.svg" alt="link"></a>
             for details.
@@ -714,7 +709,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
       </div>
     </div>
     <div>
-      This operation updates the <code>authorization</code> (<kbd>-1</kbd>) element of AD.
+      This operation updates the <code>signature</code> (<kbd>-1</kbd>) element of AD.
     </div>
     <div class="para">The resulting object is subsequently referred to as Signed Authorization Data (SAD).</div>
     <div class="comment box">
@@ -749,6 +744,11 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     </div>
     <div>
       This object is subsequently referred to as Encrypted Signed Authorization Data (ESAD).
+    </div>
+    <div class="para">
+      Note the <a href="https://www.ietf.org/archive/id/draft-rundgren-cotx-03.html">
+        COTX<img src="images/xtl.svg" alt="link">
+      </a> tag which is used to identify the FWP assertion object in its entirety.
     </div>
     <div id="domainconstraints" class="para box comment">
       Due to the end-to-end encryption scheme, the domain
@@ -785,7 +785,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
         </td>
       </tr>
       <tr>
-        <td><code>encryptedAuthorization</code></td>
+        <td><code>userAuthorization</code></td>
         <td><kbd>String</kbd></td>
         <td>
           Encrypted Signed Authorization Data (ESAD) supplied in a Base64Url string
@@ -1020,10 +1020,13 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
     </div>
     <ul>
       <li>
-        Decode the Base64Url string supplied in <code>pspRequest.fwpAssertion.encryptedAuthorization</code>.
+        Decode the Base64Url string supplied in <code>pspRequest.fwpAssertion.userAuthorization</code>.
       </li>
       <li>
         Parse the result of the previous operation as CBOR and set result as <a href="#seq-4.4">ESAD</a>.
+      </li>
+      <li>
+        Verify that the COTX object Id is supported.
       </li>
       <li>
         Verify that the resulting object is compatible with the encryption profile specified by FWP.
@@ -1046,9 +1049,6 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
       10.3 Validate Request Data
     </div>
     <ul>
-      <li>
-        Verify that <code>SAD.version</code> is supported.
-      </li>
       <li>
         Verify that <code>pspRequest.paymentRequest</code> is equivalent to <code>SAD.paymentRequest</code>.
         That is, verifying that the <b class="actor">Merchant</b> payment claim corresponds to what the
@@ -1473,7 +1473,8 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
         <tr><td style="text-align:center;white-space:nowrap">2022-08-18</td><td style="text-align:center">0.27</td><td>CTAP2 signature scheme.</td></tr>
         <tr><td style="text-align:center;white-space:nowrap">2022-10-03</td><td style="text-align:center">0.28</td><td>Added <code>rpId</code> to <a href="#credentialdatabase">Credential Database</a>.</td></tr>
         <tr><td style="text-align:center;white-space:nowrap">2022-11-16</td><td style="text-align:center">0.29</td><td>Changed paymentMethod to <code>paymentNetworkId</code>.</td></tr>
-        <tr><td style="text-align:center;white-space:nowrap">2022-12-19</td><td style="text-align:center">0.30</td><td>Changed <code>authorization</code> key to <kbd>-1</kbd>.</td></tr>
+        <tr><td style="text-align:center;white-space:nowrap">2022-12-19</td><td style="text-align:center">0.30</td><td>Changed <code>signature</code> key to <kbd>-1</kbd>.</td></tr>
+        <tr><td style="text-align:center;white-space:nowrap">2023-01-07</td><td style="text-align:center">0.31</td><td>Added COTX wrapper to ESAD object.</td></tr>
       </table>
     </div>
     <div id="authors" class="header">

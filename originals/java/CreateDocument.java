@@ -28,7 +28,7 @@ public class CreateDocument  {
     }
 
     String esadFilter(String json) throws Exception {
-        int i = json.indexOf("&quot;encryptedAuthorization&quot;");
+        int i = json.indexOf("&quot;userAuthorization&quot;");
         if (i < 0) throw new IOException("no keyword");
         i = json.indexOf("&quot;", i + 32);
         int j = json.indexOf("&quot;", i + 1);

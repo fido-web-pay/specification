@@ -198,7 +198,10 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
       <td><kbd>tstr</kbd></td>
       <td>
         Since credential data may evolve over time, versioning is necessary.
-        This specification covers version &quot;1.0&quot;.
+        This specification covers version 
+        <kbd style='white-space:nowrap'>&quot;https://fido-web-pay.github.io/ns/w1&quot;</kbd>
+        which is compatible with FWP assertions of the type described here 
+        (<kbd style='white-space:nowrap'>&quot;https://fido-web-pay.github.io/ns/p1&quot;</kbd>).
       </td>
     </tr>
     <tr>
@@ -1717,7 +1720,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
 
     <div style='overflow-x:auto;padding-right:0.2em'>
       <div class="staticbox" style="min-width:50em">
-        {<br>&nbsp;&nbsp;1:&nbsp;&quot;1.0&quot;,<br>&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;&quot;Space&nbsp;Shop&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;&quot;7040566321&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;435.00&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;EUR&quot;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;3:&nbsp;&quot;spaceshop.com&quot;,<br>&nbsp;&nbsp;4:&nbsp;&quot;FR7630002111110020050014382&quot;,<br>&nbsp;&nbsp;5:&nbsp;&quot;https://banknet2.org&quot;,<br>&nbsp;&nbsp;6:&nbsp;&quot;0057162932&quot;,<br>&nbsp;&nbsp;7:&nbsp;&quot;additional&nbsp;stuff...&quot;,<br>&nbsp;&nbsp;8:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;Android&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;10.0&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;Chrome&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;103&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;9:&nbsp;&quot;2022-12-19T10:14:07+01:00&quot;,<br>&nbsp;&nbsp;-1:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;-7,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;2,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1:&nbsp;1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2:&nbsp;h&#039;e812b1a6dcbc708f9ec43cc2921fa0a14e9d5eadcc6dc63471dd4b680c6236b5&#039;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-3:&nbsp;h&#039;9826dcbd4ce6e388f72edd9be413f2425a10f75b5fd83d95fa0cde53159a51d8&#039;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;}<br>}
+        {<br>&nbsp;&nbsp;1:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;&quot;Space&nbsp;Shop&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;&quot;7040566321&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;435.00&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;EUR&quot;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;2:&nbsp;&quot;spaceshop.com&quot;,<br>&nbsp;&nbsp;3:&nbsp;&quot;FR7630002111110020050014382&quot;,<br>&nbsp;&nbsp;4:&nbsp;&quot;https://banknet2.org&quot;,<br>&nbsp;&nbsp;5:&nbsp;&quot;0057162932&quot;,<br>&nbsp;&nbsp;6:&nbsp;&quot;additional&nbsp;stuff...&quot;,<br>&nbsp;&nbsp;7:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;Android&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;12.0&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;Chrome&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;108&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;8:&nbsp;&quot;2023-01-07T10:14:07+01:00&quot;,<br>&nbsp;&nbsp;-1:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;-7,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;2,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1:&nbsp;1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2:&nbsp;h&#039;e812b1a6dcbc708f9ec43cc2921fa0a14e9d5eadcc6dc63471dd4b680c6236b5&#039;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-3:&nbsp;h&#039;9826dcbd4ce6e388f72edd9be413f2425a10f75b5fd83d95fa0cde53159a51d8&#039;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;}<br>}
       </div>
     </div>
     <div>Definition:</div>
@@ -1725,16 +1728,8 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
       <table class="tftable">
         <tr><th>Name</th><th>Label</th><th>Type</th><th style="min-width:30em">Description</th></tr>
         <tr>
-          <td><code>version</code></td>
-          <td style='text-align:center'><kbd>1</kbd></td>
-          <td><kbd>tstr</kbd></td>
-          <td>
-            FWP assertion data version.  This specification covers version &quot;1.0&quot;.
-          </td>
-        </tr>
-        <tr>
           <td><code>paymentRequest</code></td>
-          <td style='text-align:center'><kbd>2</kbd></td>
+          <td style='text-align:center'><kbd>1</kbd></td>
           <td><kbd>map</kbd></td>
           <td>
             Copy of PaymentRequest Core Data (<a href="#seq-4.1">PRCD</a>).
@@ -1742,7 +1737,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
         </tr>
         <tr>
           <td><code>payeeHost</code></td>
-          <td style='text-align:center'><kbd>3</kbd></td>
+          <td style='text-align:center'><kbd>2</kbd></td>
           <td><kbd>tstr</kbd></td>
           <td>
             Host name as interpreted by the <b class="actor">Browser</b>.
@@ -1752,7 +1747,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
         </tr>
         <tr>
           <td><code>accountId</code></td>
-          <td style='text-align:center'><kbd>4</kbd></td>
+          <td style='text-align:center'><kbd>3</kbd></td>
           <td><kbd>tstr</kbd></td>
           <td>
             <b class="actor">User</b> account number associated
@@ -1761,7 +1756,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
         </tr>
         <tr>
           <td><code>paymentNetworkId</code></td>
-          <td style='text-align:center'><kbd>5</kbd></td>
+          <td style='text-align:center'><kbd>4</kbd></td>
           <td><kbd>tstr</kbd></td>
           <td>
             Payment network associated with the selected <a href="#credentialdatabase">FWP credential</a>.
@@ -1770,7 +1765,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
         </tr>
         <tr>
           <td><code>serialNumber</code></td>
-          <td style='text-align:center'><kbd>6</kbd></td>
+          <td style='text-align:center'><kbd>5</kbd></td>
           <td><kbd>tstr</kbd></td>
           <td>
             Unique identifier associated with the selected <a href="#credentialdatabase">FWP credential</a>.
@@ -1778,7 +1773,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
         </tr>
         <tr>
           <td><code>networkOptions</code></td>
-          <td style='text-align:center'><kbd>7</kbd></td>
+          <td style='text-align:center'><kbd>6</kbd></td>
           <td><i>&quot;Any&quot;</i></td>
           <td>
             <i>Optional</i>.  This attribute MUST be included if
@@ -1810,7 +1805,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
         </tr>
         <tr>
           <td><code>platformData</code></td>
-          <td style='text-align:center'><kbd>8</kbd></td>
+          <td style='text-align:center'><kbd>7</kbd></td>
           <td><kbd>map</kbd></td>
           <td>
             Up-to-date information about the core <i>software</i> components.
@@ -1832,7 +1827,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
         </tr>
         <tr>
           <td><code>timeStamp</code></td>
-          <td style='text-align:center'><kbd>9</kbd></td>
+          <td style='text-align:center'><kbd>8</kbd></td>
           <td><kbd>tstr</kbd></td>
           <td>
             ISO (<a href="https://tools.ietf.org/html/rfc3339"
@@ -1843,11 +1838,11 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
           </td>
         </tr>
         <tr>
-          <td><code>authorization</code></td>
+          <td><code>signature</code></td>
           <td style='text-align:center'><kbd>-1</kbd></td>
           <td><kbd>map</kbd></td>
           <td>
-            <b class="actor">User</b> authorization.
+            <b class="actor">User</b> authorization signature.
             See <a href="crypto.html#4.1"
                    title="FIDO Web Pay - Crypto">FIDO Web Pay - Crypto<img src="images/xtl.svg" alt="link"></a>
             for details.
@@ -1872,11 +1867,11 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
     </div>
     <div style='overflow-x:auto;padding-right:0.2em'>
       <div class="staticbox" style="min-width:60em">
-        {<br>&nbsp;&nbsp;1:&nbsp;&quot;1.0&quot;,<br>&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;&quot;Space&nbsp;Shop&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;&quot;7040566321&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;435.00&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;EUR&quot;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;3:&nbsp;&quot;spaceshop.com&quot;,<br>&nbsp;&nbsp;4:&nbsp;&quot;FR7630002111110020050014382&quot;,<br>&nbsp;&nbsp;5:&nbsp;&quot;https://banknet2.org&quot;,<br>&nbsp;&nbsp;6:&nbsp;&quot;0057162932&quot;,<br>&nbsp;&nbsp;7:&nbsp;&quot;additional&nbsp;stuff...&quot;,<br>&nbsp;&nbsp;8:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;Android&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;10.0&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;Chrome&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;103&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;9:&nbsp;&quot;2022-12-19T10:14:07+01:00&quot;,<br>&nbsp;&nbsp;-1:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;-7,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;2,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1:&nbsp;1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2:&nbsp;h&#039;e812b1a6dcbc708f9ec43cc2921fa0a14e9d5eadcc6dc63471dd4b680c6236b5&#039;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-3:&nbsp;h&#039;9826dcbd4ce6e388f72edd9be413f2425a10f75b5fd83d95fa0cde53159a51d8&#039;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;h&#039;412e175a0f0bdc06dabf0b1db79b97541c08dbacee7e31c97a553588ee922ea70500000017&#039;,<br>&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;h&#039;3045022100bf83c27dc440efbca6378ca6feab4f170bced28fd41b987098b8d55512ab37a0022074319f72ab29aff969a59b37a067f08267fb31b54a161bb67821d4cf371e75b9&#039;<br>&nbsp;&nbsp;}<br>}
+        {<br>&nbsp;&nbsp;1:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;&quot;Space&nbsp;Shop&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;&quot;7040566321&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;435.00&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;EUR&quot;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;2:&nbsp;&quot;spaceshop.com&quot;,<br>&nbsp;&nbsp;3:&nbsp;&quot;FR7630002111110020050014382&quot;,<br>&nbsp;&nbsp;4:&nbsp;&quot;https://banknet2.org&quot;,<br>&nbsp;&nbsp;5:&nbsp;&quot;0057162932&quot;,<br>&nbsp;&nbsp;6:&nbsp;&quot;additional&nbsp;stuff...&quot;,<br>&nbsp;&nbsp;7:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;Android&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;12.0&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;Chrome&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;&quot;108&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;8:&nbsp;&quot;2023-01-07T10:14:07+01:00&quot;,<br>&nbsp;&nbsp;-1:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;-7,<br>&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;2,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1:&nbsp;1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2:&nbsp;h&#039;e812b1a6dcbc708f9ec43cc2921fa0a14e9d5eadcc6dc63471dd4b680c6236b5&#039;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-3:&nbsp;h&#039;9826dcbd4ce6e388f72edd9be413f2425a10f75b5fd83d95fa0cde53159a51d8&#039;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;h&#039;412e175a0f0bdc06dabf0b1db79b97541c08dbacee7e31c97a553588ee922ea70500000017&#039;,<br>&nbsp;&nbsp;&nbsp;&nbsp;4:&nbsp;h&#039;3045022100c0784c01d7aea61e158910c3b05ff409105ff0f5f673e19ba3b84756cc2c23f1022035095fd2528c6af9f68a23ec99643359d543faec92c4dfa248e642ca2b5cb8f3&#039;<br>&nbsp;&nbsp;}<br>}
       </div>
     </div>
     <div>
-      This operation updates the <code>authorization</code> (<kbd>-1</kbd>) element of AD.
+      This operation updates the <code>signature</code> (<kbd>-1</kbd>) element of AD.
     </div>
     <div class="para">The resulting object is subsequently referred to as Signed Authorization Data (SAD).</div>
     <div class="comment box">
@@ -1906,11 +1901,16 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
     </div>
     <div style='overflow-x:auto;padding-right:0.2em'>
       <div class="staticbox" style="min-width:60em">
-        {<br>&nbsp;&nbsp;1:&nbsp;3,<br>&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;-31,<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;x25519:2022:1&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;7:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1:&nbsp;4,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2:&nbsp;h&#039;54036cadec7ef7748a8be952fa34e1c626d8dcea0fd1105b4181c7f561769305&#039;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;10:&nbsp;h&#039;933a56b03c0040ad14ed55e485de6d71036d9065d0fa7678526c6622d4f9e416b7a5ae35355fb184&#039;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;8:&nbsp;h&#039;4e615522326bfecfcd700fd0b5d0f1e3&#039;,<br>&nbsp;&nbsp;9:&nbsp;h&#039;e787380251e09e9ad8e1acd0&#039;,<br>&nbsp;&nbsp;10:&nbsp;h&#039;94f918472807772b332df08f9bb50599406d83ec9bc7aed17064a65970d2b74394c0841b4b020b9eefcaf86829b81ca732b0d28685d0476a2babf3eedba1b8738757b9cbd0e6101c9757de5764cd46f286b88f815d1f44e1a5e2396e22ac881da24e703b297a3e742371cf64211a59eec55f9612c11ff0931eac5a6701747e4eac1620f815b17b78f2cb51fb1bab19bf58771b5bcc80a4c13afd058af2fa577e95b5dd991c1d25d9596de1276cf3dc1cbad3c1385ad6e74b1b61c2049dccf01f56a82bc7982d80e5d4304ddf54db991093a9f8bc4ff35038eafb17c70a9a93aa5192ac5af8641197b88d27beb1f9f2b0d4ec76cc8454fe8ca1fd136ef7ca36dbdaf25054da4797bfcfb13824b2d6b662119cca42d7dc5640337632652c843e99fa121819e767942dfc958b98f4a0dfc31f2a492db9ba93acdc9f5a3635c86ce89807c5579a47e13300e3b4c0d2a2beb538bbde1bd968768af9cf322ee7858803d77edcc22acb564ec55c0fe7d76faa7a1f7ada7040d796d1e96c8634290c79948fdb153008d373dbf9dac51152d8144dac&#039;<br>}
+        1010([&quot;https://fido-web-pay.github.io/ns/p1&quot;,&nbsp;{<br>&nbsp;&nbsp;1:&nbsp;3,<br>&nbsp;&nbsp;2:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;-31,<br>&nbsp;&nbsp;&nbsp;&nbsp;3:&nbsp;&quot;x25519:2022:1&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;7:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:&nbsp;1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1:&nbsp;4,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2:&nbsp;h&#039;91d00183af3e92b443676e3faf8b4b2130bfe6ba98538d27eba49dc1ae386810&#039;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;10:&nbsp;h&#039;06555f65ecf806b6b819216ce9bc51ed1b6800915685a2889f6ef5254d2ca955a49135b25a08c6e9&#039;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;8:&nbsp;h&#039;bbb6e2671e25c6346cebd4877d0b635f&#039;,<br>&nbsp;&nbsp;9:&nbsp;h&#039;ebe57e33a6bb79e1917dc0be&#039;,<br>&nbsp;&nbsp;10:&nbsp;h&#039;2c7600f3aa3749829df50347233afb81e4a7674a50470968466050195dabd99f377854885e4838181a844993665726f77a3ff16402e5b45e8479cc8045076483dac05cfcca7a89ae73fe39b0e0ac38e632cb9ee80dc89b5ca5575ddf0c7640c0d674f684f3da4db4ec89dfcdbe345d504f5609f6cfcf27ca112231ee18d8088fe05a9c8d94cf3e7eabe3fcc7f4dd0e81b24a1602731734161c8bae87e147a6e802b694029b92bd3dc07ed34a31753b7c8781e42fa57a43b6c8f10d525007f88d3f88d0e5ca50148d9945fcd355c1029a310cb61fa629c15fa1ea4b3e5b7c69df629ec421167f9ad371fcba77910a4dd4d34081382367751c29ed18781797886e6f91f2377a30bdf6264435781177b28be0c7a53ca97d5d66083fe943bf154b014eb9fd5372fd7be1b11f5142045b6b58566de9975a884f5fa7cdce32ec9293b704d072a17d535dbdc00316d6764b5058b9593cb2bdb2a28f53cee950bb15a400e832977f1315b666ef40664c15401697cf27d4abd4222ecabda6114684e89f1469d79f8571835676df389019&#039;<br>}])
       </div>
     </div>
     <div>
       This object is subsequently referred to as Encrypted Signed Authorization Data (ESAD).
+    </div>
+    <div class="para">
+      Note the <a href="https://www.ietf.org/archive/id/draft-rundgren-cotx-03.html">
+        COTX<img src="images/xtl.svg" alt="link">
+      </a> tag which is used to identify the FWP assertion object in its entirety.
     </div>
     <div id="domainconstraints" class="para box comment">
       Due to the end-to-end encryption scheme, the domain
@@ -1925,7 +1925,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
     </div>
     <div style='overflow-x:auto;padding-right:0.2em'>
       <div class="staticbox" style="min-width:60em">
-        {<br>&nbsp;&nbsp;&quot;paymentNetworkId&quot;:&nbsp;&quot;https://banknet2.org&quot;,<br>&nbsp;&nbsp;&quot;issuerId&quot;:&nbsp;&quot;https://mybank.fr/payment&quot;,<br>&nbsp;&nbsp;&quot;encryptedAuthorization&quot;:&nbsp;&quot;pQEDAqQBOB4DbXgyNTUxOToyMDIyOjEHowEBIAQhWCBUA2yt7H73dIqL6VL6NOHGJtjc6g_REFtBgcf1YXaTBQpYKJM6VrA8AECtFO1V5IXebXEDbZBl0Pp2eFJsZiLU-eQWt6WuNTVfsYQIUE5hVSIya_7PzXAP0LXQ8eMJTOeHOAJR4J6a2OGs0ApZAZGU-RhHKAd3KzMt8I-btQWZQG2D7JvHrtFwZKZZcNK3Q5TAhBtLAgue78r4aCm4HKcysNKGhdBHaiur8-7bobhzh1e5y9DmEByXV95XZM1G8oa4j4FdH0ThpeI5biKsiB2iTnA7KXo-dCNxz2QhGlnuxV-WEsEf8JMerFpnAXR-TqwWIPgVsXt48stR-xurGb9YdxtbzICkwTr9BYry-ld-lbXdmRwdJdlZbeEnbPPcHLrTwTha1udLG2HCBJ3M8B9WqCvHmC2A5dQwTd9U25kQk6n4vE_zUDjq-xfHCpqTqlGSrFr4ZBGXuI0nvrH58rDU7HbMhFT-jKH9E273yjbb2vJQVNpHl7_PsTgksta2YhGcykLX3FZAM3YyZSyEPpn6EhgZ52eULfyVi5j0oN_DHypJLbm6k6zcn1o2Nchs6JgHxVeaR-EzAOO0wNKivrU4u94b2Wh2ivnPMi7nhYgD137cwirLVk7FXA_n12-qeh962nBA15bR6WyGNCkMeZSP2xUwCNNz2_naxRFS2BRNrA&quot;<br>}<br>
+        {<br>&nbsp;&nbsp;&quot;paymentNetworkId&quot;:&nbsp;&quot;https://banknet2.org&quot;,<br>&nbsp;&nbsp;&quot;issuerId&quot;:&nbsp;&quot;https://mybank.fr/payment&quot;,<br>&nbsp;&nbsp;&quot;userAuthorization&quot;:&nbsp;&quot;2QPygngkaHR0cHM6Ly9maWRvLXdlYi1wYXkuZ2l0aHViLmlvL25zL3AxpQEDAqQBOB4DbXgyNTUxOToyMDIyOjEHowEBIAQhWCCR0AGDrz6StENnbj-vi0shML_muphTjSfrpJ3BrjhoEApYKAZVX2Xs-Aa2uBkhbOm8Ue0baACRVoWiiJ9u9SVNLKlVpJE1sloIxukIULu24mceJcY0bOvUh30LY18JTOvlfjOmu3nhkX3AvgpZAYwsdgDzqjdJgp31A0cjOvuB5KdnSlBHCWhGYFAZXavZnzd4VIheSDgYGoRJk2ZXJvd6P_FkAuW0XoR5zIBFB2SD2sBc_Mp6ia5z_jmw4Kw45jLLnugNyJtcpVdd3wx2QMDWdPaE89pNtOyJ382-NF1QT1YJ9s_PJ8oRIjHuGNgIj-BanI2Uzz5-q-P8x_TdDoGyShYCcxc0FhyLrofhR6boAraUApuSvT3AftNKMXU7fIeB5C-lekO2yPENUlAH-I0_iNDlylAUjZlF_NNVwQKaMQy2H6YpwV-h6ks-W3xp32KexCEWf5rTcfy6d5EKTdTTQIE4I2d1HCntGHgXl4hub5HyN3owvfYmRDV4EXeyi-DHpTypfV1mCD_pQ78VSwFOuf1Tcv174bEfUUIEW2tYVm3pl1qIT1-nzc4y7JKTtwTQcqF9U129wAMW1nZLUFi5WTyyvbKij1PO6VC7FaQA6DKXfxMVtmbvQGZMFUAWl88n1KvUIi7KvaYRRoTonxRp15-FcYNWdt84kBk&quot;<br>}<br>
       </div>
     </div>
     <div>Definition:</div>
@@ -1947,7 +1947,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
         </td>
       </tr>
       <tr>
-        <td><code>encryptedAuthorization</code></td>
+        <td><code>userAuthorization</code></td>
         <td><kbd>String</kbd></td>
         <td>
           Encrypted Signed Authorization Data (ESAD) supplied in a Base64Url string
@@ -1986,7 +1986,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
       </div>
     <div style='overflow-x:auto;padding-right:0.2em'>
       <div class="staticbox" style="min-width:35em">
-        {<br>&nbsp;&nbsp;&quot;paymentRequest&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;payeeName&quot;:&nbsp;&quot;Space&nbsp;Shop&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;requestId&quot;:&nbsp;&quot;7040566321&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;amount&quot;:&nbsp;&quot;435.00&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;currency&quot;:&nbsp;&quot;EUR&quot;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;&quot;fwpAssertion&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;paymentNetworkId&quot;:&nbsp;&quot;https://banknet2.org&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;issuerId&quot;:&nbsp;&quot;https://mybank.fr/payment&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;encryptedAuthorization&quot;:&nbsp;&quot;pQED&#x2022;&#x2022;&#x2022;RNrA&quot;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;&quot;receiveAccount&quot;:&nbsp;&quot;DE89370400440532013000&quot;,<br>&nbsp;&nbsp;&quot;clientIpAddress&quot;:&nbsp;&quot;220.13.198.144&quot;,<br>&nbsp;&nbsp;&quot;timeStamp&quot;:&nbsp;&quot;2022-12-19T09:14:22Z&quot;<br>}<br>
+        {<br>&nbsp;&nbsp;&quot;paymentRequest&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;payeeName&quot;:&nbsp;&quot;Space&nbsp;Shop&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;requestId&quot;:&nbsp;&quot;7040566321&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;amount&quot;:&nbsp;&quot;435.00&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;currency&quot;:&nbsp;&quot;EUR&quot;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;&quot;fwpAssertion&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;paymentNetworkId&quot;:&nbsp;&quot;https://banknet2.org&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;issuerId&quot;:&nbsp;&quot;https://mybank.fr/payment&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;userAuthorization&quot;:&nbsp;&quot;2QPy&#x2022;&#x2022;&#x2022;4kBk&quot;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;&quot;receiveAccount&quot;:&nbsp;&quot;DE89370400440532013000&quot;,<br>&nbsp;&nbsp;&quot;clientIpAddress&quot;:&nbsp;&quot;220.13.198.144&quot;,<br>&nbsp;&nbsp;&quot;timeStamp&quot;:&nbsp;&quot;2023-01-07T09:14:22Z&quot;<br>}<br>
       </div>
     </div>
       <div>Definition:</div>
@@ -2092,7 +2092,7 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
       </div>
     <div style='overflow-x:auto;padding-right:0.2em'>
       <div class="staticbox" style="min-width:35em">
-        {<br>&nbsp;&nbsp;&quot;pspRequest&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;paymentRequest&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;payeeName&quot;:&nbsp;&quot;Space&nbsp;Shop&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;requestId&quot;:&nbsp;&quot;7040566321&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;amount&quot;:&nbsp;&quot;435.00&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;currency&quot;:&nbsp;&quot;EUR&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;fwpAssertion&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;paymentNetworkId&quot;:&nbsp;&quot;https://banknet2.org&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;issuerId&quot;:&nbsp;&quot;https://mybank.fr/payment&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;encryptedAuthorization&quot;:&nbsp;&quot;pQED&#x2022;&#x2022;&#x2022;RNrA&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;receiveAccount&quot;:&nbsp;&quot;DE89370400440532013000&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;clientIpAddress&quot;:&nbsp;&quot;220.13.198.144&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;timeStamp&quot;:&nbsp;&quot;2022-12-19T09:14:23Z&quot;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;&quot;payeeHost&quot;:&nbsp;&quot;spaceshop.com&quot;,<br>&nbsp;&nbsp;&quot;timeStamp&quot;:&nbsp;&quot;2022-12-19T09:14:23Z&quot;<br>}<br>
+        {<br>&nbsp;&nbsp;&quot;pspRequest&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;paymentRequest&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;payeeName&quot;:&nbsp;&quot;Space&nbsp;Shop&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;requestId&quot;:&nbsp;&quot;7040566321&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;amount&quot;:&nbsp;&quot;435.00&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;currency&quot;:&nbsp;&quot;EUR&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;fwpAssertion&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;paymentNetworkId&quot;:&nbsp;&quot;https://banknet2.org&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;issuerId&quot;:&nbsp;&quot;https://mybank.fr/payment&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;userAuthorization&quot;:&nbsp;&quot;2QPy&#x2022;&#x2022;&#x2022;4kBk&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;receiveAccount&quot;:&nbsp;&quot;DE89370400440532013000&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;clientIpAddress&quot;:&nbsp;&quot;220.13.198.144&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;timeStamp&quot;:&nbsp;&quot;2023-01-07T09:14:23Z&quot;<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;&quot;payeeHost&quot;:&nbsp;&quot;spaceshop.com&quot;,<br>&nbsp;&nbsp;&quot;timeStamp&quot;:&nbsp;&quot;2023-01-07T09:14:23Z&quot;<br>}<br>
       </div>
     </div>
 
@@ -2182,10 +2182,13 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
     </div>
     <ul>
       <li>
-        Decode the Base64Url string supplied in <code>pspRequest.fwpAssertion.encryptedAuthorization</code>.
+        Decode the Base64Url string supplied in <code>pspRequest.fwpAssertion.userAuthorization</code>.
       </li>
       <li>
         Parse the result of the previous operation as CBOR and set result as <a href="#seq-4.4">ESAD</a>.
+      </li>
+      <li>
+        Verify that the COTX object Id is supported.
       </li>
       <li>
         Verify that the resulting object is compatible with the encryption profile specified by FWP.
@@ -2208,9 +2211,6 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
       10.3 Validate Request Data
     </div>
     <ul>
-      <li>
-        Verify that <code>SAD.version</code> is supported.
-      </li>
       <li>
         Verify that <code>pspRequest.paymentRequest</code> is equivalent to <code>SAD.paymentRequest</code>.
         That is, verifying that the <b class="actor">Merchant</b> payment claim corresponds to what the
@@ -3198,7 +3198,8 @@ B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
         <tr><td style="text-align:center;white-space:nowrap">2022-08-18</td><td style="text-align:center">0.27</td><td>CTAP2 signature scheme.</td></tr>
         <tr><td style="text-align:center;white-space:nowrap">2022-10-03</td><td style="text-align:center">0.28</td><td>Added <code>rpId</code> to <a href="#credentialdatabase">Credential Database</a>.</td></tr>
         <tr><td style="text-align:center;white-space:nowrap">2022-11-16</td><td style="text-align:center">0.29</td><td>Changed paymentMethod to <code>paymentNetworkId</code>.</td></tr>
-        <tr><td style="text-align:center;white-space:nowrap">2022-12-19</td><td style="text-align:center">0.30</td><td>Changed <code>authorization</code> key to <kbd>-1</kbd>.</td></tr>
+        <tr><td style="text-align:center;white-space:nowrap">2022-12-19</td><td style="text-align:center">0.30</td><td>Changed <code>signature</code> key to <kbd>-1</kbd>.</td></tr>
+        <tr><td style="text-align:center;white-space:nowrap">2023-01-07</td><td style="text-align:center">0.31</td><td>Added COTX wrapper to ESAD object.</td></tr>
       </table>
     </div>
     <div id="authors" class="header">
