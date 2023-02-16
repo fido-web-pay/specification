@@ -544,7 +544,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
       This object is subsequently referred to as PaymentRequest Core Data (PRCD).
     </div>
     <div class="para">
-      Note that throughout this specification, elements are referred to
+      Note that throughout this specification, attributes are referred to
       by their symbolic name rather than by their <a href="#cbor">CBOR</a> label.
     </div>
 
@@ -664,8 +664,20 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
           </td>
         </tr>
         <tr>
-          <td><code>timeStamp</code></td>
+          <td><code>location</code></td>
           <td style='text-align:center'><kbd>8</kbd></td>
+          <td><kbd>array</kbd></td>
+          <td>
+            <i>Optional</i>.  If the platform supports GPS and the user has granted
+            access to location data, this attribute MUST contain a CBOR array
+            holding two CBOR <span style='white-space:nowrap'>IEEE-754</span>
+            (2, 4, or 8 byte) floating point data items representing
+            latitude (index 0) and longitude (index 1) respectively.
+          </td>
+        </tr>
+        <tr>
+          <td><code>timeStamp</code></td>
+          <td style='text-align:center'><kbd>9</kbd></td>
           <td><kbd>tstr</kbd></td>
           <td>
             ISO (<a href="https://tools.ietf.org/html/rfc3339"
@@ -709,7 +721,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
       </div>
     </div>
     <div>
-      This operation updates the <code>signature</code> (<kbd>-1</kbd>) element of AD.
+      This operation updates the <code>signature</code> (<kbd>-1</kbd>) attribute of AD.
     </div>
     <div class="para">The resulting object is subsequently referred to as Signed Authorization Data (SAD).</div>
     <div class="comment box">
@@ -1103,7 +1115,7 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
       Due to the unique, <i>account specific</i> data featured in SAD objects,
       authorizations associated with different accounts may share a common cache.
       Since authorization signatures encompass variant data like
-      the <code>timeStamp</code> and <code>paymentRequest</code> elements,
+      the <code>timeStamp</code> and <code>paymentRequest</code> attributes,
       as well as the signature counter in FIDO <code>authenticatorData</code> objects,
       false cache collisions on individual SAD objects should be
       &quot;impossible&quot;, also in the cryptographic sense.
@@ -1476,7 +1488,8 @@ a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
         <tr><td style="text-align:center;white-space:nowrap">2022-10-03</td><td style="text-align:center">0.28</td><td>Added <code>rpId</code> to <a href="#credentialdatabase">Credential Database</a>.</td></tr>
         <tr><td style="text-align:center;white-space:nowrap">2022-11-16</td><td style="text-align:center">0.29</td><td>Changed paymentMethod to <code>paymentNetworkId</code>.</td></tr>
         <tr><td style="text-align:center;white-space:nowrap">2022-12-19</td><td style="text-align:center">0.30</td><td>Changed <code>signature</code> key to <kbd>-1</kbd>.</td></tr>
-        <tr><td style="text-align:center;white-space:nowrap">2023-01-07</td><td style="text-align:center">0.31</td><td>Added COTX tag to ESAD object.</td></tr>
+        <tr><td style="text-align:center;white-space:nowrap">2023-01-07</td><td style="text-align:center">0.31</td><td>Added COTX tag to the ESAD object.</td></tr>
+        <tr><td style="text-align:center;white-space:nowrap">2023-02-16</td><td style="text-align:center">0.32</td><td>Added <code>location</code> the AD object.</td></tr>
       </table>
     </div>
     <div id="authors" class="header">
