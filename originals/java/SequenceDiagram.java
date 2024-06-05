@@ -55,7 +55,7 @@ public class SequenceDiagram   {
     static final double SCOPE_Y_MARGIN = 15;
     static final double SCOPE_X_MARGIN = 25;
 
-    static final String FONT_FAMILY = "Roboto,sans-serif";
+    static final String FONT_FAMILY = "var(--font-sans)";
 
     String originalBase;
 
@@ -123,21 +123,7 @@ public class SequenceDiagram   {
         seqY -= SEQ_Y_SLACK_AFTER_UI;
         double rectY = seqY - (PROC_HEIGHT + STROKE_WIDTH) / 2;
         double startX = center(vbar) - PROC_WIDTH / 2 + PROC_SLANT / 2;
-        svg.append("  <path fill='black' opacity='0.4' d='M")
-           .append(convert(startX + DROP_OFFSET))
-           .append(',')
-           .append(convert(DROP_OFFSET + rectY))
-           .append(" l")
-           .append(convert(PROC_WIDTH))
-           .append(',')
-           .append("0 l")
-           .append(convert(-PROC_SLANT))
-           .append(',')
-           .append(convert(PROC_HEIGHT))
-           .append(" l")
-           .append(convert(-PROC_WIDTH))
-           .append(",0Z' filter='url(#dropShaddow)'/>\n")
-           .append("  <path fill='" + PROC_COLOR + "' stroke='" + PROC_STROKE + "' stroke-width='0.5' d='M")
+        svg.append("  <path fill='" + PROC_COLOR + "' stroke='" + PROC_STROKE + "' stroke-width='0.5' d='M")
            .append(convert(startX))
            .append(',')
            .append(convert(rectY))
@@ -150,7 +136,7 @@ public class SequenceDiagram   {
            .append(convert(PROC_HEIGHT))
            .append(" l")
            .append(convert(-PROC_WIDTH))
-           .append(",0Z'/>\n");
+           .append(",0Z' filter='url(#dropShaddow)'/>\n");
         text(center(vbar) + NUMB_WIDTH / 5, seqY - STROKE_WIDTH / 2, "Processing");
         number(startX - PROC_SLANT / 2 - STROKE_WIDTH / 2, seqY - STROKE_WIDTH / 2);
         seqY += SEQ_Y_DISTANCE + SEQ_Y_SLACK_AFTER_UI;
@@ -268,15 +254,6 @@ public class SequenceDiagram   {
             double uiTop = uiY - (UI_HEIGHT + STROKE_WIDTH) / 2;
             double uiX = center(1) - (UI_WIDTH + STROKE_WIDTH) / 2;
             svg.append("  <rect x='")
-               .append(convert(uiX + DROP_OFFSET))
-               .append("' y='")
-               .append(convert(uiTop + DROP_OFFSET))
-               .append("' width='")
-               .append(convert(UI_WIDTH))
-               .append("' height='")
-               .append(convert(UI_HEIGHT))
-               .append("' fill='black' opacity='0.4' filter='url(#dropShaddow)'/>\n")
-               .append("  <rect x='")
                .append(convert(uiX))
                .append("' y='")
                .append(convert(uiTop))
@@ -286,7 +263,7 @@ public class SequenceDiagram   {
                .append(convert(UI_HEIGHT))
                .append("' fill='white' stroke-width='")
                .append(convert(STROKE_WIDTH))
-               .append("' stroke='black'/>\n")
+               .append("' stroke='black' filter='url(#dropShaddow)'/>\n")
                .append("  <rect x='")
                .append(convert(uiX))
                .append("' y='")
@@ -348,7 +325,7 @@ public class SequenceDiagram   {
   "    <!-- Anders Rundgren 2021 -->\n" +
   "    <defs>\n" +
   "    <filter id='dropShaddow'>\n" +
-  "      <feGaussianBlur stdDeviation='1.3'/>\n" +
+  "      <feDropShadow dx='1.5' dy='1.5' stdDeviation='1.5' flood-opacity='0.4'/>\n" +
   "    </filter>\n")
             .append("    <marker id='arrowHead' markerWidth='")
             .append(convert(ARROW_HEAD_LENGTH))

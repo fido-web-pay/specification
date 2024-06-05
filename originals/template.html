@@ -2,6 +2,15 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="images/favicon.png" sizes="192x192">
 <title>FIDO Web Pay</title><style>
+@import url('https://fonts.googleapis.com/css?family=Roboto+Sans');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Serif');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono'); 
+
+:root {
+  --font-sans: 'Noto Sans', Arial, Helvetica, sans-serif;
+  --font-serif: 'Noto Serif', 'Times', 'Times New Roman', serif;
+  --font-mono: 'Roboto Mono', Courier, 'Courier New', monospace;
+}
 .header {font-size:1.6em;margin:1em 0 0.8em 0}
 .step {font-size:1.2em;margin-top:1.5em;margin-bottom:0.6em}
 .para {margin-top: 0.8em}
@@ -9,7 +18,7 @@
 .actor {color:darkgreen;font-weight:500}
 .msg {font-weight:500}
 .staticbox {
-  font-family: "Noto Mono",monospace;
+  font-family: var(--font-mono);
   margin: 0.8em 0 1em 0;
   box-sizing: border-box;
   word-break: break-all;
@@ -27,15 +36,14 @@
 .tftable td {background-color: #fffdf2;padding: 0.4em 0.5em;border-width: 1px;border-style: solid; border-color: black}
 .tftable th {font-weight: normal;padding: 0.4em 0.5em;background-color: #f8f8f8;text-align: center;border-width: 1px;border-style: solid; border-color: black}
 .json {word-break:break-all;background-color:#f8f8f8;padding:1em;border-width:1px;border-style:solid;border-color:#a9a9a9;box-shadow:0.3em 0.3em 0.3em #d0d0d0}
-body {margin:1em;font-size:10pt;font-family:Roboto,sans-serif;background-color:white}
-code {font-family:"Noto Mono",monospace;color:maroon}
-kbd {font-family: "Noto Mono",monospace}
-pre {font-family:"Noto Mono",monospace;margin: 0.8em 0 1em 0;padding:0.6em 1em;background-color: #f8f8f8}
+body {margin:1em;font-size:10pt;font-family:var(--font-sans);background-color:white}
+code {font-family:var(--font-mono);color:maroon}
+kbd {font-family: var(--font-mono)}
+pre {font-family:var(--font-mono);margin: 0.8em 0 1em 0;padding:0.6em 1em;background-color: #f8f8f8}
 ul, ol {margin: 0;padding-left:2em}
 li {margin-top:0.3em}
 a {color:#4366bf;text-decoration:none;font-weight:500;white-space:nowrap}
 .toc {padding: 0 0 0.3em 1em}
-
 </style>
 </head>
 <body>

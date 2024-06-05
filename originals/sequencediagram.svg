@@ -4,7 +4,7 @@
     <!-- Anders Rundgren 2021 -->
     <defs>
     <filter id='dropShaddow'>
-      <feGaussianBlur stdDeviation='1.3'/>
+      <feDropShadow dx='1.5' dy='1.5' stdDeviation='1.5' flood-opacity='0.4'/>
     </filter>
     <marker id='arrowHead' markerWidth='7' markerHeight='5' refX='0' refY='2.5' orient='auto' markerUnits='userSpaceOnUse'>
       <polygon points='0 0, 7 2.5, 0 5' fill='#cc1010'/>
@@ -454,7 +454,7 @@
      id='path3269'
      style='fill:url(#linearGradient3312);stroke:#1f1f1f;stroke-width:1.65679765px'/>
 </svg>
-  <text x='63' y='24.3' fill='black' font-family='Roboto,sans-serif' font-size='14.399999999999999' text-anchor='middle'>User</text>
+  <text x='63' y='24.3' fill='black' font-family='var(--font-sans)' font-size='14.399999999999999' text-anchor='middle'>User</text>
 <svg x='163' y='32.0' width='40' height='40.0' viewBox='0 0 68 68' xmlns='http://www.w3.org/2000/svg'>
   <title>Browser Symbol</title>
   <!-- Anders Rundgren 2021-->
@@ -474,7 +474,7 @@
     <line x1='7' y1='49' x2='61' y2='49'/>
   </g>
 </svg>
-  <text x='183' y='24.3' fill='black' font-family='Roboto,sans-serif' font-size='14.399999999999999' text-anchor='middle'>Browser</text>
+  <text x='183' y='24.3' fill='black' font-family='var(--font-sans)' font-size='14.399999999999999' text-anchor='middle'>Browser</text>
 <svg x='274.6666666666667' y='32.0' width='56.666666666666664' height='40.0'
    xmlns='http://www.w3.org/2000/svg'
    viewBox='0 0 68 48'
@@ -1024,7 +1024,7 @@
      stroke-miterlimit='10'
      fill='#fdfac7' />
 </svg>
-  <text x='303' y='24.3' fill='black' font-family='Roboto,sans-serif' font-size='14.399999999999999' text-anchor='middle'>Merchant</text>
+  <text x='303' y='24.3' fill='black' font-family='var(--font-sans)' font-size='14.399999999999999' text-anchor='middle'>Merchant</text>
 <svg x='403' y='32.0' width='40' height='40.0' viewBox='0 0 1000 1000' xmlns='http://www.w3.org/2000/svg'>
   <title>PSP Symbol</title>
   <!-- Anders Rundgren 2021 -->
@@ -1047,7 +1047,7 @@
   <circle stroke='grey' stroke-width='15' fill='url(#shaftGid)' r='80' cx='390' cy='610'/>
   <path stroke='#f27b2b' stroke-width='20' fill='url(#smallGearGid)' d='M656.4,357.2 661.5,471.3 692.2,478.1 745,376.8 755,373.7 856.4,426.3 877.6,403.1 816.4,306.7 818.6,296.5 914.9,235 905.4,205.1 791.3,209.9 783.6,202.8 778.5,88.7 747.8,81.9 695,183.2 685,186.3 583.6,133.7 562.4,156.9 623.6,253.3 621.4,263.5 525.1,325 534.6,354.9 648.7,350.1 z'/>
   <circle stroke='grey' stroke-width='15' fill='url(#shaftGid)' r='50' cx='720' cy='280'/>
-</svg>  <text x='423' y='24.3' fill='black' font-family='Roboto,sans-serif' font-size='14.399999999999999' text-anchor='middle'>PSP</text>
+</svg>  <text x='423' y='24.3' fill='black' font-family='var(--font-sans)' font-size='14.399999999999999' text-anchor='middle'>PSP</text>
 <svg x='512.4444444444445' y='32.0' width='61.111111111111114' height='40.0' viewBox='0 0 110 72' xmlns='http://www.w3.org/2000/svg'>
   <title>Issuer Symbol</title>
   <!-- Anders Rundgren 2021-->
@@ -1093,72 +1093,67 @@
 B&#xa0;&#xa0;A&#xa0;&#xa0;N&#xa0;&#xa0;K
 </text>
 </svg>
-  <text x='543' y='24.3' fill='black' font-family='Roboto,sans-serif' font-size='14.399999999999999' text-anchor='middle'>Issuer</text>
+  <text x='543' y='24.3' fill='black' font-family='var(--font-sans)' font-size='14.399999999999999' text-anchor='middle'>Issuer</text>
   <line x1='302.4' y1='115' x2='191.1' y2='115' stroke-width='0.8' stroke='#cc1010' marker-end='url(#arrowHead)'/>
-  <text x='243' y='109.7' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>PaymentRequest</text>
+  <text x='243' y='109.7' fill='black' font-family='var(--font-sans)' font-size='12' text-anchor='middle'>PaymentRequest</text>
   <a href='#seq-1'>
   <rect x='296' y='108' width='14' height='14' rx='3' fill='white' stroke='#404040' stroke-width='0.5'/>
-  <text x='303' y='119.3' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>1</text>
+  <text x='303' y='119.3' fill='#4366ff' font-family='var(--font-sans)' font-size='12' text-anchor='middle'>1</text>
   </a>
-  <rect x='141.75' y='133.75' width='86' height='50' fill='black' opacity='0.4' filter='url(#dropShaddow)'/>
-  <rect x='139.75' y='131.75' width='86' height='50' fill='white' stroke-width='0.5' stroke='black'/>
+  <rect x='139.75' y='131.75' width='86' height='50' fill='white' stroke-width='0.5' stroke='black' filter='url(#dropShaddow)'/>
   <rect x='139.75' y='131.75' width='86' height='5' fill='#deeafc' stroke-width='0.5' stroke='black'/>
-  <text x='183' y='161.3' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>Payment UI</text>
+  <text x='183' y='161.3' fill='black' font-family='var(--font-sans)' font-size='12' text-anchor='middle'>Payment UI</text>
   <a href='#seq-2'>
   <rect x='132.75' y='127.25' width='14' height='14' rx='3' fill='white' stroke='#404040' stroke-width='0.5'/>
-  <text x='139.75' y='138.55' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>2</text>
+  <text x='139.75' y='138.55' fill='#4366ff' font-family='var(--font-sans)' font-size='12' text-anchor='middle'>2</text>
   </a>
   <line x1='63.6' y1='207' x2='174.9' y2='207' stroke-width='0.8' stroke='#cc1010' marker-end='url(#arrowHead)' stroke-dasharray='4'/>
-  <text x='123' y='201.70000000000002' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>Authorization</text>
+  <text x='123' y='201.70000000000002' fill='black' font-family='var(--font-sans)' font-size='12' text-anchor='middle'>Authorization</text>
   <a href='#seq-3'>
   <rect x='56' y='200' width='14' height='14' rx='3' fill='white' stroke='#404040' stroke-width='0.5'/>
-  <text x='63' y='211.3' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>3</text>
+  <text x='63' y='211.3' fill='#4366ff' font-family='var(--font-sans)' font-size='12' text-anchor='middle'>3</text>
   </a>
-  <path fill='black' opacity='0.4' d='M146,225.75 l86,0 l-8,22 l-86,0Z' filter='url(#dropShaddow)'/>
-  <path fill='#faf2dd' stroke='#404040' stroke-width='0.5' d='M144,223.75 l86,0 l-8,22 l-86,0Z'/>
-  <text x='185.8' y='239.05' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>Processing</text>
+  <path fill='#faf2dd' stroke='#404040' stroke-width='0.5' d='M144,223.75 l86,0 l-8,22 l-86,0Z' filter='url(#dropShaddow)'/>
+  <text x='185.8' y='239.05' fill='black' font-family='var(--font-sans)' font-size='12' text-anchor='middle'>Processing</text>
   <a href='#seq-4'>
   <rect x='132.75' y='227.75' width='14' height='14' rx='3' fill='white' stroke='#404040' stroke-width='0.5'/>
-  <text x='139.75' y='239.05' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>4</text>
+  <text x='139.75' y='239.05' fill='#4366ff' font-family='var(--font-sans)' font-size='12' text-anchor='middle'>4</text>
   </a>
   <line x1='183.6' y1='290' x2='294.9' y2='290' stroke-width='0.8' stroke='#cc1010' marker-end='url(#arrowHead)'/>
-  <text x='243' y='284.7' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>FWP Assertion</text>
+  <text x='243' y='284.7' fill='black' font-family='var(--font-sans)' font-size='12' text-anchor='middle'>FWP Assertion</text>
   <a href='#seq-5'>
   <rect x='176' y='283' width='14' height='14' rx='3' fill='white' stroke='#404040' stroke-width='0.5'/>
-  <text x='183' y='294.3' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>5</text>
+  <text x='183' y='294.3' fill='#4366ff' font-family='var(--font-sans)' font-size='12' text-anchor='middle'>5</text>
   </a>
-  <path fill='black' opacity='0.4' d='M266,308.75 l86,0 l-8,22 l-86,0Z' filter='url(#dropShaddow)'/>
-  <path fill='#faf2dd' stroke='#404040' stroke-width='0.5' d='M264,306.75 l86,0 l-8,22 l-86,0Z'/>
-  <text x='305.8' y='322.05' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>Processing</text>
+  <path fill='#faf2dd' stroke='#404040' stroke-width='0.5' d='M264,306.75 l86,0 l-8,22 l-86,0Z' filter='url(#dropShaddow)'/>
+  <text x='305.8' y='322.05' fill='black' font-family='var(--font-sans)' font-size='12' text-anchor='middle'>Processing</text>
   <a href='#seq-6'>
   <rect x='252.75' y='310.75' width='14' height='14' rx='3' fill='white' stroke='#404040' stroke-width='0.5'/>
-  <text x='259.75' y='322.05' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>6</text>
+  <text x='259.75' y='322.05' fill='#4366ff' font-family='var(--font-sans)' font-size='12' text-anchor='middle'>6</text>
   </a>
   <line x1='303.6' y1='354' x2='414.9' y2='354' stroke-width='0.8' stroke='#cc1010' marker-end='url(#arrowHead)'/>
-  <text x='363' y='348.7' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>PSPRequest</text>
+  <text x='363' y='348.7' fill='black' font-family='var(--font-sans)' font-size='12' text-anchor='middle'>PSPRequest</text>
   <a href='#seq-7'>
   <rect x='296' y='347' width='14' height='14' rx='3' fill='white' stroke='#404040' stroke-width='0.5'/>
-  <text x='303' y='358.3' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>7</text>
+  <text x='303' y='358.3' fill='#4366ff' font-family='var(--font-sans)' font-size='12' text-anchor='middle'>7</text>
   </a>
-  <path fill='black' opacity='0.4' d='M386,372.75 l86,0 l-8,22 l-86,0Z' filter='url(#dropShaddow)'/>
-  <path fill='#faf2dd' stroke='#404040' stroke-width='0.5' d='M384,370.75 l86,0 l-8,22 l-86,0Z'/>
-  <text x='425.8' y='386.05' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>Processing</text>
+  <path fill='#faf2dd' stroke='#404040' stroke-width='0.5' d='M384,370.75 l86,0 l-8,22 l-86,0Z' filter='url(#dropShaddow)'/>
+  <text x='425.8' y='386.05' fill='black' font-family='var(--font-sans)' font-size='12' text-anchor='middle'>Processing</text>
   <a href='#seq-8'>
   <rect x='372.75' y='374.75' width='14' height='14' rx='3' fill='white' stroke='#404040' stroke-width='0.5'/>
-  <text x='379.75' y='386.05' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>8</text>
+  <text x='379.75' y='386.05' fill='#4366ff' font-family='var(--font-sans)' font-size='12' text-anchor='middle'>8</text>
   </a>
   <line x1='423.6' y1='418' x2='534.9' y2='418' stroke-width='0.8' stroke='#cc1010' marker-end='url(#arrowHead)'/>
-  <text x='483' y='412.7' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>IssuerRequest</text>
+  <text x='483' y='412.7' fill='black' font-family='var(--font-sans)' font-size='12' text-anchor='middle'>IssuerRequest</text>
   <a href='#seq-9'>
   <rect x='416' y='411' width='14' height='14' rx='3' fill='white' stroke='#404040' stroke-width='0.5'/>
-  <text x='423' y='422.3' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>9</text>
+  <text x='423' y='422.3' fill='#4366ff' font-family='var(--font-sans)' font-size='12' text-anchor='middle'>9</text>
   </a>
-  <path fill='black' opacity='0.4' d='M506,436.75 l86,0 l-8,22 l-86,0Z' filter='url(#dropShaddow)'/>
-  <path fill='#faf2dd' stroke='#404040' stroke-width='0.5' d='M504,434.75 l86,0 l-8,22 l-86,0Z'/>
-  <text x='545.8' y='450.05' fill='black' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>Processing</text>
+  <path fill='#faf2dd' stroke='#404040' stroke-width='0.5' d='M504,434.75 l86,0 l-8,22 l-86,0Z' filter='url(#dropShaddow)'/>
+  <text x='545.8' y='450.05' fill='black' font-family='var(--font-sans)' font-size='12' text-anchor='middle'>Processing</text>
   <a href='#seq-10'>
   <rect x='490.65' y='438.75' width='18.2' height='14' rx='3' fill='white' stroke='#404040' stroke-width='0.5'/>
-  <text x='498.95' y='450.05' fill='#4366ff' font-family='Roboto,sans-serif' font-size='12' text-anchor='middle'>10</text>
+  <text x='498.95' y='450.05' fill='#4366ff' font-family='var(--font-sans)' font-size='12' text-anchor='middle'>10</text>
   </a>
   <rect x='38' y='87' width='290' height='175' rx='5' fill='none' stroke-width='0.5' stroke='black' stroke-dasharray='1'/>
 </svg>
